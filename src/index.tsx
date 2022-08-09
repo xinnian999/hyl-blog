@@ -14,7 +14,6 @@ if (isIE()) {
   alert("请放弃万恶的IE浏览器吧");
 }
 
-// window.open("https://www.hyl999.cn", "_self");
 
 window.onfocus = () => {
   changeBlogTitle(window.location.pathname);
