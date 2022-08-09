@@ -1,4 +1,3 @@
-import QueueAnim from "rc-queue-anim";
 import { OverPack } from "rc-scroll-anim";
 import "./style.scss";
 

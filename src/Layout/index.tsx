@@ -1,7 +1,6 @@
 import { useEffect, Suspense, useMemo, useCallback } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { BackTop, ConfigProvider, Modal } from "antd";
-import {} from "antd";
 //@ts-ignore
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";

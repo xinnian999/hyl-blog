@@ -27,7 +27,7 @@ const About = () => {
       console.log(111);
     }, 1000);
 
-    // return () => clearInterval(t);
+    return () => clearInterval(t);
   });
 
   return (

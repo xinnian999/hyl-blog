@@ -8,7 +8,6 @@ import { Comment, Loading } from "@/components";
 import Markdown from "./Markdown";
 import { useRef } from "react";
 import "./style.scss";
-import selectText from "./selectText";
 
 interface State {
   content: string;

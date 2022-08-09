@@ -43,7 +43,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
       },
     ];
 
-    if (author_id == item.author_id) {
+    if (author_id === item.author_id) {
       action.push({
         name: "删除",
         handle: handleDelete,
@@ -59,7 +59,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
   const author = (item: any) => (
     <div>
       <span className="username">
-        {author_id == item.author_id ? `${item.author}（me）` : item.author}
+        {author_id === item.author_id ? `${item.author}（me）` : item.author}
       </span>
       {item.author_id === 30 && <span className="boss">站长</span>}
     </div>
