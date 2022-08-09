@@ -5,7 +5,7 @@ const server = {
     port:22,//服务器端口
     username:'root',//服务器ssh登录用户名
     password:'Qs991015',//服务器ssh登录密码
-    path:'/www/wwwroot/blog'//服务器web目录
+    path:'/www/wwwroot/my-blog'//服务器web目录
 }
 const loading = ora('正在部署至 ' + server.host )
 loading.start()
