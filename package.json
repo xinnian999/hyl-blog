@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "deploy": "npm run build && node ./deploy.js"
   },
   "dependencies": {
     "@arco-design/web-react": "^2.34.0",
@@ -190,6 +191,8 @@
     "@types/js-md5": "^0.4.3",
     "@types/lodash": "^4.14.182",
     "@types/nprogress": "^0.2.0",
-    "@types/styled-components": "^5.1.24"
+    "@types/styled-components": "^5.1.24",
+    "ora": "^5.1.0",
+    "scp2": "^0.5.0"
   }
 }
