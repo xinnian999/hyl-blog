@@ -16,7 +16,7 @@ interface State {
   articleData: any[];
   pageNum: number;
   count: number;
-  categoryActive: any;
+  category: any;
   fixedCateGory: boolean;
 }
 
@@ -26,21 +26,18 @@ function Article() {
   const [categoryData, setCategoryData] = useRequest("/category/query", {
     method: "get",
     onSuccess: (res: any) => {
-      setCategoryData([{ name: "all" }, ...res.data]);
+      setCategoryData([{ name: "全部" }, ...res.data]);
     },
   });
 
-  const [
-    { articleData, count, categoryActive, fixedCateGory },
-    setState,
-    getState,
-  ] = useSetState<State>({
-    articleData: [],
-    fixedCateGory: false,
-    pageNum: 1,
-    count: 10,
-    categoryActive: "all",
-  });
+  const [{ articleData, count, category, fixedCateGory }, setState, getState] =
+    useSetState<State>({
+      articleData: [],
+      fixedCateGory: false,
+      pageNum: 1,
+      count: 10,
+      category: "全部",
+    });
 
   const ref = useRef(null) as any;
 
@@ -50,21 +47,23 @@ function Article() {
 
   const queryArticle = useCallback(
     () =>
-      getState(({ categoryActive, pageNum, articleData }: any) => {
-        request
-          .get("/article/query", {
-            params: {
-              category: categoryActive,
-              pageNum,
-              pageSize: 5,
-            },
-          })
-          .then((res: any) => {
-            setState({
-              articleData: [...articleData, ...res.data],
-              count: res.total,
-            });
+      getState(({ category, pageNum, articleData }: any) => {
+        const params = {
+          pageNum,
+          pageSize: 5,
+          filter: { publish: 1, category },
+        };
+
+        if (category === "全部") {
+          delete params.filter.category;
+        }
+
+        request.get("/article/query", { params }).then((res: any) => {
+          setState({
+            articleData: [...articleData, ...res.data],
+            count: res.total,
           });
+        });
         setState({ pageNum: pageNum + 1 });
       }),
     []
@@ -95,15 +94,15 @@ function Article() {
         onClick={() => {
           window.scrollTo(0, 0);
           setState({
-            categoryActive: name,
+            category: name,
             articleData: [],
             pageNum: 1,
           });
           queryArticle();
         }}
-        className={categoryActive === name ? "categoryActive" : ""}
+        className={category === name ? "category" : ""}
       >
-        <div>{name === "all" ? `全部` : name} </div>
+        <div>{name} </div>
       </li>
     );
   });
