@@ -1,0 +1,68 @@
+.Works {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  padding: 30px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+
+  .item {
+    width: 45%;
+    height: 300px;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    padding: 40px;
+    transition: 0.7s all;
+    color: rgb(221, 49, 49);
+    cursor: pointer;
+    margin-bottom: 40px;
+
+    .title {
+      font-size: 35px;
+      font-weight: bold;
+      padding-bottom: 5px;
+    }
+
+    hr {
+      margin: 5px 0 10px;
+      border: 3px solid rgb(221, 49, 49);
+      display: none;
+    }
+
+    .autograph {
+      display: none;
+      font-size: 25px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      opacity: 0.9;
+
+      .autograph,
+      hr {
+        display: block;
+      }
+    }
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+      height: 200px;
+
+      // .title {
+      //     font-size: 20px;
+      // }
+
+      // .autograph {
+      //     font-size: 18px;
+      // }
+    }
+  }
+}
+
+.Collection {
+  // background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  // justify-content: space-around;
+}

@@ -1,0 +1,90 @@
+.ReactMarkdown {
+  li {
+    margin-left: 18px;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  .md-title {
+    font-weight: bold;
+    border-bottom: 4px solid var(--ant-primary-color);
+    color: var(--ant-primary-color);
+    position: relative;
+    font-size: 24px;
+    padding: 12px 5px;
+    margin: 30px 0;
+    &::after {
+      display: block;
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      width: 50%;
+      height: 10px;
+      border-top-right-radius: 24px;
+      background: linear-gradient(90deg, #fff, var(--ant-primary-color));
+    }
+  }
+
+  .code-content {
+    position: relative;
+    .copy {
+      position: absolute;
+      right: 0;
+      top: 0;
+      font-size: 12px;
+      padding: 2px 8px;
+      cursor: pointer;
+      font-size: 15px;
+    }
+  }
+
+  .hr {
+    margin: 10px 0;
+  }
+
+  .md-h3 {
+    margin: 15px 0 5px 0;
+    color: var(--ant-primary-color);
+    font-style: italic;
+    font-size: 20px;
+  }
+  .text-shadow {
+    padding: 3px;
+    border-radius: 5px;
+    background-color: var(--ant-primary-3);
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+
+  ul {
+    li {
+      list-style: disc;
+    }
+  }
+
+  ol {
+    li {
+      list-style: decimal;
+    }
+  }
+
+  table {
+    margin-bottom: 20px;
+  }
+  th,
+  tr,
+  td {
+    padding: 10px;
+    border: 2px solid var(--ant-primary-3);
+  }
+
+  blockquote {
+    padding-left: 1em;
+    border-left: 0.25em solid var(--ant-primary-3);
+  }
+}

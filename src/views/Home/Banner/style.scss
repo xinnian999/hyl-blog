@@ -1,0 +1,87 @@
+.homeBanner {
+  height: 100vh;
+  background-image: url("~@/assets/img/banner1.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-color: transparent;
+  background-position: center;
+  position: relative;
+  #homeParticle {
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .bannerContent {
+    z-index: 99999999;
+    width: 550px;
+    position: absolute;
+    top: 45%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    text-align: center;
+    color: #ffffff;
+
+    p {
+      margin-bottom: 0;
+    }
+
+    &-title {
+      text-shadow: #ccffff 0px 1px 2px, #ccffff 1px 0px 2px,
+        #ccffff 0px -1px 2px, #ccffff -1px 0px 2px;
+      font-size: 40px;
+    }
+
+    &-autograph {
+      word-wrap: break-word;
+      font-size: 18px;
+      letter-spacing: 10px;
+      margin: 15px 0;
+    }
+
+    &-Button {
+      background-color: var(--ant-primary-color);
+      border: none;
+      margin: 15px 0;
+      color: #fff;
+      height: 40px;
+      &:hover {
+        color: var(--ant-primary-2);
+        border-color: #fff;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 10px rgba(50, 250, 255, 0.75);
+        border-color: var(--ant-primary-color);
+      }
+    }
+
+    &-icon {
+      bottom: 20px;
+      font-size: 24px;
+      position: absolute;
+      padding: 10px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      left: 50%;
+      margin-left: -27px;
+      path {
+        font-weight: bold;
+      }
+      &:hover {
+        background-color: var(--ant-primary-color);
+      }
+    }
+  }
+}

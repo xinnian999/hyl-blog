@@ -1,0 +1,20 @@
+#about {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 15px;
+  a {
+    color: var(--ant-primary-color);
+  }
+  .updateLog {
+    .content {
+      margin: 20px 0 0 10px;
+      white-space: pre-wrap;
+    }
+    height: 300px;
+  }
+
+  .myContact {
+    font-size: 18px;
+    margin-left: 5px;
+  }
+}

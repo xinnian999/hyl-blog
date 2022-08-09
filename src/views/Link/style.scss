@@ -1,0 +1,53 @@
+$bg: #fff;
+
+.explain {
+  padding: 15px;
+  background-color: $bg;
+  border-radius: 15px;
+  .explainMain {
+    margin-left: 20px;
+
+    .tags {
+      margin-bottom: 30px;
+    }
+
+    .content {
+      line-height: 25px;
+    }
+  }
+}
+
+.linkItem {
+  background-color: $bg;
+  cursor: pointer;
+  padding: 15px;
+  margin-bottom: 26px;
+  min-height: 150px;
+  transition: 0.6s all;
+  border-radius: 15px;
+
+  .avatar {
+    margin-right: 15px;
+    margin-bottom: 10px;
+  }
+
+  span {
+    font-size: 16px;
+    font-weight: bold;
+  }
+}
+
+.linkItem:hover {
+  box-shadow: 0 0 15px rgba(50, 250, 255, 0.75);
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 800px) {
+  .link-main {
+    display: block;
+
+    .ant-col-6 {
+      max-width: 100%;
+    }
+  }
+}

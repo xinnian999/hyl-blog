@@ -1,0 +1,217 @@
+#backgroundImg {
+  // background: url("~@/assets/img/bg/wallpaper1.jpg");
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  z-index: -1;
+}
+
+#nprogress .bar {
+  background: var(--ant-primary-color);
+}
+
+header {
+  a {
+    color: #212220;
+  }
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  display: flex;
+  border-bottom: 1px solid #e8e9e7;
+  z-index: 10;
+
+  .header-main {
+    width: 1280px;
+    height: 60px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    padding: 0 15px;
+
+    #iphone-menus {
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+
+      span {
+        margin: auto;
+      }
+    }
+
+    #logo {
+      width: 135px;
+      height: 100%;
+      img {
+        height: 100%;
+        cursor: pointer;
+        display: block;
+      }
+    }
+
+    #nav {
+      display: flex;
+      height: 100%;
+      flex: 1;
+
+      .navButton {
+        display: flex;
+        height: 100%;
+        margin: 0 auto;
+
+        li {
+          line-height: 60px;
+          padding: 0 20px;
+          position: relative;
+          margin-right: 10px;
+        }
+
+        li:hover {
+          color: var(--ant-primary-color-active);
+          cursor: pointer;
+
+          &::before {
+            width: 100%;
+          }
+        }
+
+        li::before {
+          width: 0%;
+          height: 3px;
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          background-color: #6bc30d;
+          background-color: var(--ant-primary-color);
+          content: "";
+          transition: all 0.6s;
+          z-index: 99999;
+        }
+      }
+    }
+
+    .user {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      .userAvatar {
+        transform: scale(1.2);
+      }
+    }
+
+    .themeBtn {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 5px;
+      font-size: 30px;
+      text-align: center;
+      position: relative;
+      top: 50%;
+      right: 30px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      &:hover {
+        background-color: var(--ant-primary-color);
+      }
+    }
+  }
+}
+
+#main {
+  min-height: 100vh;
+}
+
+.isHome {
+  padding-top: 60px;
+}
+
+footer {
+  background-color: #001529;
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid rgba(233, 233, 233, 0.1);
+  a {
+    color: var(--ant-primary-color);
+  }
+
+  .AllRights {
+    display: block;
+  }
+
+  .beianNumber {
+    margin-right: 15px;
+    display: inline-block;
+    text-align: left;
+    img {
+      float: left;
+    }
+  }
+}
+
+.active {
+  color: #6bc30d;
+  color: var(--ant-primary-color);
+
+  ::before {
+    width: 100% !important;
+    height: 3px;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    background-color: #6bc30d;
+    background-color: var(--ant-primary-color);
+    content: "";
+    transition: all 0.6s;
+  }
+}
+
+.iphone-nav {
+  li {
+    font-size: 18px;
+    text-align: center;
+    line-height: 40px;
+  }
+
+  a {
+    color: #212220;
+  }
+
+  .active {
+    color: rgb(22, 139, 218);
+  }
+}
+
+.themeList {
+  width: 60px;
+  position: relative;
+  right: 10px;
+  background-color: #e8e9e7;
+  .themeItem {
+    width: 50px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    #logo {
+      flex: 1;
+
+      img {
+        margin: 0 auto;
+      }
+    }
+  }
+
+  .ant-col-offset-4 {
+    margin-left: 0;
+  }
+}

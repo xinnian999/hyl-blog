@@ -1,0 +1,11 @@
+.searchBar {
+  display: flex;
+  position: relative;
+  .searchBtn {
+    position: absolute;
+    right: 0;
+  }
+  .arco-select-view {
+    background-color: #fff;
+  }
+}

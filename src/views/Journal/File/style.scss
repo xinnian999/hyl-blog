@@ -1,0 +1,27 @@
+#file {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding-top: 5px;
+  border-radius: 15px;
+  .fileTitle {
+    font-weight: bold;
+    font-size: 25px;
+  }
+  .fileList {
+    color: #1890ff !important;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .fileList:hover {
+    opacity: 0.8;
+  }
+  .year {
+    // color: #fff;
+  }
+  .year::before,
+  .year::after {
+    border-top-color: #999;
+  }
+  .count {
+    font-size: 20px;
+  }
+}

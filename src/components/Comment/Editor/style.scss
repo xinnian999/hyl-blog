@@ -1,0 +1,62 @@
+$bgc: rgba(255, 255, 255, 0.9);
+
+.comment-editor {
+  z-index: 99;
+  background-color: $bgc;
+  padding: 15px;
+  border-radius: 10px;
+  .editor {
+    margin-bottom: 10px;
+  }
+  .toolbar {
+    line-height: 35px;
+    width: 100%;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    border-bottom: none;
+    padding-left: 10px;
+    .emoji-icon {
+      font-size: 20px;
+    }
+    .emoji-icon:hover {
+      color: cadetblue;
+      cursor: pointer;
+    }
+  }
+}
+
+.replyItem {
+  .boss {
+    background-color: cadetblue;
+    color: #fff;
+    padding: 0 3px;
+    margin-left: 2px;
+  }
+  .username {
+    color: var(--ant-primary-color);
+  }
+  .ant-comment-content-author-time {
+    color: #555;
+  }
+}
+
+.emoji-Popover {
+  box-sizing: border-box;
+  z-index: 9999;
+}
+.emojiAll {
+  display: flex;
+  flex-wrap: wrap;
+  z-index: 9999;
+
+  width: 273px;
+  li {
+    padding: 5px;
+    border: 1px solid #eee;
+    font-size: 16px;
+  }
+  li:hover {
+    border: 1px solid red;
+    cursor: pointer;
+  }
+}

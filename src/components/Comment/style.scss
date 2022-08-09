@@ -1,0 +1,26 @@
+$bgc: rgba(255, 255, 255, 0.8);
+.commentCon {
+  padding-bottom: 15px;
+  z-index: 1;
+  // :nth-child(1){
+  //   border-radius: 10px 10px 0 0;
+  // }
+
+  .total {
+    color: #fff;
+  }
+  .ant-list-items {
+    border-radius: 15px;
+    overflow: hidden;
+  }
+
+  .replyItem {
+    background-color: $bgc;
+    .replyCon {
+      padding-left: 24px;
+    }
+    .replyEditor {
+      padding-left: 58px;
+    }
+  }
+}

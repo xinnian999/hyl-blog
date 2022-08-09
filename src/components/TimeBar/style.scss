@@ -1,0 +1,22 @@
+.timeBar {
+  // position: absolute;
+  // right: 0;
+  padding: 5px 20px 0;
+  top: 0;
+  // background-color: #fff;
+  .day {
+    font-size: 40px;
+    font-weight: bold;
+    color: var(--ant-primary-color);
+    text-align: center;
+    line-height: 40px;
+  }
+  .month,
+  .year {
+    color: #989997;
+    font-size: 16px;
+  }
+  .month {
+    margin-right: 10px;
+  }
+}

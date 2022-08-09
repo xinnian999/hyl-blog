@@ -1,0 +1,79 @@
+#ArticleDetail {
+  width: 70%;
+  border-radius: 15px;
+  overflow: hidden;
+  .anchorFlag {
+    position: fixed;
+    right: 0;
+    top: 15%;
+    background-color: #eee;
+    font-size: 25px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+}
+
+.anchorDrawer {
+  padding-top: 10px;
+}
+
+.ArticleDetail {
+  background-color: #fff;
+  padding: 10px 30px;
+  position: relative;
+
+  .time {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 25px;
+  }
+
+  .article-info {
+    small {
+      color: #787977;
+    }
+  }
+
+  .Anchor {
+    padding-left: 10px;
+    position: fixed;
+    right: 0;
+    top: 10%;
+    z-index: 999;
+    width: 15%;
+    border-radius: 5px;
+    background-color: rgb(88, 83, 83, 0.8);
+
+    .anchorList {
+      font-weight: bold;
+
+      padding-right: 30px;
+
+      .oneAnchor {
+        a {
+          color: var(--text-color);
+        }
+
+        color: #fff;
+      }
+
+      .twoAnchor {
+        a {
+          padding-left: 20px;
+          color: rgb(180, 178, 178);
+          font-size: 13px;
+        }
+
+        color: #fff;
+      }
+    }
+  }
+}

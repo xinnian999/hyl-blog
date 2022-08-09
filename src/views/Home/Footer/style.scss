@@ -1,0 +1,44 @@
+.homeFooter {
+  min-height: 360px;
+  background-color: #001529;
+
+  &-content {
+    // height: 100%;
+    width: 70%;
+    padding: 80px 24px 40px;
+    margin: 0 auto;
+    display: flex;
+    @media screen and (max-width: 800px) {
+      flex-wrap: wrap;
+    }
+
+    &-block {
+      // flex: 1;
+      width: 25%;
+      img {
+        max-width: 180px;
+      }
+      padding: 0 32px;
+      h2 {
+        color: #ccc;
+        margin-bottom: 0.44444rem;
+      }
+
+      @media screen and (max-width: 800px) {
+        width: 100%;
+        padding: 20px 0;
+      }
+    }
+    &-autograph {
+      color: #999;
+    }
+    .v {
+      a {
+        color: #999;
+        &:hover {
+          color: var(--ant-primary-color);
+        }
+      }
+    }
+  }
+}

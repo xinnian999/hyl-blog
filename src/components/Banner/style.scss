@@ -1,0 +1,51 @@
+.banner-container {
+  position: relative;
+  min-height: 270px;
+  width: 100%;
+  #particle-banner {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  article {
+    margin-top: 60px;
+    > * {
+      text-align: center;
+      color: #fff;
+    }
+    h2 {
+      font-weight: 500;
+      font-size: 40px;
+    }
+    p {
+      font-size: 20px;
+    }
+    #nav {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      li {
+        padding: 0 15px 5px;
+        margin: 0 5px;
+        position: relative;
+      }
+      a {
+        color: #fff;
+      }
+      .active {
+        color: var(--ant-primary-color);
+      }
+
+      .navItem::after {
+        content: "";
+        width: 1px;
+        background-color: #fff;
+        height: 12px;
+        position: absolute;
+        right: -5px;
+        top: 25%;
+      }
+    }
+  }
+}

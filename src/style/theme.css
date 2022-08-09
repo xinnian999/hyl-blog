@@ -1,0 +1,30 @@
+/*******************配置组件自定义颜色(入口css)******************/
+.light-theme {
+    --primary-color: #1890ff;
+    --primary-color50: rgba(24, 144, 255, 0.5);
+    --primary-color20: rgba(24, 144, 255, 0.2);
+    --main-background-color: #ffffff;
+    --text-color: #555;
+    --text-color65: rgba(0, 0, 0, 0.65);
+    --text-color45: rgba(0, 0, 0, 0.45);
+    --text-color25: rgba(0, 0, 0, 0.25);
+    --text-color10: rgba(0, 0, 0, 0.1);
+    --title-text-color: #000000;
+    --title-text-primary-color: #1890ff;
+    --head-background-color: #fff;
+}
+
+.dark-theme {
+    --primary-color: #67b9b8;
+    --primary-color50: rgba(103, 185, 184, 0.5);
+    --primary-color20: rgba(103, 185, 184, 0.2);
+    --main-background-color: #000;
+    --text-color: rgba(255, 255, 255, 0.85);
+    --text-color65: rgba(255, 255, 255, 0.65);
+    --text-color45: rgba(255, 255, 255, 0.45);
+    --text-color25: rgba(255, 255, 255, 0.25);
+    --text-color10: rgba(255, 255, 255, 0.1);
+    --title-text-color: #ffffff;
+    --title-text-primary-color: #ffffff;
+    --head-background-color: transparent;
+}
