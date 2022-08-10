@@ -13,13 +13,14 @@ function ArticleCard(props: any) {
     comments,
     visits,
     category,
-    creatTime,
+    createTime,
     introduce,
     picture,
     topping,
   } = props.data;
 
   const history = useNavigate();
+  console.log(createTime);
 
   return (
     <div
@@ -29,7 +30,7 @@ function ArticleCard(props: any) {
     >
       {topping === 1 && <div className="topping">置顶</div>}
       <div className="time">
-        <TimeBar time={creatTime} />
+        <TimeBar time={createTime} />
       </div>
       <div className="title">
         <span>【原创】</span> {title}

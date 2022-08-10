@@ -2,8 +2,8 @@ import { Spin } from "antd";
 import "./style.scss";
 
 interface Props {
-  size: any;
-  tip: string;
+  size?: any;
+  tip?: string;
 }
 
 const Loading = ({ size, tip }: Props) => {

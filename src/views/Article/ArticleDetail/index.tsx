@@ -2,7 +2,7 @@ import { Anchor, Divider, Space, Drawer } from "antd";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
 import { useParams } from "react-router-dom";
-import { request } from "@/utils";
+import { request, Time } from "@/utils";
 import { useSetState, useMount, useWindowSize } from "@/hooks";
 import { Comment, Loading } from "@/components";
 import Markdown from "./Markdown";
@@ -71,11 +71,7 @@ function ArticleDetail() {
 
   const renderAnchor = () => {
     return (
-      <Anchor
-        className="anchorList"
-        targetOffset={targetOffset}
-        // onChange={(currentActiveLink) => selectText(currentActiveLink)}
-      >
+      <Anchor className="anchorList" targetOffset={targetOffset}>
         {anchorList.map((item: { id: string; localName: string }) => {
           const { id, localName } = item;
 
@@ -114,7 +110,7 @@ function ArticleDetail() {
           <Space size={25}>
             <small>作者：心念 </small>
             <small>阅读量：{visits}</small>
-            <small>更新于 {updateTime}</small>
+            <small>更新于 {new Time(updateTime).getStandardTime()}</small>
           </Space>
         </Divider>
         {content ? <Markdown content={content} ref={mdRef} /> : <Loading />}
