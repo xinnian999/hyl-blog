@@ -6,7 +6,15 @@ import { useRequest } from "@/hooks";
 import "./style.scss";
 
 export default function Article() {
-  const [hotArticleData] = useRequest("/article/queryHot");
+  const [hotArticleData] = useRequest("/article/query", {
+    method: "get",
+    params: {
+      pageNum: 1,
+      pageSize: 3,
+      filters: { publish: 1 },
+      orderBys: "visits desc",
+    },
+  });
 
   return (
     <div className="homeArticle">

@@ -67,6 +67,10 @@ function ArticleDetail() {
           setState({ anchorList, targetOffset: window.innerHeight / 4 });
         });
       });
+
+    setTimeout(() => {
+      request.put("/article/visit", { id: params.id });
+    }, 3000);
   });
 
   const renderAnchor = () => {
