@@ -21,7 +21,15 @@ interface State {
 }
 
 function Article() {
-  const [hotArticleData] = useRequest("/article/queryHot");
+  const [hotArticleData] = useRequest("/article/query", {
+    method: "get",
+    params: {
+      pageNum: 1,
+      pageSize: 5,
+      filters: { publish: 1 },
+      orderBys: "visits desc",
+    },
+  });
 
   const [categoryData, setCategoryData] = useRequest("/category/query", {
     method: "get",
@@ -51,11 +59,12 @@ function Article() {
         const params = {
           pageNum,
           pageSize: 5,
-          filter: { publish: 1, category },
+          filters: { publish: 1, category },
+          orderBys: "topping desc,id desc",
         };
 
         if (category === "全部") {
-          delete params.filter.category;
+          delete params.filters.category;
         }
 
         request.get("/article/query", { params }).then((res: any) => {
@@ -100,7 +109,7 @@ function Article() {
           });
           queryArticle();
         }}
-        className={category === name ? "category" : ""}
+        className={category === name ? "categoryActive" : ""}
       >
         <div>{name} </div>
       </li>

@@ -20,7 +20,6 @@ function ArticleCard(props: any) {
   } = props.data;
 
   const history = useNavigate();
-  console.log(createTime);
 
   return (
     <div

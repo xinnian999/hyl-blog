@@ -19,7 +19,7 @@ class SearchInput extends PureComponent<any> {
   fetch: any = debounce(() => {
     request
       .get("/article/query", {
-        params: { q: this.state.value, searchType: "title" },
+        params: { filters: { title: this.state.value } },
       })
       .then((res: response) => {
         if (res.status === 0) {
@@ -41,7 +41,7 @@ class SearchInput extends PureComponent<any> {
     const { giveData } = this.props;
     request
       .get("/article/query", {
-        params: { q: value, searchType: "title" },
+        params: { filters: { title: value } },
       })
       .then((res: response) => {
         giveData(res.data);
