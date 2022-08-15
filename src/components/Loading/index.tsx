@@ -16,7 +16,7 @@ const Loading = ({ size, tip }: Props) => {
 
 Loading.defaultProps = {
   size: "default",
-  tip: "获取中...",
+  tip: "玩命加载中...",
 };
 
 export default Loading;

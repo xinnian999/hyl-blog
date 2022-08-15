@@ -7,7 +7,6 @@ import "nprogress/nprogress.css";
 
 const request: any = axios.create({
   baseURL: "/api",
-  // baseURL: "https://www.hyl999.cn:7777",
   timeout: 15000,
   withCredentials: true,
 });
@@ -36,7 +35,7 @@ request.interceptors.response.use(
     }
 
     // 监听登陆是否失效：
-    if (!cookie.get("blog_token") && !cookie.get("super_admin_blog_token")) {
+    if (!cookie.get("blog_token")) {
       store.dispatch({
         type: "CHANGE_LOGIN_STATE",
         payload: false,

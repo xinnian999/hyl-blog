@@ -21,6 +21,15 @@ interface State {
 }
 
 function Article() {
+  const [{ articleData, count, category, fixedCateGory }, setState, getState] =
+    useSetState<State>({
+      articleData: [],
+      fixedCateGory: false,
+      pageNum: 1,
+      count: 10,
+      category: "全部",
+    });
+
   const [hotArticleData] = useRequest("/article/query", {
     method: "get",
     params: {
@@ -38,45 +47,30 @@ function Article() {
     },
   });
 
-  const [{ articleData, count, category, fixedCateGory }, setState, getState] =
-    useSetState<State>({
-      articleData: [],
-      fixedCateGory: false,
-      pageNum: 1,
-      count: 10,
-      category: "全部",
-    });
-
   const ref = useRef(null) as any;
 
   const scrollNum = useScroll(document.querySelector("#container"));
 
   const history = useNavigate();
 
-  const queryArticle = useCallback(
-    () =>
-      getState(({ category, pageNum, articleData }: any) => {
-        const params = {
-          pageNum,
-          pageSize: 5,
-          filters: { publish: 1, category },
-          orderBys: "topping desc,id desc",
-        };
+  const queryArticle = () =>
+    getState(({ category, pageNum, articleData }: any) => {
+      const params = {
+        pageNum,
+        pageSize: 5,
+        filters:
+          category === "全部" ? { publish: 1 } : { publish: 1, category },
+        orderBys: "topping desc,id desc",
+      };
 
-        if (category === "全部") {
-          delete params.filters.category;
-        }
-
-        request.get("/article/query", { params }).then((res: any) => {
-          setState({
-            articleData: [...articleData, ...res.data],
-            count: res.total,
-          });
+      request.get("/article/query", { params }).then((res: any) => {
+        setState({
+          articleData: [...articleData, ...res.data],
+          count: res.total,
         });
-        setState({ pageNum: pageNum + 1 });
-      }),
-    []
-  );
+      });
+      setState({ pageNum: pageNum + 1 });
+    });
 
   useEffect(() => {
     queryArticle();
