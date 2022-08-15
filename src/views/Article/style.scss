@@ -39,7 +39,25 @@
 
     .article-footer {
       font-weight: bold;
+      font-size: 20px;
+      color: #fff;
+      text-shadow: 2px 2px var(--ant-primary-color);
     }
+
+    .skeleton{
+      width: 100%;
+      margin-top: 20px;
+      .skeletonItem {
+        display: flex;
+        height: 200px;
+        &-image {
+          width: 300px;
+          height: 100%;
+          margin-right: 10px;
+        }
+      }
+    }
+    
   }
 
   .article-toolbar-container {

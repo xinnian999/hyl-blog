@@ -49,6 +49,7 @@ class Index extends Component<isProps, isState> {
         <List
           bordered
           dataSource={data2022}
+          loading={!data2022.length}
           renderItem={(item: any) => (
             <div onClick={() => navigate(`/article/${item.id}`)}>
               <List.Item className="fileList">
@@ -68,6 +69,7 @@ class Index extends Component<isProps, isState> {
         <List
           bordered
           dataSource={data2021}
+          loading={!data2021.length}
           renderItem={(item: any) => (
             <div onClick={() => navigate(`/article/${item.id}`)}>
               <List.Item className="fileList">

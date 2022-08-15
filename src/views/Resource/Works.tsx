@@ -1,4 +1,6 @@
+import { Skeleton } from "antd";
 import { useRequest } from "@/hooks";
+import { batchCopyDom } from "@/utils";
 import "./style.scss";
 
 export default function Works() {
@@ -24,5 +26,12 @@ export default function Works() {
       );
     });
 
-  return <div className="Works">{renderItem}</div>;
+  const renderSkeleton = batchCopyDom(
+    (key) => <Skeleton active paragraph={{ rows: 6 }} className="item" />,
+    4
+  );
+
+  return (
+    <div className="Works">{data.length ? renderItem : renderSkeleton}</div>
+  );
 }

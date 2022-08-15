@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback, useMemo } from "react";
+import { useEffect, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Divider, Space, Skeleton } from "antd";
 import ReactScroll from "react-infinite-scroll-component";
@@ -6,11 +6,11 @@ import classnames from "classnames";
 import { useScroll } from "ahooks";
 import { useSetState } from "@/hooks";
 import { PageCenter } from "@/components";
-import { request } from "@/utils";
+import { request, batchCopyDom } from "@/utils";
 import { useRequest } from "@/hooks";
+import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
-import Search from "./Search";
 
 interface State {
   articleData: any[];
@@ -55,20 +55,22 @@ function Article() {
 
   const queryArticle = () =>
     getState(({ category, pageNum, articleData }: any) => {
-      const params = {
-        pageNum,
-        pageSize: 5,
-        filters:
-          category === "全部" ? { publish: 1 } : { publish: 1, category },
-        orderBys: "topping desc,id desc",
-      };
-
-      request.get("/article/query", { params }).then((res: any) => {
-        setState({
-          articleData: [...articleData, ...res.data],
-          count: res.total,
+      request
+        .get("/article/query", {
+          params: {
+            pageNum,
+            pageSize: 5,
+            filters:
+              category === "全部" ? { publish: 1 } : { publish: 1, category },
+            orderBys: "topping desc,id desc",
+          },
+        })
+        .then((res) => {
+          setState({
+            articleData: [...articleData, ...res.data],
+            count: res.total,
+          });
         });
-      });
       setState({ pageNum: pageNum + 1 });
     });
 
@@ -90,7 +92,7 @@ function Article() {
     </span>
   ));
 
-  const renderCategory = categoryData.map(({ name, count }: any) => {
+  const renderCategory = categoryData.map(({ name }: any) => {
     return (
       <li
         key={name}
@@ -125,7 +127,19 @@ function Article() {
     [hotArticleData]
   );
 
-  const paragraph = <Skeleton avatar paragraph={{ rows: 3 }} active />;
+  const paragraph = (
+    <Space direction="vertical" className="skeleton" size={20}>
+      {batchCopyDom(
+        (key) => (
+          <div className="skeletonItem" key={key}>
+            <Skeleton.Image active className="skeletonItem-image" />
+            <Skeleton paragraph={{ rows: 5 }} active round className="" />
+          </div>
+        ),
+        3
+      )}
+    </Space>
+  );
 
   const categoryStyle = { width: ref.current?.clientWidth };
 
@@ -135,31 +149,27 @@ function Article() {
     animate__animated: fixedCateGory,
   });
 
-  const giveData = (data: any) => setState({ articleData: data, count: 1 });
+  const giveData = (data: any) => setState({ articleData: data, count: -1 });
 
   return (
     <PageCenter>
       <div id="hall-main">
         <div className="article-list">
-          {articleData.length ? (
-            <ReactScroll
-              dataLength={articleData.length}
-              next={queryArticle}
-              hasMore={articleData.length < count}
-              loader={paragraph}
-              endMessage={
-                <Divider plain className="article-footer">
-                  没有更多文章了 ---- 🤐{" "}
-                </Divider>
-              }
-            >
-              <Space direction="vertical" className="listStyle">
-                {renderArticle}
-              </Space>
-            </ReactScroll>
-          ) : (
-            paragraph
-          )}
+          <ReactScroll
+            dataLength={articleData.length}
+            next={queryArticle}
+            hasMore={articleData.length < count}
+            loader={paragraph}
+            endMessage={
+              <Divider plain className="article-footer">
+                没有更多文章了 ---- 🤐{" "}
+              </Divider>
+            }
+          >
+            <Space direction="vertical" className="listStyle">
+              {renderArticle}
+            </Space>
+          </ReactScroll>
         </div>
 
         <div className="article-toolbar-container" ref={ref}>

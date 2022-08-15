@@ -1,7 +1,8 @@
-import { Row, Col, Tag, Avatar } from "antd";
+import { Row, Col, Tag, Avatar, Skeleton } from "antd";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { PageCenter, Banner, Title } from "@/components";
 import { useRequest } from "@/hooks";
+import { batchCopyDom } from "@/utils";
 import "./style.scss";
 
 export default function Link() {
@@ -52,17 +53,26 @@ export default function Link() {
         </Row>
         <br />
         <Row gutter={26} wrap className="link-main">
-          {data.map(({ avator, name, autograph, link }) => {
-            return (
-              <Col span={6} onClick={() => window.open(link)} key={link}>
-                <div className="linkItem">
-                  <Avatar src={avator} className="avatar" />
-                  <span>{name}</span>
-                  <div>{autograph}</div>
-                </div>
-              </Col>
-            );
-          })}
+          {data.length
+            ? data.map(({ avator, name, autograph, link }) => {
+                return (
+                  <Col span={6} onClick={() => window.open(link)} key={link}>
+                    <div className="linkItem">
+                      <Avatar src={avator} className="avatar" />
+                      <span>{name}</span>
+                      <div>{autograph}</div>
+                    </div>
+                  </Col>
+                );
+              })
+            : batchCopyDom(
+                (key) => (
+                  <Col span={6} key={key}>
+                    <Skeleton avatar active paragraph={{ rows: 3 }} />
+                  </Col>
+                ),
+                4
+              )}
         </Row>
       </PageCenter>
     </>

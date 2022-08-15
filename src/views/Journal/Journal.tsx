@@ -14,7 +14,7 @@ const First = () => {
     <div className="Journal">
       <Timeline
         mode={width > 800 ? "alternate" : "left"}
-        pending
+        pending={<div>查询中···</div>}
         className="timeline"
       >
         {data.map(({ content, picture, category, creatTime }, index) => (

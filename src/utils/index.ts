@@ -6,6 +6,7 @@ import changeBlogTitle from "./changeBlogTitle";
 import getDecode from "./getDecode";
 import debounce from "./debounce";
 import copy from "./copy";
+import batchCopyDom from "./batchCopyDom";
 
 function isFunction(obj: any): boolean {
   return typeof obj === "function";
@@ -31,4 +32,5 @@ export {
   getDecode,
   debounce,
   copy,
+  batchCopyDom
 };
