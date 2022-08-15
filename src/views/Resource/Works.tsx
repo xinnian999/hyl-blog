@@ -27,7 +27,7 @@ export default function Works() {
     });
 
   const renderSkeleton = batchCopyDom(
-    (key) => <Skeleton active paragraph={{ rows: 6 }} className="item" />,
+    (key) => <Skeleton active paragraph={{ rows: 4 }} className="item" />,
     4
   );
 
