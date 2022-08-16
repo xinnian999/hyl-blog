@@ -6,7 +6,7 @@ import classnames from "classnames";
 import { useScroll } from "ahooks";
 import { useSetState } from "@/hooks";
 import { PageCenter } from "@/components";
-import { request, batchCopyDom } from "@/utils";
+import { request, batchCopyDom, debounce } from "@/utils";
 import { useRequest } from "@/hooks";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
@@ -53,26 +53,29 @@ function Article() {
 
   const history = useNavigate();
 
-  const queryArticle = () =>
-    getState(({ category, pageNum, articleData }: any) => {
-      request
-        .get("/article/query", {
-          params: {
-            pageNum,
-            pageSize: 5,
-            filters:
-              category === "全部" ? { publish: 1 } : { publish: 1, category },
-            orderBys: "topping desc,id desc",
-          },
-        })
-        .then((res) => {
-          setState({
-            articleData: [...articleData, ...res.data],
-            count: res.total,
+  const queryArticle = debounce(
+    () =>
+      getState(({ category, pageNum, articleData }: any) => {
+        request
+          .get("/article/query", {
+            params: {
+              pageNum,
+              pageSize: 5,
+              filters:
+                category === "全部" ? { publish: 1 } : { publish: 1, category },
+              orderBys: "topping desc,id desc",
+            },
+          })
+          .then((res) => {
+            setState({
+              articleData: [...articleData, ...res.data],
+              count: res.total,
+            });
           });
-        });
-      setState({ pageNum: pageNum + 1 });
-    });
+        setState({ pageNum: pageNum + 1 });
+      }),
+    500
+  );
 
   useEffect(() => {
     queryArticle();

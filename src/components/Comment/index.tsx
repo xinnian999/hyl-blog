@@ -76,6 +76,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
         itemLayout="horizontal"
         className="commentCon"
         renderItem={commentItem}
+        locale={{ emptyText: "暂无评论，快发表第一个热评！" }}
         loading={!commentData.length && articleId === 99999}
       />
     </>
