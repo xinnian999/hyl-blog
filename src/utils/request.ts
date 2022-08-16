@@ -68,7 +68,7 @@ request.interceptors.response.use(
       default:
         Modal.error({
           title: status,
-          content: "请求接口错误",
+          content: "请求接口失败",
         });
         break;
     }

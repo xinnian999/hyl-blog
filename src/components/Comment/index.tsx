@@ -76,7 +76,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
         itemLayout="horizontal"
         className="commentCon"
         renderItem={commentItem}
-        loading={!commentData.length}
+        loading={!commentData.length && articleId === 99999}
       />
     </>
   );
