@@ -158,21 +158,25 @@ function Article() {
     <PageCenter>
       <div id="hall-main">
         <div className="article-list">
-          <ReactScroll
-            dataLength={articleData.length}
-            next={queryArticle}
-            hasMore={articleData.length < count}
-            loader={paragraph}
-            endMessage={
-              <Divider plain className="article-footer">
-                没有更多文章了 ---- 🤐{" "}
-              </Divider>
-            }
-          >
-            <Space direction="vertical" className="listStyle">
-              {renderArticle}
-            </Space>
-          </ReactScroll>
+          {articleData.length ? (
+            <ReactScroll
+              dataLength={articleData.length}
+              next={queryArticle}
+              hasMore={articleData.length < count}
+              loader={paragraph}
+              endMessage={
+                <Divider plain className="article-footer">
+                  没有更多文章了 ---- 🤐{" "}
+                </Divider>
+              }
+            >
+              <Space direction="vertical" className="listStyle">
+                {renderArticle}
+              </Space>
+            </ReactScroll>
+          ) : (
+            paragraph
+          )}
         </div>
 
         <div className="article-toolbar-container" ref={ref}>
