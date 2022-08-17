@@ -10,6 +10,12 @@ class Time implements isTime {
     this.time = time;
   }
 
+  static getDiff(start,last){
+    const diffDay = parseInt( (Date.parse(start)-Date.parse(last))/(1000*60*60*24))
+
+    return `${diffDay/365}年 ${diffDay/30}个月`
+  }
+
   getStandardTime() {
     return moment(this.time).format("YYYY-MM-DD HH:mm:ss");
   }
