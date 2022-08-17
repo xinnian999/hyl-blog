@@ -53,7 +53,28 @@ function Article() {
 
   const history = useNavigate();
 
-  const queryArticle = debounce(
+  const queryArticle = () =>
+    getState(({ category, pageNum, articleData }: any) => {
+      request
+        .get("/article/query", {
+          params: {
+            pageNum,
+            pageSize: 5,
+            filters:
+              category === "全部" ? { publish: 1 } : { publish: 1, category },
+            orderBys: "topping desc,id desc",
+          },
+        })
+        .then((res) => {
+          setState({
+            articleData: [...articleData, ...res.data],
+            count: res.total,
+          });
+        });
+      setState({ pageNum: pageNum + 1 });
+    });
+
+  const scrollArticle = debounce(
     () =>
       getState(({ category, pageNum, articleData }: any) => {
         request
@@ -161,7 +182,7 @@ function Article() {
           {articleData.length ? (
             <ReactScroll
               dataLength={articleData.length}
-              next={queryArticle}
+              next={scrollArticle}
               hasMore={articleData.length < count}
               loader={paragraph}
               endMessage={
