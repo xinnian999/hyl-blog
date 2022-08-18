@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import moment from "moment";
 import { List, Typography, Divider } from "antd";
 import { request, Time } from "@/utils";
@@ -13,13 +13,12 @@ interface isState {
   data: any;
 }
 class Index extends Component<isProps, isState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      count: 0,
-      data: [],
-    };
-  }
+  state = {
+    count: 0,
+    data: [],
+  };
+
+  diff: number = 0;
 
   componentDidMount() {
     request
@@ -27,19 +26,23 @@ class Index extends Component<isProps, isState> {
       .then((res: any) => {
         const { data } = res;
         this.setState({ count: data.length, data });
+        const startTime = data[0]?.createTime;
+        const lastTime = data[data.length - 1]?.createTime;
+        this.diff = Time.getDiffDay(startTime, lastTime);
       });
   }
 
   render() {
     const { count, data } = this.state;
     const { navigate } = this.props;
-    const startTime = data[0]?.createTime;
-    const lastTime = data[data.length - 1]?.createTime;
-    console.log(Time.getDiff(startTime, lastTime));
 
     return (
       <div id="file">
-        <Title>居然用了两年时间才写了{count}篇文章</Title>
+        <Title>
+          居然用了
+          {`${parseInt(this.diff / 365)}年${parseInt(this.diff / 30)}个月`}
+          才写了{count}篇文章
+        </Title>
         <Divider orientation="left" className="year">
           2022
         </Divider>

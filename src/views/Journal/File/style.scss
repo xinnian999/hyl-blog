@@ -7,15 +7,12 @@
     font-size: 25px;
   }
   .fileList {
-    color: #1890ff !important;
+    color: var(--ant-primary-7) !important;
     cursor: pointer;
     font-size: 16px;
   }
   .fileList:hover {
     opacity: 0.8;
-  }
-  .year {
-    // color: #fff;
   }
   .year::before,
   .year::after {
