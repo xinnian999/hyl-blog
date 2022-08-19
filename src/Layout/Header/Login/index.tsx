@@ -70,10 +70,7 @@ export default function Login() {
 
   const randomAvatar = () => {
     const random = getRandom(0, 5, imgNum);
-    setState({ imgNum: [random] });
-
-    const img = `/api/avatar/${avatar[random]}`;
-    setState({ imageUrl: img });
+    setState({ imgNum: [random], imageUrl: `/api/avatar/${avatar[random]}` });
   };
 
   const onLoginUser = (values: any) => {
