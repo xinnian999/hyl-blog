@@ -40,7 +40,7 @@ export default function Banner() {
         </p>
         <Button
           className="bannerContent-Button  animate__animated animate__fadeInUp"
-          onClick={() => navigate("/article")}
+          onClick={() => navigate("/article?category=all")}
         >
           Enter Blog
         </Button>

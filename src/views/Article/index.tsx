@@ -1,12 +1,12 @@
 import { useEffect, useRef, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Divider, Space, Skeleton } from "antd";
 import ReactScroll from "react-infinite-scroll-component";
 import classnames from "classnames";
 import { useScroll } from "ahooks";
 import { useSetState } from "@/hooks";
 import { PageCenter } from "@/components";
-import { request, batchCopyDom, debounce } from "@/utils";
+import { request, batchCopyDom } from "@/utils";
 import { useRequest } from "@/hooks";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
@@ -18,17 +18,25 @@ interface State {
   count: number;
   category: any;
   fixedCateGory: boolean;
+  requestLoading: boolean;
 }
 
 function Article() {
-  const [{ articleData, count, category, fixedCateGory }, setState, getState] =
-    useSetState<State>({
-      articleData: [],
-      fixedCateGory: false,
-      pageNum: 1,
-      count: 10,
-      category: "全部",
-    });
+  const history = useNavigate();
+  const [params] = useSearchParams();
+
+  const [
+    { articleData, count, category, fixedCateGory, requestLoading },
+    setState,
+    getState,
+  ] = useSetState<State>({
+    articleData: [],
+    fixedCateGory: false,
+    pageNum: 1,
+    count: 10,
+    category: params.get("category"),
+    requestLoading: false,
+  });
 
   const [hotArticleData] = useRequest("/article/query", {
     method: "get",
@@ -43,7 +51,7 @@ function Article() {
   const [categoryData, setCategoryData] = useRequest("/category/query", {
     method: "get",
     onSuccess: (res: any) => {
-      setCategoryData([{ name: "全部" }, ...res.data]);
+      setCategoryData([{ name: "all" }, ...res.data]);
     },
   });
 
@@ -51,9 +59,9 @@ function Article() {
 
   const scrollNum = useScroll(document.querySelector("#container"));
 
-  const history = useNavigate();
-
-  const queryArticle = () =>
+  const queryArticle = () => {
+    if (requestLoading) return;
+    setState({ requestLoading: true });
     getState(({ category, pageNum, articleData }: any) => {
       request
         .get("/article/query", {
@@ -61,7 +69,7 @@ function Article() {
             pageNum,
             pageSize: 5,
             filters:
-              category === "全部" ? { publish: 1 } : { publish: 1, category },
+              category === "all" ? { publish: 1 } : { publish: 1, category },
             orderBys: "topping desc,id desc",
           },
         })
@@ -69,34 +77,12 @@ function Article() {
           setState({
             articleData: [...articleData, ...res.data],
             count: res.total,
+            pageNum: pageNum + 1,
+            requestLoading: false,
           });
         });
-      setState({ pageNum: pageNum + 1 });
     });
-
-  const scrollArticle = debounce(
-    () =>
-      getState(({ category, pageNum, articleData }: any) => {
-        request
-          .get("/article/query", {
-            params: {
-              pageNum,
-              pageSize: 5,
-              filters:
-                category === "全部" ? { publish: 1 } : { publish: 1, category },
-              orderBys: "topping desc,id desc",
-            },
-          })
-          .then((res) => {
-            setState({
-              articleData: [...articleData, ...res.data],
-              count: res.total,
-            });
-          });
-        setState({ pageNum: pageNum + 1 });
-      }),
-    500
-  );
+  };
 
   useEffect(() => {
     queryArticle();
@@ -128,10 +114,11 @@ function Article() {
             pageNum: 1,
           });
           queryArticle();
+          history(`/article?category=${name}`);
         }}
         className={category === name ? "categoryActive" : ""}
       >
-        <div>{name} </div>
+        <div>{name === "all" ? "全部" : name} </div>
       </li>
     );
   });
@@ -179,25 +166,21 @@ function Article() {
     <PageCenter>
       <div id="hall-main">
         <div className="article-list">
-          {articleData.length ? (
-            <ReactScroll
-              dataLength={articleData.length}
-              next={scrollArticle}
-              hasMore={articleData.length < count}
-              loader={paragraph}
-              endMessage={
-                <Divider plain className="article-footer">
-                  没有更多文章了 ---- 🤐{" "}
-                </Divider>
-              }
-            >
-              <Space direction="vertical" className="listStyle">
-                {renderArticle}
-              </Space>
-            </ReactScroll>
-          ) : (
-            paragraph
-          )}
+          <ReactScroll
+            dataLength={articleData.length}
+            next={queryArticle}
+            hasMore={articleData.length < count}
+            loader={paragraph}
+            endMessage={
+              <Divider plain className="article-footer">
+                没有更多文章了 ---- 🤐{" "}
+              </Divider>
+            }
+          >
+            <Space direction="vertical" className="listStyle">
+              {renderArticle}
+            </Space>
+          </ReactScroll>
         </div>
 
         <div className="article-toolbar-container" ref={ref}>

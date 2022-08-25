@@ -1,28 +1,23 @@
 import { lazy } from "react";
-import {
-  HomeOutlined,
-  GitlabOutlined,
-  FormOutlined,
-  UsergroupAddOutlined,
-  CrownOutlined,
-} from "@ant-design/icons";
 
 const route = [
   {
     title: "博客",
-    icon: HomeOutlined,
     path: "/home",
     component: lazy(() => import("@/views/Home")),
   },
   {
     title: "文章",
-    icon: CrownOutlined,
     path: "/article",
+    search:'?category=all',
     component: lazy(() => import("@/views/Article")),
   },
   {
+    path: "/article/:id",
+    component: lazy(() => import("@/views/Article/ArticleDetail")),
+  },
+  {
     title: "日志",
-    icon: FormOutlined,
     path: "/journal",
     component: lazy(() => import("@/views/Journal")),
     children: [
@@ -45,19 +40,16 @@ const route = [
   },
   {
     title: "友链",
-    icon: UsergroupAddOutlined,
     path: "/link",
     component: lazy(() => import("@/views/Link")),
   },
   {
     title: "留言",
-    icon: GitlabOutlined,
     path: "/message",
     component: lazy(() => import("@/views/Message")),
   },
   {
     title: "资源",
-    // icon: GitlabOutlined,
     path: "/resource",
     component: lazy(() => import("@/views/Resource")),
     children: [
@@ -75,14 +67,10 @@ const route = [
   },
   {
     title: "关于",
-    icon: GitlabOutlined,
     path: "/about",
     component: lazy(() => import("@/views/About")),
   },
-  {
-    path: "/article/:id",
-    component: lazy(() => import("@/views/Article/ArticleDetail")),
-  },
+
   {
     path: "/demo",
     component: lazy(() => import("@/views/Demo")),

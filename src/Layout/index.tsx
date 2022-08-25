@@ -108,10 +108,10 @@ function Layout() {
   const renderMenus = useMemo(
     () =>
       menus.map((item: any) => {
-        const { title, path } = item;
+        const { title, path, search } = item;
         if (title) {
           return (
-            <NavLink key={title} to={path}>
+            <NavLink key={title} to={{ pathname: path, search }}>
               <li>{title}</li>
             </NavLink>
           );
