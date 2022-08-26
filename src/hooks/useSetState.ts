@@ -3,9 +3,9 @@ import { isFunction } from "@/utils";
 
 export type SetState<S extends Record<string, any>> = <K extends keyof S>(
   state: Pick<S, K> | null | ((prevState: Readonly<S>) => Pick<S, K> | S | null)
-) => void;
+) => Promise<any>;
 
-type getState = (getStateCallback: (arg: object, resolve: any) => void) => any;
+type getState = (getStateCallback: (arg: object) => void) => any;
 
 const useSetState = <S extends Record<string, any>>(
   initialState: S | (() => S)
@@ -13,23 +13,23 @@ const useSetState = <S extends Record<string, any>>(
   const [state, setState] = useState<S>(initialState);
 
   const stateRef = useRef(state);
+
   stateRef.current = state;
 
-  const get = useCallback(() => stateRef.current, []);
-
   const getState: getState = (getStateCallback) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        // 当需要异步时调用resolve，不需要则不用
-        getStateCallback(get(), resolve);
-      });
+    setTimeout(() => {
+      getStateCallback(stateRef.current);
     });
   };
 
   const setMergeState = useCallback((patch: any) => {
-    setState((prevState) => {
-      const newState = isFunction(patch) ? patch(prevState) : patch;
-      return newState ? { ...prevState, ...newState } : prevState;
+    return new Promise((resolve) => {
+      setState((prevState) => {
+        const newState = isFunction(patch) ? patch(prevState) : patch;
+        const result = newState ? { ...prevState, ...newState } : prevState;
+        resolve(result);
+        return result;
+      });
     });
   }, []);
 

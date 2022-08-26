@@ -79,7 +79,7 @@ function Article() {
             count: res.total,
             pageNum: pageNum + 1,
             requestLoading: false,
-          });
+          }).then((res) => {});
         });
     });
   };
@@ -173,7 +173,7 @@ function Article() {
             loader={paragraph}
             endMessage={
               <Divider plain className="article-footer">
-                没有更多文章了 ---- 🤐{" "}
+                <span className="shadowText">没有更多文章了</span> ---- 🤐
               </Divider>
             }
           >
