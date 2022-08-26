@@ -15,7 +15,7 @@ import "./style.scss";
 interface State {
   articleData: any[];
   pageNum: number;
-  count: number;
+  total: number;
   category: any;
   fixedCateGory: boolean;
   requestLoading: boolean;
@@ -26,14 +26,13 @@ function Article() {
   const [params] = useSearchParams();
 
   const [
-    { articleData, count, category, fixedCateGory, requestLoading },
+    { articleData, total, category, fixedCateGory, requestLoading },
     setState,
-    getState,
   ] = useSetState<State>({
     articleData: [],
     fixedCateGory: false,
     pageNum: 1,
-    count: 10,
+    total: 10,
     category: params.get("category"),
     requestLoading: false,
   });
@@ -62,25 +61,24 @@ function Article() {
   const queryArticle = () => {
     if (requestLoading) return;
     setState({ requestLoading: true });
-    getState(({ category, pageNum, articleData }: any) => {
-      request
-        .get("/article/query", {
-          params: {
-            pageNum,
-            pageSize: 5,
-            filters:
-              category === "all" ? { publish: 1 } : { publish: 1, category },
-            orderBys: "topping desc,id desc",
-          },
-        })
-        .then((res) => {
-          setState({
-            articleData: [...articleData, ...res.data],
-            count: res.total,
-            pageNum: pageNum + 1,
-            requestLoading: false,
-          }).then((res) => {});
+
+    setState(({ category, pageNum, articleData }) => {
+      request("/article/query", {
+        params: {
+          pageNum,
+          pageSize: 5,
+          filters:
+            category === "all" ? { publish: 1 } : { publish: 1, category },
+          orderBys: "topping desc,id desc",
+        },
+      }).then((res) => {
+        setState({
+          articleData: [...articleData, ...res.data],
+          total: res.total,
+          pageNum: pageNum + 1,
+          requestLoading: false,
         });
+      });
     });
   };
 
@@ -108,13 +106,14 @@ function Article() {
         key={name}
         onClick={() => {
           window.scrollTo(0, 0);
+          history(`/article?category=${name}`);
+
           setState({
             category: name,
             articleData: [],
             pageNum: 1,
           });
           queryArticle();
-          history(`/article?category=${name}`);
         }}
         className={category === name ? "categoryActive" : ""}
       >
@@ -160,7 +159,7 @@ function Article() {
     animate__animated: fixedCateGory,
   });
 
-  const giveData = (data: any) => setState({ articleData: data, count: -1 });
+  const giveData = (data: any) => setState({ articleData: data, total: -1 });
 
   return (
     <PageCenter>
@@ -169,7 +168,7 @@ function Article() {
           <ReactScroll
             dataLength={articleData.length}
             next={queryArticle}
-            hasMore={articleData.length < count}
+            hasMore={articleData.length < total}
             loader={paragraph}
             endMessage={
               <Divider plain className="article-footer">

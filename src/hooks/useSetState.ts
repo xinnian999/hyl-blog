@@ -2,8 +2,11 @@ import { useCallback, useState, useRef } from "react";
 import { isFunction } from "@/utils";
 
 export type SetState<S extends Record<string, any>> = <K extends keyof S>(
-  state: Pick<S, K> | null | ((prevState: Readonly<S>) => Pick<S, K> | S | null)
-) => Promise<any>;
+  state:
+    | Pick<S, K>
+    | null
+    | ((prevState: Readonly<S>) => Pick<S, K> | S | null | Promise<void>)
+) => void;
 
 type getState = (getStateCallback: (arg: object) => void) => any;
 
@@ -23,13 +26,10 @@ const useSetState = <S extends Record<string, any>>(
   };
 
   const setMergeState = useCallback((patch: any) => {
-    return new Promise((resolve) => {
-      setState((prevState) => {
-        const newState = isFunction(patch) ? patch(prevState) : patch;
-        const result = newState ? { ...prevState, ...newState } : prevState;
-        resolve(result);
-        return result;
-      });
+    setState((prevState) => {
+      const newState = isFunction(patch) ? patch(prevState) : patch;
+      const result = newState ? { ...prevState, ...newState } : prevState;
+      return result;
     });
   }, []);
 
