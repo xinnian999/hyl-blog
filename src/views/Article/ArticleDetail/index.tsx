@@ -59,7 +59,7 @@ function ArticleDetail() {
         document.title = `心 念 · ${res.data[0].title}`;
 
         // 生成锚点
-        getState(() => {
+        setTimeout(() => {
           let anchorList = Array.from(
             //@ts-ignore
             mdRef.current.children[0].querySelectorAll("h2,h3")

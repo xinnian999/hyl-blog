@@ -84,7 +84,7 @@ export default function Login() {
     if (!imageUrl) {
       randomAvatar();
     }
-    getState((state: any) => {
+    setState((state: any) => {
       runOnRegister({
         data: {
           ...values,
