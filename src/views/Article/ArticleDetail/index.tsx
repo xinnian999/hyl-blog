@@ -34,7 +34,6 @@ function ArticleDetail() {
       drawerVisible,
     },
     setState,
-    getState,
   ] = useSetState<State>({
     content: "",
     title: "",

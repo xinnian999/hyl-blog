@@ -16,7 +16,7 @@ const avatar = [
 ];
 
 export default function Login() {
-  const [{ imageUrl, imgNum, loading }, setState, getState] = useSetState<any>({
+  const [{ imageUrl, imgNum, loading }, setState] = useSetState<any>({
     imageUrl: "",
     imgNum: [],
     loading: false,
