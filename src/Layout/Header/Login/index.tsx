@@ -31,6 +31,7 @@ export default function Login() {
   const [, , runOnLogin] = useRequest("/user/login", {
     method: "post",
     manual: true,
+    progress: true,
     onSuccess: (res: any) => {
       const { username } = res.data;
 
@@ -57,6 +58,7 @@ export default function Login() {
   const [, , runOnRegister] = useRequest("/user/register", {
     method: "post",
     manual: true,
+    progress: true,
     onSuccess: (res: any) => {
       if (res.status === 0) {
         message.success("注册成功");

@@ -22,12 +22,12 @@ function Layout() {
   const { store, dispatch } = useRedux();
 
   useRequest("/all/getCsrfToken", {
-    method: "get",
+    progress: false,
     manual: !!cookie.get("csrf_token"),
   });
 
   useRequest("/music/query", {
-    method: "get",
+    progress: false,
     onSuccess: (res) => {
       music = new APlayer({
         container: document.getElementById("aplayer"),

@@ -1,13 +1,6 @@
 import { Timeline, Tag as AntdTag } from "antd";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
-import {
-  PageCenter,
-  withProgress,
-  Title,
-  Tag,
-  Info,
-  Section,
-} from "@/components";
+import { PageCenter, Title, Tag, Info, Section } from "@/components";
 import { Time } from "@/utils";
 import { useMount, useSetState, useRequest } from "@/hooks";
 import "./style.scss";
@@ -24,7 +17,6 @@ const About = () => {
   useMount(() => {
     const t = setInterval(() => {
       setState({ onTime: new Time(startTime).getDuration() });
-      console.log(111);
     }, 1000);
 
     return () => clearInterval(t);
@@ -117,4 +109,4 @@ const About = () => {
   );
 };
 
-export default withProgress(About);
+export default About;

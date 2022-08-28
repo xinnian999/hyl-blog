@@ -12,9 +12,6 @@ const request: any = axios.create({
 });
 
 request.interceptors.request.use((config: any) => {
-  // 开启顶部加载进度条
-  Nprogress.start();
-
   config.xsrfHeaderName = "X-CSRF-TOKEN";
   config.xsrfCookieName = "csrf_token";
 
