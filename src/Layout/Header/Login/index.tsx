@@ -1,4 +1,13 @@
-import { Button, Modal, Form, Input, message, Alert, Upload } from "antd";
+import {
+  Button,
+  Modal,
+  Form,
+  Input,
+  message,
+  Alert,
+  Upload,
+  Divider,
+} from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import md5 from "js-md5";
 import cookie from "js-cookie";
@@ -128,7 +137,7 @@ export default function Login() {
         title={isRegister ? "注册" : "登陆"}
         visible={modalVisible}
         onCancel={offModal}
-        footer={[]}
+        footer={null}
       >
         <Form
           name="basic"
@@ -219,19 +228,23 @@ export default function Login() {
             >
               {isRegister ? "已有账号？立即登录" : "没有账号？ 立即注册"}
             </Button>
-
-            <Button
-              style={{ marginTop: "10px", float: "right" }}
-              onClick={qqLogin}
-            >
-              <img
-                src="https://connect.qq.com/favicon.ico"
-                alt=""
-                className="qqIcon"
-              />{" "}
-              qq登录
-            </Button>
           </Form.Item>
+
+          {!isRegister && (
+            <>
+              <Divider>第三方登录</Divider>
+              <div className="toolLogin">
+                <Button onClick={qqLogin} className="qqLogin">
+                  <img
+                    src="https://connect.qq.com/favicon.ico"
+                    alt=""
+                    className="qqIcon"
+                  />{" "}
+                  qq登录
+                </Button>
+              </div>
+            </>
+          )}
         </Form>
       </Modal>
     </>

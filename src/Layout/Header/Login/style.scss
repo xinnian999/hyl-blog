@@ -1,4 +1,10 @@
-.qqIcon {
-  width: 15px;
-  margin-right: 5px;
+
+.toolLogin{
+  display: flex;
+  justify-content: right;
+  padding: 0 20px;
+  .qqIcon {
+    width: 15px;
+    margin-right: 5px;
+  }
 }
