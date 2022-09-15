@@ -1,44 +1,14 @@
-import { useEffect, useState, Component } from "react";
-import { useSetState } from "@/hooks";
+import { useEffect, useRef } from "react";
 
-class Demo extends Component {
-  state = {
-    num: 0,
-  };
-
-  componentDidMount() {
-    this.setState({ num: 1 });
-
-    setTimeout(() => {
-      console.log(this.state.num);
-    });
-  }
-
-  render() {
-    return null;
-  }
-}
-
-const HookDemo = () => {
-  const [{ num }, set] = useSetState({ num: 0 });
+function Ref() {
+  const ref = useRef({ name: "hyl" });
 
   useEffect(() => {
-    set((prev) => {
-      return { num: prev.num + 1 };
-    });
-    set((prev) => {
-      return { num: prev.num + 1 };
-    });
-    set((prev) => {
-      return { num: prev.num + 1 };
-    });
+    ref.current.name = "zyy";
+    console.log(ref);
   }, []);
-  return (
-    <>
-      <Demo />
-      <h1 style={{ color: "#fff" }}>{num}</h1>
-    </>
-  );
-};
 
-export default HookDemo;
+  return null;
+}
+
+export default Ref;

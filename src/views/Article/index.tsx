@@ -23,7 +23,12 @@ interface State {
 
 function Article() {
   const history = useNavigate();
+
   const [params] = useSearchParams();
+
+  const toobarRef = useRef(null) as any;
+
+  const scrollNum = useScroll(document.querySelector("#container"));
 
   const [
     { articleData, total, category, fixedCateGory, hotArticleData },
@@ -50,10 +55,6 @@ function Article() {
       setCategoryData([{ name: "all" }, ...res.data]);
     },
   });
-
-  const ref = useRef(null) as any;
-
-  const scrollNum = useScroll(document.querySelector("#container"));
 
   const queryArticle = () => {
     setState(({ category, pageNum, articleData }) => {
@@ -151,14 +152,14 @@ function Article() {
           </ReactScroll>
         </div>
 
-        <div className="article-toolbar-container" ref={ref}>
+        <div className="article-toolbar-container" ref={toobarRef}>
           <div
             className={classnames("article-toolbar ", {
               "category-fixed": fixedCateGory,
               animate__fadeInDownBig: fixedCateGory,
               animate__animated: fixedCateGory,
             })}
-            style={{ width: ref.current?.clientWidth }}
+            style={{ width: toobarRef.current?.clientWidth }}
           >
             <div className="article-toolbar-search">
               <Search
