@@ -1,13 +1,17 @@
-import { Anchor, Divider, Space, Drawer } from "antd";
+import { Divider, Space, Drawer } from "antd";
+import { Anchor } from "@arco-design/web-react";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
+import classnames from "classnames";
 import { useParams } from "react-router-dom";
+import { UnorderedListOutlined } from "@ant-design/icons";
 import { request, Time } from "@/utils";
 import { useSetState, useMount, useWindowSize } from "@/hooks";
 import { Comment, Loading } from "@/components";
 import Markdown from "./Markdown";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./style.scss";
+import { useScroll } from "ahooks";
 
 interface State {
   content: string;
@@ -48,7 +52,10 @@ function ArticleDetail() {
 
   const params = useParams();
   const mdRef = useRef(null);
+  const toolbarRef: any = useRef(null);
   const size = useWindowSize();
+
+  const scrollNum = useScroll(document.querySelector("#container"));
 
   useMount(() => {
     request
@@ -74,7 +81,12 @@ function ArticleDetail() {
 
   const renderAnchor = () => {
     return (
-      <Anchor className="anchorList" targetOffset={targetOffset}>
+      <Anchor
+        className="anchorList"
+        boundary={targetOffset}
+        lineless
+        affix={false}
+      >
         {anchorList.map((item: { id: string; localName: string }) => {
           const { id, localName } = item;
 
@@ -118,25 +130,38 @@ function ArticleDetail() {
         </Divider>
         {content ? <Markdown content={content} ref={mdRef} /> : <Loading />}
 
-        {/* 锚点 */}
-        {size.width > 800 ? (
-          <div className="Anchor">{renderAnchor()}</div>
-        ) : (
-          <div className="anchorFlag" onClick={showDrawer}>
-            <MenuFoldOutlined />
-          </div>
-        )}
-
-        <Drawer
-          placement="right"
-          onClose={onClose}
-          visible={drawerVisible}
-          width="60%"
-        >
-          <div className="anchorDrawer">{renderAnchor()}</div>
-        </Drawer>
         <Comment articleId={params.id} title="评论区" btnName="提交评论" />
       </div>
+
+      {size.width > 800 ? (
+        <div className="toolbar" ref={toolbarRef}>
+          <div
+            className={classnames("anchor", {
+              "anchor-fixed": scrollNum && scrollNum.top > 100,
+            })}
+            style={{ width: toolbarRef.current?.clientWidth }}
+          >
+            <div className="catalogue">
+              <UnorderedListOutlined /> 本章目录
+            </div>
+            <Divider></Divider>
+            <div className="Anchor">{renderAnchor()}</div>
+          </div>
+        </div>
+      ) : (
+        <div className="anchorFlag" onClick={showDrawer}>
+          <MenuFoldOutlined />
+        </div>
+      )}
+
+      <Drawer
+        placement="right"
+        onClose={onClose}
+        visible={drawerVisible}
+        width="60%"
+      >
+        <div className="anchorDrawer">{renderAnchor()}</div>
+      </Drawer>
     </PageCenter>
   );
 }

@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
-import { CopyOutlined } from "@ant-design/icons";
+import { CopyOutlined, LinkOutlined } from "@ant-design/icons";
 import { copy } from "@/utils";
 import "./style.scss";
 
@@ -45,6 +45,13 @@ const components = {
   },
   hr() {
     return <hr className="hr" />;
+  },
+  a(props) {
+    return (
+      <span>
+        <LinkOutlined /> <a href={props.href}>{props.children[0]}</a>
+      </span>
+    );
   },
 };
 

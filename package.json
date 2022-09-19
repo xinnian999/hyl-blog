@@ -10,7 +10,7 @@
     "deploy": "npm run build && node ./deploy.js"
   },
   "dependencies": {
-    "@arco-design/web-react": "^2.34.0",
+    "@arco-design/web-react": "^2.40.0",
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",

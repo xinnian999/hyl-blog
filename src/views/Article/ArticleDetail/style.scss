@@ -1,7 +1,6 @@
 #ArticleDetail {
-  width: 70%;
-  border-radius: 15px;
-  overflow: hidden;
+  width: 85%;
+  display: flex;
   .anchorFlag {
     position: fixed;
     right: 0;
@@ -14,66 +13,84 @@
   @media screen and (max-width: 800px) {
     width: 100%;
   }
+
+  .ArticleDetail {
+    background-color: #fff;
+    padding: 10px 30px;
+    position: relative;
+    flex: 1;
+    max-width: 75%;
+    border-radius: 10px;
+    .time {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 25px;
+    }
+
+    .article-info {
+      small {
+        color: #787977;
+      }
+    }
+
+  }
+
+  .toolbar {
+    width: 25%;
+    margin-left: 15px;
+    
+    .anchor{
+      background: #fff;
+      border-radius: 10px;
+      padding: 15px;
+      max-height: 400px;
+      overflow: auto;
+      .catalogue{
+        font-size: 18px;
+       
+      }
+      .ant-divider-horizontal{
+        margin: 10px auto;
+      }
+
+      .oneAnchor {
+      font-weight: bold;
+
+      }
+
+      .twoAnchor {
+        a {
+          font-size: 13px;
+          text-indent: 1em;
+        }
+
+        color: #fff;
+      }
+    }
+    .anchor-fixed{
+      position: fixed;
+    }
+
+    .arco-anchor-link-active{
+      a{
+        color: var(--ant-primary-color);
+      }
+    }
+
+  }
 }
 
 .anchorDrawer {
   padding-top: 10px;
 }
 
-.ArticleDetail {
-  background-color: #fff;
-  padding: 10px 30px;
-  position: relative;
 
-  .time {
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
 
-  .title {
-    text-align: center;
-    font-size: 25px;
-  }
-
-  .article-info {
-    small {
-      color: #787977;
-    }
-  }
-
-  .Anchor {
-    padding-left: 10px;
-    position: fixed;
-    right: 0;
-    top: 10%;
-    z-index: 999;
-    width: 15%;
-    border-radius: 5px;
-    background-color: rgb(88, 83, 83, 0.8);
-
-    .anchorList {
-      font-weight: bold;
-
-      padding-right: 30px;
-
-      .oneAnchor {
-        a {
-          color: var(--text-color);
-        }
-
-        color: #fff;
-      }
-
-      .twoAnchor {
-        a {
-          padding-left: 20px;
-          color: rgb(180, 178, 178);
-          font-size: 13px;
-        }
-
-        color: #fff;
-      }
-    }
-  }
+.arco-anchor{
+  width: 100%;
 }
