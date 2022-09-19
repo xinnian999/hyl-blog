@@ -30,17 +30,15 @@ function Article() {
 
   const scrollNum = useScroll(document.querySelector("#container"));
 
-  const [
-    { articleData, total, category, fixedCateGory, hotArticleData },
-    setState,
-  ] = useSetState<State>({
-    articleData: [],
-    fixedCateGory: false,
-    pageNum: 1,
-    total: 10,
-    category: params.get("category"),
-    hotArticleData: [],
-  });
+  const [{ articleData, total, category, hotArticleData }, setState] =
+    useSetState<State>({
+      articleData: [],
+      fixedCateGory: false,
+      pageNum: 1,
+      total: 10,
+      category: params.get("category"),
+      hotArticleData: [],
+    });
 
   const [, , runQueryArticle] = useRequest("/article/query", {
     method: "get",
@@ -55,6 +53,20 @@ function Article() {
       setCategoryData([{ name: "all" }, ...res.data]);
     },
   });
+
+  useEffect(() => {
+    queryArticle();
+    runQueryArticle({
+      params: {
+        pageNum: 1,
+        pageSize: 5,
+        filters: { publish: 1 },
+        orderBys: "visits desc",
+      },
+    }).then((res) => {
+      setState({ hotArticleData: res.data });
+    });
+  }, []);
 
   const queryArticle = () => {
     setState(({ category, pageNum, articleData }) => {
@@ -75,28 +87,6 @@ function Article() {
       });
     });
   };
-
-  useEffect(() => {
-    queryArticle();
-    runQueryArticle({
-      params: {
-        pageNum: 1,
-        pageSize: 5,
-        filters: { publish: 1 },
-        orderBys: "visits desc",
-      },
-    }).then((res) => {
-      setState({ hotArticleData: res.data });
-    });
-  }, []);
-
-  useEffect(() => {
-    if (scrollNum && scrollNum.top > 780) {
-      setState({ fixedCateGory: true });
-    } else {
-      setState({ fixedCateGory: false });
-    }
-  }, [scrollNum]);
 
   const renderHotArticle = useMemo(
     () =>
@@ -126,6 +116,8 @@ function Article() {
       )}
     </Space>
   );
+
+  const fixedCateGory = scrollNum && scrollNum.top > 780;
 
   return (
     <PageCenter>
