@@ -41,12 +41,12 @@
       font-weight: bold;
       font-size: 20px;
       color: #fff;
-      .shadowText{
+      .shadowText {
         text-shadow: 2px 2px var(--ant-primary-color);
       }
     }
 
-    .skeleton{
+    .skeleton {
       width: 100%;
       margin-top: 20px;
       overflow: hidden;
@@ -60,7 +60,6 @@
         }
       }
     }
-    
   }
 
   .article-toolbar-container {
@@ -81,11 +80,13 @@
       &-search {
         padding: 10px;
         background-color: gray;
+        border-radius: 10px 10px 0 0;
       }
 
       &-category {
         padding-top: 20px;
         background-color: #fff;
+        border-radius: 0 0 10px 10px;
 
         li {
           position: relative;
@@ -134,6 +135,7 @@
         margin-top: 20px;
         padding: 10px;
         padding-top: 1px;
+        border-radius: 10px;
 
         li {
           position: relative;

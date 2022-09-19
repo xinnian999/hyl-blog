@@ -2,16 +2,15 @@ import { Divider, Space, Drawer } from "antd";
 import { Anchor } from "@arco-design/web-react";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
-import classnames from "classnames";
 import { useParams } from "react-router-dom";
-import { UnorderedListOutlined } from "@ant-design/icons";
+import { useScroll } from "ahooks";
+import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { request, Time } from "@/utils";
-import { useSetState, useMount, useWindowSize } from "@/hooks";
+import { useSetState, useMount, useWindowSize, useRequest } from "@/hooks";
 import { Comment, Loading } from "@/components";
 import Markdown from "./Markdown";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import "./style.scss";
-import { useScroll } from "ahooks";
 
 interface State {
   content: string;
@@ -23,6 +22,8 @@ interface State {
   visits: number;
   targetOffset: any;
   drawerVisible: boolean;
+  category: string;
+  aboutArticle: any[];
 }
 
 function ArticleDetail() {
@@ -36,6 +37,7 @@ function ArticleDetail() {
       anchorList,
       targetOffset,
       drawerVisible,
+      aboutArticle,
     },
     setState,
   ] = useSetState<State>({
@@ -46,8 +48,10 @@ function ArticleDetail() {
     anchorList: [],
     visits: 0,
     updateTime: "",
+    category: "",
     targetOffset: undefined,
     drawerVisible: false,
+    aboutArticle: [],
   });
 
   const params = useParams();
@@ -56,6 +60,12 @@ function ArticleDetail() {
   const size = useWindowSize();
 
   const scrollNum = useScroll(document.querySelector("#container"));
+
+  const [, , runGetAbout] = useRequest("/article/query", {
+    method: "get",
+    manual: true,
+    progress: false,
+  });
 
   useMount(() => {
     request
@@ -71,6 +81,18 @@ function ArticleDetail() {
             mdRef.current.children[0].querySelectorAll("h2,h3")
           );
           setState({ anchorList, targetOffset: window.innerHeight / 4 });
+        });
+
+        //查询相关文章
+        runGetAbout({
+          params: {
+            pageNum: 1,
+            pageSize: 5,
+            filters: { publish: 1, category: res.data[0].category },
+            orderBys: "topping desc,id desc",
+          },
+        }).then((res) => {
+          setState({ aboutArticle: res.data });
         });
       });
 
@@ -134,18 +156,47 @@ function ArticleDetail() {
       </div>
 
       {size.width > 800 ? (
-        <div className="toolbar" ref={toolbarRef}>
+        <div className="ArticleDetail-toolbar" ref={toolbarRef}>
           <div
-            className={classnames("anchor", {
-              "anchor-fixed": scrollNum && scrollNum.top > 100,
-            })}
-            style={{ width: toolbarRef.current?.clientWidth }}
+            className={
+              scrollNum && scrollNum.top > 200
+                ? "ArticleDetail-toolbar-fixed"
+                : ""
+            }
           >
-            <div className="catalogue">
-              <UnorderedListOutlined /> 本章目录
+            <div
+              className="ArticleDetail-toolbar-item"
+              style={{ width: toolbarRef.current?.clientWidth }}
+            >
+              <div className="catalogue">
+                <UnorderedListOutlined /> 本章目录
+              </div>
+              <Divider></Divider>
+              <div className="Anchor">{renderAnchor()}</div>
             </div>
-            <Divider></Divider>
-            <div className="Anchor">{renderAnchor()}</div>
+
+            <div
+              className="ArticleDetail-toolbar-item"
+              style={{ width: toolbarRef.current?.clientWidth }}
+            >
+              <div className="catalogue">
+                <CheckSquareOutlined /> 相关阅读
+              </div>
+              <Divider></Divider>
+              {aboutArticle.map(({ title, visits, comments, id }) => (
+                <div className="aboutArticle-item" key={title}>
+                  <div
+                    className="aboutArticle-item-title"
+                    onClick={() => window.open(`/article/${id}`, "_self")}
+                  >
+                    {title}
+                  </div>
+                  <div className="aboutArticle-item-info">
+                    {comments}评论 | {visits}阅读
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       ) : (
