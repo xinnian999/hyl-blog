@@ -207,7 +207,7 @@ function ArticleDetail() {
       <Drawer
         placement="right"
         onClose={setFalse}
-        visible={drawerVisible}
+        open={drawerVisible}
         width="60%"
       >
         <div className="anchorDrawer">{renderAnchor}</div>

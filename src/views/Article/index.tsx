@@ -106,8 +106,8 @@ function Article() {
   const paragraph = (
     <Space direction="vertical" className="skeleton" size={20}>
       {batchCopyDom(
-        (key) => (
-          <div className="skeletonItem" key={key}>
+        () => (
+          <div className="skeletonItem">
             <Skeleton.Image active className="skeletonItem-image" />
             <Skeleton paragraph={{ rows: 5 }} active round className="" />
           </div>

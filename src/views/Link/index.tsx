@@ -66,8 +66,8 @@ export default function Link() {
                 );
               })
             : batchCopyDom(
-                (key) => (
-                  <Col span={6} key={key}>
+                () => (
+                  <Col span={6}>
                     <Skeleton avatar active paragraph={{ rows: 3 }} />
                   </Col>
                 ),
