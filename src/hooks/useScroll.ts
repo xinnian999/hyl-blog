@@ -5,10 +5,9 @@ const useScroll = (num?: number) => {
   const [scrollNum, setScrollNum] = useState(0);
   const [visible, setVisible] = useState(false);
   const onScroll = (e: any) => {
-    // @ts-ignore
     const scrollNum = e.srcElement.documentElement.scrollTop;
     setScrollNum(scrollNum);
-    // console.log(scrollNum);
+
     if (num && scrollNum >= num) {
       setVisible(true);
     } else {

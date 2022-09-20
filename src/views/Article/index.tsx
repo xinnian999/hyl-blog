@@ -28,7 +28,7 @@ function Article() {
 
   const toobarRef = useRef(null) as any;
 
-  const scrollNum = useScroll(document.querySelector("#container"));
+  const scrollNum = useScroll();
 
   const [{ articleData, total, category, hotArticleData }, setState] =
     useSetState<State>({

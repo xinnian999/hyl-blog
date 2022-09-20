@@ -1,6 +1,6 @@
 #ArticleDetail {
-  width: 85%;
   display: flex;
+  overflow: hidden;
   .anchorFlag {
     position: fixed;
     right: 0;
@@ -10,16 +10,15 @@
     padding: 5px 10px;
     cursor: pointer;
   }
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
 
   .ArticleDetail {
     background-color: #fff;
     padding: 10px 30px;
     position: relative;
-    flex: 1;
-    max-width: 75%;
+    width: calc(75% - 20px) ;
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
     border-radius: 10px;
     .time {
       position: absolute;

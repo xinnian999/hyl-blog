@@ -1,15 +1,15 @@
+import { useEffect, useMemo, useRef } from "react";
 import { Divider, Space, Drawer } from "antd";
 import { Anchor } from "@arco-design/web-react";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
 import { useParams } from "react-router-dom";
-import { useScroll } from "ahooks";
+import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { request, Time } from "@/utils";
 import { useSetState, useMount, useWindowSize, useRequest } from "@/hooks";
 import { Comment, Loading } from "@/components";
 import Markdown from "./Markdown";
-import { useRef } from "react";
 import "./style.scss";
 
 interface State {
@@ -21,7 +21,6 @@ interface State {
   anchorList: any;
   visits: number;
   targetOffset: any;
-  drawerVisible: boolean;
   category: string;
   aboutArticle: any[];
 }
@@ -36,7 +35,6 @@ function ArticleDetail() {
       updateTime,
       anchorList,
       targetOffset,
-      drawerVisible,
       aboutArticle,
     },
     setState,
@@ -50,16 +48,17 @@ function ArticleDetail() {
     updateTime: "",
     category: "",
     targetOffset: undefined,
-    drawerVisible: false,
     aboutArticle: [],
   });
 
   const params = useParams();
-  const mdRef = useRef(null);
+  const mdRef: any = useRef(null);
   const toolbarRef: any = useRef(null);
   const size = useWindowSize();
 
-  const scrollNum = useScroll(document.querySelector("#container"));
+  const scrollNum = useScroll();
+
+  const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
   const [, , runGetAbout] = useRequest("/article/query", {
     method: "get",
@@ -70,73 +69,103 @@ function ArticleDetail() {
   useMount(() => {
     request
       .get("/article/queryDetail", { params: { id: params.id } })
-      .then((res: any) => {
-        setState(res.data[0]);
-        document.title = `心 念 · ${res.data[0].title}`;
-
-        // 生成锚点
+      .then((res) => res.data[0])
+      .then((data) => {
+        setState(data);
+        // 设置页面标题
+        document.title = `心 念 · ${data.title}`;
+        // 文章阅读量+1
         setTimeout(() => {
-          let anchorList = Array.from(
-            //@ts-ignore
-            mdRef.current.children[0].querySelectorAll("h2,h3")
-          );
-          setState({ anchorList, targetOffset: window.innerHeight / 4 });
-        });
-
+          request.put("/article/visit", { id: params.id });
+        }, 3000);
         //查询相关文章
         runGetAbout({
           params: {
             pageNum: 1,
             pageSize: 5,
-            filters: { publish: 1, category: res.data[0].category },
+            filters: { publish: 1, category: data.category },
             orderBys: "topping desc,id desc",
           },
         }).then((res) => {
           setState({ aboutArticle: res.data });
         });
       });
-
-    setTimeout(() => {
-      request.put("/article/visit", { id: params.id });
-    }, 3000);
   });
 
-  const renderAnchor = () => {
-    return (
-      <Anchor
-        className="anchorList"
-        boundary={targetOffset}
-        lineless
-        affix={false}
+  useEffect(() => {
+    if (mdRef.current) {
+      //生成锚点
+      setState({
+        anchorList: [...mdRef.current.children[0].querySelectorAll("h2,h3")],
+        targetOffset: window.innerHeight / 4,
+      });
+    }
+  }, [mdRef.current]);
+
+  const renderAnchor = useMemo(
+    () => (
+      <div
+        className="ArticleDetail-toolbar-item"
+        style={{ width: toolbarRef.current?.clientWidth }}
       >
-        {anchorList.map((item: { id: string; localName: string }) => {
-          const { id, localName } = item;
+        <div className="catalogue">
+          <UnorderedListOutlined /> 本章目录
+        </div>
+        <Divider></Divider>
+        <Anchor
+          className="anchorList"
+          boundary={targetOffset}
+          lineless
+          affix={false}
+        >
+          {anchorList.map((item: { id: string; localName: string }) => {
+            const { id, localName } = item;
+            return (
+              <Anchor.Link
+                key={id}
+                href={`#${id}`}
+                title={id}
+                className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
+              />
+            );
+          })}
+        </Anchor>
+      </div>
+    ),
+    [anchorList]
+  );
 
-          return (
-            <Anchor.Link
-              key={id}
-              href={`#${id}`}
-              title={id}
-              className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
-            />
-          );
-        })}
-      </Anchor>
-    );
-  };
-
-  const showDrawer = () => {
-    setState({ drawerVisible: true });
-  };
-
-  const onClose = () => {
-    setState({ drawerVisible: false });
-  };
+  const renderAboutArticle = useMemo(
+    () => (
+      <div
+        className="ArticleDetail-toolbar-item"
+        style={{ width: toolbarRef.current?.clientWidth }}
+      >
+        <div className="catalogue">
+          <CheckSquareOutlined /> 相关阅读
+        </div>
+        <Divider></Divider>
+        {aboutArticle.map(({ title, visits, comments, id }) => (
+          <div className="aboutArticle-item" key={title}>
+            <div
+              className="aboutArticle-item-title"
+              onClick={() => window.open(`/article/${id}`, "_self")}
+            >
+              {title}
+            </div>
+            <div className="aboutArticle-item-info">
+              {comments}评论 | {visits}阅读
+            </div>
+          </div>
+        ))}
+      </div>
+    ),
+    [aboutArticle]
+  );
 
   return (
     <PageCenter id="ArticleDetail">
       <div className="ArticleDetail">
-        {/* 内容 */}
         <div className="time">
           <TimeBar time={creatTime} />
         </div>
@@ -159,59 +188,29 @@ function ArticleDetail() {
         <div className="ArticleDetail-toolbar" ref={toolbarRef}>
           <div
             className={
-              scrollNum && scrollNum.top > 200
-                ? "ArticleDetail-toolbar-fixed"
-                : ""
+              (scrollNum &&
+                scrollNum.top > 200 &&
+                "ArticleDetail-toolbar-fixed") ||
+              ""
             }
           >
-            <div
-              className="ArticleDetail-toolbar-item"
-              style={{ width: toolbarRef.current?.clientWidth }}
-            >
-              <div className="catalogue">
-                <UnorderedListOutlined /> 本章目录
-              </div>
-              <Divider></Divider>
-              <div className="Anchor">{renderAnchor()}</div>
-            </div>
-
-            <div
-              className="ArticleDetail-toolbar-item"
-              style={{ width: toolbarRef.current?.clientWidth }}
-            >
-              <div className="catalogue">
-                <CheckSquareOutlined /> 相关阅读
-              </div>
-              <Divider></Divider>
-              {aboutArticle.map(({ title, visits, comments, id }) => (
-                <div className="aboutArticle-item" key={title}>
-                  <div
-                    className="aboutArticle-item-title"
-                    onClick={() => window.open(`/article/${id}`, "_self")}
-                  >
-                    {title}
-                  </div>
-                  <div className="aboutArticle-item-info">
-                    {comments}评论 | {visits}阅读
-                  </div>
-                </div>
-              ))}
-            </div>
+            {renderAnchor}
+            {renderAboutArticle}
           </div>
         </div>
       ) : (
-        <div className="anchorFlag" onClick={showDrawer}>
+        <div className="anchorFlag" onClick={setTrue}>
           <MenuFoldOutlined />
         </div>
       )}
 
       <Drawer
         placement="right"
-        onClose={onClose}
+        onClose={setFalse}
         visible={drawerVisible}
         width="60%"
       >
-        <div className="anchorDrawer">{renderAnchor()}</div>
+        <div className="anchorDrawer">{renderAnchor}</div>
       </Drawer>
     </PageCenter>
   );
