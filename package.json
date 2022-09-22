@@ -41,8 +41,6 @@
     "css-minimizer-webpack-plugin": "^3.2.0",
     "dotenv": "^10.0.0",
     "dotenv-expand": "^5.1.0",
-    "element-react": "^1.4.34",
-    "element-theme-default": "^1.4.13",
     "enquire-js": "^0.2.1",
     "eslint": "^8.3.0",
     "eslint-config-react-app": "^7.0.1",

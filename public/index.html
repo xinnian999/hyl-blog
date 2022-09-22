@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="心念，个人网站，记录个人成长" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>心 念</title>
+    <!-- require cdn assets css -->
+    <% for (var i in htmlWebpackPlugin.options.files &&
+    htmlWebpackPlugin.options.files.css) { %>
+    <link
+      rel="stylesheet"
+      href="<%= htmlWebpackPlugin.options.files.css[i] %>"
+    />
+    <% } %>
+  </head>
 
-<head>
-  <meta charset="utf-8" />
-  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="description" content="心念，个人网站，记录个人成长" />
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-  <title>心 念</title>
-</head>
-
-<body>
-  <noscript>javascript 执行失败 ！</noscript>
-  <div id="root"></div>
-</body>
-
+  <body>
+    <noscript>javascript 执行失败 ！</noscript>
+    <div id="root"></div>
+    <!-- require cdn assets js -->
+    <% for (var i in htmlWebpackPlugin.options.files &&
+    htmlWebpackPlugin.options.files.js) { %>
+    <script
+      type="text/javascript"
+      crossorigin
+      src="<%= htmlWebpackPlugin.options.files.js[i] %>"
+    ></script>
+    <% } %>
+  </body>
 </html>

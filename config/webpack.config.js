@@ -616,6 +616,10 @@ module.exports = function (webpackEnv) {
           {
             inject: true,
             template: paths.appHtml,
+            files: {
+              js: [],
+              css: [],
+            },
           },
           isEnvProduction
             ? {
@@ -794,6 +798,8 @@ module.exports = function (webpackEnv) {
           },
         }),
     ].filter(Boolean),
+    //webpack排除打包
+    externals: {},
     // Turn off performance processing because we utilize
     // our own hints via the FileSizeReporter
     performance: false,
