@@ -2,8 +2,8 @@ import "react-app-polyfill/ie9";
 import "react-app-polyfill/stable";
 import { createRoot } from "react-dom/client";
 import "@/style/style.scss";
-import "antd/dist/antd.variable.min.css";
-import "animate.css";
+// import "antd/dist/antd.variable.min.css";
+// import "animate.css";
 import App from "./App";
 import "lib-flexible";
 import reportWebVitals from "./reportWebVitals";
@@ -13,7 +13,6 @@ import "@arco-design/web-react/dist/css/arco.css";
 if (isIE()) {
   alert("请放弃万恶的IE浏览器吧");
 }
-
 
 window.onfocus = () => {
   changeBlogTitle(window.location.pathname);

@@ -618,7 +618,10 @@ module.exports = function (webpackEnv) {
             template: paths.appHtml,
             files: {
               js: [],
-              css: [],
+              css: [
+                "https://lib.baomitu.com/antd/4.23.2/antd.variable.min.css",
+                "https://lib.baomitu.com/animate.css/4.1.1/animate.min.css",
+              ],
             },
           },
           isEnvProduction

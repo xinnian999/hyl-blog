@@ -60,14 +60,11 @@ config.plugins[0].userOptions.files.js = [
   "https://lib.baomitu.com/aplayer/1.10.1/APlayer.min.js",
 ];
 
-config.plugins[0].userOptions.files.css = [];
-
 // 配置不进行webpack打包的文件
 config.externals = {
   react: "React",
   "react-dom": "ReactDOM",
   redux: "Redux",
-  "redux-thunk": "ReduxThunk",
   axios: "axios",
   antd: "antd",
   lodash: "_",
