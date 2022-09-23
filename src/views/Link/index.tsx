@@ -1,9 +1,31 @@
 import { Row, Col, Tag, Avatar, Skeleton } from "antd";
+import { Tabs } from "@arco-design/web-react";
+import { Prism } from "react-syntax-highlighter";
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { PageCenter, Banner, Title } from "@/components";
+import { PageCenter, Banner, Title, Copy } from "@/components";
 import { useRequest } from "@/hooks";
 import { batchCopyDom } from "@/utils";
 import "./style.scss";
+
+const tags = [
+  { color: "green", icon: <CheckOutlined />, con: "原创优先" },
+  { color: "green", icon: <CheckOutlined />, con: "技术优先" },
+  { color: "red", icon: <CloseOutlined />, con: "经常宕机" },
+  { color: "red", icon: <CloseOutlined />, con: "不合法规" },
+  { color: "red", icon: <CloseOutlined />, con: "插边球站" },
+  { color: "red", icon: <CloseOutlined />, con: "红标报毒" },
+];
+
+const info = `名称：心念个人博客
+网址：https://www.hyl999.co
+图标：https://www.hyl999.co/favicon.ico
+描述：犹一心一意 , 念念不忘`;
+
+const yaml = `- name: 心念个人博客
+  link: https://www.hyl999.co
+  avatar: https://www.hyl999.co
+  descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
   const [data] = useRequest("/link/query");
@@ -21,32 +43,36 @@ export default function Link() {
               <Title>链接申请说明</Title>
               <div className="explainMain">
                 <p className="tags">
-                  <Tag color="green" icon={<CheckOutlined />}>
-                    原创优先
-                  </Tag>
-                  <Tag color="green" icon={<CheckOutlined />}>
-                    技术优先
-                  </Tag>
-                  <Tag color="red" icon={<CloseOutlined />}>
-                    经常宕机
-                  </Tag>
-                  <Tag color="red" icon={<CloseOutlined />}>
-                    不合法规
-                  </Tag>
-                  <Tag color="red" icon={<CloseOutlined />}>
-                    插边球站
-                  </Tag>
-                  <Tag color="red" icon={<CloseOutlined />}>
-                    红标报毒
-                  </Tag>
+                  {tags.map((item) => (
+                    <Tag color={item.color} icon={item.icon} key={item.con}>
+                      {item.con}
+                    </Tag>
+                  ))}
                 </p>
-                <p className="content">
-                  交换友链可在 <b>留言板</b> 留言： <b>请将本站加入友链</b>{" "}
-                  <br />
-                  名称：心念个人博客 <br /> 网址：https://www.hyl999.co <br />
-                  图标：https://www.hyl999.co/favicon.ico <br />
-                  描述：犹一心一意 , 念念不忘 <br />
-                </p>
+                <div className="content">
+                  <p>
+                    交换友链可在 <b>留言板</b>
+                    ，本站友链倒序排列，且不定期清理失效友链
+                  </p>
+                  <Tabs type="card-gutter">
+                    <Tabs.TabPane title="中文" key="chinese">
+                      <Copy content={info}>
+                        <pre className="mylink-info">{info}</pre>
+                      </Copy>
+                    </Tabs.TabPane>
+                    <Tabs.TabPane title="Yaml" key="yaml">
+                      <Copy content={yaml}>
+                        <Prism
+                          showLineNumbers
+                          style={tomorrow}
+                          language={"xml"}
+                          PreTag="div"
+                          children={yaml}
+                        />
+                      </Copy>
+                    </Tabs.TabPane>
+                  </Tabs>
+                </div>
               </div>
             </div>
           </Col>
@@ -54,13 +80,13 @@ export default function Link() {
         <br />
         <Row gutter={26} wrap className="link-main">
           {data.length
-            ? data.map(({ avator, name, autograph, link }) => {
+            ? data.map(({ avator, name, descr, link }) => {
                 return (
                   <Col span={6} onClick={() => window.open(link)} key={link}>
                     <div className="linkItem">
                       <Avatar src={avator} className="avatar" />
                       <span>{name}</span>
-                      <div>{autograph}</div>
+                      <div>{descr}</div>
                     </div>
                   </Col>
                 );

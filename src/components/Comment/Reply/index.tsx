@@ -89,6 +89,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
                 content={`回复 ${props.reply_name} : ${props.content}`}
                 author={author(props)}
                 actions={renderAction(props)}
+                className="itemList-item"
               />
             )}
           />

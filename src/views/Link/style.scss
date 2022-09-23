@@ -1,4 +1,4 @@
-$bg: #fff;
+$bg: rgba(255, 255, 255);
 
 .explain {
   padding: 15px;
@@ -13,6 +13,11 @@ $bg: #fff;
 
     .content {
       line-height: 25px;
+      .mylink-info {
+        background: var(--ant-primary-2);
+        padding: 10px;
+        font-weight: bold;
+      }
     }
   }
 }

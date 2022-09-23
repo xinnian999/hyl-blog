@@ -1,6 +1,6 @@
 import { Timeline, Tag as AntdTag } from "antd";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
-import { PageCenter, Title, Tag, Info, Section } from "@/components";
+import { PageCenter, Title, Tag, Info, Section, Icon } from "@/components";
 import { Time } from "@/utils";
 import { useMount, useSetState, useRequest } from "@/hooks";
 import "./style.scss";
@@ -43,7 +43,28 @@ const About = () => {
             <QqOutlined className="myContact" /> 33075783337 <br />
             <WechatOutlined className="myContact" /> 17803000829 <br />
             <MailOutlined className="myContact" /> 17803000829@163.com <br />
+            <Icon type="icon-gitee2" className="myContact gitee" />{" "}
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href="https://gitee.com/mind251314/dashboard/projects"
+            >
+              gitee
+            </a>
+            <img
+              src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/apple-touch-icon.png"
+              className="myContact juejin"
+            />{" "}
+            <a
+              href="https://juejin.cn/user/1900422792751454"
+              target="_blank"
+              rel="noreferrer"
+            >
+              junjin
+            </a>
+            <br />
           </Info>
+
           <Title>关于本站</Title>
           <Info>
             <Section>
@@ -75,6 +96,7 @@ const About = () => {
               <Tag>{onTime}</Tag>
             </Section>
           </Info>
+
           <Title>更新日志</Title>
           <Info className="updateLog">
             <Timeline>

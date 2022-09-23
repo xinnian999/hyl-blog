@@ -4,6 +4,7 @@ import Loading from "./Loading";
 import TimeBar from "./TimeBar";
 import Banner from "./Banner";
 import Card from "./Card";
+import Copy from "./Copy";
 import {
   PageCenter,
   Bubble,
@@ -32,4 +33,5 @@ export {
   Section,
   Card,
   Redirect,
+  Copy,
 };
