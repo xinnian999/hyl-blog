@@ -11,20 +11,20 @@ const bucket = "hylcdn-1305519392";
 const region = "ap-beijing";
 
 // 需要上传的文件夹地址
-const filePath = path.resolve("./build");
+const filePath = path.resolve("build/");
 
-const uploadFile = (filePath) => {
+const uploadFile = (pathItem) => {
   cos.putObject(
     {
       Bucket: "hylcdn-1305519392" /* 必须 */,
       Region: "ap-beijing" /* 必须 */,
-      Key: `static/${filePath.split("/").pop()}` /* 必须 */,
+      Key: `static/${pathItem.split("static/")[1]}` /* 必须 */,
       StorageClass: "STANDARD",
-      Body: fs.createReadStream(filePath), // 上传文件对象
+      Body: fs.createReadStream(pathItem), // 上传文件对象
     },
     function (err, data) {
       if (data?.statusCode === 200) {
-        console.log(`上传${filePath.split("/").pop()}到cdn成功！`);
+        console.log(`上传${pathItem.split("/").pop()}到cdn成功！`);
       }
     }
   );
@@ -45,22 +45,27 @@ const deleteOldFile = () => {
         var objects = listResult.Contents.map(function (item) {
           return { Key: item.Key };
         });
-        cos.deleteMultipleObject(
-          {
-            Bucket: bucket,
-            Region: region,
-            Objects: objects,
-          },
-          function (delError, deleteResult) {
-            if (delError) {
-              console.log(delError);
+        if (objects.length) {
+          cos.deleteMultipleObject(
+            {
+              Bucket: bucket,
+              Region: region,
+              Objects: objects,
+            },
+            function (delError, deleteResult) {
+              if (delError) {
+                console.log(delError);
+              }
+              if (deleteResult?.statusCode === 200) {
+                console.log("清理原static目录成功！");
+                resolve();
+              }
             }
-            if (deleteResult?.statusCode === 200) {
-              console.log("清理原static目录成功！");
-              resolve();
-            }
-          }
-        );
+          );
+        } else {
+          console.log("目录下无资源，无需删除！");
+          resolve();
+        }
       }
     );
   });
@@ -70,6 +75,7 @@ const playUpload = async () => {
   // 先删除原来的static
   await deleteOldFile();
   const fileData = await fileDisplay(filePath);
+
   fileData.forEach((item) => {
     uploadFile(item);
   });
