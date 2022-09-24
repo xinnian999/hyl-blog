@@ -24,7 +24,7 @@ const info = `名称：心念个人博客
 
 const yaml = `- name: 心念个人博客
   link: https://www.hyl999.co
-  avatar: https://www.hyl999.co
+  avatar: https://www.hyl999.co/favicon.ico
   descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
