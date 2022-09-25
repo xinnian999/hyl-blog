@@ -12,7 +12,7 @@
     border-bottom: 4px solid var(--ant-primary-color);
     color: var(--ant-primary-color);
     position: relative;
-    font-size: 24px;
+    font-size: 1.6em;
     padding: 12px 5px;
     margin: 30px 0;
     &::after {
@@ -46,10 +46,9 @@
   }
 
   .md-h3 {
-    margin: 15px 0 5px 0;
-    color: var(--ant-primary-color);
-    font-style: italic;
-    font-size: 20px;
+    margin: 24px 0 16px 0;
+    font-weight: bold;
+    font-size: 1.25em;
   }
   .text-shadow {
     padding: 3px;
