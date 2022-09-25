@@ -234,7 +234,9 @@ module.exports = function (webpackEnv) {
       // webpack uses `publicPath` to determine where the app is being served from.
       // It requires a trailing slash, or the file assets will get an incorrect path.
       // We inferred the "public path" (such as / or /my-project) from homepage.
-      publicPath: "https://hylcdn-1305519392.cos.ap-beijing.myqcloud.com/",
+      publicPath: isEnvProduction
+        ? "https://cdn.hyl999.co/"
+        : paths.publicUrlOrPath,
       // Point sourcemap entries to original disk location (format as URL on Windows)
       devtoolModuleFilenameTemplate: isEnvProduction
         ? (info) =>
