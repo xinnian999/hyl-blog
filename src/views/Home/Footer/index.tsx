@@ -1,4 +1,4 @@
-import { OverPack } from "rc-scroll-anim";
+import { OverPack } from "@/components";
 import "./style.scss";
 
 const footerData = [
@@ -31,7 +31,7 @@ const footerData = [
 export default function Footer() {
   return (
     <div className="homeFooter">
-      <OverPack playScale={0}>
+      <OverPack playScale={0} always={false}>
         <div className="homeFooter-content">
           <div className="homeFooter-content-block animate__animated  animate__fadeInUp">
             <img src={require("@/assets/img/logo-white.png")} alt="" />

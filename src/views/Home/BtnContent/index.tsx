@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { OverPack } from "rc-scroll-anim";
 import { Button } from "antd";
 import { BtnContentWapper } from "./StyleComponents";
 import "./style.scss";
+import { OverPack } from "@/components";
 
 function BtnContent() {
   const history = useNavigate();
@@ -16,7 +16,7 @@ function BtnContent() {
   return (
     <>
       <BtnContentWapper className="BtnContent">
-        <OverPack className="BtnContentScroll" playScale={0.2}>
+        <OverPack always={false} className="BtnContentScroll" playScale={0.2}>
           <Button
             type="primary"
             ghost

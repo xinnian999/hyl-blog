@@ -1,7 +1,7 @@
-import { OverPack } from "rc-scroll-anim";
 import QueueAnim from "rc-queue-anim";
 import { LinkOutlined } from "@ant-design/icons";
 import { Time } from "@/utils";
+import { OverPack } from "@/components";
 import { useRequest } from "@/hooks";
 import "./style.scss";
 
@@ -19,7 +19,7 @@ export default function Article() {
 
   return (
     <div className="homeArticle">
-      <OverPack playScale={0} className="item">
+      <OverPack playScale={0} className="item" always={false}>
         <div className="main">
           <div className="title animate__animated  animate__fadeIn">
             热门文章

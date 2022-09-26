@@ -1,7 +1,6 @@
 import { Timeline, Image } from "antd";
 import classnames from "classnames";
-import { OverPack } from "rc-scroll-anim";
-import { Bubble, Icon } from "@/components";
+import { Bubble, Icon, OverPack } from "@/components";
 import { useWindowSize, useRequest } from "@/hooks";
 import "./style.scss";
 
@@ -35,7 +34,7 @@ const First = () => {
             }
             key={creatTime}
           >
-            <OverPack playScale={0} targetId="container">
+            <OverPack playScale={0} targetId="container" always={false}>
               <Bubble
                 type={width > 800 ? (index % 2 === 0 ? 0 : 1) : 0}
                 className="animate__animated animate__fadeInUp"

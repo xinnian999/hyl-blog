@@ -1,3 +1,4 @@
+import ScrollAnim from "rc-scroll-anim";
 import Icon from "./Icon";
 import Comment from "./Comment";
 import Loading from "./Loading";
@@ -15,6 +16,8 @@ import {
 } from "./StyleComponent";
 import { withRouter, withProgress, Error } from "./Hoc";
 import Redirect from "./Redirect";
+
+const OverPack: any = ScrollAnim.OverPack;
 
 export {
   Icon,
@@ -34,4 +37,5 @@ export {
   Card,
   Redirect,
   Copy,
+  OverPack,
 };

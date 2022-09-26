@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { OverPack } from "rc-scroll-anim";
 import { Button } from "antd";
 import { request } from "@/utils";
 import {
@@ -8,6 +7,7 @@ import {
   Lines,
   ChangeBar,
 } from "./StyleComponents";
+import { OverPack } from "@/components";
 
 function SentenceContent() {
   const [visible, setVisible] = useState(true);
@@ -31,7 +31,7 @@ function SentenceContent() {
 
   return (
     <SentenceContentWapper className="SentenceContent">
-      <OverPack playScale={0.2}>
+      <OverPack playScale={0.2} always={false}>
         {visible && (
           <>
             <div className="animate__animated animate__fadeInLeft">
