@@ -21,6 +21,8 @@ function ArticleCard(props: any) {
 
   const history = useNavigate();
 
+  const image = `https://cdn.hyl999.co/public/image/${picture}`;
+
   return (
     <div
       className="ArticleCard animate__animated animate__zoomIn"
@@ -37,7 +39,7 @@ function ArticleCard(props: any) {
       <div className="content">
         <div className="img-box" onClick={(e) => e.stopPropagation()}>
           <Image
-            src={picture || Images}
+            src={image || Images}
             alt="图片加载失败了...网有点卡..."
             height="100%"
             width="100%"
