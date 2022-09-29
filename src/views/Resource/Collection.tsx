@@ -10,7 +10,7 @@ export default function Collection() {
     .map(({ title, picture, link, autograph }) => {
       return (
         <Card
-          picture={picture}
+          picture={`https://cdn.hyl999.co/public/image/${picture}`}
           title={title}
           autograph={autograph}
           onClick={() => window.open(link)}
