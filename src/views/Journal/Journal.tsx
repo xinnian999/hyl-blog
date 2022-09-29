@@ -41,7 +41,11 @@ const First = () => {
               >
                 <div className="content">{content}</div>
 
-                {picture && <Image src={picture} />}
+                {picture && (
+                  <Image
+                    src={`https://cdn.hyl999.co/public/image/${picture}`}
+                  />
+                )}
                 {width < 800 && (
                   <div className="Journal-time-iphone">{creatTime}</div>
                 )}

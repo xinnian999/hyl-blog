@@ -13,7 +13,7 @@ export default function Works() {
         <div
           className="item"
           style={{
-            background: `url(${picture})`,
+            background: `url(${`https://cdn.hyl999.co/public/image/${picture}`})`,
             backgroundSize: "cover",
           }}
           onClick={() => window.open(link)}

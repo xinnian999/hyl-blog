@@ -49,7 +49,10 @@ export default function Article() {
                   <div className="item" key={title}>
                     <div className="item-box">
                       <div className="item-img">
-                        <img src={picture} alt="" />
+                        <img
+                          src={`https://cdn.hyl999.co/public/image/${picture}`}
+                          alt=""
+                        />
                         <a href={`/article/${id}`} className="link">
                           <LinkOutlined />
                         </a>

@@ -29,9 +29,14 @@ function Layout() {
   useRequest("/music/query", {
     progress: false,
     onSuccess: (res) => {
+      const data = res.data.map((item) => ({
+        ...item,
+        url: `https://cdn.hyl999.co/public/music/${item.url}`,
+      }));
+
       music = new APlayer({
         container: document.getElementById("aplayer"),
-        audio: res.data, // 音乐信息
+        audio: data, // 音乐信息
         fixed: true, // 开启吸底模式
         listFolded: true, // 折叠歌曲列表
         autoplay: false, // 开启自动播放
