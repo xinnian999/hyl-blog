@@ -20,6 +20,10 @@ function isIE() {
 
 const isDev = process.env.NODE_ENV === "development";
 
+const globalConfig = {
+  remoteStaticUrl: "https://cdn.hyl999.co",
+};
+
 export {
   Time,
   isFunction,
@@ -32,5 +36,6 @@ export {
   getDecode,
   debounce,
   copy,
-  batchCopyDom
+  batchCopyDom,
+  globalConfig,
 };

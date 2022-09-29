@@ -1,6 +1,6 @@
 import { Skeleton } from "antd";
 import { useRequest } from "@/hooks";
-import { batchCopyDom } from "@/utils";
+import { batchCopyDom, globalConfig } from "@/utils";
 import "./style.scss";
 
 export default function Works() {
@@ -13,7 +13,7 @@ export default function Works() {
         <div
           className="item"
           style={{
-            background: `url(${`https://cdn.hyl999.co/public/image/${picture}`})`,
+            background: `url(${`${globalConfig.remoteStaticUrl}/public/image/${picture}`})`,
             backgroundSize: "cover",
           }}
           onClick={() => window.open(link)}

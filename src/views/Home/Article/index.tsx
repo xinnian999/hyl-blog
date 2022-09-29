@@ -1,6 +1,6 @@
 import QueueAnim from "rc-queue-anim";
 import { LinkOutlined } from "@ant-design/icons";
-import { Time } from "@/utils";
+import { Time, globalConfig } from "@/utils";
 import { OverPack } from "@/components";
 import { useRequest } from "@/hooks";
 import "./style.scss";
@@ -50,7 +50,7 @@ export default function Article() {
                     <div className="item-box">
                       <div className="item-img">
                         <img
-                          src={`https://cdn.hyl999.co/public/image/${picture}`}
+                          src={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
                           alt=""
                         />
                         <a href={`/article/${id}`} className="link">

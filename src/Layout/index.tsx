@@ -1,13 +1,12 @@
 import { useEffect, Suspense, useMemo, useCallback } from "react";
 import { NavLink, Route, Routes, useLocation } from "react-router-dom";
 import { BackTop, ConfigProvider, Modal } from "antd";
-//@ts-ignore
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
 import cookie from "js-cookie";
 import menus from "@/router";
 import { Loading, Redirect } from "@/components";
-import { changeBlogTitle, getDecode } from "@/utils";
+import { changeBlogTitle, getDecode, globalConfig } from "@/utils";
 import { useRequest, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
@@ -31,7 +30,7 @@ function Layout() {
     onSuccess: (res) => {
       const data = res.data.map((item) => ({
         ...item,
-        url: `https://cdn.hyl999.co/public/music/${item.url}`,
+        url: `${globalConfig.remoteStaticUrl}/public/music/${item.url}`,
       }));
 
       music = new APlayer({

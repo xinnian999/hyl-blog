@@ -1,5 +1,6 @@
 import { useRequest } from "@/hooks";
 import { Card } from "@/components";
+import { globalConfig } from "@/utils";
 import "./style.scss";
 
 export default function Collection() {
@@ -10,7 +11,7 @@ export default function Collection() {
     .map(({ title, picture, link, autograph }) => {
       return (
         <Card
-          picture={`https://cdn.hyl999.co/public/image/${picture}`}
+          picture={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
           title={title}
           autograph={autograph}
           onClick={() => window.open(link)}

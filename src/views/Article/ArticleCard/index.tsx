@@ -3,6 +3,7 @@ import { Tag, Image } from "antd";
 import { useNavigate } from "react-router-dom";
 import { TagOutlined } from "@ant-design/icons";
 import { TimeBar } from "@/components";
+import { globalConfig } from "@/utils";
 import Images from "@/assets/img/wallpaper3.jpg";
 import "./style.scss";
 
@@ -21,7 +22,7 @@ function ArticleCard(props: any) {
 
   const history = useNavigate();
 
-  const image = `https://cdn.hyl999.co/public/image/${picture}`;
+  const image = `${globalConfig.remoteStaticUrl}/public/image/${picture}`;
 
   return (
     <div

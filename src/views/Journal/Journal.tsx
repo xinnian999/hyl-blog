@@ -2,6 +2,7 @@ import { Timeline, Image } from "antd";
 import classnames from "classnames";
 import { Bubble, Icon, OverPack } from "@/components";
 import { useWindowSize, useRequest } from "@/hooks";
+import { globalConfig } from "@/utils";
 import "./style.scss";
 
 const First = () => {
@@ -43,7 +44,7 @@ const First = () => {
 
                 {picture && (
                   <Image
-                    src={`https://cdn.hyl999.co/public/image/${picture}`}
+                    src={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
                   />
                 )}
                 {width < 800 && (

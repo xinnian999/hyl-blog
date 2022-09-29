@@ -10,6 +10,8 @@ import reportWebVitals from "./reportWebVitals";
 import { isIE, changeBlogTitle } from "@/utils";
 import "@arco-design/web-react/dist/css/arco.css";
 
+const globals = {};
+
 if (isIE()) {
   alert("请放弃万恶的IE浏览器吧");
 }
