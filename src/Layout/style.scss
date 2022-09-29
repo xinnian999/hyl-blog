@@ -105,39 +105,50 @@ header {
         }
       }
     }
-
-    .user {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      .userAvatar {
-        transform: scale(1.2);
-      }
+.header-action{
+  position: relative;
+  .user {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .userAvatar {
+      transform: scale(1.2);
     }
+  }
 
-    .toolbar{
-      height: 100%;
-      padding: 0 10px;
-      display: flex;
-      &-item {
-        width: 40px;
-        height: 40px;
+  .toolbar{
+    height: 60px;
+    padding: 0 10px;
+    display: flex;
+    position: absolute;
+    right: 100%;
+    &-item {
+      width: 40px;
+      height: 40px;
+      border-radius: 5px;
+      margin-right: 15px;
+      font-size: 30px;
+      text-align: center;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      &:hover {
+        background-color: var(--ant-primary-color);
+        box-shadow: 0 0 10px rgb(0 0 0 / 50%);
         line-height: 40px;
-        border-radius: 5px;
-        margin-right: 15px;
-        font-size: 30px;
-        text-align: center;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        &:hover {
-          background-color: var(--ant-primary-color);
-          box-shadow: 0 0 10px rgb(0 0 0 / 50%);
-        }
+        color: #eee;
       }
     }
+    // @media screen and (max-width: 950px) {
+    // position: absolute;
+    // }
+  }
+
+}
+   
+
 
    
   }
