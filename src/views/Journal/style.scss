@@ -65,6 +65,31 @@
   }
 }
 
+.note {
+  background-color: #eee;
+  border-radius: 5px;
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  p {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  &-item {
+    width: 24%;
+    height: 200px;
+    margin-bottom: 15px;
+    background: #fff;
+    padding: 5px;
+    text-align: center;
+  }
+  // & > :nth-child(4n) {
+  //   margin-right: 0;
+  // }
+}
+
 @media screen and (max-width: 800px) {
   .Journal {
     .animate__fadeInUp {

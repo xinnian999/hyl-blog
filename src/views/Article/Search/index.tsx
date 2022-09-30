@@ -66,7 +66,6 @@ class SearchInput extends PureComponent<any> {
         <Select
           showSearch
           value={value}
-          style={{ width: "100%", overflow: "hidden" }}
           defaultActiveFirstOption={false}
           filterOption={false}
           onSearch={this.handleSearch}
