@@ -2,7 +2,7 @@ import { Timeline, Image } from "antd";
 import classnames from "classnames";
 import { Bubble, Icon, OverPack } from "@/components";
 import { useWindowSize, useRequest } from "@/hooks";
-import { globalConfig } from "@/utils";
+import { globalConfig, Time } from "@/utils";
 import "./style.scss";
 
 const First = () => {
@@ -20,7 +20,11 @@ const First = () => {
         {data.map(({ content, picture, category, creatTime }, index) => (
           <Timeline.Item
             label={
-              width > 800 && <div className="Journal-time ">{creatTime}</div>
+              width > 800 && (
+                <div className="Journal-time">
+                  {new Time(creatTime).getYMDTime()}
+                </div>
+              )
             }
             dot={
               <div
@@ -33,7 +37,7 @@ const First = () => {
                 <Icon type={`icon-${category}`} className="dot-icon" />
               </div>
             }
-            key={creatTime}
+            key={content}
           >
             <OverPack playScale={0} targetId="container" always={false}>
               <Bubble
@@ -41,14 +45,16 @@ const First = () => {
                 className="animate__animated animate__fadeInUp"
               >
                 <div className="content">{content}</div>
-
+                <br />
                 {picture && (
                   <Image
                     src={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
                   />
                 )}
                 {width < 800 && (
-                  <div className="Journal-time-iphone">{creatTime}</div>
+                  <div className="Journal-time-iphone">
+                    {new Time(creatTime).getYMDTime()}
+                  </div>
                 )}
               </Bubble>
             </OverPack>

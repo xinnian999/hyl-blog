@@ -176,7 +176,9 @@ function ArticleDetail() {
           <Space size={25}>
             <small>作者：心念 </small>
             <small>阅读量：{visits}</small>
-            <small>更新于 {new Time(updateTime).getStandardTime()}</small>
+            <small className="updateTime">
+              更新于 {new Time(updateTime).getStandardTime()}
+            </small>
           </Space>
         </Divider>
         {content ? <Markdown content={content} ref={mdRef} /> : <Loading />}
