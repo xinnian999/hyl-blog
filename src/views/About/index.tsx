@@ -81,9 +81,7 @@ const About = () => {
             <br />
             本站结构:
             <br />
-            前端 ： <Tag>react</Tag>
-            <br />
-            后台管理 ： <Tag>vue3</Tag>
+            前端 ： <Tag>react18.2</Tag>
             <br />
             后端 ：<Tag>koa2 + mysql</Tag> <br />
             部署 ：<Tag>宝塔 + nginx + pm2</Tag>
