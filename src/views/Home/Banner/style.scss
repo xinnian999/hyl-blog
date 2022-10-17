@@ -25,7 +25,7 @@
 
   .bannerContent {
     z-index: 99999999;
-    width: 550px;
+    // width: 550px;
     position: absolute;
     top: 45%;
     left: 0;
@@ -82,6 +82,48 @@
       &:hover {
         background-color: var(--ant-primary-color);
       }
+    }
+  }
+
+  .fast-nav-btn {
+    position: fixed;
+    right: 55px;
+    top: 40px;
+    z-index: 9999;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    text-align: center;
+    line-height: 50px;
+    color: #fff;
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    &:hover {
+      background-color: var(--ant-primary-color);
+    }
+  }
+}
+.fast-nav {
+  transform: translateZ(0) translateX(45%) skew(-12deg);
+  z-index: 10;
+  transition: 1s all !important;
+}
+
+.fast-nav-menus {
+  position: fixed;
+  top: 200px;
+  right: 60px;
+  z-index: 999999;
+  font-size: 20px;
+  li {
+    display: block;
+    text-align: right;
+    line-height: 80px;
+    &:hover {
+      color: var(--ant-primary-color);
+      cursor: pointer;
     }
   }
 }

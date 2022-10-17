@@ -1,13 +1,19 @@
-import { useMount } from "@/hooks";
+import { useMount, useBoolean } from "@/hooks";
 import { Particle } from "jparticles";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
-import { DownOutlined } from "@ant-design/icons";
+import { Drawer } from "@arco-design/web-react";
+import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import "./style.scss";
 import TweenOne from "rc-tween-one";
+import { useRef } from "react";
 
 export default function Banner() {
   const navigate = useNavigate();
+
+  const [visible, setTrue, setFalse, toggle] = useBoolean(false);
+
+  const drawerRef = useRef(null);
 
   useMount(() => {
     new Particle("#homeParticle", {
@@ -29,7 +35,7 @@ export default function Banner() {
   };
 
   return (
-    <div className="homeBanner">
+    <div className="homeBanner" ref={drawerRef}>
       <div id="homeParticle"></div>
       <div className="bannerContent">
         <p className="bannerContent-title  animate__animated animate__fadeInDown">
@@ -59,6 +65,28 @@ export default function Banner() {
           <DownOutlined />
         </TweenOne>
       </div>
+
+      <div className="fast-nav-btn" onClick={toggle}>
+        {visible ? <CloseOutlined /> : <MenuOutlined />}
+      </div>
+
+      <Drawer
+        width={832}
+        title={null}
+        visible={visible}
+        onCancel={setFalse}
+        closable={false}
+        footer={null}
+        className="fast-nav"
+        mask={false}
+      ></Drawer>
+      {visible && (
+        <ul className="fast-nav-menus">
+          <li onClick={() => navigate("/link")}>友链</li>
+          <li onClick={() => navigate("/journal/note")}>笔记</li>
+          <li onClick={() => navigate("/about")}>关于</li>
+        </ul>
+      )}
     </div>
   );
 }
