@@ -1,13 +1,13 @@
 import { useEffect, useRef, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Divider, Space, Skeleton } from "antd";
+import { Divider, Space, Skeleton, Drawer } from "antd";
 import ReactScroll from "react-infinite-scroll-component";
 import classnames from "classnames";
-import { useScroll } from "ahooks";
-import { useSetState } from "@/hooks";
+import { useBoolean, useScroll } from "ahooks";
+import { MenuFoldOutlined } from "@ant-design/icons";
+import { useSetState, useWindowSize, useRequest } from "@/hooks";
 import { PageCenter } from "@/components";
 import { batchCopyDom } from "@/utils";
-import { useRequest } from "@/hooks";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
@@ -29,6 +29,10 @@ function Article() {
   const toobarRef = useRef(null) as any;
 
   const scrollNum = useScroll();
+
+  const size = useWindowSize();
+
+  const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
   const [{ articleData, total, category, hotArticleData }, setState] =
     useSetState<State>({
@@ -119,6 +123,55 @@ function Article() {
 
   const fixedCateGory = scrollNum && scrollNum.top > 780;
 
+  const Toolbar = (
+    <div className="article-toolbar-container" ref={toobarRef}>
+      <div
+        className={classnames("article-toolbar ", {
+          "category-fixed": fixedCateGory,
+          animate__fadeInDownBig: fixedCateGory,
+          animate__animated: fixedCateGory,
+        })}
+        style={{ width: toobarRef.current?.clientWidth }}
+      >
+        <div className="article-toolbar-search">
+          <Search
+            giveData={(data: any) => setState({ articleData: data, total: -1 })}
+          />
+        </div>
+        <ul className="article-toolbar-category">
+          {categoryData.map(({ name }: any) => {
+            return (
+              <li
+                key={name}
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                  history(`/article?category=${name}`);
+
+                  setState({
+                    category: name,
+                    articleData: [],
+                    pageNum: 1,
+                  });
+                  queryArticle();
+                }}
+                className={category === name ? "categoryActive" : ""}
+              >
+                <div>{name === "all" ? "全部" : name} </div>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+
+      {!fixedCateGory && (
+        <ul className="article-toolbar-hot">
+          <Divider>热门文章</Divider>
+          {renderHotArticle}
+        </ul>
+      )}
+    </div>
+  );
+
   return (
     <PageCenter>
       <div id="hall-main">
@@ -143,55 +196,22 @@ function Article() {
             </Space>
           </ReactScroll>
         </div>
-
-        <div className="article-toolbar-container" ref={toobarRef}>
-          <div
-            className={classnames("article-toolbar ", {
-              "category-fixed": fixedCateGory,
-              animate__fadeInDownBig: fixedCateGory,
-              animate__animated: fixedCateGory,
-            })}
-            style={{ width: toobarRef.current?.clientWidth }}
-          >
-            <div className="article-toolbar-search">
-              <Search
-                giveData={(data: any) =>
-                  setState({ articleData: data, total: -1 })
-                }
-              />
-            </div>
-            <ul className="article-toolbar-category">
-              {categoryData.map(({ name }: any) => {
-                return (
-                  <li
-                    key={name}
-                    onClick={() => {
-                      window.scrollTo(0, 0);
-                      history(`/article?category=${name}`);
-
-                      setState({
-                        category: name,
-                        articleData: [],
-                        pageNum: 1,
-                      });
-                      queryArticle();
-                    }}
-                    className={category === name ? "categoryActive" : ""}
-                  >
-                    <div>{name === "all" ? "全部" : name} </div>
-                  </li>
-                );
-              })}
-            </ul>
+        {size.width > 800 ? (
+          Toolbar
+        ) : (
+          <div className="toolbarFlag" onClick={setTrue}>
+            <MenuFoldOutlined />
           </div>
+        )}
 
-          {!fixedCateGory && (
-            <ul className="article-toolbar-hot">
-              <Divider>热门文章</Divider>
-              {renderHotArticle}
-            </ul>
-          )}
-        </div>
+        <Drawer
+          placement="right"
+          onClose={setFalse}
+          visible={drawerVisible}
+          width="60%"
+        >
+          {Toolbar}
+        </Drawer>
       </div>
     </PageCenter>
   );

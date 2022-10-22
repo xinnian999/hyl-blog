@@ -4,9 +4,16 @@
   .searchBtn {
     position: absolute;
     right: 0;
+    height: 100%;
+    width: 35px;
+    background-color: var(--ant-primary-color);
+    text-align: center;
+    line-height: 30px;
+    color: #fff;
+    font-size: 15px;
+    cursor: pointer;
   }
   .arco-select-view {
     background-color: #fff;
   }
-
 }

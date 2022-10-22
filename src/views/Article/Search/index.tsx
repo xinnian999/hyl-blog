@@ -74,12 +74,9 @@ class SearchInput extends PureComponent<any> {
           arrowIcon={null}
           placeholder="搜索文章"
         ></Select>
-        <Button
-          type="primary"
-          className="searchBtn"
-          icon={<SearchOutlined />}
-          onClick={this.onSearch}
-        ></Button>
+        <div className="searchBtn" onClick={this.onSearch}>
+          <SearchOutlined />
+        </div>
       </div>
     );
   }

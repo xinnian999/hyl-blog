@@ -7,6 +7,7 @@ import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import "./style.scss";
 import TweenOne from "rc-tween-one";
 import { useRef } from "react";
+import classNames from "classnames";
 
 export default function Banner() {
   const navigate = useNavigate();
@@ -70,18 +71,12 @@ export default function Banner() {
         {visible ? <CloseOutlined /> : <MenuOutlined />}
       </div>
 
-      <Drawer
-        width={832}
-        title={null}
-        visible={visible}
-        onCancel={setFalse}
-        closable={false}
-        footer={null}
-        className="fast-nav"
-        mask={false}
-      ></Drawer>
+      <div
+        className={classNames("fast-nav", { "fast-nav-hide": visible })}
+      ></div>
+
       {visible && (
-        <ul className="fast-nav-menus">
+        <ul className="fast-nav-menus animate__animated animate__fadeInRight">
           <li onClick={() => navigate("/link")}>友链</li>
           <li onClick={() => navigate("/journal/note")}>笔记</li>
           <li onClick={() => navigate("/about")}>关于</li>
