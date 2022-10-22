@@ -1,6 +1,7 @@
 import { useEffect, useRef, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Divider, Space, Skeleton, Drawer } from "antd";
+import { Divider, Space, Skeleton } from "antd";
+import { Drawer } from "@arco-design/web-react";
 import ReactScroll from "react-infinite-scroll-component";
 import classnames from "classnames";
 import { useBoolean, useScroll } from "ahooks";
@@ -206,10 +207,13 @@ function Article() {
 
         <Drawer
           placement="right"
-          onClose={setFalse}
+          onCancel={setFalse}
           visible={drawerVisible}
-          destroyOnClose
           width="60%"
+          footer={null}
+          title={null}
+          className="drawer-toolbar"
+          unmountOnExit
         >
           {Toolbar}
         </Drawer>
