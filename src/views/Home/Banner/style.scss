@@ -2,9 +2,12 @@
   height: 100vh;
   background-image: url("~@/assets/img/banner1.jpg");
   background-size: cover;
-  background-attachment: fixed;
   background-color: transparent;
   background-position: center;
+  @media screen and (min-width: 800px) {
+    background-attachment: fixed;
+  }
+
   position: relative;
   #homeParticle {
     height: 100%;

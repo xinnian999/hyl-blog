@@ -208,6 +208,7 @@ function Article() {
           placement="right"
           onClose={setFalse}
           visible={drawerVisible}
+          destroyOnClose
           width="60%"
         >
           {Toolbar}
