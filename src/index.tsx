@@ -18,9 +18,9 @@ window.onfocus = () => {
   changeBlogTitle(window.location.pathname);
 };
 
-window.onblur = () => {
-  document.title = "心 念 · 客官~请留步";
-};
+// window.onblur = () => {
+//   document.title = "心 念 · 客官~请留步";
+// };
 
 const root = createRoot(document.getElementById("root")!);
 root.render(<App />);
