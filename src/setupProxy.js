@@ -12,11 +12,11 @@ module.exports = function (app) {
   );
 
   app.use(
-    "/qq",
+    "/qqAvatar",
     createProxyMiddleware({
-      target: "https://graph.qq.com",
+      target: "https://thirdqq.qlogo.cn",
       changeOrigin: true,
-      pathRewrite: { "^/qq": "" },
+      pathRewrite: { "^/qqAvatar": "" },
       secure: false,
     })
   );

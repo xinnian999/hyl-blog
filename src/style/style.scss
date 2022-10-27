@@ -19,6 +19,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: auto;
 }
 
 #root {
@@ -26,6 +27,7 @@ body {
   @media screen and (max-width: 500px) {
     font-size: 19px;
   }
+  overflow: hidden;
 }
 
 .el-popover {
