@@ -50,26 +50,26 @@ const writeStatsJson = argv.indexOf("--stats") !== -1;
 const config = configFactory("production");
 
 // 配置cdn引入
-config.plugins[0].userOptions.files.js = [
-  "https://unpkg.com/react@18.2.0/umd/react.production.min.js",
-  "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js",
-  "https://lib.baomitu.com/redux/4.1.2/redux.min.js",
-  "https://lib.baomitu.com/axios/0.27.2/axios.min.js",
-  "https://lib.baomitu.com/lodash.js/4.17.21/lodash.min.js",
-  "https://lib.baomitu.com/antd/4.21.4/antd.min.js",
-  "https://lib.baomitu.com/aplayer/1.10.1/APlayer.min.js",
-];
+// config.plugins[0].userOptions.files.js = [
+//   "https://unpkg.com/react@18.2.0/umd/react.production.min.js",
+//   "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js",
+//   "https://lib.baomitu.com/redux/4.1.2/redux.min.js",
+//   "https://lib.baomitu.com/axios/0.27.2/axios.min.js",
+//   "https://lib.baomitu.com/lodash.js/4.17.21/lodash.min.js",
+//   "https://lib.baomitu.com/antd/4.21.4/antd.min.js",
+//   "https://lib.baomitu.com/aplayer/1.10.1/APlayer.min.js",
+// ];
 
 // 配置不进行webpack打包的文件
-config.externals = {
-  react: "React",
-  "react-dom": "ReactDOM",
-  redux: "Redux",
-  axios: "axios",
-  antd: "antd",
-  lodash: "_",
-  aplayer: "APlayer",
-};
+// config.externals = {
+//   react: "React",
+//   "react-dom": "ReactDOM",
+//   redux: "Redux",
+//   axios: "axios",
+//   antd: "antd",
+//   lodash: "_",
+//   aplayer: "APlayer",
+// };
 
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
