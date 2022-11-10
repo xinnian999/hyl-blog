@@ -30,7 +30,7 @@ function Layout() {
     onSuccess: (res) => {
       const data = res.data.map((item) => ({
         ...item,
-        url: `${globalConfig.remoteStaticUrl}/public/music/${item.url}`,
+        url: `${globalConfig.remoteStaticUrl}/music/${item.url}`,
       }));
 
       music = new APlayer({
@@ -38,7 +38,7 @@ function Layout() {
         audio: data, // 音乐信息
         fixed: true, // 开启吸底模式
         listFolded: true, // 折叠歌曲列表
-        autoplay: false, // 开启自动播放
+        autoplay: store.autoplay, // 开启自动播放
         preload: "auto", // 自动预加载歌曲
         loop: "all", // 播放循环模式、all全部循环 one单曲循环 none只播放一次
         order: "list", //  播放模式，list列表播放, random随机播放
