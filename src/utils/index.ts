@@ -21,7 +21,7 @@ function isIE() {
 const isDev = process.env.NODE_ENV === "development";
 
 const globalConfig = {
-  remoteStaticUrl: "https://cdn.hyl999.co",
+  remoteStaticUrl: "https://cdn.hyl999.co/public",
 };
 
 export {

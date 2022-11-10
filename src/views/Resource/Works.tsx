@@ -13,7 +13,7 @@ export default function Works() {
         <div
           className="item"
           style={{
-            background: `url(${`${globalConfig.remoteStaticUrl}/public/image/${picture}`})`,
+            background: `url(${`${globalConfig.remoteStaticUrl}/image/${picture}`})`,
             backgroundSize: "cover",
           }}
           onClick={() => window.open(link)}

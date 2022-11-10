@@ -11,7 +11,7 @@ export default function Collection() {
     .map(({ title, picture, link, autograph }) => {
       return (
         <Card
-          picture={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
+          picture={`${globalConfig.remoteStaticUrl}/image/${picture}`}
           title={title}
           autograph={autograph}
           onClick={() => window.open(link)}

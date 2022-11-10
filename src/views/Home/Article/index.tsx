@@ -50,7 +50,7 @@ export default function Article() {
                     <div className="item-box">
                       <div className="item-img">
                         <img
-                          src={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
+                          src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
                           alt=""
                         />
                         <a href={`/article/${id}`} className="link">

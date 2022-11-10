@@ -22,7 +22,7 @@ function ArticleCard(props: any) {
 
   const history = useNavigate();
 
-  const image = `${globalConfig.remoteStaticUrl}/public/image/${picture}`;
+  const image = `${globalConfig.remoteStaticUrl}/image/${picture}`;
 
   return (
     <div

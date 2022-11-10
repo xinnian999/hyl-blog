@@ -48,7 +48,7 @@ const First = () => {
                 <br />
                 {picture && (
                   <Image
-                    src={`${globalConfig.remoteStaticUrl}/public/image/${picture}`}
+                    src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
                   />
                 )}
                 {width < 800 && (
