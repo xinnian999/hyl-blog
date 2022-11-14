@@ -15,13 +15,13 @@
     background-color: #fff;
     padding: 10px 30px;
     position: relative;
-    width: calc(75% - 20px) ;
+    width: calc(75% - 20px);
     @media screen and (max-width: 800px) {
       width: 100%;
-      .updateTime{
-      position: absolute;
-      right: 0;
-      top: 150%;
+      .updateTime {
+        position: absolute;
+        right: 0;
+        top: 150%;
       }
     }
     border-radius: 10px;
@@ -31,15 +31,13 @@
       right: 0;
     }
 
-
-
     .title {
       text-align: center;
       font-size: 25px;
     }
 
     .article-info {
-    position: relative;
+      position: relative;
 
       small {
         color: #787977;

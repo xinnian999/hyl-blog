@@ -7,7 +7,8 @@
     max-width: 100%;
   }
 
-  .md-title {
+  // 标题样式1
+  .md-title1 {
     font-weight: bold;
     border-bottom: 4px solid var(--ant-primary-color);
     color: var(--ant-primary-color);
@@ -25,6 +26,40 @@
       height: 10px;
       border-top-right-radius: 24px;
       background: linear-gradient(90deg, #fff, var(--ant-primary-color));
+    }
+  }
+
+  .md-title-box {
+    position: relative;
+    margin-bottom: 20px;
+    // 标题样式2
+    .md-title2 {
+      margin-top: 30px;
+      margin-bottom: 0;
+      font-size: 24px;
+      display: inline-block;
+      font-weight: 700;
+      background: var(--ant-primary-color);
+      color: #fff;
+      padding: 3px 10px;
+      border-top-right-radius: 6px;
+      margin-right: 2px;
+      box-shadow: 6px 3px 0 0 var(--ant-primary-3);
+      @media screen and (max-width: 800px) {
+        box-shadow: none;
+      }
+      &::after {
+        content: " ";
+        position: absolute;
+        bottom: -3px;
+        left: -6px;
+        display: block;
+        width: calc(100% - 50px);
+        @media screen and (max-width: 800px) {
+          display: none;
+        }
+        border-bottom: 3px solid var(--ant-primary-color);
+      }
     }
   }
 
@@ -49,6 +84,7 @@
     margin: 24px 0 16px 0;
     font-weight: bold;
     font-size: 1.25em;
+    color: var(--ant-primary-color);
   }
   .text-shadow {
     padding: 3px;
@@ -85,5 +121,9 @@
   blockquote {
     padding-left: 1em;
     border-left: 0.25em solid var(--ant-primary-3);
+    p {
+      white-space: pre-wrap;
+      line-height: 30px;
+    }
   }
 }

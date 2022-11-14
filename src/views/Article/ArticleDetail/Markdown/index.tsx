@@ -31,7 +31,13 @@ const components = {
   },
   h2(props) {
     return (
-      <h2 children={props.children} id={props.children} className="md-title" />
+      <div className="md-title-box">
+        <h2
+          children={props.children}
+          id={props.children}
+          className="md-title2"
+        />
+      </div>
     );
   },
   h3(props) {
