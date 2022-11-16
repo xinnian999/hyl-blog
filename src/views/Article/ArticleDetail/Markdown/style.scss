@@ -60,6 +60,9 @@
         }
         border-bottom: 3px solid var(--ant-primary-color);
       }
+      &::selection {
+        background-color: var(--ant-primary-3) !important;
+      }
     }
   }
 
@@ -106,6 +109,7 @@
     li {
       list-style: decimal;
     }
+    padding-left: 15px;
   }
 
   table {
