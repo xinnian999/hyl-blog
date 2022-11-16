@@ -6,7 +6,7 @@ import { TimeBar, PageCenter } from "@/components";
 import { useParams } from "react-router-dom";
 import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
-import { request, Time } from "@/utils";
+import { request, Time, changeBlogTitle } from "@/utils";
 import { useSetState, useMount, useWindowSize, useRequest } from "@/hooks";
 import { Comment, Loading } from "@/components";
 import Markdown from "./Markdown";
@@ -73,7 +73,7 @@ function ArticleDetail() {
       .then((data) => {
         setState(data);
         // 设置页面标题
-        document.title = `心 念 · ${data.title}`;
+        changeBlogTitle("", data.title);
         // 文章阅读量+1
         setTimeout(() => {
           request.put("/article/visit", { id: params.id });

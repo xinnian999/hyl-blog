@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
 import { BtnContentWapper } from "./StyleComponents";
@@ -7,11 +6,6 @@ import { OverPack } from "@/components";
 
 function BtnContent() {
   const history = useNavigate();
-
-  // 路由监听
-  useEffect(() => {
-    document.title = `心 念 · 博客`;
-  }, []);
 
   return (
     <>
