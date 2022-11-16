@@ -1,4 +1,3 @@
-import { Spin } from "antd";
 import "./style.scss";
 
 interface Props {
@@ -8,8 +7,12 @@ interface Props {
 
 const Loading = ({ size, tip }: Props) => {
   return (
-    <div className="loading">
-      <Spin className="loading-spin" size={size} tip={tip} />
+    <div id="Loading">
+      <div id="content">
+        <div className="outer"></div>
+        <div className="inner"></div>
+        <div>{tip}</div>
+      </div>
     </div>
   );
 };

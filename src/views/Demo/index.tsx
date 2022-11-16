@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Loading } from "@/components";
 
 function Ref() {
   const ref = useRef({ name: "hyl" });
@@ -8,7 +9,7 @@ function Ref() {
     console.log(ref);
   }, []);
 
-  return null;
+  return <Loading />;
 }
 
 export default Ref;
