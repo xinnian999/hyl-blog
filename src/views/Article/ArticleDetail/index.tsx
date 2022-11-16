@@ -15,7 +15,7 @@ import "./style.scss";
 interface State {
   content: string;
   title: string;
-  creatTime: string;
+  createTime: string;
   updateTime: string;
   comments: any;
   anchorList: any;
@@ -30,7 +30,7 @@ function ArticleDetail() {
     {
       content,
       title,
-      creatTime,
+      createTime,
       visits,
       updateTime,
       anchorList,
@@ -41,7 +41,7 @@ function ArticleDetail() {
   ] = useSetState<State>({
     content: "",
     title: "",
-    creatTime: "",
+    createTime: "",
     comments: [],
     anchorList: [],
     visits: 0,
@@ -167,7 +167,7 @@ function ArticleDetail() {
     <PageCenter id="ArticleDetail">
       <div className="ArticleDetail">
         <div className="time">
-          <TimeBar time={creatTime} />
+          <TimeBar time={createTime} />
         </div>
         <div className="title">
           <span>{title}</span>

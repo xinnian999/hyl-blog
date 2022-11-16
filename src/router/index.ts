@@ -2,14 +2,14 @@ import { lazy } from "react";
 
 const route = [
   {
-    title: "博客",
+    title: "首页",
     path: "/home",
     component: lazy(() => import("@/views/Home")),
   },
   {
     title: "文章",
     path: "/article",
-    search:'?category=all',
+    search: "?category=all",
     component: lazy(() => import("@/views/Article")),
   },
   {
