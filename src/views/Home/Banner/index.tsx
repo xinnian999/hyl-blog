@@ -2,7 +2,7 @@ import { useMount, useBoolean } from "@/hooks";
 import { Particle } from "jparticles";
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
-import { Drawer } from "@arco-design/web-react";
+import Canvas from "@/views/Home/Banner/Canvas";
 import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import "./style.scss";
 import TweenOne from "rc-tween-one";
@@ -37,7 +37,8 @@ export default function Banner() {
 
   return (
     <div className="homeBanner" ref={drawerRef}>
-      <div id="homeParticle"></div>
+      {/* <div id="homeParticle"></div> */}
+      <Canvas />
       <div className="bannerContent">
         <p className="bannerContent-title  animate__animated animate__fadeInDown">
           心 念

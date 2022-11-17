@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { Loading } from "@/components";
+import Canvas from "@/views/Home/Banner/Canvas";
 
 function Ref() {
   const ref = useRef({ name: "hyl" });
@@ -9,7 +9,7 @@ function Ref() {
     console.log(ref);
   }, []);
 
-  return <Loading />;
+  return <Canvas />;
 }
 
 export default Ref;
