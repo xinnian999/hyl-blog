@@ -7,6 +7,7 @@ import { PageCenter, Banner, Title, Copy } from "@/components";
 import { useRequest } from "@/hooks";
 import { batchCopyDom } from "@/utils";
 import "./style.scss";
+import { useMemo } from "react";
 
 const tags = [
   { color: "green", icon: <CheckOutlined />, con: "原创优先" },
@@ -30,6 +31,30 @@ const yaml = `- name: 心念个人博客
 export default function Link() {
   const [data] = useRequest("/link/query");
 
+  const renderInfo = useMemo(
+    () => (
+      <Tabs type="card-gutter">
+        <Tabs.TabPane title="中文" key="chinese">
+          <Copy content={info}>
+            <pre className="mylink-info">{info}</pre>
+          </Copy>
+        </Tabs.TabPane>
+        <Tabs.TabPane title="Yaml" key="yaml">
+          <Copy content={yaml}>
+            <Prism
+              showLineNumbers
+              style={tomorrow}
+              language={"xml"}
+              PreTag="div"
+              children={yaml}
+            />
+          </Copy>
+        </Tabs.TabPane>
+      </Tabs>
+    ),
+    []
+  );
+
   return (
     <>
       <Banner
@@ -37,47 +62,26 @@ export default function Link() {
         autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
       />
       <PageCenter>
-        <Row>
-          <Col span={24}>
-            <div className="explain">
-              <Title>链接申请说明</Title>
-              <div className="explainMain">
-                <p className="tags">
-                  {tags.map((item) => (
-                    <Tag color={item.color} icon={item.icon} key={item.con}>
-                      {item.con}
-                    </Tag>
-                  ))}
-                </p>
-                <div className="content">
-                  <p>
-                    交换友链可在 <b>留言板</b>
-                    ，本站友链倒序排列，且不定期清理失效友链
-                  </p>
-                  <Tabs type="card-gutter">
-                    <Tabs.TabPane title="中文" key="chinese">
-                      <Copy content={info}>
-                        <pre className="mylink-info">{info}</pre>
-                      </Copy>
-                    </Tabs.TabPane>
-                    <Tabs.TabPane title="Yaml" key="yaml">
-                      <Copy content={yaml}>
-                        <Prism
-                          showLineNumbers
-                          style={tomorrow}
-                          language={"xml"}
-                          PreTag="div"
-                          children={yaml}
-                        />
-                      </Copy>
-                    </Tabs.TabPane>
-                  </Tabs>
-                </div>
-              </div>
+        <div className="explain">
+          <Title>链接申请说明</Title>
+          <div className="explain-main">
+            <p className="tags">
+              {tags.map((item) => (
+                <Tag color={item.color} icon={item.icon} key={item.con}>
+                  {item.con}
+                </Tag>
+              ))}
+            </p>
+            <div className="content">
+              <p>
+                交换友链可在 <b>留言板</b>
+                ，本站友链倒序排列，且不定期清理失效友链
+              </p>
+              {renderInfo}
             </div>
-          </Col>
-        </Row>
-        <br />
+          </div>
+        </div>
+
         <Row gutter={26} wrap className="link-main">
           {data.length
             ? data.map(({ avator, name, descr, link }) => {

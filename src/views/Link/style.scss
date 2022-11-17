@@ -4,7 +4,7 @@ $bg: rgba(255, 255, 255);
   padding: 15px;
   background-color: $bg;
   border-radius: 15px;
-  .explainMain {
+  &-main {
     margin-left: 20px;
 
     .tags {
@@ -22,29 +22,34 @@ $bg: rgba(255, 255, 255);
   }
 }
 
-.linkItem {
-  background-color: $bg;
-  cursor: pointer;
-  padding: 15px;
-  margin-bottom: 26px;
-  min-height: 150px;
-  transition: 0.6s all;
-  border-radius: 15px;
+.link-main {
+  margin-top: 25px;
+  .linkItem {
+    background-color: $bg;
+    cursor: pointer;
+    padding: 15px;
+    margin-bottom: 26px;
+    min-height: 150px;
+    transition: 0.6s all;
+    border-radius: 15px;
 
-  .avatar {
-    margin-right: 15px;
-    margin-bottom: 10px;
+    .avatar {
+      margin-right: 15px;
+      margin-bottom: 10px;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    &:hover {
+      .linkItem:hover {
+        box-shadow: 0 0 15px rgba(50, 250, 255, 0.75);
+        opacity: 0.9;
+      }
+    }
   }
-
-  span {
-    font-size: 16px;
-    font-weight: bold;
-  }
-}
-
-.linkItem:hover {
-  box-shadow: 0 0 15px rgba(50, 250, 255, 0.75);
-  opacity: 0.9;
 }
 
 @media screen and (max-width: 800px) {

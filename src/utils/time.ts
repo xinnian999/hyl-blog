@@ -5,6 +5,10 @@ interface isTime {
 }
 
 class Time implements isTime {
+  static getYearMonth(time) {
+    return moment(time).format("MM-DD");
+  }
+
   time: any;
   constructor(time: number | string | object) {
     this.time = time;
