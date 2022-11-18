@@ -1,15 +1,18 @@
+// @ts-nocheck
+/* eslint-disable */
 import { useEffect, useRef } from "react";
-import Canvas from "@/views/Home/Banner/Canvas";
 
 function Ref() {
-  const ref = useRef({ name: "hyl" });
-
   useEffect(() => {
-    ref.current.name = "zyy";
-    console.log(ref);
+    custom(jQuery);
   }, []);
 
-  return <Canvas />;
+  return (
+    <div className="container">
+      <h3 id="effect">这是一款灵活的文字特效插件</h3>
+      <p id="effect1">基于jquery</p>
+    </div>
+  );
 }
 
 export default Ref;
