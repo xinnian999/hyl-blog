@@ -12,9 +12,9 @@ import User from "./User";
 import { Tooltip } from "antd";
 
 const theme = [
-  { bg: "bg3.jpeg", color: "#25b864" },
-  { bg: "bg1.webp", color: "#1890ff" },
-  { bg: "bg2.jpg", color: "#d6324d" },
+  { bg: 125, color: "#25b864" },
+  { bg: 217, color: "#1890ff" },
+  { bg: 0, color: "#d6324d" },
 ];
 
 function Header({ menus }: any) {

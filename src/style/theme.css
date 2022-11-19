@@ -1,5 +1,5 @@
 /*******************配置组件自定义颜色(入口css)******************/
-.light-theme {
+#light {
     --primary-color: #1890ff;
     --primary-color50: rgba(24, 144, 255, 0.5);
     --primary-color20: rgba(24, 144, 255, 0.2);
@@ -27,4 +27,10 @@
     --title-text-color: #ffffff;
     --title-text-primary-color: #ffffff;
     --head-background-color: transparent;
+}
+
+#star{
+    --border-radius: 0px;
+    --head-background-color:transparent;
+    --color:#066197;
 }

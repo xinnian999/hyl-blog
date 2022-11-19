@@ -10,6 +10,7 @@ import { changeBlogTitle, getDecode, globalConfig } from "@/utils";
 import { useRequest, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
+import canvasBg from "./canvas";
 
 const { confirm } = Modal;
 
@@ -82,6 +83,8 @@ function Layout() {
         primaryColor: store.theme.color,
       },
     });
+
+    canvasBg(store.theme.bg);
   }, [store.theme]);
 
   useEffect(() => {
@@ -106,12 +109,6 @@ function Layout() {
           id,
         },
       });
-    }
-
-    const loadingDom: any = document.querySelector("#loading-box");
-    if (loadingDom) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-      loadingDom.style.display = "none";
     }
   }, []);
 
@@ -154,13 +151,11 @@ function Layout() {
 
   const isHome = location.pathname === "/home";
 
-  const bg = {
-    backgroundImage: `url(${require(`@/assets/img/bg/${store.theme.bg}`)})`,
-  };
-
   return (
     <>
-      <div id="backgroundImg" style={bg} />
+      <div id="backgroundImg">
+        <canvas id="canvasBg"></canvas>
+      </div>
       <div id="aplayer"></div>
       {!isHome && <Header menus={renderMenus} />}
       <main id="main" className={!isHome ? "isHome" : ""}>

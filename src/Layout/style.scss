@@ -5,6 +5,15 @@
   width: 100%;
   position: fixed;
   z-index: -1;
+
+  canvas {
+    width: 100%;
+    height: 100%; /*默认全屏显示 可自己设置高度640px*/
+    display: inline-block;
+    vertical-align: baseline;
+    position: absolute;
+    z-index: -1;
+  }
 }
 
 #nprogress .bar {
@@ -13,11 +22,11 @@
 
 header {
   a {
-    color: #212220;
+    color: var(--color);
   }
   position: fixed;
   width: 100%;
-  background-color: #fff;
+  background-color: var(--head-background-color);
   display: flex;
   border-bottom: 1px solid #e8e9e7;
   z-index: 10;

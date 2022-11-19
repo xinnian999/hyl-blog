@@ -11,19 +11,19 @@ interface isBanner {
 }
 
 function Index({ title = "标题", autograph = "", twoRouter }: isBanner) {
-  useMount(() => {
-    new Particle("#particle-banner", {
-      // 两粒子圆心点之间的直线距离
-      proximity: 0,
-      // 定位点半径 100 以内（包含）的所有粒子，圆心点之间小于等于 proximity 值，则连线
-      range: 150,
-      color: "#e2e469",
-      eventElem: document.querySelector(".banner") as any,
-      num: 0.03,
-      lineWidth: 0.4,
-      minR: 2,
-    });
-  });
+  // useMount(() => {
+  //   new Particle("#particle-banner", {
+  //     // 两粒子圆心点之间的直线距离
+  //     proximity: 0,
+  //     // 定位点半径 100 以内（包含）的所有粒子，圆心点之间小于等于 proximity 值，则连线
+  //     range: 150,
+  //     color: "#e2e469",
+  //     eventElem: document.querySelector(".banner") as any,
+  //     num: 0.03,
+  //     lineWidth: 0.4,
+  //     minR: 2,
+  //   });
+  // });
 
   return (
     <div className="banner-container">

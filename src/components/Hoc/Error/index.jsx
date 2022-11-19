@@ -1,10 +1,12 @@
 import React from "react";
 import { Alert, Button } from "antd";
+import { stopWriteLoading } from "@/utils";
 import "./style.scss";
 
 const ErrorBlock = ({ errorInfo }) => {
   const handleReload = () => {
     window.history.go(-1);
+    localStorage.clear();
     window.location.reload();
   };
   return (
@@ -33,6 +35,7 @@ const ErrorBoundary = (Comp) => {
     }
 
     static getDerivedStateFromError(error) {
+      stopWriteLoading();
       return { hasError: true, errorInfo: error };
     }
 
