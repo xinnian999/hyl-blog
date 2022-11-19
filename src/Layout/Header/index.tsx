@@ -52,49 +52,41 @@ function Header({ menus }: any) {
 
   return (
     <header>
-      <div className="header-main">
-        {width < 800 && (
-          <div id="iphone-menus">
-            <Popover
-              content={<div className="iphone-nav">{menus}</div>}
-              trigger="click"
-            >
-              <MenuOutlined />
-            </Popover>
-          </div>
-        )}
-        <div id="logo">
-          <img src={logo} onClick={goHome} />
-        </div>
-        {width > 800 && (
-          <nav id="nav">
-            <div className="navButton">{menus}</div>
-          </nav>
-        )}
+      <div id="iphone-menus">
+        <Popover
+          content={<div className="iphone-nav">{menus}</div>}
+          trigger="click"
+        >
+          <MenuOutlined />
+        </Popover>
+      </div>
+      <div id="logo">
+        <span>心念の空间站</span>
+      </div>
+      {width > 800 && <ul id="nav">{menus}</ul>}
 
-        <div className="header-action">
-          <div className="toolbar">
-            <Tooltip title="切换主题" placement="left">
-              <Dropdown droplist={themeList} trigger="click">
-                <div className="toolbar-item">
-                  <BgColorsOutlined />
-                </div>
-              </Dropdown>
+      <div className="header-action">
+        <div className="toolbar">
+          <Tooltip title="切换主题" placement="left">
+            <Dropdown droplist={themeList} trigger="click">
+              <div className="toolbar-item">
+                <BgColorsOutlined />
+              </div>
+            </Dropdown>
+          </Tooltip>
+          {width > 1000 && (
+            <Tooltip title="访问网站后台">
+              <div
+                className="toolbar-item"
+                onClick={() => window.open("https://www.hyl999.co:81/")}
+              >
+                <SettingOutlined />
+              </div>
             </Tooltip>
-            {width > 1000 && (
-              <Tooltip title="访问网站后台">
-                <div
-                  className="toolbar-item"
-                  onClick={() => window.open("https://www.hyl999.co:81/")}
-                >
-                  <SettingOutlined />
-                </div>
-              </Tooltip>
-            )}
-          </div>
-
-          <div className="user">{loginState ? <User /> : <Login />}</div>
+          )}
         </div>
+
+        <div className="user">{loginState ? <User /> : <Login />}</div>
       </div>
     </header>
   );

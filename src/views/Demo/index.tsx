@@ -1,18 +1,10 @@
-// @ts-nocheck
-/* eslint-disable */
 import { useEffect, useRef } from "react";
+import "./style.scss";
 
 function Ref() {
-  useEffect(() => {
-    custom(jQuery);
-  }, []);
+  useEffect(() => {}, []);
 
-  return (
-    <div className="container">
-      <h3 id="effect">这是一款灵活的文字特效插件</h3>
-      <p id="effect1">基于jquery</p>
-    </div>
-  );
+  return <div className="container">心念の空间站</div>;
 }
 
 export default Ref;

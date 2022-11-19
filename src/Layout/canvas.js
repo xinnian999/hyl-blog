@@ -65,7 +65,6 @@ const canvasBg = (bg) => {
     this.orbitY = h / 2;
     this.timePassed = random(0, maxStars);
     this.speed = random(this.orbitRadius) / 200000;
-    console.log(this.speed);
     //星星移动速度
     this.alpha = random(2, 10) / 10;
 

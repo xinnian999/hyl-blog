@@ -1,5 +1,26 @@
 @import url("./theme.css");
 
+@font-face {
+  font-family: "站酷高端黑 Regular";
+  font-weight: 400;
+  src: url("//at.alicdn.com/wf/webfont/aRNJwZt6eJY6/eMn4iuLqgobjLCyr4JCEU.woff2")
+      format("woff2"),
+    url("//at.alicdn.com/wf/webfont/aRNJwZt6eJY6/QXTmTdUh_8lLR3p8_zSH1.woff")
+      format("woff");
+  font-display: swap;
+}
+
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: "仓耳渔阳体 W03";
+  font-weight: 400;
+  src: url("//at.alicdn.com/wf/webfont/aRNJwZt6eJY6/z79nLCOtI_t-TtZ1Ol44B.woff2")
+      format("woff2"),
+    url("//at.alicdn.com/wf/webfont/aRNJwZt6eJY6/UFvBdRrpcAymfqItJ8Dvc.woff")
+      format("woff");
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,9 +35,6 @@ a {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: auto !important;
