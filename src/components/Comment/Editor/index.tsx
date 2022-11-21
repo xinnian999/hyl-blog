@@ -53,7 +53,7 @@ export default function Editor({
       avatar: headPicture,
       author: username,
       email,
-      datetime: new Time(new Date()).getStandardTime(),
+      datetime: Time.getStandardTime(new Date()),
       article_id: articleId,
       author_id,
     };

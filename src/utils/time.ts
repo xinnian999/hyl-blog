@@ -1,8 +1,6 @@
 import moment from "moment";
 
-interface isTime {
-  getStandardTime(): string;
-}
+interface isTime {}
 
 class Time implements isTime {
   static getYearMonth(time) {
@@ -21,8 +19,8 @@ class Time implements isTime {
     return parseInt(diffDay);
   }
 
-  getStandardTime() {
-    return moment(this.time).format("YYYY-MM-DD HH:mm:ss");
+  static getStandardTime(time: moment.MomentInput) {
+    return moment(time).format("YYYY-MM-DD HH:mm:ss");
   }
 
   getDate() {

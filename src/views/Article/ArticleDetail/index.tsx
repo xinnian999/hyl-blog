@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Divider, Space, Drawer } from "antd";
+import { Divider, Space, Drawer, Skeleton } from "antd";
 import { Anchor } from "@arco-design/web-react";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
@@ -8,7 +8,7 @@ import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { request, Time, changeBlogTitle } from "@/utils";
 import { useSetState, useMount, useWindowSize, useRequest } from "@/hooks";
-import { Comment, Loading } from "@/components";
+import { Comment } from "@/components";
 import Markdown from "./Markdown";
 import "./style.scss";
 
@@ -40,12 +40,12 @@ function ArticleDetail() {
     setState,
   ] = useSetState<State>({
     content: "",
-    title: "",
-    createTime: "",
+    title: "这是一个文章的标题",
+    createTime: Time.getStandardTime(new Date()),
     comments: [],
     anchorList: [],
     visits: 0,
-    updateTime: "",
+    updateTime: Time.getStandardTime(new Date()),
     category: "",
     targetOffset: undefined,
     aboutArticle: [],
@@ -177,11 +177,13 @@ function ArticleDetail() {
             <small>作者：心念 </small>
             <small>阅读量：{visits}</small>
             <small className="updateTime">
-              更新于 {new Time(updateTime).getStandardTime()}
+              更新于 {Time.getStandardTime(updateTime)}
             </small>
           </Space>
         </Divider>
-        {content ? <Markdown content={content} ref={mdRef} /> : <Loading />}
+        <Skeleton loading={!content} paragraph={{ rows: 30 }}>
+          <Markdown content={content} ref={mdRef} />
+        </Skeleton>
 
         <Comment articleId={params.id} title="评论区" btnName="提交评论" />
       </div>
