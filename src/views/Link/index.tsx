@@ -29,7 +29,9 @@ const yaml = `- name: 心念个人博客
   descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
-  const [data] = useRequest("/link/query");
+  const [data] = useRequest("/link/query", {
+    mockLoadingCount: 8,
+  });
 
   const renderInfo = useMemo(
     () => (
@@ -83,26 +85,19 @@ export default function Link() {
         </div>
 
         <Row gutter={26} wrap className="link-main">
-          {data.length
-            ? data.map(({ avator, name, descr, link }) => {
-                return (
-                  <Col span={6} onClick={() => window.open(link)} key={link}>
-                    <div className="linkItem">
-                      <Avatar src={avator} className="avatar" />
-                      <span>{name}</span>
-                      <div>{descr}</div>
-                    </div>
-                  </Col>
-                );
-              })
-            : batchCopyDom(
-                () => (
-                  <Col span={6}>
-                    <Skeleton avatar active paragraph={{ rows: 3 }} />
-                  </Col>
-                ),
-                4
-              )}
+          {data.map(({ avator, name, descr, link, id, loading }) => {
+            return (
+              <Col span={6} onClick={() => window.open(link)} key={id}>
+                <Skeleton loading={loading}>
+                  <div className="linkItem">
+                    <Avatar src={avator} className="avatar" />
+                    <span>{name}</span>
+                    <div>{descr}</div>
+                  </div>
+                </Skeleton>
+              </Col>
+            );
+          })}
         </Row>
       </PageCenter>
     </>

@@ -11,6 +11,7 @@ type toolConfig = {
   manual?: boolean;
   progress?: boolean;
   onSuccess?: (res: any) => void;
+  mockLoadingCount?: number;
 };
 
 type isRunProps = {
@@ -31,6 +32,7 @@ const defaultConfig: toolConfig = {
   data: {},
   manual: false,
   params: {},
+  mockLoadingCount: undefined,
 };
 
 //只传入url，默认get请求
@@ -41,7 +43,7 @@ function useRequest(
 ): useRequestResult {
   const config = { ...defaultConfig, ...newConfig };
 
-  const [result, setResult] = useState([]);
+  const [result, setResult]: any = useState([]);
 
   const thenFn = (res: any) => {
     if (res.status === 0) {
@@ -56,8 +58,14 @@ function useRequest(
       Nprogress.start();
     }
 
-    if (!config) {
-      return request(url).then(thenFn);
+    if (config.mockLoadingCount) {
+      const mockData = [...new Array(config.mockLoadingCount)].map(
+        (item, index) => ({
+          loading: true,
+          id: `${index}-key`,
+        })
+      );
+      setResult([...result, ...mockData]);
     }
 
     const options = {
