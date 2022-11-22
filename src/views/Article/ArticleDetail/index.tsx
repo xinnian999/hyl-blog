@@ -60,36 +60,34 @@ function ArticleDetail() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [, , runGetAbout] = useRequest("/article/query", {
-    method: "get",
-    manual: true,
-    progress: false,
+  useRequest("/article/queryDetail", {
+    params: { id: params.id },
+    onSuccess: (res) => {
+      const [data] = res.data;
+      setState(data);
+      // 设置页面标题
+      changeBlogTitle("", data.title);
+      // 文章阅读量+1
+      setTimeout(() => {
+        request.put("/article/visit", { id: params.id });
+      }, 3000);
+      //查询相关文章
+      runGetAbout({
+        params: {
+          pageNum: 1,
+          pageSize: 5,
+          filters: { publish: 1, category: data.category },
+          orderBys: "topping desc,id desc",
+        },
+      }).then((res) => {
+        setState({ aboutArticle: res.data });
+      });
+    },
   });
 
-  useMount(() => {
-    request
-      .get("/article/queryDetail", { params: { id: params.id } })
-      .then((res) => res.data[0])
-      .then((data) => {
-        setState(data);
-        // 设置页面标题
-        changeBlogTitle("", data.title);
-        // 文章阅读量+1
-        setTimeout(() => {
-          request.put("/article/visit", { id: params.id });
-        }, 3000);
-        //查询相关文章
-        runGetAbout({
-          params: {
-            pageNum: 1,
-            pageSize: 5,
-            filters: { publish: 1, category: data.category },
-            orderBys: "topping desc,id desc",
-          },
-        }).then((res) => {
-          setState({ aboutArticle: res.data });
-        });
-      });
+  const [, , runGetAbout] = useRequest("/article/query", {
+    manual: true,
+    progress: false,
   });
 
   useEffect(() => {

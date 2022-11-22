@@ -5,17 +5,17 @@ import { request } from "@/utils";
 import useMount from "./useMount";
 
 type toolConfig = {
-  method?: string;
+  method?: "get" | "post" | "put" | "delete";
   data?: object;
   params?: object;
   manual?: boolean;
-  progress: boolean;
+  progress?: boolean;
   onSuccess?: (res: any) => void;
 };
 
 type isRunProps = {
-  params?: any;
-  data?: any;
+  params?: object;
+  data?: object;
 };
 
 type isRun = (props?: isRunProps) => Promise<any>;
@@ -24,12 +24,23 @@ type SetResult = (state: any) => void;
 
 type useRequestResult = [any[], SetResult, isRun];
 
+const defaultConfig: toolConfig = {
+  method: "get",
+  progress: true,
+  onSuccess: undefined,
+  data: {},
+  manual: false,
+  params: {},
+};
+
 //只传入url，默认get请求
 //默认在组件挂载完成时自动发一次请求，可设置config的manual为true取消自动
-const useRequest = (
+function useRequest(
   url: string,
-  config: toolConfig = { method: "get", progress: true }
-): useRequestResult => {
+  newConfig: toolConfig = defaultConfig
+): useRequestResult {
+  const config = { ...defaultConfig, ...newConfig };
+
   const [result, setResult] = useState([]);
 
   const thenFn = (res: any) => {
@@ -49,7 +60,11 @@ const useRequest = (
       return request(url).then(thenFn);
     }
 
-    const options = { url, ...pick(config, ["method", "data", "params"]) };
+    const options = {
+      url,
+      ...pick(config, ["method", "data", "params"]),
+    };
+
     if (runProps) {
       Object.assign(options, runProps);
     }
@@ -63,6 +78,6 @@ const useRequest = (
   });
 
   return [result, setResult, run];
-};
+}
 
 export default useRequest;

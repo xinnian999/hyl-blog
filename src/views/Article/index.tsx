@@ -46,14 +46,12 @@ function Article() {
     });
 
   const [, , runQueryArticle] = useRequest("/article/query", {
-    method: "get",
     manual: true,
     progress: false,
   });
 
   const [categoryData, setCategoryData] = useRequest("/category/query", {
     method: "get",
-    progress: true,
     onSuccess: (res: any) => {
       setCategoryData([{ name: "all" }, ...res.data]);
     },
