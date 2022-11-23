@@ -11,6 +11,7 @@ import Login from "./Login";
 import User from "./User";
 import { Tooltip } from "antd";
 import { useMemo } from "react";
+import "./style.scss";
 
 const theme = [
   { bg: 125, color: "#25b864" },
