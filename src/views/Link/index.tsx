@@ -5,7 +5,6 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { PageCenter, Banner, Title, Copy } from "@/components";
 import { useRequest } from "@/hooks";
-import { batchCopyDom } from "@/utils";
 import "./style.scss";
 import { useMemo } from "react";
 
@@ -31,6 +30,9 @@ const yaml = `- name: 心念个人博客
 export default function Link() {
   const [data] = useRequest("/link/query", {
     mockLoadingCount: 8,
+    onFail(res) {
+      console.log(res);
+    },
   });
 
   const renderInfo = useMemo(

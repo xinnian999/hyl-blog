@@ -37,7 +37,7 @@ export default function Login() {
 
   const { dispatchAll } = useRedux();
 
-  const [, , runOnLogin] = useRequest("/user/login", {
+  const [, runOnLogin] = useRequest("/user/login", {
     method: "post",
     manual: true,
     progress: true,
@@ -64,7 +64,7 @@ export default function Login() {
     },
   });
 
-  const [, , runOnRegister] = useRequest("/user/register", {
+  const [, runOnRegister] = useRequest("/user/register", {
     method: "post",
     manual: true,
     progress: true,

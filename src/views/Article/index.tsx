@@ -20,6 +20,7 @@ interface State {
   category: any;
   fixedCateGory: boolean;
   hotArticleData: any[];
+  categoryData: any[];
 }
 
 function Article() {
@@ -35,25 +36,28 @@ function Article() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [{ articleData, total, category, hotArticleData }, setState] =
-    useSetState<State>({
-      articleData: [],
-      fixedCateGory: false,
-      pageNum: 1,
-      total: 10,
-      category: params.get("category"),
-      hotArticleData: [],
-    });
+  const [
+    { articleData, total, category, hotArticleData, categoryData },
+    setState,
+  ] = useSetState<State>({
+    articleData: [],
+    categoryData: [],
+    fixedCateGory: false,
+    pageNum: 1,
+    total: 10,
+    category: params.get("category"),
+    hotArticleData: [],
+  });
 
-  const [, , runQueryArticle] = useRequest("/article/query", {
+  const [, runQueryArticle] = useRequest("/article/query", {
     manual: true,
     progress: false,
   });
 
-  const [categoryData, setCategoryData] = useRequest("/category/query", {
+  useRequest("/category/query", {
     method: "get",
     onSuccess: (res: any) => {
-      setCategoryData([{ name: "all" }, ...res.data]);
+      setState({ categoryData: [{ name: "all" }, ...res.data] });
     },
   });
 

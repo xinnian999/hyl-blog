@@ -13,7 +13,7 @@ interface comment {
 }
 
 function Index({ articleId, title, btnName, hasAnimation }: comment) {
-  const [commentData, , run] = useRequest("/comment/query", {
+  const [commentData, run] = useRequest("/comment/query", {
     params: {
       articleId,
     },
