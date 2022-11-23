@@ -51,9 +51,11 @@ function Article() {
       },
       progress: false,
       onSuccess(res) {
-        setState({
-          total: res.total,
-          pageNum: state.pageNum + 1,
+        setState(({ pageNum }) => {
+          setState({
+            total: res.total,
+            pageNum: pageNum + 1,
+          });
         });
       },
     }
