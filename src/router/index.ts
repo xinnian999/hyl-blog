@@ -34,7 +34,7 @@ const route = [
       {
         title: "笔记",
         path: "note",
-        component: lazy(() => import("@/views/Journal/Note")),
+        component: lazy(() => import("@/views/Journal/Note/Note")),
       },
     ],
   },

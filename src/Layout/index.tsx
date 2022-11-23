@@ -112,22 +112,6 @@ function Layout() {
     }
   }, []);
 
-  const renderMenus = useMemo(
-    () =>
-      menus.map((item: any) => {
-        const { title, path, search } = item;
-        if (title) {
-          return (
-            <NavLink key={title} to={{ pathname: path, search }}>
-              <li>{title}</li>
-            </NavLink>
-          );
-        }
-        return null;
-      }),
-    []
-  );
-
   const renderRoutes = useCallback(
     (menu: any) =>
       menu.map(({ path, children, index, title, ...item }: any) => {
@@ -157,7 +141,7 @@ function Layout() {
         <canvas id="canvasBg"></canvas>
       </div>
       <div id="aplayer"></div>
-      {!isHome && <Header menus={renderMenus} />}
+      {!isHome && <Header />}
       <main id="main" className={!isHome ? "isHome" : ""}>
         <Routes>
           {renderRoutes(menus)}

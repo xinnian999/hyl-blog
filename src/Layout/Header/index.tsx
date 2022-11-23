@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Popover, Dropdown, Menu } from "@arco-design/web-react";
 import {
   MenuOutlined,
   BgColorsOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
-import logo from "@/assets/img/logo.png";
+import menus from "@/router";
 import { useWindowSize, useRedux } from "@/hooks";
 import Login from "./Login";
 import User from "./User";
 import { Tooltip } from "antd";
+import { useMemo } from "react";
 
 const theme = [
   { bg: 125, color: "#25b864" },
@@ -17,7 +18,7 @@ const theme = [
   { bg: 0, color: "#d6324d" },
 ];
 
-function Header({ menus }: any) {
+function Header() {
   const navigate = useNavigate();
 
   const { store, dispatch } = useRedux();
@@ -27,6 +28,22 @@ function Header({ menus }: any) {
   const goHome = () => navigate("/home");
 
   const { width } = useWindowSize();
+
+  const renderMenus = useMemo(
+    () =>
+      menus.map((item: any) => {
+        const { title, path, search } = item;
+        if (title) {
+          return (
+            <NavLink key={title} to={{ pathname: path, search }}>
+              <li>{title}</li>
+            </NavLink>
+          );
+        }
+        return null;
+      }),
+    []
+  );
 
   const themeList = (
     <Menu className="themeList">
@@ -54,16 +71,16 @@ function Header({ menus }: any) {
     <header>
       <div id="iphone-menus">
         <Popover
-          content={<div className="iphone-nav">{menus}</div>}
+          content={<div className="iphone-nav">{renderMenus}</div>}
           trigger="click"
         >
           <MenuOutlined />
         </Popover>
       </div>
-      <div id="logo">
+      <div id="logo" onClick={goHome}>
         <span>心念の空间站</span>
       </div>
-      {width > 800 && <ul id="nav">{menus}</ul>}
+      {width > 800 && <ul id="nav">{renderMenus}</ul>}
 
       <div className="header-action">
         <div className="toolbar">

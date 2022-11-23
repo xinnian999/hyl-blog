@@ -48,7 +48,10 @@ header {
     font-family: "站酷高端黑 Regular";
     font-size: 35px;
     line-height: 60px;
-    float: left;
+    position: absolute;
+    left: 15px;
+    top: 0;
+    cursor: pointer;
   }
 
   #nav {
@@ -61,6 +64,14 @@ header {
       position: relative;
       margin-right: 10px;
     }
+
+    // a {
+    //   width: 100%;
+    //   height: 100%;
+    //   padding: 0 20px;
+
+    //   display: block;
+    // }
 
     li:hover {
       color: var(--ant-primary-color-active);
