@@ -1,4 +1,4 @@
-import { useEffect, useRef, useMemo } from "react";
+import { useRef, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Divider, Space, Skeleton } from "antd";
 import { Drawer } from "@arco-design/web-react";
@@ -14,13 +14,10 @@ import ArticleCard from "./ArticleCard";
 import "./style.scss";
 
 interface State {
-  articleData: any[];
   pageNum: number;
   total: number;
   category: any;
   fixedCateGory: boolean;
-  hotArticleData: any[];
-  categoryData: any[];
 }
 
 function Article() {
@@ -36,48 +33,50 @@ function Article() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [
-    { articleData, total, category, hotArticleData, categoryData },
-    setState,
-  ] = useSetState<State>({
-    articleData: [],
-    categoryData: [],
+  const [{ total, category, ...state }, setState] = useSetState<State>({
     fixedCateGory: false,
     pageNum: 1,
     total: 10,
     category: params.get("category"),
-    hotArticleData: [],
   });
 
-  const [, runQueryArticle] = useRequest("/article/query", {
-    manual: true,
+  const [articleData, runQueryArticle, setArticleData] = useRequest(
+    "/article/query",
+    {
+      params: {
+        pageNum: state.pageNum,
+        pageSize: 5,
+        filters: category === "all" ? { publish: 1 } : { publish: 1, category },
+        orderBys: "topping desc,id desc",
+      },
+      progress: false,
+      onSuccess(res) {
+        setState({
+          total: res.total,
+          pageNum: state.pageNum + 1,
+        });
+      },
+    }
+  );
+
+  const [hotArticleData] = useRequest("/article/query", {
     progress: false,
-  });
-
-  useRequest("/category/query", {
-    method: "get",
-    onSuccess: (res: any) => {
-      setState({ categoryData: [{ name: "all" }, ...res.data] });
+    params: {
+      pageNum: 1,
+      pageSize: 5,
+      filters: { publish: 1 },
+      orderBys: "visits desc",
     },
   });
 
-  useEffect(() => {
-    queryArticle();
-    runQueryArticle({
-      params: {
-        pageNum: 1,
-        pageSize: 5,
-        filters: { publish: 1 },
-        orderBys: "visits desc",
-      },
-    }).then((res) => {
-      setState({ hotArticleData: res.data });
-    });
-  }, []);
+  const [categoryData] = useRequest("/category/query", {
+    method: "get",
+  });
 
-  const queryArticle = () => {
-    setState(({ category, pageNum, articleData }) => {
+  const queryArticle = (cache) => {
+    setState(({ category, pageNum }) => {
       runQueryArticle({
+        cache,
         params: {
           pageNum,
           pageSize: 5,
@@ -85,12 +84,6 @@ function Article() {
             category === "all" ? { publish: 1 } : { publish: 1, category },
           orderBys: "topping desc,id desc",
         },
-      }).then((res) => {
-        setState({
-          articleData: [...articleData, ...res.data],
-          total: res.total,
-          pageNum: pageNum + 1,
-        });
       });
     });
   };
@@ -138,24 +131,26 @@ function Article() {
       >
         <div className="article-toolbar-search">
           <Search
-            giveData={(data: any) => setState({ articleData: data, total: -1 })}
+            giveData={(data: any) => {
+              setArticleData(data);
+              setState({ total: -1 });
+            }}
           />
         </div>
         <ul className="article-toolbar-category">
-          {categoryData.map(({ name }: any) => {
+          {[{ name: "all" }, ...categoryData].map(({ name }: any) => {
             return (
               <li
                 key={name}
                 onClick={() => {
                   window.scrollTo(0, 0);
                   history(`/article?category=${name}`);
-
+                  setArticleData([]);
                   setState({
                     category: name,
-                    articleData: [],
                     pageNum: 1,
                   });
-                  queryArticle();
+                  queryArticle(false);
                 }}
                 className={category === name ? "categoryActive" : ""}
               >
@@ -181,7 +176,7 @@ function Article() {
         <div className="article-list">
           <ReactScroll
             dataLength={articleData.length}
-            next={queryArticle}
+            next={() => queryArticle(true)}
             hasMore={articleData.length < total}
             loader={paragraph}
             endMessage={

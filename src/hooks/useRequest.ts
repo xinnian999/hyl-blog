@@ -13,19 +13,14 @@ type toolConfig = {
   onSuccess?: (res: any) => void;
   onFail?: (res: any) => void;
   mockLoadingCount?: number;
-  cacheData?: boolean;
+  cache?: boolean;
 };
 
-type isRunProps = {
-  params?: object;
-  data?: object;
-};
+type isRun = (props?: toolConfig) => Promise<any>;
 
-type isRun = (props?: isRunProps) => Promise<any>;
+type useRequestResult = [any[], isRun, (data: any) => void];
 
-type useRequestResult = [any[], isRun];
-
-type useStateResult = [any[], (data: any) => void];
+type useStateResult = [any[], (data?: any) => void];
 
 const defaultConfig: toolConfig = {
   method: "get",
@@ -36,12 +31,13 @@ const defaultConfig: toolConfig = {
   manual: false,
   params: {},
   mockLoadingCount: undefined,
-  cacheData: false,
+  cache: false,
 };
 
 //只传入url，默认get请求
 //默认在组件挂载完成时自动发一次请求，可设置config的manual为 true取消自动
 //默认开启progress顶部加载进度条，可设置config的progress为 false
+//默认关闭缓存数据，可设置config的cacheData为 true开启
 function useRequest(
   url: string,
   newConfig: toolConfig = defaultConfig
@@ -52,6 +48,11 @@ function useRequest(
   const [data, setData]: useStateResult = useState([]);
 
   const run: isRun = async (runProps) => {
+    //重复请求的新配置合并
+    if (runProps) {
+      Object.assign(config, runProps);
+    }
+
     // 是否开启顶部加载进度条
     if (config.progress) {
       Nprogress.start();
@@ -74,14 +75,9 @@ function useRequest(
       ...pick(config, ["method", "data", "params"]),
     };
 
-    //重复请求的新配置合并
-    if (runProps) {
-      Object.assign(options, runProps);
-    }
-
     try {
       const res = await request(options);
-      const newData = config.cacheData ? data.concat(res.data) : res.data;
+      const newData = config.cache ? data.concat(res.data) : res.data;
       setResult(newData);
       setData(newData);
 
@@ -97,13 +93,18 @@ function useRequest(
     }
   };
 
+  const set = (data: any) => {
+    setResult(data);
+    setData(data);
+  };
+
   useMount(() => {
     if (!config.manual) {
       run();
     }
   });
 
-  return [result, run];
+  return [result, run, set];
 }
 
 export default useRequest;
