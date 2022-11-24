@@ -20,6 +20,9 @@ interface State {
   fixedCateGory: boolean;
 }
 
+let pageNum = 1;
+let category = "all";
+
 function Article() {
   const history = useNavigate();
 
@@ -33,7 +36,7 @@ function Article() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [{ total, category, ...state }, setState] = useSetState<State>({
+  const [{ total, ...state }, setState] = useSetState<State>({
     fixedCateGory: false,
     pageNum: 1,
     total: 10,
@@ -44,19 +47,17 @@ function Article() {
     "/article/query",
     {
       params: {
-        pageNum: state.pageNum,
+        pageNum,
         pageSize: 5,
         filters: category === "all" ? { publish: 1 } : { publish: 1, category },
         orderBys: "topping desc,id desc",
       },
       progress: false,
       onSuccess(res) {
-        setState(({ pageNum }) => {
-          setState({
-            total: res.total,
-            pageNum: pageNum + 1,
-          });
+        setState({
+          total: res.total,
         });
+        pageNum = pageNum + 1;
       },
     }
   );
@@ -76,17 +77,16 @@ function Article() {
   });
 
   const queryArticle = (cache) => {
-    setState(({ category, pageNum }) => {
-      runQueryArticle({
-        cache,
-        params: {
-          pageNum,
-          pageSize: 5,
-          filters:
-            category === "all" ? { publish: 1 } : { publish: 1, category },
-          orderBys: "topping desc,id desc",
-        },
-      });
+    console.log(articleData.length, total);
+
+    runQueryArticle({
+      cache,
+      params: {
+        pageNum,
+        pageSize: 5,
+        filters: category === "all" ? { publish: 1 } : { publish: 1, category },
+        orderBys: "topping desc,id desc",
+      },
     });
   };
 
@@ -147,11 +147,11 @@ function Article() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   history(`/article?category=${name}`);
-                  setArticleData([]);
-                  setState({
-                    category: name,
-                    pageNum: 1,
-                  });
+                  // setArticleData([]);
+
+                  category = name;
+                  pageNum = 1;
+
                   queryArticle(false);
                 }}
                 className={category === name ? "categoryActive" : ""}
