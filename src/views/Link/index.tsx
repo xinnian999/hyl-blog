@@ -91,13 +91,13 @@ export default function Link() {
           {data.map(({ avator, name, descr, link, id, loading }) => {
             return (
               <Col span={6} onClick={() => window.open(link)} key={id}>
-                <Skeleton loading={loading}>
-                  <div className="linkItem">
+                <div className="linkItem">
+                  <Skeleton loading={loading} active>
                     <Avatar src={avator} className="avatar" />
                     <span>{name}</span>
                     <div>{descr}</div>
-                  </div>
-                </Skeleton>
+                  </Skeleton>
+                </div>
               </Col>
             );
           })}

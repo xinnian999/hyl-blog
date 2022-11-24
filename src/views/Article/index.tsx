@@ -6,22 +6,12 @@ import ReactScroll from "react-infinite-scroll-component";
 import classnames from "classnames";
 import { useBoolean, useScroll } from "ahooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import { useSetState, useWindowSize, useRequest } from "@/hooks";
+import { useWindowSize, useRequest } from "@/hooks";
 import { PageCenter } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
-
-interface State {
-  pageNum: number;
-  total: number;
-  category: any;
-  fixedCateGory: boolean;
-}
-
-let pageNum = 1;
-let category = "all";
 
 function Article() {
   const history = useNavigate();
@@ -30,34 +20,34 @@ function Article() {
 
   const toobarRef = useRef(null) as any;
 
-  const scrollNum = useScroll();
+  const { current } = useRef({
+    pageNum: 1,
+    category: params.get("category"),
+    total: 10,
+  });
+
+  const scrollNum = useScroll()!;
 
   const size = useWindowSize();
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [{ total, ...state }, setState] = useSetState<State>({
-    fixedCateGory: false,
-    pageNum: 1,
-    total: 10,
-    category: params.get("category"),
-  });
-
   const [articleData, runQueryArticle, setArticleData] = useRequest(
     "/article/query",
     {
+      progress: false,
       params: {
-        pageNum,
+        pageNum: current.pageNum,
         pageSize: 5,
-        filters: category === "all" ? { publish: 1 } : { publish: 1, category },
+        filters:
+          current.category === "all"
+            ? { publish: 1 }
+            : { publish: 1, category: current.category },
         orderBys: "topping desc,id desc",
       },
-      progress: false,
       onSuccess(res) {
-        setState({
-          total: res.total,
-        });
-        pageNum = pageNum + 1;
+        current.total = res.total;
+        current.pageNum++;
       },
     }
   );
@@ -75,20 +65,6 @@ function Article() {
   const [categoryData] = useRequest("/category/query", {
     method: "get",
   });
-
-  const queryArticle = (cache) => {
-    console.log(articleData.length, total);
-
-    runQueryArticle({
-      cache,
-      params: {
-        pageNum,
-        pageSize: 5,
-        filters: category === "all" ? { publish: 1 } : { publish: 1, category },
-        orderBys: "topping desc,id desc",
-      },
-    });
-  };
 
   const renderHotArticle = useMemo(
     () =>
@@ -119,15 +95,11 @@ function Article() {
     </Space>
   );
 
-  const fixedCateGory = scrollNum && scrollNum.top > 780;
-
   const Toolbar = (
     <div className="article-toolbar-container" ref={toobarRef}>
       <div
         className={classnames("article-toolbar ", {
-          "category-fixed": fixedCateGory,
-          animate__fadeInDownBig: fixedCateGory,
-          animate__animated: fixedCateGory,
+          "category-fixed": scrollNum?.top > 780,
         })}
         style={{ width: toobarRef.current?.clientWidth }}
       >
@@ -135,7 +107,7 @@ function Article() {
           <Search
             giveData={(data: any) => {
               setArticleData(data);
-              setState({ total: -1 });
+              current.total = -1;
             }}
           />
         </div>
@@ -147,14 +119,23 @@ function Article() {
                 onClick={() => {
                   window.scrollTo(0, 0);
                   history(`/article?category=${name}`);
-                  // setArticleData([]);
+                  current.category = name;
+                  current.pageNum = 1;
+                  setArticleData([]);
 
-                  category = name;
-                  pageNum = 1;
-
-                  queryArticle(false);
+                  runQueryArticle({
+                    params: {
+                      pageNum: 1,
+                      pageSize: 5,
+                      filters:
+                        current.category === "all"
+                          ? { publish: 1 }
+                          : { publish: 1, category: name },
+                      orderBys: "topping desc,id desc",
+                    },
+                  });
                 }}
-                className={category === name ? "categoryActive" : ""}
+                className={current.category === name ? "categoryActive" : ""}
               >
                 <div>{name === "all" ? "全部" : name} </div>
               </li>
@@ -163,7 +144,7 @@ function Article() {
         </ul>
       </div>
 
-      {!fixedCateGory && (
+      {scrollNum?.top < 780 && (
         <ul className="article-toolbar-hot">
           <Divider>热门文章</Divider>
           {renderHotArticle}
@@ -176,26 +157,35 @@ function Article() {
     <PageCenter>
       <div id="hall-main">
         <div className="article-list">
-          <ReactScroll
-            dataLength={articleData.length}
-            next={() => queryArticle(true)}
-            hasMore={articleData.length < total}
-            loader={paragraph}
-            endMessage={
-              <Divider plain className="article-footer">
-                <span className="shadowText">没有更多文章了</span> ---- 🤐
-              </Divider>
-            }
-          >
-            <Space direction="vertical" className="listStyle">
-              {articleData.map((item: any) => (
-                <span key={item.title}>
-                  <ArticleCard data={item} />
-                </span>
-              ))}
-            </Space>
-          </ReactScroll>
+          {articleData.length ? (
+            <ReactScroll
+              dataLength={articleData.length}
+              next={() =>
+                runQueryArticle({
+                  cache: true,
+                })
+              }
+              hasMore={articleData.length < current.total}
+              loader={paragraph}
+              endMessage={
+                <Divider plain className="article-footer">
+                  <span className="shadowText">没有更多文章了</span> ---- 🤐
+                </Divider>
+              }
+            >
+              <Space direction="vertical" className="listStyle">
+                {articleData.map((item: any) => (
+                  <span key={item.title}>
+                    <ArticleCard data={item} />
+                  </span>
+                ))}
+              </Space>
+            </ReactScroll>
+          ) : (
+            paragraph
+          )}
         </div>
+
         {size.width > 800 ? (
           Toolbar
         ) : (

@@ -16,7 +16,7 @@ class Time implements isTime {
     const diffDay =
       (Date.parse(start) - Date.parse(last)) / (1000 * 60 * 60 * 24);
 
-    return parseInt(diffDay);
+    return parseInt(diffDay.toString());
   }
 
   static getStandardTime(time: moment.MomentInput) {

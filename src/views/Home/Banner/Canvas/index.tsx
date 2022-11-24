@@ -1,3 +1,4 @@
+/* eslint-disable no-sequences */
 // @ts-nocheck
 import { useEffect } from "react";
 import "./canvas.scss";
@@ -58,7 +59,7 @@ function Canvas() {
     };
 
     Dot.prototype.link = function () {
-      if (this.id == 0) return;
+      if (this.id === 0) return;
       var previousDot1 = getPreviousDot(this.id, 1);
       var previousDot2 = getPreviousDot(this.id, 2);
       var previousDot3 = getPreviousDot(this.id, 3);
@@ -67,15 +68,16 @@ function Canvas() {
       ctx.moveTo(previousDot1.x, previousDot1.y);
       ctx.beginPath();
       ctx.lineTo(this.x, this.y);
-      if (previousDot2 != false) ctx.lineTo(previousDot2.x, previousDot2.y);
-      if (previousDot3 != false) ctx.lineTo(previousDot3.x, previousDot3.y);
+      if (previousDot2 !== false) ctx.lineTo(previousDot2.x, previousDot2.y);
+      if (previousDot3 !== false) ctx.lineTo(previousDot3.x, previousDot3.y);
       ctx.stroke();
       ctx.closePath();
     };
 
     function getPreviousDot(id, stepback) {
-      if (id == 0 || id - stepback < 0) return false;
-      if (typeof dots[id - stepback] != "undefined") return dots[id - stepback];
+      if (id === 0 || id - stepback < 0) return false;
+      if (typeof dots[id - stepback] !== "undefined")
+        return dots[id - stepback];
       else return false; //getPreviousDot(id - stepback);
     }
 
@@ -135,7 +137,6 @@ function Canvas() {
           Math.floor(Math.random() * WIDTH),
           Math.floor(Math.random() * HEIGHT)
         );
-        //stars[i].draw();
       }
       ctx.shadowBlur = 0;
       animate();
@@ -147,7 +148,7 @@ function Canvas() {
       for (var i in stars) {
         stars[i].move();
       }
-      for (var i in dots) {
+      for (let i in dots) {
         dots[i].move();
       }
       drawIfMouseMoving();
@@ -167,7 +168,7 @@ function Canvas() {
     function drawIfMouseMoving() {
       if (!mouseMoving) return;
 
-      if (dots.length == 0) {
+      if (dots.length === 0) {
         dots[0] = new Dot(0, mouseX, mouseY);
         dots[0].draw();
         return;
@@ -196,7 +197,6 @@ function Canvas() {
       dots[dots.length - 1].draw();
       dots[dots.length - 1].link();
     }
-    //setInterval(drawIfMouseMoving, 17);
 
     function degToRad(deg) {
       return deg * (Math.PI / 180);

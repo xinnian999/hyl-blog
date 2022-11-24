@@ -72,8 +72,9 @@ function Header() {
     <header>
       <div id="iphone-menus">
         <Popover
-          content={<div className="iphone-nav">{renderMenus}</div>}
+          content={<ul className="iphone-nav">{renderMenus}</ul>}
           trigger="click"
+          getPopupContainer={(node: HTMLElement) => node}
         >
           <MenuOutlined />
         </Popover>

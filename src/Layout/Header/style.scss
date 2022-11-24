@@ -139,10 +139,16 @@ header {
   }
 
   .iphone-nav {
+    margin-bottom: 0;
     li {
+      width: 100px;
+      border: 1px solid var(--ant-primary-color);
       font-size: 18px;
       text-align: center;
       line-height: 40px;
+      border-radius: 10px;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
 
     a {
@@ -150,7 +156,7 @@ header {
     }
 
     .active {
-      color: rgb(22, 139, 218);
+      color: var(--ant-primary-color);
     }
   }
 
