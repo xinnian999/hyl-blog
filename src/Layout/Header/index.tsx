@@ -36,7 +36,13 @@ function Header() {
         const { title, path, search } = item;
         if (title) {
           return (
-            <NavLink key={title} to={{ pathname: path, search }}>
+            <NavLink
+              key={title}
+              to={{
+                pathname: path,
+                search,
+              }}
+            >
               <li>{title}</li>
             </NavLink>
           );

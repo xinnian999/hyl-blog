@@ -1,4 +1,4 @@
-import { useEffect, Suspense, useCallback } from "react";
+import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { BackTop, ConfigProvider, Modal } from "antd";
 import APlayer from "aplayer";
@@ -116,18 +116,29 @@ function Layout() {
     (menu: any) =>
       menu.map(({ path, children, index, title, ...item }: any) => {
         return (
-          <Route
-            path={path}
-            key={path || title}
-            index={index}
-            element={
-              <Suspense fallback={<Loading />}>
-                <item.component twoRouter={children} />
-              </Suspense>
-            }
-          >
-            {children && renderRoutes(children)}
-          </Route>
+          <Fragment key={path}>
+            {index && (
+              <Route
+                index={true}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <item.component twoRouter={children} />
+                  </Suspense>
+                }
+              />
+            )}
+            <Route
+              path={path}
+              key={path}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <item.component twoRouter={children} />
+                </Suspense>
+              }
+            >
+              {children && renderRoutes(children)}
+            </Route>
+          </Fragment>
         );
       }),
     []

@@ -23,6 +23,7 @@ const route = [
     children: [
       {
         title: "说说",
+        path: "journal",
         index: true,
         component: lazy(() => import("@/views/Journal/Journal")),
       },
@@ -56,11 +57,12 @@ const route = [
       {
         title: "个人作品",
         index: true,
+        path: "works",
         component: lazy(() => import("@/views/Resource/Works")),
       },
       {
         title: "珍藏",
-        path: "Collection",
+        path: "collection",
         component: lazy(() => import("@/views/Resource/Collection")),
       },
     ],

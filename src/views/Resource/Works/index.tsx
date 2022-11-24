@@ -16,9 +16,9 @@ export default function Works() {
             backgroundSize: "cover",
           }}
           onClick={() => window.open(link)}
-          key={name}
+          key={id}
         >
-          <Skeleton loading={loading} key={id} active>
+          <Skeleton loading={loading} active>
             <div className="title">{name}</div>
             <hr />
             <div className="autograph">{autograph}</div>

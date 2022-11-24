@@ -1,6 +1,7 @@
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useRequest } from "@/hooks";
+import "./style.scss";
 
 export default function Note() {
   const [data] = useRequest("/note/query");
