@@ -8,9 +8,13 @@ export default function Collection() {
   const [data] = useRequest("/collection/query", { mockLoadingCount: 4 });
 
   const renderItem = data.map(
-    ({ picture, title, autograph, onClick, createTime, loading, id }) => {
+    ({ picture, title, autograph, createTime, loading, link, id }) => {
       return (
-        <div className="cardContainer" onClick={onClick} key={id}>
+        <div
+          className="cardContainer"
+          onClick={() => window.open(link)}
+          key={id}
+        >
           <Skeleton loading={loading}>
             <Image
               src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
