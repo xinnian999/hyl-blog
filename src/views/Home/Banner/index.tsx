@@ -60,7 +60,7 @@ export default function Banner() {
       <div
         className={classNames("fast-nav", { "fast-nav-hide": visible })}
       ></div>
-
+      {visible && <div className="fast-nav-mask" onClick={toggle}></div>}
       {visible && (
         <ul className="fast-nav-menus animate__animated animate__fadeInRight">
           <li onClick={() => navigate("/link")}>友链</li>

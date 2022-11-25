@@ -3,10 +3,11 @@ import Article from "./Article";
 import SentenceContent from "./SentenceContent";
 import BtnContent from "./BtnContent";
 import Footer from "./Footer";
+import "./style.scss";
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div id="home">
       <Banner />
       <Article />
       <BtnContent />

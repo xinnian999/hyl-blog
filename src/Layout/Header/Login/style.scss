@@ -1,5 +1,4 @@
-
-.toolLogin{
+.toolLogin {
   display: flex;
   justify-content: right;
   padding: 0 20px;
@@ -7,4 +6,8 @@
     width: 15px;
     margin-right: 5px;
   }
+}
+
+.login {
+  font-family: none;
 }

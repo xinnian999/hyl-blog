@@ -14,6 +14,7 @@ import cookie from "js-cookie";
 import { getRandom } from "@/utils";
 import { useSetState, useRequest, useBoolean, useRedux } from "@/hooks";
 import "./style.scss";
+import { Icon } from "@/components";
 
 const avatar = [
   "img_1.jpeg",
@@ -130,8 +131,13 @@ export default function Login() {
 
   return (
     <>
-      <Button type="primary" ghost onClick={onModal}>
-        登陆
+      <Button
+        type="primary"
+        onClick={onModal}
+        className="login"
+        icon={<Icon type="icon-denglu-copy"></Icon>}
+      >
+        登 陆
       </Button>
       <Modal
         title={isRegister ? "注册" : "登陆"}

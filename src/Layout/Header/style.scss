@@ -162,20 +162,20 @@ header {
       color: var(--ant-primary-color);
     }
   }
+}
 
-  .themeList {
-    width: 60px;
-    position: relative;
-    right: 10px;
-    background-color: #e8e9e7;
-    .themeItem {
-      width: 50px;
-      margin: 0 auto;
-      text-align: center;
-      border-radius: 5px;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
+.themeList {
+  width: 60px;
+  position: relative;
+  right: 10px;
+  background-color: #e8e9e7;
+  .themeItem {
+    width: 50px;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
   }
 }
 

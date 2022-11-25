@@ -38,11 +38,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: auto !important;
+  background-color: #374140 !important;
 }
 
 #root {
   font-size: 16px;
   font-family: "仓耳渔阳体 W03";
+
   @media screen and (max-width: 500px) {
     font-size: 19px;
   }
