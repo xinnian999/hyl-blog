@@ -5,6 +5,7 @@ import {
   BgColorsOutlined,
   SettingOutlined,
 } from "@ant-design/icons";
+import { Icon } from "@/components";
 import menus from "@/router";
 import { useWindowSize, useRedux } from "@/hooks";
 import Login from "./Login";
@@ -33,7 +34,7 @@ function Header() {
   const renderMenus = useMemo(
     () =>
       menus.map((item: any) => {
-        const { title, path, search } = item;
+        const { title, path, search, icon } = item;
         if (title) {
           return (
             <NavLink
@@ -43,7 +44,9 @@ function Header() {
                 search,
               }}
             >
-              <li>{title}</li>
+              <li>
+                <Icon type={icon} /> {title}
+              </li>
             </NavLink>
           );
         }

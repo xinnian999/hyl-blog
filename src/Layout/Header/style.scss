@@ -40,6 +40,9 @@ header {
       padding: 0 20px;
       position: relative;
       margin-right: 10px;
+      font-family: "阿里妈妈数黑体";
+      font-size: 18px;
+      font-weight: bold;
     }
 
     li:hover {
@@ -58,7 +61,7 @@ header {
       width: 0%;
       height: 3px;
       position: absolute;
-      bottom: -1px;
+      bottom: 0;
       left: 50%;
       background-color: #6bc30d;
       background-color: var(--ant-primary-color);
@@ -70,7 +73,7 @@ header {
       width: 0%;
       height: 3px;
       position: absolute;
-      bottom: -1px;
+      bottom: 0;
       right: 50%;
       background-color: #6bc30d;
       background-color: var(--ant-primary-color);

@@ -4,12 +4,14 @@ const route = [
   {
     title: "首页",
     path: "/home",
+    icon: "icon-shouye",
     component: lazy(() => import("@/views/Home")),
   },
   {
     title: "文章",
     path: "/article",
     search: "?category=all",
+    icon: "icon-wenzhang",
     component: lazy(() => import("@/views/Article")),
   },
   {
@@ -20,6 +22,7 @@ const route = [
     title: "日志",
     path: "/journal",
     component: lazy(() => import("@/views/Journal")),
+    icon: "icon-houtaiweihurizhi",
     children: [
       {
         title: "说说",
@@ -42,16 +45,19 @@ const route = [
   {
     title: "友链",
     path: "/link",
+    icon: "icon-LINKS",
     component: lazy(() => import("@/views/Link")),
   },
   {
     title: "留言",
     path: "/message",
+    icon: "icon-liuyan",
     component: lazy(() => import("@/views/Message")),
   },
   {
     title: "资源",
     path: "/resource",
+    icon: "icon-ziyuan",
     component: lazy(() => import("@/views/Resource")),
     children: [
       {
@@ -70,6 +76,7 @@ const route = [
   {
     title: "关于",
     path: "/about",
+    icon: "icon-guanyu1",
     component: lazy(() => import("@/views/About")),
   },
 
