@@ -22,6 +22,7 @@
         position: absolute;
         right: 0;
         top: 150%;
+        width: 100%;
       }
     }
     border-radius: 10px;
@@ -34,6 +35,9 @@
     .title {
       text-align: center;
       font-size: 25px;
+      @media screen and (max-width: 800px) {
+        width: 80%;
+      }
     }
 
     .article-info {

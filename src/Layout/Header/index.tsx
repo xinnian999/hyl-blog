@@ -94,15 +94,15 @@ function Header() {
       {width > 800 && <ul id="nav">{renderMenus}</ul>}
 
       <div className="header-action">
-        <div className="toolbar">
-          <Tooltip title="切换主题" placement="left">
-            <Dropdown droplist={themeList} trigger="click">
-              <div className="toolbar-item">
-                <BgColorsOutlined />
-              </div>
-            </Dropdown>
-          </Tooltip>
-          {width > 1000 && (
+        {width > 1000 && (
+          <div className="toolbar">
+            <Tooltip title="切换主题" placement="left">
+              <Dropdown droplist={themeList} trigger="click">
+                <div className="toolbar-item">
+                  <BgColorsOutlined />
+                </div>
+              </Dropdown>
+            </Tooltip>
             <Tooltip title="访问网站后台">
               <div
                 className="toolbar-item"
@@ -111,8 +111,8 @@ function Header() {
                 <SettingOutlined />
               </div>
             </Tooltip>
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="user">{loginState ? <User /> : <Login />}</div>
       </div>
