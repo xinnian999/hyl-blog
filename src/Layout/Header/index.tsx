@@ -10,13 +10,13 @@ import menus from "@/router";
 import { useWindowSize, useRedux } from "@/hooks";
 import Login from "./Login";
 import User from "./User";
-import { Button, Tooltip } from "antd";
+import { Tooltip } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
 
 const theme = [
-  { bg: 125, color: "#25b864" },
   { bg: 217, color: "#1890ff" },
+  { bg: 125, color: "#25b864" },
   { bg: 0, color: "#d6324d" },
 ];
 

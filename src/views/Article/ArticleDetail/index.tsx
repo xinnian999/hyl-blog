@@ -75,12 +75,16 @@ function ArticleDetail() {
       runGetAbout({
         params: {
           pageNum: 1,
-          pageSize: 5,
+          pageSize: 6,
           filters: { publish: 1, category: data.category },
           orderBys: "topping desc,id desc",
         },
       }).then((res) => {
-        setState({ aboutArticle: res.data });
+        setState({
+          aboutArticle: res.data.filter(
+            (item) => item.id !== Number(params.id)
+          ),
+        });
       });
     },
   });

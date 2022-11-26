@@ -31,12 +31,12 @@ export default function Banner() {
       <div className="bannerContent">
         <p className="bannerContent-title text1">心念 の 空间站</p>
         <p className="bannerContent-autograph text2">犹一心一意，念念不忘</p>
-        <Button
+        <button
           className="bannerContent-Button  animate__animated animate__fadeInUp"
           onClick={() => navigate("/article?category=all")}
         >
           Enter Blog
-        </Button>
+        </button>
 
         <TweenOne
           animation={{

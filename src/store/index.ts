@@ -19,7 +19,7 @@ const persistConfig = {
 const reducer = (
   state: isStore = {
     loginState: false,
-    theme: { bg: 125, color: "#25b864" },
+    theme: { bg: 125, color: "#1890ff" },
     userInfo: { id: 0, username: "昵称", headPicture: "" },
     autoplay: undefined,
   },

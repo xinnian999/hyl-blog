@@ -146,7 +146,7 @@ function Article() {
 
       {scrollNum?.top < 780 && (
         <ul className="article-toolbar-hot">
-          <Divider>热门文章</Divider>
+          <Divider className="article-toolbar-hot-title">热门文章</Divider>
           {renderHotArticle}
         </ul>
       )}
