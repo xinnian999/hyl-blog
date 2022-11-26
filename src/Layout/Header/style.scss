@@ -46,7 +46,7 @@ header {
     }
 
     li:hover {
-      color: var(--ant-primary-color-active);
+      color: var(--ant-primary-color);
       cursor: pointer;
 
       &::before {
@@ -177,7 +177,7 @@ header {
   }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1300px) {
   header {
     #logo {
       display: inline;

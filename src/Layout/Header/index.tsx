@@ -10,7 +10,7 @@ import menus from "@/router";
 import { useWindowSize, useRedux } from "@/hooks";
 import Login from "./Login";
 import User from "./User";
-import { Tooltip } from "antd";
+import { Button, Tooltip } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
 
@@ -91,10 +91,10 @@ function Header() {
       <div id="logo" onClick={goHome}>
         <span>心念の空间站</span>
       </div>
-      {width > 800 && <ul id="nav">{renderMenus}</ul>}
+      {width > 1300 && <ul id="nav">{renderMenus}</ul>}
 
       <div className="header-action">
-        {width > 1000 && (
+        {width > 1300 && (
           <div className="toolbar">
             <Tooltip title="切换主题" placement="left">
               <Dropdown droplist={themeList} trigger="click">
