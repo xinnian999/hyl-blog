@@ -54,6 +54,7 @@ function Article() {
 
   const [hotArticleData] = useRequest("/article/query", {
     progress: false,
+    mockLoadingCount: 5,
     params: {
       pageNum: 1,
       pageSize: 5,
@@ -64,20 +65,27 @@ function Article() {
 
   const [categoryData] = useRequest("/category/query", {
     method: "get",
+    mockLoadingCount: 7,
   });
 
   const renderHotArticle = useMemo(
     () =>
-      hotArticleData.map((item: { id: any; title: string }, index: number) => (
-        <li
-          className="hotArticle"
-          onClick={() => history(`/article/${item.id}`)}
-          key={item.title}
-        >
-          <div className={`index index${index + 1}`}>{index + 1}</div>
-          <span>{item.title}</span>
-        </li>
-      )),
+      hotArticleData.map(({ title, id, loading }: any, index: number) => {
+        if (loading)
+          return (
+            <Skeleton.Input
+              active
+              className="article-toolbar-hot-item"
+              key={id}
+            />
+          );
+        return (
+          <li className="article-toolbar-hot-item" key={id}>
+            <div className={`index index${index + 1}`}>{index + 1}</div>
+            <span onClick={() => history(`/article/${id}`)}>{title}</span>
+          </li>
+        );
+      }),
     [hotArticleData]
   );
 
@@ -86,11 +94,11 @@ function Article() {
       {batchCopyDom(
         () => (
           <div className="skeletonItem">
-            <Skeleton.Image active className="skeletonItem-image" />
+            <Skeleton.Button active className="skeletonItem-image" />
             <Skeleton paragraph={{ rows: 5 }} active round className="" />
           </div>
         ),
-        3
+        5
       )}
     </Space>
   );
@@ -112,35 +120,49 @@ function Article() {
           />
         </div>
         <ul className="article-toolbar-category">
-          {[{ name: "all" }, ...categoryData].map(({ name }: any) => {
-            return (
-              <li
-                key={name}
-                onClick={() => {
-                  window.scrollTo(0, 0);
-                  history(`/article?category=${name}`);
-                  current.category = name;
-                  current.pageNum = 1;
-                  setArticleData([]);
+          {[{ name: "all" }, ...categoryData].map(
+            ({ name, loading, id }: any) => {
+              if (loading)
+                return (
+                  <Skeleton.Input
+                    key={id}
+                    className="article-toolbar-category-item"
+                    active
+                  />
+                );
+              return (
+                <li
+                  key={name}
+                  onClick={() => {
+                    window.scrollTo(0, 0);
+                    history(`/article?category=${name}`);
+                    current.category = name;
+                    current.pageNum = 1;
+                    setArticleData([]);
 
-                  runQueryArticle({
-                    params: {
-                      pageNum: 1,
-                      pageSize: 5,
-                      filters:
-                        current.category === "all"
-                          ? { publish: 1 }
-                          : { publish: 1, category: name },
-                      orderBys: "topping desc,id desc",
-                    },
-                  });
-                }}
-                className={current.category === name ? "categoryActive" : ""}
-              >
-                <div>{name === "all" ? "全部" : name} </div>
-              </li>
-            );
-          })}
+                    runQueryArticle({
+                      params: {
+                        pageNum: 1,
+                        pageSize: 5,
+                        filters:
+                          current.category === "all"
+                            ? { publish: 1 }
+                            : { publish: 1, category: name },
+                        orderBys: "topping desc,id desc",
+                      },
+                    });
+                  }}
+                  className={
+                    current.category === name
+                      ? "article-toolbar-category-item categoryActive"
+                      : "article-toolbar-category-item"
+                  }
+                >
+                  <div>{name === "all" ? "全部" : name} </div>
+                </li>
+              );
+            }
+          )}
         </ul>
       </div>
 
