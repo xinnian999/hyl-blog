@@ -51,6 +51,12 @@ request.interceptors.response.use(
         });
 
         break;
+      case 502:
+        notification.error({
+          message: status,
+          description: "后端服务挂了",
+        });
+        break;
       case 500:
         notification.error({
           message: status,
