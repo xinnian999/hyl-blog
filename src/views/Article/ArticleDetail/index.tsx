@@ -8,8 +8,7 @@ import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { request, Time, changeBlogTitle } from "@/utils";
 import { useSetState, useWindowSize, useRequest } from "@/hooks";
-import { Comment } from "@/components";
-import Markdown from "./Markdown";
+import { Comment, Markdown } from "@/components";
 import "./style.scss";
 
 interface State {

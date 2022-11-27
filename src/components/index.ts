@@ -5,6 +5,7 @@ import Loading from "./Loading";
 import TimeBar from "./TimeBar";
 import Banner from "./Banner";
 import Copy from "./Copy";
+import Markdown from "./Markdown";
 import {
   PageCenter,
   Bubble,
@@ -36,4 +37,5 @@ export {
   Redirect,
   Copy,
   OverPack,
+  Markdown,
 };
