@@ -1,23 +1,16 @@
 @import url("./theme.css");
 
 @font-face {
-  font-family: "站酷高端黑 Regular";
+  font-family: "汉仪霹雳体简";
   font-weight: 400;
-  src: url("~@/assets/font/zcool-gdh_Regular.ttf");
+  src: url("~@/assets/font/汉仪霹雳体简.ttf");
   font-display: swap;
 }
 
 @font-face {
-  font-family: "仓耳渔阳体 W03";
-  font-weight: 400;
-  src: url("~@/assets/font/站酷仓耳渔阳体/TsangerYuYangT_W03_W03.ttf");
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "阿里妈妈数黑体";
+  font-family: "font";
   font-weight: 0;
-  src: url("~@/assets/font/Alimama_ShuHeiTi_Bold.ttf");
+  src: url("~@/assets/font/HarmonyOS_Sans_SC_Medium.subset.woff2");
   font-display: swap;
 }
 
@@ -44,7 +37,7 @@ body {
 
 #root {
   font-size: 16px;
-  font-family: "仓耳渔阳体 W03";
+  font-family: "font";
 
   @media screen and (max-width: 500px) {
     font-size: 19px;
