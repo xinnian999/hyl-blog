@@ -1,4 +1,4 @@
-import { Timeline, Tag as AntdTag } from "antd";
+import { Timeline, Tag as AntdTag, Card } from "antd";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
 import { PageCenter, Title, Tag, Info, Section, Icon } from "@/components";
 import { Time } from "@/utils";
@@ -122,6 +122,19 @@ const About = () => {
             <br />
             用户邮箱仅作回复消息用，不对外使用。
             <br />
+          </Info>
+
+          <Title>其他</Title>
+          <Info className="other">
+            <Card title="我的微信">
+              <img src={require("@/assets/img/about/weixin.jpg")} />
+            </Card>
+            <Card title="我的小程序">
+              <img src={require("@/assets/img/about/xiaochengxu.jpg")} />
+            </Card>
+            <Card title="我的公众号">
+              <img src={require("@/assets/img/about/gongzhonghao.jpg")} />
+            </Card>
           </Info>
         </div>
       </PageCenter>
