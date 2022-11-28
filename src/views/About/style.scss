@@ -38,5 +38,11 @@
         display: block;
       }
     }
+    @media screen and (max-width: 500px) {
+      display: block;
+      .ant-card {
+        margin-bottom: 20px;
+      }
+    }
   }
 }
