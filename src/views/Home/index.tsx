@@ -1,8 +1,8 @@
 import Banner from "./Banner";
 import Article from "./Article";
 import SentenceContent from "./SentenceContent";
-import BtnContent from "./BtnContent";
 import Footer from "./Footer";
+import Progress from "./Progress";
 import "./style.scss";
 
 export default function Home() {
@@ -10,8 +10,10 @@ export default function Home() {
     <div id="home">
       <Banner />
       <Article />
-      <BtnContent />
+
+      {/* <BtnContent /> */}
       <SentenceContent />
+      <Progress />
       <Footer />
     </div>
   );

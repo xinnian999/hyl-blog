@@ -116,7 +116,9 @@
       "react-hooks/exhaustive-deps": 0,
       "jsx-a11y/alt-text": 0
     },
-    "globals": {}
+    "globals": {
+      "wx": true
+    }
   },
   "browserslist": {
     "production": [
