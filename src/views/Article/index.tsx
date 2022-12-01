@@ -181,6 +181,7 @@ function Article() {
         <div className="article-list">
           {articleData.length ? (
             <ReactScroll
+              scrollThreshold={0.75}
               dataLength={articleData.length}
               next={() =>
                 runQueryArticle({

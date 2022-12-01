@@ -8,11 +8,10 @@ import {
   ChangeBar,
 } from "./StyleComponents";
 import { OverPack } from "@/components";
-import { url } from "inspector";
 
 function SentenceContent() {
   const [visible, setVisible] = useState(true);
-  const [{ name, content, picture }, setSentence] = useState({
+  const [{ name, content }, setSentence] = useState({
     name: "",
     content: "",
     picture: "",
