@@ -146,19 +146,21 @@ function ArticleDetail() {
           <CheckSquareOutlined /> 相关阅读
         </div>
         <Divider></Divider>
-        {aboutArticle.map(({ title, visits, comments, id }) => (
-          <div className="aboutArticle-item" key={title}>
-            <div
-              className="aboutArticle-item-title"
-              onClick={() => window.open(`/article/${id}`, "_self")}
-            >
-              {title}
+        <div className="aboutArticle">
+          {aboutArticle.map(({ title, visits, comments, id }) => (
+            <div className="aboutArticle-item" key={title}>
+              <div
+                className="aboutArticle-item-title"
+                onClick={() => window.open(`/article/${id}`, "_self")}
+              >
+                {title}
+              </div>
+              <div className="aboutArticle-item-info">
+                {comments}评论 | {visits}阅读
+              </div>
             </div>
-            <div className="aboutArticle-item-info">
-              {comments}评论 | {visits}阅读
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     ),
     [aboutArticle]

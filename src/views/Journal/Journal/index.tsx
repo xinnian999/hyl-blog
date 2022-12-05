@@ -17,12 +17,12 @@ const First = () => {
         pending={<div>查询中···</div>}
         className="timeline"
       >
-        {data.map(({ content, picture, category, creatTime }, index) => (
+        {data.map(({ content, picture, category, createTime }, index) => (
           <Timeline.Item
             label={
               width > 800 && (
                 <div className="Journal-time">
-                  {new Time(creatTime).getYMDTime()}
+                  {new Time(createTime).getYMDTime()}
                 </div>
               )
             }
@@ -53,7 +53,7 @@ const First = () => {
                 )}
                 {width < 800 && (
                   <div className="Journal-time-iphone">
-                    {new Time(creatTime).getYMDTime()}
+                    {new Time(createTime).getYMDTime()}
                   </div>
                 )}
               </Bubble>
