@@ -1,11 +1,11 @@
 import { useMount, useBoolean } from "@/hooks";
 import { useNavigate } from "react-router-dom";
-import { Button } from "antd";
 import TweenOne from "rc-tween-one";
 import { useRef } from "react";
 import classNames from "classnames";
 import Canvas from "@/views/Home/Banner/Canvas";
 import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
+import { useRedux } from "@/hooks";
 import textCustom from "./textCustom";
 import "./style.scss";
 
@@ -16,8 +16,12 @@ export default function Banner() {
 
   const drawerRef = useRef(null);
 
+  const { store } = useRedux();
+
   useMount(() => {
-    textCustom();
+    if (!store.simple) {
+      textCustom();
+    }
   });
 
   const goNext = () => {

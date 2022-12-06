@@ -1,16 +1,12 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Popover, Dropdown, Menu } from "@arco-design/web-react";
-import {
-  MenuOutlined,
-  BgColorsOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { Popover } from "@arco-design/web-react";
+import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { Icon } from "@/components";
 import menus from "@/router";
-import { useWindowSize, useRedux } from "@/hooks";
+import { useWindowSize, useRedux, useBoolean } from "@/hooks";
 import Login from "./Login";
 import User from "./User";
-import { Tooltip } from "antd";
+import { Tooltip, Modal, Switch } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
 
@@ -23,9 +19,11 @@ const theme = [
 function Header() {
   const navigate = useNavigate();
 
+  const [setVisible, on, off] = useBoolean();
+
   const { store, dispatch } = useRedux();
 
-  const { loginState } = store;
+  const { loginState, simple, autoplay } = store;
 
   const goHome = () => navigate("/home");
 
@@ -55,28 +53,6 @@ function Header() {
     []
   );
 
-  const themeList = (
-    <Menu className="themeList">
-      {theme.map((item) => {
-        return (
-          <Menu.Item
-            key={item.color}
-            className="themeItem"
-            style={{ backgroundColor: item.color }}
-            onClick={() =>
-              dispatch({
-                type: "CHANGE_THEME",
-                payload: item,
-              })
-            }
-          >
-            {item.color === store.theme.color && "✔️"}
-          </Menu.Item>
-        );
-      })}
-    </Menu>
-  );
-
   return (
     <header>
       <div id="iphone-menus">
@@ -96,18 +72,8 @@ function Header() {
       <div className="header-action">
         {width > 1300 && (
           <div className="toolbar">
-            <Tooltip title="切换主题" placement="left">
-              <Dropdown droplist={themeList} trigger="click">
-                <div className="toolbar-item">
-                  <BgColorsOutlined />
-                </div>
-              </Dropdown>
-            </Tooltip>
-            <Tooltip title="访问网站后台">
-              <div
-                className="toolbar-item"
-                onClick={() => window.open("https://www.hyl999.co:81/")}
-              >
+            <Tooltip title="网站设置">
+              <div className="toolbar-item" onClick={on}>
                 <SettingOutlined />
               </div>
             </Tooltip>
@@ -116,6 +82,58 @@ function Header() {
 
         <div className="user">{loginState ? <User /> : <Login />}</div>
       </div>
+
+      <Modal
+        visible={setVisible}
+        onCancel={off}
+        closable={false}
+        okText="确认"
+        cancelText="取消"
+        title="本站设置"
+        onOk={() => window.location.reload()}
+      >
+        <ul className="setting">
+          <li>
+            <h4>播放背景音乐：</h4>
+            <Switch
+              checked={autoplay}
+              defaultChecked
+              onChange={() => dispatch({ type: "CHANGE_AUTOPLAY" })}
+            />
+            <span className="tip">开启后，将自动播放背景音乐</span>
+          </li>
+          <li>
+            <h4>主题颜色：</h4>
+            {theme.map((item) => {
+              return (
+                <div
+                  key={item.color}
+                  className="themeItem"
+                  style={{ backgroundColor: item.color }}
+                  onClick={() =>
+                    dispatch({
+                      type: "CHANGE_THEME",
+                      payload: item,
+                    })
+                  }
+                >
+                  {item.color === store.theme.color && "✔️"}
+                </div>
+              );
+            })}
+          </li>
+          <li>
+            <h4>简约模式：</h4>
+            <Switch
+              checked={simple}
+              onChange={() => dispatch({ type: "CHANGE_SIMPLE" })}
+            />
+            <span className="tip">
+              非简约模式下，会加载很多canvas特效，可能会引起电脑风扇的咆哮
+            </span>
+          </li>
+        </ul>
+      </Modal>
     </header>
   );
 }

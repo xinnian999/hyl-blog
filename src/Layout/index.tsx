@@ -1,6 +1,6 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { BackTop, ConfigProvider, Modal } from "antd";
+import { BackTop, ConfigProvider } from "antd";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
 import cookie from "js-cookie";
@@ -11,10 +11,6 @@ import { useRequest, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
-
-const { confirm } = Modal;
-
-let music: any;
 
 function Layout() {
   const location = useLocation();
@@ -34,7 +30,7 @@ function Layout() {
         url: `${globalConfig.remoteStaticUrl}/music/${item.url}`,
       }));
 
-      music = new APlayer({
+      new APlayer({
         container: document.getElementById("aplayer"),
         audio: data, // 音乐信息
         fixed: true, // 开启吸底模式
@@ -44,28 +40,6 @@ function Layout() {
         loop: "all", // 播放循环模式、all全部循环 one单曲循环 none只播放一次
         order: "list", //  播放模式，list列表播放, random随机播放
       });
-
-      if (store.autoplay === undefined) {
-        confirm({
-          content: "播放背景音乐吗？(可在左下角操控)",
-          okText: "播放",
-          cancelText: "不播放",
-          onOk() {
-            music.play();
-            dispatch({
-              type: "CHANGE_AUTOPLAY",
-              payload: true,
-            });
-          },
-          onCancel() {
-            music.pause();
-            dispatch({
-              type: "CHANGE_AUTOPLAY",
-              payload: false,
-            });
-          },
-        });
-      }
     },
   });
 
@@ -84,7 +58,9 @@ function Layout() {
       },
     });
 
-    canvasBg(store.theme.bg);
+    if (!store.simple) {
+      canvasBg(store.theme.bg);
+    }
   }, [store.theme]);
 
   useEffect(() => {

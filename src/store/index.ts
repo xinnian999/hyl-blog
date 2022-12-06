@@ -7,6 +7,7 @@ export type isStore = {
   theme: { bg: number; color: string };
   userInfo: { id: number; username: string; headPicture: string };
   autoplay: boolean | undefined;
+  simple: boolean | undefined;
 };
 
 //在localStorge中生成key为root的值
@@ -21,7 +22,8 @@ const reducer = (
     loginState: false,
     theme: { bg: 125, color: "#1890ff" },
     userInfo: { id: 0, username: "昵称", headPicture: "" },
-    autoplay: undefined,
+    autoplay: false,
+    simple: false,
   },
   { type, payload }: any
 ) => {
@@ -33,7 +35,9 @@ const reducer = (
     case "CHANGE_USER_INFO":
       return { ...state, userInfo: { ...state.userInfo, ...payload } };
     case "CHANGE_AUTOPLAY":
-      return { ...state, autoplay: payload };
+      return { ...state, autoplay: !state.autoplay };
+    case "CHANGE_SIMPLE":
+      return { ...state, simple: !state.simple };
     default:
       return state;
   }
