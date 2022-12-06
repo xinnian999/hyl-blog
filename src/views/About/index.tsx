@@ -16,7 +16,7 @@ const About = () => {
 
   useMount(() => {
     const t = setInterval(() => {
-      setState({ onTime: new Time(startTime).getDuration() });
+      setState({ onTime: Time.getDuration(startTime) });
     }, 1000);
 
     return () => clearInterval(t);
@@ -101,7 +101,7 @@ const About = () => {
               {updateLog.map(({ content, creatTime }) => (
                 <Timeline.Item key={creatTime}>
                   <AntdTag className="time">
-                    {new Time(creatTime).getYMDTime()}
+                    {Time.getYMDTime(creatTime)}
                   </AntdTag>
                   <div className="content">{content}</div>
                 </Timeline.Item>

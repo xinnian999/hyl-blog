@@ -60,7 +60,7 @@ export default function Article() {
                       <div className="item-content">
                         <div className="item-title">{title}</div>
                         <div className="item-time">
-                          {new Time(creatTime).getYMDTime()}
+                          {Time.getYMDTime(creatTime)}
                         </div>
                         <div>{introduce}</div>
                         <a href={`/article/${id}`} className="more">

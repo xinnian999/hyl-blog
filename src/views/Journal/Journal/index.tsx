@@ -22,7 +22,7 @@ const First = () => {
             label={
               width > 800 && (
                 <div className="Journal-time">
-                  {new Time(createTime).getYMDTime()}
+                  {Time.getYMDTime(createTime)}
                 </div>
               )
             }
@@ -53,7 +53,7 @@ const First = () => {
                 )}
                 {width < 800 && (
                   <div className="Journal-time-iphone">
-                    {new Time(createTime).getYMDTime()}
+                    {Time.getYMDTime(createTime)}
                   </div>
                 )}
               </Bubble>
