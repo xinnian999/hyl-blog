@@ -38,7 +38,7 @@ function Layout() {
         autoplay: store.autoplay, // 开启自动播放
         preload: "auto", // 自动预加载歌曲
         loop: "all", // 播放循环模式、all全部循环 one单曲循环 none只播放一次
-        order: "list", //  播放模式，list列表播放, random随机播放
+        order: "random", //  播放模式，list列表播放, random随机播放
       });
     },
   });

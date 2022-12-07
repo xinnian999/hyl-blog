@@ -33,10 +33,14 @@ export default function Banner() {
     <div className="homeBanner" ref={drawerRef}>
       <Canvas />
       <div className="bannerContent">
-        <p className="bannerContent-title text1">心念 の 空间站</p>
-        <p className="bannerContent-autograph text2">犹一心一意，念念不忘</p>
+        <p className="bannerContent-title text1 animate__animated animate__zoomIn">
+          心念 の 空间站
+        </p>
+        <p className="bannerContent-autograph text2  animate__animated animate__zoomIn">
+          犹一心一意，念念不忘
+        </p>
         <button
-          className="bannerContent-Button  animate__animated animate__fadeInUp"
+          className="bannerContent-Button  animate__animated animate__zoomIn"
           onClick={() => navigate("/article?category=all")}
         >
           Enter Blog
