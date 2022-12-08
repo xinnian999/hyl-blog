@@ -10,6 +10,9 @@ import "animate.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "@arco-design/web-react/dist/css/arco.css";
+import "@/jquery/jquery-1.9.1.min";
+import "@/jquery/jquery.lettering";
+import "@/jquery/jquery.textillate";
 
 if (isIE()) {
   alert("请放弃万恶的IE浏览器吧");

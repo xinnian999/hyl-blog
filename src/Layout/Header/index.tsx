@@ -5,7 +5,6 @@ import { Icon } from "@/components";
 import menus from "@/router";
 import { useWindowSize, useRedux, useBoolean } from "@/hooks";
 import Login from "./Login";
-import User from "./User";
 import { Tooltip, Modal, Switch } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
@@ -23,7 +22,7 @@ function Header() {
 
   const { store, dispatch } = useRedux();
 
-  const { loginState, simple, autoplay } = store;
+  const { simple, autoplay } = store;
 
   const goHome = () => navigate("/home");
 
@@ -70,17 +69,14 @@ function Header() {
       {width > 1300 && <ul id="nav">{renderMenus}</ul>}
 
       <div className="header-action">
-        {width > 1300 && (
-          <div className="toolbar">
-            <Tooltip title="网站设置">
-              <div className="toolbar-item" onClick={on}>
-                <SettingOutlined />
-              </div>
-            </Tooltip>
+        <Tooltip title="网站设置">
+          <div className="setting" onClick={on}>
+            <SettingOutlined />
           </div>
-        )}
-
-        <div className="user">{loginState ? <User /> : <Login />}</div>
+        </Tooltip>
+        <div className="user">
+          <Login />
+        </div>
       </div>
 
       <Modal
@@ -91,6 +87,8 @@ function Header() {
         cancelText="取消"
         title="本站设置"
         onOk={() => window.location.reload()}
+        getContainer={false}
+        destroyOnClose
       >
         <ul className="setting">
           <li>
