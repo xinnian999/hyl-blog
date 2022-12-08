@@ -87,7 +87,6 @@ function Header() {
         cancelText="取消"
         title="本站设置"
         onOk={() => window.location.reload()}
-        getContainer={false}
         destroyOnClose
       >
         <ul className="setting">
