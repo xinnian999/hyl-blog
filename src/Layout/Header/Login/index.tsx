@@ -14,7 +14,13 @@ import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import md5 from "js-md5";
 import cookie from "js-cookie";
 import { clearLogin, getRandom } from "@/utils";
-import { useSetState, useRequest, useBoolean, useRedux } from "@/hooks";
+import {
+  useSetState,
+  useRequest,
+  useBoolean,
+  useRedux,
+  useWindowSize,
+} from "@/hooks";
 import "./style.scss";
 import { Popover } from "@arco-design/web-react";
 
@@ -40,7 +46,9 @@ export default function Login() {
 
   const { store, dispatchAll } = useRedux();
 
-  const { username, id, headPicture } = store.userInfo;
+  const { width } = useWindowSize();
+
+  const { username, headPicture } = store.userInfo;
 
   const [, runOnLogin] = useRequest("/user/login", {
     method: "post",
@@ -145,10 +153,18 @@ export default function Login() {
     <>
       {store.loginState ? (
         <Popover content={renderUserMenus} trigger="hover">
-          <Avatar src={headPicture} className="userAvatar" size={35} />
+          <Avatar
+            src={headPicture}
+            className="userAvatar"
+            size={width > 800 ? 35 : 30}
+          />
         </Popover>
       ) : (
-        <Avatar className="userAvatar" size={40} onClick={onModal}>
+        <Avatar
+          className="userAvatar"
+          size={width > 800 ? 40 : 30}
+          onClick={onModal}
+        >
           登录
         </Avatar>
       )}

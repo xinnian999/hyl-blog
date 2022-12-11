@@ -5,7 +5,7 @@ import { Icon } from "@/components";
 import menus from "@/router";
 import { useWindowSize, useRedux, useBoolean } from "@/hooks";
 import Login from "./Login";
-import { Tooltip, Modal, Switch } from "antd";
+import { Tooltip, Modal, Switch, Button } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
 
@@ -88,6 +88,7 @@ function Header() {
         title="本站设置"
         onOk={() => window.location.reload()}
         destroyOnClose
+        // getContainer={false}
       >
         <ul className="setting">
           <li>
@@ -128,6 +129,16 @@ function Header() {
             <span className="tip">
               非简约模式下，会加载很多canvas特效，可能会引起电脑风扇的咆哮
             </span>
+          </li>
+
+          <li>
+            <Button
+              type="primary"
+              className="goAdmin"
+              onClick={() => window.open("https://www.hyl999.co:81/#/home")}
+            >
+              进入网站后台管理
+            </Button>
           </li>
         </ul>
       </Modal>
