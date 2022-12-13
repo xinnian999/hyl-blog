@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
 import { PageCenter, Banner } from "@/components";
-import "./style.scss";
 
 export default function Journal(props: any) {
   return (

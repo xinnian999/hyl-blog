@@ -44,10 +44,8 @@ $bg: rgba(255, 255, 255);
     }
 
     &:hover {
-      .linkItem:hover {
-        box-shadow: 0 0 15px rgba(50, 250, 255, 0.75);
-        opacity: 0.9;
-      }
+      box-shadow: 0 0 15px rgba(50, 250, 255, 0.95);
+      opacity: 0.8;
     }
   }
 }

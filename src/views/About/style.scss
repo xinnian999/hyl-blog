@@ -26,4 +26,23 @@
     top: -2px;
     margin-left: 15px;
   }
+
+  .other {
+    display: flex;
+    .ant-card {
+      flex: 1;
+      margin: 0 30px;
+      img {
+        width: 50%;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+    @media screen and (max-width: 500px) {
+      display: block;
+      .ant-card {
+        margin-bottom: 20px;
+      }
+    }
+  }
 }

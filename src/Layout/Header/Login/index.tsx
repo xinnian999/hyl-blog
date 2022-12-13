@@ -7,13 +7,22 @@ import {
   Alert,
   Upload,
   Divider,
+  Space,
+  Avatar,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import md5 from "js-md5";
 import cookie from "js-cookie";
-import { getRandom } from "@/utils";
-import { useSetState, useRequest, useBoolean, useRedux } from "@/hooks";
+import { clearLogin, getRandom } from "@/utils";
+import {
+  useSetState,
+  useRequest,
+  useBoolean,
+  useRedux,
+  useWindowSize,
+} from "@/hooks";
 import "./style.scss";
+import { Popover } from "@arco-design/web-react";
 
 const avatar = [
   "img_1.jpeg",
@@ -35,9 +44,13 @@ export default function Login() {
 
   const [isRegister, , offRegister, toggleRegister] = useBoolean(false);
 
-  const { dispatchAll } = useRedux();
+  const { store, dispatchAll } = useRedux();
 
-  const [, , runOnLogin] = useRequest("/user/login", {
+  const { width } = useWindowSize();
+
+  const { username, headPicture } = store.userInfo;
+
+  const [, runOnLogin] = useRequest("/user/login", {
     method: "post",
     manual: true,
     progress: true,
@@ -64,7 +77,7 @@ export default function Login() {
     },
   });
 
-  const [, , runOnRegister] = useRequest("/user/register", {
+  const [, runOnRegister] = useRequest("/user/register", {
     method: "post",
     manual: true,
     progress: true,
@@ -128,16 +141,40 @@ export default function Login() {
     );
   };
 
+  const renderUserMenus = (
+    <Space direction="vertical">
+      <div className="username">昵称 : {username}</div>
+
+      <Button onClick={clearLogin}>退出登录</Button>
+    </Space>
+  );
+
   return (
     <>
-      <Button type="primary" ghost onClick={onModal}>
-        登陆
-      </Button>
+      {store.loginState ? (
+        <Popover content={renderUserMenus} trigger="hover">
+          <Avatar
+            src={headPicture}
+            className="userAvatar"
+            size={width > 800 ? 35 : 30}
+          />
+        </Popover>
+      ) : (
+        <Avatar
+          className="userAvatar"
+          size={width > 800 ? 40 : 30}
+          onClick={onModal}
+        >
+          登录
+        </Avatar>
+      )}
+
       <Modal
         title={isRegister ? "注册" : "登陆"}
         visible={modalVisible}
         onCancel={offModal}
         footer={null}
+        destroyOnClose
       >
         <Form
           name="basic"

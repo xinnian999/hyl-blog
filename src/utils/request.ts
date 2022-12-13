@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Modal } from "antd";
+import { notification } from "antd";
 import cookie from "js-cookie";
 import { store } from "@/store";
 import Nprogress from "nprogress";
@@ -25,9 +25,9 @@ request.interceptors.response.use(
     Nprogress.done();
 
     if (res.data.message) {
-      Modal.warning({
-        title: "接口错误",
-        content: res.data.message,
+      notification.error({
+        message: "接口错误",
+        description: res.data.message,
       });
     }
 
@@ -45,27 +45,34 @@ request.interceptors.response.use(
     const { status } = err.response;
     switch (status) {
       case 504:
-        Modal.error({
-          title: status,
-          content: "请求超时",
+        notification.error({
+          message: status,
+          description: "请求超时",
+        });
+
+        break;
+      case 502:
+        notification.error({
+          message: status,
+          description: "后端服务挂了",
         });
         break;
       case 500:
-        Modal.error({
-          title: status,
-          content: "请求接口异常",
+        notification.error({
+          message: status,
+          description: "请求接口异常",
         });
         break;
       case 404:
-        Modal.error({
-          title: status,
-          content: "请求接口不存在",
+        notification.error({
+          message: status,
+          description: "请求接口不存在",
         });
         break;
       default:
-        Modal.error({
-          title: status,
-          content: "请求接口失败",
+        notification.error({
+          message: status,
+          description: "请求接口失败",
         });
         break;
     }

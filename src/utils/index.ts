@@ -7,6 +7,7 @@ import getDecode from "./getDecode";
 import debounce from "./debounce";
 import copy from "./copy";
 import batchCopyDom from "./batchCopyDom";
+import stopWriteLoading from "./stopWriteLoading";
 
 function isFunction(obj: any): boolean {
   return typeof obj === "function";
@@ -38,4 +39,5 @@ export {
   copy,
   batchCopyDom,
   globalConfig,
+  stopWriteLoading,
 };

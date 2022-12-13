@@ -40,7 +40,9 @@ class Index extends Component<isProps, isState> {
       <div id="file">
         <Title>
           居然用了
-          {`${parseInt(this.diff / 365)}年${parseInt(this.diff / 30)}个月`}
+          {`${parseInt(this.diff / 365 + "")}年${parseInt(
+            this.diff / 30 + ""
+          )}个月`}
           才写了{count}篇文章
         </Title>
         <Divider orientation="left" className="year">

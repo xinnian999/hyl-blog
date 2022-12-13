@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Divider, Space, Drawer } from "antd";
+import { Divider, Space, Drawer, Skeleton } from "antd";
 import { Anchor } from "@arco-design/web-react";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
@@ -7,9 +7,8 @@ import { useParams } from "react-router-dom";
 import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { request, Time, changeBlogTitle } from "@/utils";
-import { useSetState, useMount, useWindowSize, useRequest } from "@/hooks";
-import { Comment, Loading } from "@/components";
-import Markdown from "./Markdown";
+import { useSetState, useWindowSize, useRequest } from "@/hooks";
+import { Comment, Markdown } from "@/components";
 import "./style.scss";
 
 interface State {
@@ -40,12 +39,12 @@ function ArticleDetail() {
     setState,
   ] = useSetState<State>({
     content: "",
-    title: "",
-    createTime: "",
+    title: "这是一个文章的标题",
+    createTime: Time.getStandardTime(new Date()),
     comments: [],
     anchorList: [],
     visits: 0,
-    updateTime: "",
+    updateTime: Time.getStandardTime(new Date()),
     category: "",
     targetOffset: undefined,
     aboutArticle: [],
@@ -60,36 +59,38 @@ function ArticleDetail() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [, , runGetAbout] = useRequest("/article/query", {
-    method: "get",
-    manual: true,
-    progress: false,
-  });
-
-  useMount(() => {
-    request
-      .get("/article/queryDetail", { params: { id: params.id } })
-      .then((res) => res.data[0])
-      .then((data) => {
-        setState(data);
-        // 设置页面标题
-        changeBlogTitle("", data.title);
-        // 文章阅读量+1
-        setTimeout(() => {
-          request.put("/article/visit", { id: params.id });
-        }, 3000);
-        //查询相关文章
-        runGetAbout({
-          params: {
-            pageNum: 1,
-            pageSize: 5,
-            filters: { publish: 1, category: data.category },
-            orderBys: "topping desc,id desc",
-          },
-        }).then((res) => {
-          setState({ aboutArticle: res.data });
+  useRequest("/article/queryDetail", {
+    params: { id: params.id },
+    onSuccess: (res) => {
+      const [data] = res.data;
+      setState(data);
+      // 设置页面标题
+      changeBlogTitle("", data.title);
+      // 文章阅读量+1
+      setTimeout(() => {
+        request.put("/article/visit", { id: params.id });
+      }, 3000);
+      //查询相关文章
+      runGetAbout({
+        params: {
+          pageNum: 1,
+          pageSize: 6,
+          filters: { publish: 1, category: data.category },
+          orderBys: "topping desc,id desc",
+        },
+      }).then((res) => {
+        setState({
+          aboutArticle: res.data.filter(
+            (item) => item.id !== Number(params.id)
+          ),
         });
       });
+    },
+  });
+
+  const [, runGetAbout] = useRequest("/article/query", {
+    manual: true,
+    progress: false,
   });
 
   useEffect(() => {
@@ -145,19 +146,21 @@ function ArticleDetail() {
           <CheckSquareOutlined /> 相关阅读
         </div>
         <Divider></Divider>
-        {aboutArticle.map(({ title, visits, comments, id }) => (
-          <div className="aboutArticle-item" key={title}>
-            <div
-              className="aboutArticle-item-title"
-              onClick={() => window.open(`/article/${id}`, "_self")}
-            >
-              {title}
+        <div className="aboutArticle">
+          {aboutArticle.map(({ title, visits, comments, id }) => (
+            <div className="aboutArticle-item" key={title}>
+              <div
+                className="aboutArticle-item-title"
+                onClick={() => window.open(`/article/${id}`, "_self")}
+              >
+                {title}
+              </div>
+              <div className="aboutArticle-item-info">
+                {comments}评论 | {visits}阅读
+              </div>
             </div>
-            <div className="aboutArticle-item-info">
-              {comments}评论 | {visits}阅读
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     ),
     [aboutArticle]
@@ -177,11 +180,13 @@ function ArticleDetail() {
             <small>作者：心念 </small>
             <small>阅读量：{visits}</small>
             <small className="updateTime">
-              更新于 {new Time(updateTime).getStandardTime()}
+              更新于 {Time.getStandardTime(updateTime)}
             </small>
           </Space>
         </Divider>
-        {content ? <Markdown content={content} ref={mdRef} /> : <Loading />}
+        <Skeleton loading={!content} paragraph={{ rows: 30 }}>
+          <Markdown content={content} ref={mdRef} />
+        </Skeleton>
 
         <Comment articleId={params.id} title="评论区" btnName="提交评论" />
       </div>

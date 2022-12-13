@@ -88,18 +88,21 @@
       padding-top: 20px;
       background-color: #fff;
       border-radius: 0 0 10px 10px;
-
-      li {
+      &-skeleton {
+        // width: 100%;
+        margin-bottom: 5px;
+      }
+      &-item {
         position: relative;
         height: 40px;
         line-height: 39px;
         position: relative;
         z-index: 1;
-
+        margin-bottom: 2px;
+        padding: 0 20px;
         div {
           display: block;
           margin: 0 30px;
-          padding: 0 20px;
           height: 39px;
           border-bottom: 1px solid #f8f9f7;
           text-decoration: none;
@@ -137,7 +140,12 @@
       padding: 10px;
       padding-top: 1px;
       border-radius: 10px;
+      font-size: 14px;
 
+      &-item {
+        width: 100%;
+        margin-bottom: 2px;
+      }
       li {
         position: relative;
         padding: 5px;

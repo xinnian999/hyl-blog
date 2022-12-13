@@ -55,6 +55,7 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "jparticles": "^3.4.0",
+    "jquery": "^3.6.1",
     "js-cookie": "^3.0.1",
     "js-md5": "^0.7.3",
     "jsonwebtoken": "^8.5.1",
@@ -114,6 +115,9 @@
       "react/jsx-no-undef": 0,
       "react-hooks/exhaustive-deps": 0,
       "jsx-a11y/alt-text": 0
+    },
+    "globals": {
+      "wx": true
     }
   },
   "browserslist": {

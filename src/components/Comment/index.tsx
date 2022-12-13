@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import { Divider, List, Alert } from "antd";
-import { useSetState, useMount } from "@/hooks";
-import { request } from "@/utils";
+import { useRequest } from "@/hooks";
 import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
@@ -14,25 +13,13 @@ interface comment {
 }
 
 function Index({ articleId, title, btnName, hasAnimation }: comment) {
-  const [{ commentData }, setState] = useSetState({
-    commentData: [],
+  const [commentData, run] = useRequest("/comment/query", {
+    params: {
+      articleId,
+    },
   });
 
   const { loginState } = useSelector((state: any) => state);
-
-  const getCommentData = () => {
-    request
-      .get("/comment/query", {
-        params: {
-          articleId,
-        },
-      })
-      .then((res: any) => {
-        setState({ commentData: res.data });
-      });
-  };
-
-  useMount(() => getCommentData());
 
   const currentCommentData = commentData.filter(
     (item: any) => item.reply_id === 0 || !item.reply_id
@@ -48,7 +35,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
     return (
       <Reply
         commentItem={props}
-        refresh={getCommentData}
+        refresh={run}
         replyData={replyData}
         hasAnimation={hasAnimation}
       />
@@ -62,7 +49,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
         <Editor
           btnName={btnName}
           articleId={articleId}
-          refresh={getCommentData}
+          refresh={run}
           hasAnimation={hasAnimation}
         />
       ) : (

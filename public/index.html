@@ -7,6 +7,9 @@
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="心念，个人网站，记录个人成长" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link href="css/animate.css" rel="stylesheet" />
+    <link href="css/loading.css" rel="stylesheet" />
+
     <title>心念の空间站</title>
     <!-- require cdn assets css -->
     <% for (var i in htmlWebpackPlugin.options.files &&
@@ -18,10 +21,22 @@
     <% } %>
   </head>
 
-  <body>
+  <body id="light">
     <noscript>javascript 执行失败 ！</noscript>
+    <div id="loading-box">
+      <div class="loading">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
     <div id="root"></div>
-    <!-- require cdn assets js -->
+    <!-- <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="js/jquery.lettering.js"></script>
+    <script src="js/jquery.textillate.js"></script> -->
+
     <% for (var i in htmlWebpackPlugin.options.files &&
     htmlWebpackPlugin.options.files.js) { %>
     <script

@@ -1,4 +1,4 @@
-import { Timeline, Tag as AntdTag } from "antd";
+import { Timeline, Tag as AntdTag, Card } from "antd";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
 import { PageCenter, Title, Tag, Info, Section, Icon } from "@/components";
 import { Time } from "@/utils";
@@ -16,7 +16,7 @@ const About = () => {
 
   useMount(() => {
     const t = setInterval(() => {
-      setState({ onTime: new Time(startTime).getDuration() });
+      setState({ onTime: Time.getDuration(startTime) });
     }, 1000);
 
     return () => clearInterval(t);
@@ -28,7 +28,7 @@ const About = () => {
         <div id="about">
           <Title>关于我</Title>
           <Info>
-            99年来到这个世界，坐标北京，河北唐山人
+            99年来到这个世界，河北唐山人
             <br />
             国内北大清华等重点院校落榜生，著名电视剧、电影观众
             <br />
@@ -68,10 +68,10 @@ const About = () => {
           <Title>关于本站</Title>
           <Info>
             <Section>
-              想成为一个优秀的前端不能只会前端，对后端及其他架构都应该有一定了解。
+              博主是一个自制力比较差的人，为了养成学习的习惯而码出这套博客，顺便也为了消磨一下自己平时闲暇的时间（疫情隔离在家憋疯的我）。现在前端技术越来越五花八门，如果为了学而去学，对我来说效率是很低的。而码出一个自己的网站，是可以学到很多不同方面很多东西（不止前端），并且越来越有成就感，感觉就像亲手构造了一个自己的世界😄。
             </Section>
             <Section>
-              写这个博客的目的就是为了让自己多学习一些前端以外的知识，顺便也为了消磨一下自己平时闲暇的时间（疫情隔离在家憋疯的我）。但短时间内也不容易掌握后端等语言，好在有node这个利器，可以用我擅长的js码出一套后端系统。也慢慢学会了用服务器，域名，nginx等上线网站。
+              博客主要写一些前端的技术文章，以及记录自己踩过的坑，但更多只是写给自己看的，如果有不懂之处和可以改进的地方欢迎留言
             </Section>
             <Section>
               <b>
@@ -79,7 +79,7 @@ const About = () => {
               </b>
             </Section>
             <br />
-            本站结构:
+            本站结构：
             <br />
             前端 ： <Tag>react18.2</Tag>
             <br />
@@ -89,10 +89,10 @@ const About = () => {
             服务器 ：<Tag>腾讯云CentOS</Tag>
             <br />
             <br />
-            <Section>
+            <div>
               <b>网站已勉强运行：</b>
               <Tag>{onTime}</Tag>
-            </Section>
+            </div>
           </Info>
 
           <Title>更新日志</Title>
@@ -101,7 +101,7 @@ const About = () => {
               {updateLog.map(({ content, creatTime }) => (
                 <Timeline.Item key={creatTime}>
                   <AntdTag className="time">
-                    {new Time(creatTime).getYMDTime()}
+                    {Time.getYMDTime(creatTime)}
                   </AntdTag>
                   <div className="content">{content}</div>
                 </Timeline.Item>
@@ -122,6 +122,19 @@ const About = () => {
             <br />
             用户邮箱仅作回复消息用，不对外使用。
             <br />
+          </Info>
+
+          <Title>其他</Title>
+          <Info className="other">
+            <Card title="我的微信">
+              <img src={require("@/assets/img/about/weixin.jpg")} />
+            </Card>
+            <Card title="我的小程序">
+              <img src={require("@/assets/img/about/xiaochengxu.jpg")} />
+            </Card>
+            <Card title="我的公众号">
+              <img src={require("@/assets/img/about/gongzhonghao.jpg")} />
+            </Card>
           </Info>
         </div>
       </PageCenter>

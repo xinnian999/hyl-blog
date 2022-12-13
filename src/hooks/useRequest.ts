@@ -5,55 +5,97 @@ import { request } from "@/utils";
 import useMount from "./useMount";
 
 type toolConfig = {
-  method?: string;
+  method?: "get" | "post" | "put" | "delete";
   data?: object;
   params?: object;
   manual?: boolean;
-  progress: boolean;
+  progress?: boolean;
   onSuccess?: (res: any) => void;
+  onFail?: (res: any) => void;
+  mockLoadingCount?: number;
+  cache?: boolean;
 };
 
-type isRunProps = {
-  params?: any;
-  data?: any;
+type isRun = (props?: toolConfig) => Promise<any>;
+
+type useRequestResult = [any[], isRun, (data: any) => void];
+
+type useStateResult = [any[], (data?: any) => void];
+
+const defaultConfig: toolConfig = {
+  method: "get",
+  progress: true,
+  onSuccess: undefined,
+  onFail: undefined,
+  data: {},
+  manual: false,
+  params: {},
+  mockLoadingCount: undefined,
+  cache: false,
 };
-
-type isRun = (props?: isRunProps) => Promise<any>;
-
-type SetResult = (state: any) => void;
-
-type useRequestResult = [any[], SetResult, isRun];
 
 //只传入url，默认get请求
-//默认在组件挂载完成时自动发一次请求，可设置config的manual为true取消自动
-const useRequest = (
+//默认在组件挂载完成时自动发一次请求，可设置config的manual为 true取消自动
+//默认开启progress顶部加载进度条，可设置config的progress为 false
+//默认关闭缓存数据，可设置config的cacheData为 true开启
+function useRequest(
   url: string,
-  config: toolConfig = { method: "get", progress: true }
-): useRequestResult => {
-  const [result, setResult] = useState([]);
+  newConfig: toolConfig = defaultConfig
+): useRequestResult {
+  const config = { ...defaultConfig, ...newConfig };
 
-  const thenFn = (res: any) => {
-    if (res.status === 0) {
-      setResult(res.data);
-      return res;
+  const [result, setResult]: useStateResult = useState([]);
+  const [data, setData]: useStateResult = useState([]);
+
+  const run: isRun = async (runProps) => {
+    //重复请求的新配置合并
+    if (runProps) {
+      Object.assign(config, runProps);
     }
-  };
 
-  const run: isRun = (runProps) => {
+    // 是否开启顶部加载进度条
     if (config.progress) {
-      // 开启顶部加载进度条
       Nprogress.start();
     }
 
-    if (!config) {
-      return request(url).then(thenFn);
+    //是否mock骨架屏加载数据
+    if (config.mockLoadingCount) {
+      const mockData = [...new Array(config.mockLoadingCount)].map(
+        (item, index) => ({
+          loading: true,
+          id: `${index}-key`,
+        })
+      );
+      setResult(data.concat(mockData));
     }
 
-    const options = { url, ...pick(config, ["method", "data", "params"]) };
-    if (runProps) {
-      Object.assign(options, runProps);
+    //合并axios需要的请求配置
+    const options = {
+      url,
+      ...pick(config, ["method", "data", "params"]),
+    };
+
+    try {
+      const res = await request(options);
+      const newData = config.cache ? data.concat(res.data) : res.data;
+      setResult(newData);
+      setData(newData);
+
+      //调用成功的回调函数
+      if (config.onSuccess) config.onSuccess(res);
+
+      return res;
+    } catch (e) {
+      //调用失败的回调函数
+      if (config.onFail) config.onFail(e);
+
+      return e;
     }
-    return request(options).then(config.onSuccess || thenFn);
+  };
+
+  const set = (data: any) => {
+    setResult(data);
+    setData(data);
   };
 
   useMount(() => {
@@ -62,7 +104,7 @@ const useRequest = (
     }
   });
 
-  return [result, setResult, run];
-};
+  return [result, run, set];
+}
 
 export default useRequest;

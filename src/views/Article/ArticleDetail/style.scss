@@ -22,6 +22,7 @@
         position: absolute;
         right: 0;
         top: 150%;
+        width: 100%;
       }
     }
     border-radius: 10px;
@@ -34,6 +35,9 @@
     .title {
       text-align: center;
       font-size: 25px;
+      @media screen and (max-width: 800px) {
+        width: 80%;
+      }
     }
 
     .article-info {
@@ -58,7 +62,7 @@
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 20px;
-
+      font-size: 15px;
       .catalogue {
         font-size: 18px;
       }
@@ -67,19 +71,12 @@
       }
 
       .anchorList {
-        max-height: 400px;
-        .oneAnchor {
-          font-weight: bold;
-        }
+        max-height: 30vh;
+      }
 
-        .twoAnchor {
-          a {
-            font-size: 13px;
-            text-indent: 1em;
-          }
-
-          color: #fff;
-        }
+      .aboutArticle {
+        max-height: 30vh;
+        overflow: auto;
       }
 
       .aboutArticle-item {
@@ -102,6 +99,19 @@
       }
     }
   }
+}
+
+.oneAnchor {
+  font-weight: bold;
+}
+
+.twoAnchor {
+  a {
+    font-size: 13px;
+    text-indent: 1em;
+  }
+
+  color: #fff;
 }
 
 .anchorDrawer {

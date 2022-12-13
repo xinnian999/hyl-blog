@@ -1,5 +1,17 @@
 @import url("./theme.css");
 
+@font-face {
+  font-family: "汉仪霹雳体简";
+  src: url("~@/assets/font/汉仪霹雳体简.ttf");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "font";
+  src: url("~@/assets/font/HarmonyOS_Sans_SC_Medium.subset.woff2");
+  font-display: swap;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,16 +26,19 @@ a {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: auto;
+  height: auto !important;
+  background-color: #374140 !important;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: overlay;
 }
 
 #root {
-  font-size: 14px;
+  font-size: 16px;
+  font-family: "font";
+
   @media screen and (max-width: 500px) {
     font-size: 19px;
   }

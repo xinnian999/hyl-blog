@@ -1,6 +1,6 @@
-import { useEffect, Suspense, useMemo, useCallback } from "react";
-import { NavLink, Route, Routes, useLocation } from "react-router-dom";
-import { BackTop, ConfigProvider, Modal } from "antd";
+import { useEffect, Suspense, useCallback, Fragment } from "react";
+import { Route, Routes, useLocation } from "react-router-dom";
+import { BackTop, ConfigProvider } from "antd";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
 import cookie from "js-cookie";
@@ -10,10 +10,7 @@ import { changeBlogTitle, getDecode, globalConfig } from "@/utils";
 import { useRequest, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
-
-const { confirm } = Modal;
-
-let music: any;
+import canvasBg from "./canvas";
 
 function Layout() {
   const location = useLocation();
@@ -33,7 +30,7 @@ function Layout() {
         url: `${globalConfig.remoteStaticUrl}/music/${item.url}`,
       }));
 
-      music = new APlayer({
+      new APlayer({
         container: document.getElementById("aplayer"),
         audio: data, // 音乐信息
         fixed: true, // 开启吸底模式
@@ -41,30 +38,8 @@ function Layout() {
         autoplay: store.autoplay, // 开启自动播放
         preload: "auto", // 自动预加载歌曲
         loop: "all", // 播放循环模式、all全部循环 one单曲循环 none只播放一次
-        order: "list", //  播放模式，list列表播放, random随机播放
+        order: "random", //  播放模式，list列表播放, random随机播放
       });
-
-      if (store.autoplay === undefined) {
-        confirm({
-          content: "播放背景音乐吗？(可在左下角操控)",
-          okText: "播放",
-          cancelText: "不播放",
-          onOk() {
-            music.play();
-            dispatch({
-              type: "CHANGE_AUTOPLAY",
-              payload: true,
-            });
-          },
-          onCancel() {
-            music.pause();
-            dispatch({
-              type: "CHANGE_AUTOPLAY",
-              payload: false,
-            });
-          },
-        });
-      }
     },
   });
 
@@ -82,6 +57,10 @@ function Layout() {
         primaryColor: store.theme.color,
       },
     });
+
+    if (!store.simple) {
+      canvasBg(store.theme.bg);
+    }
   }, [store.theme]);
 
   useEffect(() => {
@@ -109,38 +88,33 @@ function Layout() {
     }
   }, []);
 
-  const renderMenus = useMemo(
-    () =>
-      menus.map((item: any) => {
-        const { title, path, search } = item;
-        if (title) {
-          return (
-            <NavLink key={title} to={{ pathname: path, search }}>
-              <li>{title}</li>
-            </NavLink>
-          );
-        }
-        return null;
-      }),
-    []
-  );
-
   const renderRoutes = useCallback(
     (menu: any) =>
       menu.map(({ path, children, index, title, ...item }: any) => {
         return (
-          <Route
-            path={path}
-            key={path || title}
-            index={index}
-            element={
-              <Suspense fallback={<Loading />}>
-                <item.component twoRouter={children} />
-              </Suspense>
-            }
-          >
-            {children && renderRoutes(children)}
-          </Route>
+          <Fragment key={path}>
+            {index && (
+              <Route
+                index={true}
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <item.component twoRouter={children} />
+                  </Suspense>
+                }
+              />
+            )}
+            <Route
+              path={path}
+              key={path}
+              element={
+                <Suspense fallback={<Loading />}>
+                  <item.component twoRouter={children} />
+                </Suspense>
+              }
+            >
+              {children && renderRoutes(children)}
+            </Route>
+          </Fragment>
         );
       }),
     []
@@ -148,15 +122,13 @@ function Layout() {
 
   const isHome = location.pathname === "/home";
 
-  const bg = {
-    backgroundImage: `url(${require(`@/assets/img/bg/${store.theme.bg}`)})`,
-  };
-
   return (
     <>
-      <div id="backgroundImg" style={bg} />
+      <div id="backgroundImg">
+        <canvas id="canvasBg"></canvas>
+      </div>
       <div id="aplayer"></div>
-      {!isHome && <Header menus={renderMenus} />}
+      {!isHome && <Header />}
       <main id="main" className={!isHome ? "isHome" : ""}>
         <Routes>
           {renderRoutes(menus)}

@@ -4,8 +4,8 @@ import Comment from "./Comment";
 import Loading from "./Loading";
 import TimeBar from "./TimeBar";
 import Banner from "./Banner";
-import Card from "./Card";
 import Copy from "./Copy";
+import Markdown from "./Markdown";
 import {
   PageCenter,
   Bubble,
@@ -34,8 +34,8 @@ export {
   Tag,
   Info,
   Section,
-  Card,
   Redirect,
   Copy,
   OverPack,
+  Markdown,
 };
