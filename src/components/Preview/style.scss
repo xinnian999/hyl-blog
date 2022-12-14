@@ -1,0 +1,12 @@
+.preview-container {
+  position: relative;
+  .preview {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 12px;
+    padding: 0 2px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+}

@@ -3,16 +3,32 @@
   border-radius: 5px;
   overflow: hidden;
   padding: 10px;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+
+  columns: 4;
+
+  @media screen and (max-width: 1200px) {
+    column-count: 3;
+  }
+
+  @media screen and (max-width: 950px) {
+    column-count: 2;
+  }
+
+  @media screen and (max-width: 650px) {
+    column-count: 1;
+  }
+
   p {
     font-size: 15px;
     font-weight: bold;
   }
   &-item {
-    width: 24%;
-    min-height: 200px;
+    display: inline-block;
+    vertical-align: top;
+    width: 300px;
+    @media screen and (max-width: 650px) {
+      width: 100%;
+    }
     margin-bottom: 15px;
     padding: 5px;
     text-align: center;

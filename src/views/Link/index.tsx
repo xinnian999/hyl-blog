@@ -30,7 +30,6 @@ const yaml = `- name: 心念个人博客
 export default function Link() {
   const [data] = useRequest("/link/query", {
     mockLoadingCount: 8,
-    progress: false,
     onFail(res) {
       console.log(res);
     },

@@ -16,6 +16,7 @@ import {
 } from "./StyleComponent";
 import { withRouter, withProgress, Error } from "./Hoc";
 import Redirect from "./Redirect";
+import Preview from "./Preview";
 
 const OverPack: any = ScrollAnim.OverPack;
 
@@ -38,4 +39,5 @@ export {
   Copy,
   OverPack,
   Markdown,
+  Preview,
 };
