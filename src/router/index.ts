@@ -55,7 +55,7 @@ const route = [
     component: lazy(() => import("@/views/Message")),
   },
   {
-    title: "资源",
+    title: "作品",
     path: "/resource",
     icon: "icon-ziyuan",
     component: lazy(() => import("@/views/Resource")),

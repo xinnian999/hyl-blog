@@ -10,7 +10,6 @@ interface CopyProps {
 export default function Copy({ children, content }: CopyProps) {
   return (
     <div className="copy-container">
-      {" "}
       <button className="copy" onClick={() => copy(content)}>
         <CopyOutlined />
       </button>
