@@ -63,6 +63,8 @@ function ArticleDetail() {
     params: { id: params.id },
     onSuccess: (res) => {
       const [data] = res.data;
+      console.log(data.content);
+      
       setState(data);
       // 设置页面标题
       changeBlogTitle("", data.title);
