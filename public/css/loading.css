@@ -11,6 +11,7 @@
   width: 80px;
   height: 40px;
   margin: auto;
+  text-align: center;
 }
 .loading span{
   display: inline-block;

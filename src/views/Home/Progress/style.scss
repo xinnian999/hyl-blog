@@ -5,7 +5,9 @@
   .progress {
     margin: 0 auto;
     width: 40%;
-
+    @media screen and (max-width: 600px) {
+      width: 80%;
+    }
     .gress {
       width: 100%;
     }
