@@ -12,8 +12,6 @@ import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
 
-const { confirm } = Modal;
-
 function Layout() {
   const location = useLocation();
 
