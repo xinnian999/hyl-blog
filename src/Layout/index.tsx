@@ -1,6 +1,6 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { BackTop, ConfigProvider, Modal } from "antd";
+import { BackTop, ConfigProvider } from "antd";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
 import cookie from "js-cookie";

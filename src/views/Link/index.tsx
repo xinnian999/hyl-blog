@@ -17,12 +17,12 @@ const tags = [
   { color: "red", icon: <CloseOutlined />, con: "红标报毒" },
 ];
 
-const info = `名称：心念个人博客
+const info = `名称：心念の空间站
 网址：https://www.hyl999.co
 图标：https://www.hyl999.co/favicon.ico
 描述：犹一心一意 , 念念不忘`;
 
-const yaml = `- name: 心念个人博客
+const yaml = `- name: 心念の空间站
   link: https://www.hyl999.co
   avatar: https://www.hyl999.co/favicon.ico
   descr: 犹一心一意 , 念念不忘`;
