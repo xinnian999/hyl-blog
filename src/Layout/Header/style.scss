@@ -2,6 +2,7 @@ header {
   a {
     color: var(--color);
   }
+  overflow: hidden;
   position: fixed;
   width: 100%;
   background-color: var(--head-background-color);
