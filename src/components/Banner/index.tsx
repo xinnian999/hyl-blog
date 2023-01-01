@@ -16,7 +16,7 @@ function Index({ title = "标题", autograph = "", twoRouter }: isBanner) {
   const pathnameArr = location.pathname.split("/");
   const defaultValue =
     pathnameArr.length > 2
-      ? pathnameArr.at(-1)
+      ? pathnameArr[pathnameArr.length - 1]
       : twoRouter?.find((item) => item.index).path;
 
   return (

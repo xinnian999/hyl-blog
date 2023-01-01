@@ -33,4 +33,7 @@ export const ChangeBar = styled.div`
   position: absolute;
   bottom: 15px;
   right: 20%;
+  @media screen and (max-width: 600px) {
+    right: 10%;
+  }
 `;

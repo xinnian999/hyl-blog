@@ -44,10 +44,16 @@ footer {
 
   .beianNumber {
     margin-right: 15px;
-    display: inline-block;
-    text-align: left;
     img {
       float: left;
     }
+  }
+
+  @media screen and (max-width: 600px) {
+    .icp,
+    .beianNumber {
+      display: block;
+    }
+    
   }
 }

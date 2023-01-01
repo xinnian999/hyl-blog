@@ -128,7 +128,7 @@ function Layout() {
         <canvas id="canvasBg"></canvas>
       </div>
       <div id="aplayer"></div>
-      {!isHome && <Header />}
+      <Header style={{ height: isHome && 0 }} />
       <main id="main" className={!isHome ? "isHome" : ""}>
         <Routes>
           {renderRoutes(menus)}

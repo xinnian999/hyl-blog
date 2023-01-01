@@ -37,7 +37,7 @@ const reducer = (
     case "CHANGE_AUTOPLAY":
       return { ...state, autoplay: !state.autoplay };
     case "CHANGE_SIMPLE":
-      return { ...state, simple: !state.simple };
+      return { ...state, simple: payload };
     default:
       return state;
   }

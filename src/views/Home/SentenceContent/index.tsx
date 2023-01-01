@@ -59,7 +59,6 @@ function SentenceContent() {
           <Button
             type="primary"
             shape="round"
-            // ghost
             className="animate__animated animate__fadeInLeft"
             onClick={querySentence}
           >
