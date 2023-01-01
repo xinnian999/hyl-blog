@@ -1,11 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { Popover } from "@arco-design/web-react";
 import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { Icon } from "@/components";
 import menus from "@/router";
 import { useWindowSize, useRedux, useBoolean, useMount } from "@/hooks";
 import Login from "./Login";
-import { Tooltip, Modal, Switch, Button } from "antd";
+import { Tooltip, Modal, Switch, Button, Popover } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
 

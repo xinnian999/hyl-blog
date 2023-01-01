@@ -2,21 +2,19 @@ header {
   a {
     color: var(--color);
   }
-  overflow: hidden;
   position: fixed;
   width: 100%;
   background-color: var(--head-background-color);
-  border-bottom: 1px solid #e8e9e7;
   z-index: 10;
   width: 100%;
   height: 60px;
   margin: 0 auto;
-  padding: 0 15px;
   text-align: center;
   #iphone-menus {
     font-size: 20px;
     cursor: pointer;
     display: none;
+    padding: 0 20px;
     span {
       margin: auto;
     }
@@ -85,7 +83,7 @@ header {
 
   .header-action {
     position: absolute;
-    right: 25px;
+    right: 20px;
     top: 0;
     height: 100%;
     line-height: 60px;
@@ -195,7 +193,7 @@ header {
     #iphone-menus {
       display: inline;
       position: absolute;
-      left: 15px;
+      left: 0;
       top: 50%;
       transform: translateY(-50%);
     }
