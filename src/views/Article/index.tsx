@@ -66,6 +66,7 @@ function Article() {
   const [categoryData] = useRequest("/category/query", {
     method: "get",
     mockLoadingCount: 7,
+    params: {},
   });
 
   const renderHotArticle = useMemo(
