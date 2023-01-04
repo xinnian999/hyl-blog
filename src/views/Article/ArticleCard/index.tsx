@@ -52,7 +52,7 @@ function ArticleCard(props: any) {
         </div>
         <div className="toolbar">
           <TagOutlined />{" "}
-          {category.map((item: string) => (
+          {category.split(",").map((item: string) => (
             <Tag color="pink" key={item}>
               {item}
             </Tag>

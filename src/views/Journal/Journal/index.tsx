@@ -6,7 +6,11 @@ import { globalConfig, Time } from "@/utils";
 import "./style.scss";
 
 const First = () => {
-  const [data] = useRequest("/mood/query");
+  const [data] = useRequest("/mood/query", {
+    params: {
+      orderBys: "id desc",
+    },
+  });
 
   const { width } = useWindowSize();
 

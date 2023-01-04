@@ -10,7 +10,11 @@ const About = () => {
     onTime: " 0 年 0 个月 0 天 0 小时 0 分种 0 秒",
   });
 
-  const [updateLog] = useRequest("/updateLog/query");
+  const [updateLog] = useRequest("/updateLog/query", {
+    params: {
+      orderBys: "id desc",
+    },
+  });
 
   const startTime = Date.parse("2022/6/1 10:00");
 
@@ -98,10 +102,10 @@ const About = () => {
           <Title>更新日志</Title>
           <Info className="updateLog">
             <Timeline>
-              {updateLog.map(({ content, creatTime }) => (
-                <Timeline.Item key={creatTime}>
+              {updateLog.map(({ content, createTime }) => (
+                <Timeline.Item key={createTime}>
                   <AntdTag className="time">
-                    {Time.getYMDTime(creatTime)}
+                    {Time.getYMDTime(createTime)}
                   </AntdTag>
                   <div className="content">{content}</div>
                 </Timeline.Item>
