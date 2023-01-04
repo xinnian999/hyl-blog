@@ -30,9 +30,6 @@ const yaml = `- name: 心念の空间站
 export default function Link() {
   const [data] = useRequest("/link/query", {
     mockLoadingCount: 8,
-    params: {
-      orderBys: "id desc",
-    },
     onFail(res) {
       console.log(res);
     },

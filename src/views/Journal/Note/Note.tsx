@@ -6,11 +6,7 @@ import { Preview } from "@/components";
 import QueueAnim from "rc-queue-anim";
 
 export default function Note() {
-  const [data] = useRequest("/note/query", {
-    params: {
-      orderBys: "id desc",
-    },
-  });
+  const [data] = useRequest("/note/query");
 
   return (
     <div className="note">

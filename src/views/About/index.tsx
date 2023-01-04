@@ -10,11 +10,7 @@ const About = () => {
     onTime: " 0 年 0 个月 0 天 0 小时 0 分种 0 秒",
   });
 
-  const [updateLog] = useRequest("/updateLog/query", {
-    params: {
-      orderBys: "id desc",
-    },
-  });
+  const [updateLog] = useRequest("/updateLog/query");
 
   const startTime = Date.parse("2022/6/1 10:00");
 

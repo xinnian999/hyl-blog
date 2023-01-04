@@ -16,6 +16,8 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
   const [commentData, run] = useRequest("/comment/query", {
     params: {
       articleId,
+      filters: { article_id: articleId },
+      orderBys: "id desc",
     },
   });
 

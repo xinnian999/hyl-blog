@@ -29,7 +29,8 @@ const defaultConfig: toolConfig = {
   onFail: undefined,
   data: {},
   manual: false,
-  params: {},
+  params: {    orderBys:
+    'id desc'},
   mockLoadingCount: undefined,
   cache: false,
 };
