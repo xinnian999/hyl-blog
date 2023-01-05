@@ -19,11 +19,9 @@ export default function Works() {
           key={id}
         >
           <Skeleton loading={loading} active>
-            <div className="content">
-              <div className="title">{name}</div>
-              <hr />
-              <div className="autograph">{autograph}</div>
-            </div>
+            <div className="title">{name}</div>
+            <hr />
+            <div className="autograph">{autograph}</div>
           </Skeleton>
         </div>
       );

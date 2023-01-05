@@ -18,20 +18,18 @@
     cursor: pointer;
     margin-bottom: 40px;
 
-    .content {
-      position: absolute;
-    }
     .title {
       font-size: 35px;
       font-weight: bold;
       padding-bottom: 5px;
-      letter-spacing: 10px;
+      letter-spacing: 5px;
       text-shadow: 1px 1px #fff;
     }
 
     hr {
       margin: 5px 0 10px;
-      border: 3px solid rgb(221, 49, 49);
+      height: 3px;
+      background-color: rgb(221, 49, 49);
       display: none;
     }
 
@@ -43,7 +41,6 @@
 
     &:hover {
       transform: scale(1.02);
-      // opacity: 0.9;
       box-shadow: 0 0 10px rgb(0 0 0 / 50%);
 
       .autograph,

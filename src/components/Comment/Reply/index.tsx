@@ -2,7 +2,7 @@ import { Comment, List, message } from "antd";
 import { useSelector } from "react-redux";
 import classnames from "classnames";
 import { useSetState } from "@/hooks";
-import { request } from "@/utils";
+import { request, httpTohttps } from "@/utils";
 import Editor from "../Editor";
 
 const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
@@ -76,6 +76,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
         {...commentItem}
         actions={renderAction(commentItem)}
         author={author(commentItem)}
+        avatar={httpTohttps(commentItem.avatar)}
         className="replyCon"
       >
         {replyData.length ? (
@@ -89,6 +90,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
                 content={`回复 ${props.reply_name} : ${props.content}`}
                 author={author(props)}
                 actions={renderAction(props)}
+                avatar={httpTohttps(props.avatar)}
                 className="itemList-item"
               />
             )}

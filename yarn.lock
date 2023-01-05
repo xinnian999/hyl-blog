@@ -6638,10 +6638,10 @@ jparticles@^3.4.0:
   resolved "https://registry.npmmirror.com/jparticles/-/jparticles-3.4.0.tgz"
   integrity sha512-95d9W2vkRTNZzg9wUONO9ir5xQYSjtBi0BU6mrQnCG61ckIzKRgt1aeQpRu93FHjgX+3XGRNTyo2HfQFOExdaQ==
 
-jquery@^3.6.1:
-  version "3.6.1"
-  resolved "https://registry.npmmirror.com/jquery/-/jquery-3.6.1.tgz#fab0408f8b45fc19f956205773b62b292c147a16"
-  integrity sha512-opJeO4nCucVnsjiXOE+/PcCgYw9Gwpvs/a6B1LL/lQhwWwpbVEVYDZ1FokFr8PRc7ghYlrFPuyHuiiDNTQxmcw==
+jquery@^1.9.1:
+  version "1.12.4"
+  resolved "https://registry.npmmirror.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+  integrity sha512-UEVp7PPK9xXYSk8xqXCJrkXnKZtlgWkd2GsAQbMRFK6S/ePU2JN5G2Zum8hIVjzR3CpdfSqdqAzId/xd4TJHeg==
 
 js-base64@^2.1.9:
   version "2.6.4"

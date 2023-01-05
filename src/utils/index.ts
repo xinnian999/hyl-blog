@@ -8,6 +8,7 @@ import debounce from "./debounce";
 import copy from "./copy";
 import batchCopyDom from "./batchCopyDom";
 import stopWriteLoading from "./stopWriteLoading";
+import httpTohttps from "./httpTohttps";
 
 function isFunction(obj: any): boolean {
   return typeof obj === "function";
@@ -40,4 +41,5 @@ export {
   batchCopyDom,
   globalConfig,
   stopWriteLoading,
+  httpTohttps
 };

@@ -1,3 +1,5 @@
+import jQuery from "jquery";
+
 (function ($) {
   function injector(t, splitter, klass, after) {
     var a = t.text().split(splitter),

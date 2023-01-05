@@ -38,7 +38,6 @@ export default function Editor({
   const { store, dispatch } = useRedux();
 
   const { userInfo } = store;
-  console.log(userInfo);
 
   const inputRef = useRef(null);
   const emailInputRef: any = useRef(null);
