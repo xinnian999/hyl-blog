@@ -60,7 +60,9 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
       <List
         dataSource={currentCommentData}
         header={
-          <span className="total">{`${currentCommentData.length}条评论`}</span>
+          <span className="total">{`${currentCommentData.length}条${
+            articleId === 99999 ? "留言" : "评论"
+          }`}</span>
         }
         itemLayout="horizontal"
         className="commentCon"
