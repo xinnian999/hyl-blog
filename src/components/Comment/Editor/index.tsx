@@ -1,10 +1,9 @@
-import { Button, Input, message, Space } from "antd";
+import { Button, Input, message, Modal, Space } from "antd";
 import { Popover } from "@arco-design/web-react";
 import { useRef } from "react";
-import { useSelector } from "react-redux";
 import classnames from "classnames";
 import { SmileOutlined } from "@ant-design/icons";
-import { useSetState } from "@/hooks";
+import { useBoolean, useRedux, useSetState } from "@/hooks";
 import { Time, request } from "@/utils";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
@@ -36,18 +35,25 @@ export default function Editor({
     loading: false,
   });
 
-  const { userInfo } = useSelector((state: any) => state);
+  const { store, dispatch } = useRedux();
+
+  const { userInfo } = store;
+  console.log(userInfo);
 
   const inputRef = useRef(null);
+  const emailInputRef: any = useRef(null);
+
+  const [open, on, off] = useBoolean(false);
 
   const onChangeValue = (e: any) => {
     setState({ value: e.target.value });
   };
 
   const onSubmit = () => {
+    const { headPicture, username, email, id: author_id } = userInfo;
+
     if (!value) return message.warning("评论内容不能为空");
 
-    const { headPicture, username, email, id: author_id } = userInfo;
     const data = {
       content: value,
       avatar: headPicture,
@@ -69,6 +75,20 @@ export default function Editor({
         message.success("发表评论成功");
       }
     });
+  };
+
+  const onOkEmail = () => {
+    const emailValue = emailInputRef.current.input.value;
+    const emailExp =
+      /[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
+    if (!emailExp.test(emailValue)) return message.error("邮箱格式不合法");
+
+    dispatch({
+      type: "CHANGE_USER_INFO",
+      payload: { email: emailValue },
+    });
+    off();
+    message.success("绑定邮箱成功");
   };
 
   const content = (
@@ -108,7 +128,13 @@ export default function Editor({
         <Button
           htmlType="submit"
           loading={loading}
-          onClick={onSubmit}
+          onClick={() => {
+            if (!userInfo.email) {
+              return on();
+            }
+
+            onSubmit();
+          }}
           type="primary"
         >
           {btnName}
@@ -119,6 +145,23 @@ export default function Editor({
           </Button>
         )}
       </Space>
+
+      <Modal
+        title="绑定邮箱"
+        visible={open}
+        onCancel={off}
+        okText="绑定"
+        keyboard={false}
+        closable={false}
+        footer={[
+          <Button key="submit" type="primary" onClick={onOkEmail}>
+            绑定
+          </Button>,
+        ]}
+      >
+        <div className="emailTip">请绑定邮箱，将用于接收回复通知的邮件</div>
+        <Input ref={emailInputRef} placeholder="请输入你的邮箱..." />
+      </Modal>
     </div>
   );
 }

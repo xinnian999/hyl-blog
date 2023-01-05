@@ -23,6 +23,7 @@ import {
 } from "@/hooks";
 import "./style.scss";
 import { Popover } from "@arco-design/web-react";
+import { pick } from "lodash";
 
 const avatar = [
   "img_1.jpeg",
@@ -65,7 +66,7 @@ export default function Login() {
           },
           {
             type: "CHANGE_USER_INFO",
-            payload: res.data,
+            payload: pick(res.data, ["username", "id", "headPicture", "email"]),
           },
         ]);
         offModal();

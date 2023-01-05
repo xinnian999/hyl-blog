@@ -12,16 +12,6 @@ module.exports = function (app) {
   );
 
   app.use(
-    "/qqAvatar",
-    createProxyMiddleware({
-      target: "https://thirdqq.qlogo.cn",
-      changeOrigin: true,
-      pathRewrite: { "^/qqAvatar": "" },
-      secure: false,
-    })
-  );
-
-  app.use(
     "/cdn",
     createProxyMiddleware({
       target: "https://cdn.hyl999.co/public",
