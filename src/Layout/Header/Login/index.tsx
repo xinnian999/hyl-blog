@@ -13,7 +13,7 @@ import {
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import md5 from "js-md5";
 import cookie from "js-cookie";
-import { clearLogin, getRandom } from "@/utils";
+import { clearLogin, getRandom, request } from "@/utils";
 import {
   useSetState,
   useRequest,
@@ -22,7 +22,7 @@ import {
   useWindowSize,
 } from "@/hooks";
 import "./style.scss";
-import { Popover } from "@arco-design/web-react";
+import { PageHeader, Popover } from "@arco-design/web-react";
 import { pick } from "lodash";
 
 const avatar = [
@@ -35,11 +35,14 @@ const avatar = [
 ];
 
 export default function Login() {
-  const [{ imageUrl, imgNum, loading }, setState] = useSetState<any>({
-    imageUrl: "",
-    imgNum: [],
-    loading: false,
-  });
+  const [{ imageUrl, imgNum, loading, wxLoginQr }, setState] = useSetState<any>(
+    {
+      imageUrl: "",
+      imgNum: [],
+      loading: false,
+      wxLoginQr: "",
+    }
+  );
 
   const [modalVisible, onModal, offModal] = useBoolean(false);
 
@@ -90,6 +93,20 @@ export default function Login() {
       if (res.status === 1) {
         message.warning("用户名已存在");
       }
+    },
+  });
+
+  const [, runGetWx] = useRequest("/qq/getWxQrCode", {
+    method: "get",
+    manual: true,
+    progress: false,
+    onSuccess: (res: any) => {
+      setState({ wxLoginQr: res.data.qrUrl });
+      setInterval(() => {
+        request("/qq/wxLoginState").then((res) => {
+          console.log(res);
+        });
+      }, 1000);
     },
   });
 
@@ -177,113 +194,150 @@ export default function Login() {
         footer={null}
         destroyOnClose
       >
-        <Form
-          name="basic"
-          colon={false}
-          labelCol={{ span: 4 }}
-          wrapperCol={{ span: 16 }}
-          onFinish={isRegister ? onRegisterUser : onLoginUser}
-          autoComplete="off"
-        >
-          {isRegister && (
-            <Form.Item label="头像">
-              <Upload
-                name="headPicture"
-                listType="picture-card"
-                className="avatar-uploader"
-                showUploadList={false}
-                action="/api/upload/headPicture"
-                onChange={onUploadChange}
-              >
-                {imageUrl ? (
-                  <img src={imageUrl} alt="avatar" style={{ width: "100%" }} />
-                ) : (
-                  <div>
-                    {loading ? <LoadingOutlined /> : <PlusOutlined />}
-                    <div style={{ marginTop: 8 }}>点击上传</div>
-                  </div>
-                )}
-              </Upload>
-              <Button onClick={randomAvatar}>随机头像</Button>
-            </Form.Item>
-          )}
-
-          <Form.Item
-            label="用户名"
-            name="username"
-            rules={[{ required: true, message: "请输入用户名!" }]}
+        {wxLoginQr ? (
+          <>
+            <PageHeader
+              title="微信登陆"
+              subTitle="请扫码完成微信登陆"
+              backIcon
+              onBack={() => setState({ wxLoginQr: false })}
+            />
+            <div className="wxQrCode">
+              <img src={wxLoginQr} alt="" />
+            </div>
+          </>
+        ) : (
+          <Form
+            name="basic"
+            colon={false}
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 16 }}
+            onFinish={isRegister ? onRegisterUser : onLoginUser}
+            autoComplete="off"
           >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="密码"
-            name="password"
-            rules={[{ required: true, message: "请输入密码!" }]}
-          >
-            <Input.Password />
-          </Form.Item>
-
-          {isRegister && (
-            <>
-              <Form.Item
-                label="邮箱"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "请输入正确的邮箱!",
-                    type: "email",
-                  },
-                ]}
-              >
-                <Input placeholder="xxx@xxx.com" />
+            {isRegister && (
+              <Form.Item label="头像">
+                <Upload
+                  name="headPicture"
+                  listType="picture-card"
+                  className="avatar-uploader"
+                  showUploadList={false}
+                  action="/api/upload/headPicture"
+                  onChange={onUploadChange}
+                >
+                  {imageUrl ? (
+                    <img
+                      src={imageUrl}
+                      alt="avatar"
+                      style={{ width: "100%" }}
+                    />
+                  ) : (
+                    <div>
+                      {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                      <div style={{ marginTop: 8 }}>点击上传</div>
+                    </div>
+                  )}
+                </Upload>
+                <Button onClick={randomAvatar}>随机头像</Button>
               </Form.Item>
-              <Form.Item label=" ">
-                {" "}
-                <Alert
-                  message={
-                    <span>
-                      头像：未上传将使用随机头像
-                      <br />{" "}
-                      邮箱：注册后不支持修改，将用于接收回复通知的邮件、或找回密码
-                    </span>
-                  }
-                />
-              </Form.Item>
-            </>
-          )}
+            )}
 
-          <Form.Item wrapperCol={{ offset: 4, span: 16 }}>
-            <Button type="primary" htmlType="submit" block>
-              {isRegister ? "立即注册" : "登陆"}
-            </Button>
-
-            <Button
-              onClick={toggleRegister}
-              block
-              style={{ marginTop: "10px" }}
+            <Form.Item
+              label="用户名"
+              name="username"
+              rules={[{ required: true, message: "请输入用户名!" }]}
             >
-              {isRegister ? "已有账号？立即登录" : "没有账号？ 立即注册"}
-            </Button>
-          </Form.Item>
+              <Input />
+            </Form.Item>
 
-          {!isRegister && (
-            <>
-              <Divider>第三方登录</Divider>
-              <div className="toolLogin">
-                <Button onClick={qqLogin} className="qqLogin">
-                  <img
-                    src="https://connect.qq.com/favicon.ico"
-                    alt=""
-                    className="qqIcon"
-                  />{" "}
-                  qq登录
-                </Button>
-              </div>
-            </>
-          )}
-        </Form>
+            <Form.Item
+              label="密码"
+              name="password"
+              rules={[{ required: true, message: "请输入密码!" }]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            {isRegister && (
+              <>
+                <Form.Item
+                  label="邮箱"
+                  name="email"
+                  rules={[
+                    {
+                      required: true,
+                      message: "请输入正确的邮箱!",
+                      type: "email",
+                    },
+                  ]}
+                >
+                  <Input placeholder="xxx@xxx.com" />
+                </Form.Item>
+                <Form.Item label=" ">
+                  {" "}
+                  <Alert
+                    message={
+                      <span>
+                        头像：未上传将使用随机头像
+                        <br />{" "}
+                        邮箱：注册后不支持修改，将用于接收回复通知的邮件、或找回密码
+                      </span>
+                    }
+                  />
+                </Form.Item>
+              </>
+            )}
+
+            <Form.Item label=" ">
+              <Button type="primary" htmlType="submit" block>
+                {isRegister ? "立即注册" : "登陆"}
+              </Button>
+
+              <Button
+                onClick={toggleRegister}
+                block
+                style={{ marginTop: "10px" }}
+              >
+                {isRegister ? "已有账号？立即登录" : "没有账号？ 立即注册"}
+              </Button>
+            </Form.Item>
+
+            {!isRegister && (
+              <>
+                <Divider>第三方登录</Divider>
+                <div className="toolLogin">
+                  <svg
+                    className="qqLogin"
+                    fill="#50c8fd"
+                    viewBox="0 0 24 24"
+                    width="40"
+                    height="40"
+                    onClick={qqLogin}
+                  >
+                    <path
+                      d="M12.003 2c-2.265 0-6.29 1.364-6.29 7.325v1.195S3.55 14.96 3.55 17.474c0 .665.17 1.025.281 1.025.114 0 .902-.484 1.748-2.072 0 0-.18 2.197 1.904 3.967 0 0-1.77.495-1.77 1.182 0 .686 4.078.43 6.29 0 2.239.425 6.287.687 6.287 0 0-.688-1.768-1.182-1.768-1.182 2.085-1.77 1.905-3.967 1.905-3.967.845 1.588 1.634 2.072 1.746 2.072.111 0 .283-.36.283-1.025 0-2.514-2.166-6.954-2.166-6.954V9.325C18.29 3.364 14.268 2 12.003 2z"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+
+                  <svg
+                    className="Zi Zi--WeChat Login-socialIcon"
+                    fill="#60c84d"
+                    viewBox="0 0 24 24"
+                    width="40"
+                    height="40"
+                    onClick={() => runGetWx()}
+                  >
+                    <path
+                      d="M2.224 21.667s4.24-1.825 4.788-2.056C15.029 23.141 22 17.714 22 11.898 22 6.984 17.523 3 12 3S2 6.984 2 11.898c0 1.86.64 3.585 1.737 5.013-.274.833-1.513 4.756-1.513 4.756zm5.943-9.707c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272zm7.583 0c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272z"
+                      fill-rule="evenodd"
+                    ></path>
+                  </svg>
+                </div>
+              </>
+            )}
+          </Form>
+        )}
       </Modal>
     </>
   );

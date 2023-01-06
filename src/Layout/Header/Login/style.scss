@@ -1,10 +1,9 @@
 .toolLogin {
-  display: flex;
-  justify-content: right;
   padding: 0 20px;
-  .qqIcon {
-    width: 15px;
-    margin-right: 5px;
+  text-align: center;
+  .qqLogin {
+    cursor: pointer;
+    margin-right: 15px;
   }
 }
 
@@ -14,4 +13,14 @@
 
 .userAvatar {
   cursor: pointer;
+}
+
+.wxQrCode {
+  img {
+    width: 200px;
+    height: 200px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+  }
 }
