@@ -5,9 +5,15 @@ import storage from "redux-persist/lib/storage";
 export type isStore = {
   loginState: boolean;
   theme: { bg: number; color: string };
-  userInfo: { id: number; username: string; headPicture: string,email:string|null };
+  userInfo: {
+    id: number;
+    username: string;
+    headPicture: string;
+    email: string | null;
+  };
   autoplay: boolean | undefined;
   simple: boolean | undefined;
+  loginModal: boolean;
 };
 
 //在localStorge中生成key为root的值
@@ -21,9 +27,10 @@ const reducer = (
   state: isStore = {
     loginState: false,
     theme: { bg: 125, color: "#1890ff" },
-    userInfo: { id: 0, username: "昵称", headPicture: "",email:null },
+    userInfo: { id: 0, username: "昵称", headPicture: "", email: null },
     autoplay: false,
     simple: false,
+    loginModal: false,
   },
   { type, payload }: any
 ) => {
@@ -38,6 +45,8 @@ const reducer = (
       return { ...state, autoplay: !state.autoplay };
     case "CHANGE_SIMPLE":
       return { ...state, simple: payload };
+    case "CHANGE_LOGIN_MODAL":
+      return { ...state, loginModal: payload };
     default:
       return state;
   }
