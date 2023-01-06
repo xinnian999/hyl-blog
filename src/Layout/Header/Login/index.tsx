@@ -9,6 +9,7 @@ import {
   Divider,
   Space,
   Avatar,
+  Spin,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import md5 from "js-md5";
@@ -35,14 +36,14 @@ const avatar = [
 ];
 
 export default function Login() {
-  const [{ imageUrl, imgNum, loading, wxLoginQr }, setState] = useSetState<any>(
-    {
+  const [{ imageUrl, imgNum, loading, wxLogin, wxLoginQr }, setState] =
+    useSetState<any>({
       imageUrl: "",
       imgNum: [],
       loading: false,
+      wxLogin: false,
       wxLoginQr: "",
-    }
-  );
+    });
 
   const [modalVisible, onModal, offModal] = useBoolean(false);
 
@@ -102,9 +103,29 @@ export default function Login() {
     progress: false,
     onSuccess: (res: any) => {
       setState({ wxLoginQr: res.data.qrUrl });
-      setInterval(() => {
+      const timer = setInterval(() => {
         request("/qq/wxLoginState").then((res) => {
-          console.log(res);
+          if (res) {
+            const { nickName, avatarUrl, openId } = res;
+            clearInterval(timer);
+            dispatchAll([
+              {
+                type: "CHANGE_LOGIN_STATE",
+                payload: true,
+              },
+              {
+                type: "CHANGE_USER_INFO",
+                payload: {
+                  username: nickName,
+                  headPicture: avatarUrl,
+                  id: openId,
+                },
+              },
+            ]);
+            offModal();
+            setState({ wxLogin: false, wxLoginQr: "" });
+            return message.success("登录成功");
+          }
         });
       }, 1000);
     },
@@ -194,16 +215,18 @@ export default function Login() {
         footer={null}
         destroyOnClose
       >
-        {wxLoginQr ? (
+        {wxLogin ? (
           <>
             <PageHeader
               title="微信登陆"
-              subTitle="请扫码完成微信登陆"
+              subTitle="请使用微信扫码登陆"
               backIcon
-              onBack={() => setState({ wxLoginQr: false })}
+              onBack={() => setState({ wxLogin: false, wxLoginQr: "" })}
             />
             <div className="wxQrCode">
-              <img src={wxLoginQr} alt="" />
+              <Spin spinning={!wxLoginQr} tip="二维码生成中">
+                <img src={wxLoginQr} alt="" />
+              </Spin>
             </div>
           </>
         ) : (
@@ -274,12 +297,11 @@ export default function Login() {
                   <Input placeholder="xxx@xxx.com" />
                 </Form.Item>
                 <Form.Item label=" ">
-                  {" "}
                   <Alert
                     message={
                       <span>
                         头像：未上传将使用随机头像
-                        <br />{" "}
+                        <br />
                         邮箱：注册后不支持修改，将用于接收回复通知的邮件、或找回密码
                       </span>
                     }
@@ -316,21 +338,24 @@ export default function Login() {
                   >
                     <path
                       d="M12.003 2c-2.265 0-6.29 1.364-6.29 7.325v1.195S3.55 14.96 3.55 17.474c0 .665.17 1.025.281 1.025.114 0 .902-.484 1.748-2.072 0 0-.18 2.197 1.904 3.967 0 0-1.77.495-1.77 1.182 0 .686 4.078.43 6.29 0 2.239.425 6.287.687 6.287 0 0-.688-1.768-1.182-1.768-1.182 2.085-1.77 1.905-3.967 1.905-3.967.845 1.588 1.634 2.072 1.746 2.072.111 0 .283-.36.283-1.025 0-2.514-2.166-6.954-2.166-6.954V9.325C18.29 3.364 14.268 2 12.003 2z"
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                     ></path>
                   </svg>
 
                   <svg
-                    className="Zi Zi--WeChat Login-socialIcon"
+                    className="wxLogin"
                     fill="#60c84d"
                     viewBox="0 0 24 24"
                     width="40"
                     height="40"
-                    onClick={() => runGetWx()}
+                    onClick={() => {
+                      setState({ wxLogin: true });
+                      runGetWx();
+                    }}
                   >
                     <path
                       d="M2.224 21.667s4.24-1.825 4.788-2.056C15.029 23.141 22 17.714 22 11.898 22 6.984 17.523 3 12 3S2 6.984 2 11.898c0 1.86.64 3.585 1.737 5.013-.274.833-1.513 4.756-1.513 4.756zm5.943-9.707c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272zm7.583 0c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272z"
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                     ></path>
                   </svg>
                 </div>
