@@ -1,4 +1,13 @@
 $bgc: rgba(255, 255, 255, 0.8);
+
+.commentLoginBtn {
+  color: var(--ant-primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover {
+    color: var(--ant-primary-7);
+  }
+}
 .commentCon {
   padding-bottom: 15px;
   z-index: 1;

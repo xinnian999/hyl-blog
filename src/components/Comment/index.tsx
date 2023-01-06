@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { Divider, List, Alert } from "antd";
-import { useRequest } from "@/hooks";
+import { useRequest, useRedux } from "@/hooks";
 import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
@@ -21,7 +21,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
     },
   });
 
-  const { loginState } = useSelector((state: any) => state);
+  const { store, dispatch } = useRedux();
 
   const currentCommentData = commentData.filter(
     (item: any) => item.reply_id === 0 || !item.reply_id
@@ -47,7 +47,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
   return (
     <>
       {title && <Divider>{title}</Divider>}
-      {loginState ? (
+      {store.loginState ? (
         <Editor
           btnName={btnName}
           articleId={articleId}
@@ -55,7 +55,23 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
           hasAnimation={hasAnimation}
         />
       ) : (
-        <Alert message="登录后可发表评论" type="info" showIcon />
+        <Alert
+          message={
+            <>
+              <span
+                className="commentLoginBtn"
+                onClick={() =>
+                  dispatch({ type: "CHANGE_LOGIN_MODAL", payload: true })
+                }
+              >
+                登录
+              </span>{" "}
+              后可发表评论
+            </>
+          }
+          type="info"
+          showIcon
+        />
       )}
       <List
         dataSource={currentCommentData}
