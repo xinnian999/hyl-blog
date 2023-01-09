@@ -11,6 +11,7 @@ import { useRequest, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
+import Lantern from "./Lantern";
 
 function Layout() {
   const location = useLocation();
@@ -128,6 +129,7 @@ function Layout() {
         <canvas id="canvasBg"></canvas>
       </div>
       <div id="aplayer"></div>
+      <Lantern />
       <Header style={{ display: isHome && "none" }} />
       <main id="main" className={!isHome ? "isHome" : ""}>
         <Routes>
