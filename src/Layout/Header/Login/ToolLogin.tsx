@@ -22,9 +22,8 @@ export default function ToolLogin({ setState }) {
     onSuccess: (res: any) => {
       setState({ wxLoginQr: res.data.qrUrl });
       const timer = setInterval(() => {
-        request("/qq/wxLoginState").then((res) => {
+        request("/qq/getLoginStatus").then((res) => {
           if (res) {
-            const { nickName, avatarUrl, openId } = res;
             clearInterval(timer);
             dispatchAll([
               {
@@ -33,11 +32,7 @@ export default function ToolLogin({ setState }) {
               },
               {
                 type: "CHANGE_USER_INFO",
-                payload: {
-                  username: nickName,
-                  headPicture: avatarUrl,
-                  id: openId,
-                },
+                payload: res,
               },
               { type: "CHANGE_LOGIN_MODAL", payload: false },
             ]);

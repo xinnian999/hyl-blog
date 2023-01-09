@@ -36,17 +36,15 @@ const avatar = [
 ];
 
 export default function Login() {
-  const [
-    { modalVisible, imageUrl, imgNum, loading, wxLogin, wxLoginQr },
-    setState,
-  ] = useSetState<any>({
-    imageUrl: "",
-    imgNum: [],
-    loading: false,
-    wxLogin: false,
-    wxLoginQr: "",
-    modalVisible: false,
-  });
+  const [{ imageUrl, imgNum, loading, wxLogin, wxLoginQr }, setState] =
+    useSetState<any>({
+      imageUrl: "",
+      imgNum: [],
+      loading: false,
+      wxLogin: false,
+      wxLoginQr: "",
+      modalVisible: false,
+    });
 
   const [isRegister, , offRegister, toggleRegister] = useBoolean(false);
 

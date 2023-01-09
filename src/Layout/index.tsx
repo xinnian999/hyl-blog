@@ -6,8 +6,8 @@ import "aplayer/dist/APlayer.min.css";
 import cookie from "js-cookie";
 import menus from "@/router";
 import { Loading, Redirect } from "@/components";
-import { changeBlogTitle, getDecode, globalConfig } from "@/utils";
-import { useRequest, useRedux } from "@/hooks";
+import { changeBlogTitle, globalConfig, request } from "@/utils";
+import { useRequest, useRedux, useMount } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
@@ -16,7 +16,7 @@ import Lantern from "./Lantern";
 function Layout() {
   const location = useLocation();
 
-  const { store, dispatch } = useRedux();
+  const { store, dispatch, dispatchAll } = useRedux();
 
   useRequest("/all/getCsrfToken", {
     progress: false,
@@ -31,7 +31,7 @@ function Layout() {
         url: `${globalConfig.remoteStaticUrl}/music/${item.url}`,
       }));
 
-      new APlayer({
+      const music = new APlayer({
         container: document.getElementById("aplayer"),
         audio: data, // 音乐信息
         fixed: true, // 开启吸底模式
@@ -39,7 +39,21 @@ function Layout() {
         autoplay: store.autoplay, // 开启自动播放
         preload: "auto", // 自动预加载歌曲
         loop: "all", // 播放循环模式、all全部循环 one单曲循环 none只播放一次
-        order: "random", //  播放模式，list列表播放, random随机播放
+        order: "list", //  播放模式，list列表播放, random随机播放
+      });
+
+      music.on("pause", function () {
+        dispatch({
+          type: "CHANGE_AUTOPLAY",
+          payload: false,
+        });
+      });
+
+      music.on("play", function () {
+        dispatch({
+          type: "CHANGE_AUTOPLAY",
+          payload: true,
+        });
       });
     },
   });
@@ -64,30 +78,26 @@ function Layout() {
     }
   }, [store.theme]);
 
-  useEffect(() => {
-    const username = cookie.get("qqName");
-    const headPicture = cookie.get("qqAvatar");
+  useMount(() => {
+    dispatch({ type: "CHANGE_LOGIN_MODAL", payload: false });
     if (cookie.get("blog_token")) {
-      dispatch({
-        type: "CHANGE_LOGIN_STATE",
-        payload: true,
+      request("/qq/getLoginStatus").then((res) => {
+        if (res) {
+          dispatchAll([
+            {
+              type: "CHANGE_LOGIN_STATE",
+              payload: true,
+            },
+            {
+              type: "CHANGE_USER_INFO",
+              payload: res,
+            },
+            { type: "CHANGE_LOGIN_MODAL", payload: false },
+          ]);
+        }
       });
     }
-    if (username && headPicture) {
-      const id = headPicture.substring(
-        headPicture.length - 10,
-        headPicture.length
-      );
-      dispatch({
-        type: "CHANGE_USER_INFO",
-        payload: {
-          username: getDecode(username),
-          headPicture,
-          id,
-        },
-      });
-    }
-  }, []);
+  });
 
   const renderRoutes = useCallback(
     (menu: any) =>

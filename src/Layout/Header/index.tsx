@@ -93,10 +93,9 @@ function Header({ style }) {
         closable={false}
         okText="确认"
         cancelText="取消"
-        title={first ? "本站设置" : "欢迎光临本站，建议简单设置一下~~"}
+        title={first ? "本站设置" : "欢迎光临本站,修改一下设置?"}
         onOk={() => window.location.reload()}
         destroyOnClose
-        // getContainer={false}
       >
         <ul className="setting">
           <li>
@@ -104,7 +103,9 @@ function Header({ style }) {
             <Switch
               checked={autoplay}
               defaultChecked
-              onChange={() => dispatch({ type: "CHANGE_AUTOPLAY" })}
+              onChange={() =>
+                dispatch({ type: "CHANGE_AUTOPLAY", payload: !autoplay })
+              }
             />
             <span className="tip">开启后，将自动播放背景音乐</span>
           </li>
