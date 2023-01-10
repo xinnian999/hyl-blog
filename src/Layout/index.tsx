@@ -16,7 +16,7 @@ import Lantern from "./Lantern";
 function Layout() {
   const location = useLocation();
 
-  const { store, dispatch, dispatchAll } = useRedux();
+  const { store, dispatch } = useRedux();
 
   useRequest("/all/getCsrfToken", {
     progress: false,
@@ -80,23 +80,6 @@ function Layout() {
 
   useMount(() => {
     dispatch({ type: "CHANGE_LOGIN_MODAL", payload: false });
-    if (cookie.get("blog_token")) {
-      request("/qq/getLoginStatus").then((res) => {
-        if (res) {
-          dispatchAll([
-            {
-              type: "CHANGE_LOGIN_STATE",
-              payload: true,
-            },
-            {
-              type: "CHANGE_USER_INFO",
-              payload: res,
-            },
-            { type: "CHANGE_LOGIN_MODAL", payload: false },
-          ]);
-        }
-      });
-    }
   });
 
   const renderRoutes = useCallback(

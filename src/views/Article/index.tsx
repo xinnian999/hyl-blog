@@ -6,9 +6,9 @@ import ReactScroll from "react-infinite-scroll-component";
 import classnames from "classnames";
 import { useBoolean, useScroll } from "ahooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import { useWindowSize, useRequest } from "@/hooks";
+import { useWindowSize, useRequest, useMount, useRedux } from "@/hooks";
 import { PageCenter } from "@/components";
-import { batchCopyDom } from "@/utils";
+import { batchCopyDom, request } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
@@ -16,7 +16,28 @@ import "./style.scss";
 function Article() {
   const history = useNavigate();
 
+  const { dispatchAll } = useRedux();
   const [params] = useSearchParams();
+
+  useMount(() => {
+    if (params.get("getUserInfo")) {
+      request("/qq/getLoginStatus").then((res) => {
+        if (res) {
+          dispatchAll([
+            {
+              type: "CHANGE_LOGIN_STATE",
+              payload: true,
+            },
+            {
+              type: "CHANGE_USER_INFO",
+              payload: res,
+            },
+            { type: "CHANGE_LOGIN_MODAL", payload: false },
+          ]);
+        }
+      });
+    }
+  });
 
   const toobarRef = useRef(null) as any;
 
@@ -182,7 +203,7 @@ function Article() {
         <div className="article-list">
           {articleData.length ? (
             <ReactScroll
-              scrollThreshold={0.75}
+              scrollThreshold={0.65}
               dataLength={articleData.length}
               next={() =>
                 runQueryArticle({
