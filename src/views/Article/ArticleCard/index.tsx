@@ -19,6 +19,7 @@ function ArticleCard(props: any) {
     picture,
     topping,
     loading,
+    type,
   } = props.data;
 
   const history = useNavigate();
@@ -37,7 +38,7 @@ function ArticleCard(props: any) {
           <TimeBar time={createTime} />
         </div>
         <div className="title">
-          <span>【原创】</span> {title}
+          <span>【{type === 1 ? "原创" : "转载"}】</span> {title}
         </div>
         <div className="content">
           <div className="img-box" onClick={(e) => e.stopPropagation()}>
