@@ -13,7 +13,7 @@ import {
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import md5 from "js-md5";
 
-import { clearLogin, getRandom } from "@/utils";
+import { clearLogin } from "@/utils";
 import {
   useSetState,
   useRequest,
@@ -24,6 +24,7 @@ import {
 import "./style.scss";
 import { PageHeader, Popover } from "@arco-design/web-react";
 import { pick } from "lodash";
+import { getRandom } from "hyl-utils";
 import ToolLogin from "./ToolLogin";
 
 const avatar = [
