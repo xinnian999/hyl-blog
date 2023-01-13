@@ -5,15 +5,11 @@ function getRandom(min: number, max: number, noRepeat: boolean = true): number {
   max = Math.floor(max);
   const num = Math.floor(Math.random() * (max - min + 1)) + min;
 
-  if (noRepeat && Exclude.length >= max - min) {
-    Exclude = [];
+  if (noRepeat) {
+    if (Exclude.length >= max - min) Exclude = [];
+    if (Exclude.includes(num)) return getRandom(min, max);
+    Exclude.push(num);
   }
-
-  if (noRepeat && Exclude.includes(num)) {
-    return getRandom(min, max);
-  }
-
-  noRepeat && Exclude.push(num);
   console.log(num);
 
   return num;
