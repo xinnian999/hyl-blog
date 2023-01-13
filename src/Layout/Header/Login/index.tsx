@@ -36,10 +36,9 @@ const avatar = [
 ];
 
 export default function Login() {
-  const [{ imageUrl, imgNum, loading, wxLogin, wxLoginQr }, setState] =
+  const [{ imageUrl, loading, wxLogin, wxLoginQr }, setState] =
     useSetState<any>({
       imageUrl: "",
-      imgNum: [],
       loading: false,
       wxLogin: false,
       wxLoginQr: "",
@@ -97,8 +96,10 @@ export default function Login() {
   });
 
   const randomAvatar = () => {
-    const random = getRandom(0, 5, imgNum);
-    setState({ imgNum: [random], imageUrl: `/api/avatar/${avatar[random]}` });
+    const random = getRandom(0, 5);
+    setState({
+      imageUrl: `/api/avatar/${avatar[random]}`,
+    });
   };
 
   const onLoginUser = (values: any) => {
