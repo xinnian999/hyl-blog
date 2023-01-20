@@ -4,6 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 import { CopyOutlined, LinkOutlined } from "@ant-design/icons";
 import { copy } from "@/utils";
 import "./style.scss";
@@ -72,7 +73,7 @@ const MarkDetail = (props, ref) => {
       <ReactMarkdown
         components={components}
         children={content}
-        // rehypePlugins={[raw]}
+        rehypePlugins={[rehypeRaw]}
         remarkPlugins={[remarkGfm]}
         className="ReactMarkdown"
       />
