@@ -1,5 +1,5 @@
 import { useCallback, useState, useRef, useEffect } from "react";
-import { isFunction } from "@/utils";
+import { isFunction } from "hyl-utils";
 
 export type SetState<S extends Record<string, any>> = <K extends keyof S>(
   state:
