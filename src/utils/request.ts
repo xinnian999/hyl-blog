@@ -5,6 +5,8 @@ import { store } from "@/store";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 
+console.dir(axios);
+
 const request: any = axios.create({
   baseURL: "/api",
   timeout: 15000,

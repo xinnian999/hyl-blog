@@ -1,9 +1,11 @@
 import { Button } from "antd";
-import { Url, Cookie } from "hyl-utils";
+// import { cookie } from "hyl-utils";
+import moment from "moment";
+import axios from "axios";
 
 export default function Demo() {
   const go = () => {
-    Cookie.remove("blog_token");
+    console.log(axios);
   };
   return <Button onClick={go}>demo</Button>;
 }
