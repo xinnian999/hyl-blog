@@ -4,9 +4,10 @@ import { Anchor } from "@arco-design/web-react";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
 import { useParams } from "react-router-dom";
+import { time } from "hyl-utils";
 import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
-import { request, Time, changeBlogTitle } from "@/utils";
+import { changeBlogTitle } from "@/utils";
 import { useSetState, useWindowSize, useRequest } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
@@ -40,11 +41,11 @@ function ArticleDetail() {
   ] = useSetState<State>({
     content: "",
     title: "这是一个文章的标题",
-    createTime: Time.getStandardTime(new Date()),
+    createTime: time.parse(new Date()),
     comments: [],
     anchorList: [],
     visits: 0,
-    updateTime: Time.getStandardTime(new Date()),
+    updateTime: time.parse(new Date()),
     category: "",
     targetOffset: undefined,
     aboutArticle: [],
@@ -64,14 +65,14 @@ function ArticleDetail() {
     onSuccess: (res) => {
       const [data] = res.data;
       console.log(data.content);
-      
+
       setState(data);
       // 设置页面标题
       changeBlogTitle("", data.title);
       // 文章阅读量+1
-      setTimeout(() => {
-        request.put("/article/visit", { id: params.id });
-      }, 3000);
+      // setTimeout(() => {
+      //   request.put("/article/visit", { id: params.id });
+      // }, 3000);
       //查询相关文章
       runGetAbout({
         params: {
@@ -182,7 +183,7 @@ function ArticleDetail() {
             <small>作者：心念 </small>
             <small>阅读量：{visits}</small>
             <small className="updateTime">
-              更新于 {Time.getStandardTime(updateTime)}
+              更新于 {time.parse(updateTime)}
             </small>
           </Space>
         </Divider>

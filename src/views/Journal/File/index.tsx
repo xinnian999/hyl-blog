@@ -1,7 +1,8 @@
 import { Component } from "react";
 import moment from "moment";
+import { time } from "hyl-utils";
 import { List, Typography, Divider } from "antd";
-import { request, Time } from "@/utils";
+import { request } from "@/utils";
 import { withRouter, Title } from "@/components";
 import "./style.scss";
 
@@ -18,7 +19,7 @@ class Index extends Component<isProps, isState> {
     data: [],
   };
 
-  diff: number = 0;
+  diff = { year: 0, month: 0 };
 
   componentDidMount() {
     request
@@ -26,9 +27,8 @@ class Index extends Component<isProps, isState> {
       .then((res: any) => {
         const { data } = res;
         this.setState({ count: data.length, data });
-        const startTime = data[0]?.createTime;
-        const lastTime = data[data.length - 1]?.createTime;
-        this.diff = Time.getDiffDay(startTime, lastTime);
+        const startTime = data[data.length - 1]?.createTime;
+        this.diff = time.duration(startTime, new Date().toUTCString());
       });
   }
 
@@ -40,10 +40,7 @@ class Index extends Component<isProps, isState> {
       <div id="file">
         <Title>
           居然用了
-          {`${parseInt(this.diff / 365 + "")}年${parseInt(
-            this.diff / 30 + ""
-          )}个月`}
-          才写了{count}篇文章
+          {this.diff.year}年零{this.diff.month}个月 才写了{count}篇文章
         </Title>
         <Divider orientation="left" className="year">
           2022

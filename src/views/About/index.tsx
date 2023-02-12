@@ -1,23 +1,28 @@
 import { Timeline, Tag as AntdTag, Card } from "antd";
+import { time } from "hyl-utils";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
 import { PageCenter, Title, Tag, Info, Section, Icon } from "@/components";
-import { Time } from "@/utils";
 import { useMount, useSetState, useRequest } from "@/hooks";
 import "./style.scss";
 
 const About = () => {
-  const [{ onTime }, setState] = useSetState({
-    onTime: " 0 年 0 个月 0 天 0 小时 0 分种 0 秒",
+  const [onTime, setState] = useSetState({
+    millisecond: 0,
+    second: 0,
+    minute: 0,
+    hour: 0,
+    day: 0,
+    month: 0,
+    year: 0,
   });
 
   const [updateLog] = useRequest("/updateLog/query");
 
-  const startTime = Date.parse("2022/6/1 10:00");
-
   useMount(() => {
-    const t = setInterval(() => {
-      setState({ onTime: Time.getDuration(startTime) });
-    }, 1000);
+    const t = setInterval(
+      () => setState(time.duration("2022/6/1 10:00", new Date().toUTCString())),
+      1000
+    );
 
     return () => clearInterval(t);
   });
@@ -91,7 +96,7 @@ const About = () => {
             <br />
             <div>
               <b>网站已勉强运行：</b>
-              <Tag>{onTime}</Tag>
+              <Tag>{`${onTime.year}年 ${onTime.month}个月 ${onTime.day}天 ${onTime.hour}小时 ${onTime.minute}分钟 ${onTime.second}秒`}</Tag>
             </div>
           </Info>
 
@@ -101,7 +106,7 @@ const About = () => {
               {updateLog.map(({ content, createTime }) => (
                 <Timeline.Item key={createTime}>
                   <AntdTag className="time">
-                    {Time.getYMDTime(createTime)}
+                    {time.parse(createTime, "YYYY-MM-DD")}
                   </AntdTag>
                   <div className="content">{content}</div>
                 </Timeline.Item>

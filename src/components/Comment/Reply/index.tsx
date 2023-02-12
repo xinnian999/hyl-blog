@@ -1,10 +1,10 @@
 import { Comment, List, message } from "antd";
 import { useSelector } from "react-redux";
+import { time } from "hyl-utils";
 import classnames from "classnames";
 import { useSetState } from "@/hooks";
 import { request, httpTohttps } from "@/utils";
 import Editor from "../Editor";
-import time from "@/utils/time";
 
 const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
   const { userInfo, loginState } = useSelector((state: any) => state);
@@ -78,7 +78,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
         actions={renderAction(commentItem)}
         author={author(commentItem)}
         avatar={httpTohttps(commentItem.avatar)}
-        datetime={time.getStandardTime(commentItem.datetime)}
+        datetime={time.parse(commentItem.datetime)}
         className="replyCon"
       >
         {replyData.length ? (
@@ -93,7 +93,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
                 author={author(props)}
                 actions={renderAction(props)}
                 avatar={httpTohttps(props.avatar)}
-                datetime={time.getStandardTime(props.datetime)}
+                datetime={time.parse(props.datetime)}
                 className="itemList-item"
               />
             )}

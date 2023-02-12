@@ -2,7 +2,8 @@ import { Timeline, Image } from "antd";
 import classnames from "classnames";
 import { Bubble, Icon, OverPack } from "@/components";
 import { useWindowSize, useRequest } from "@/hooks";
-import { globalConfig, Time } from "@/utils";
+import { time } from "hyl-utils";
+import { globalConfig } from "@/utils";
 import "./style.scss";
 
 const First = () => {
@@ -26,7 +27,7 @@ const First = () => {
             label={
               width > 800 && (
                 <div className="Journal-time">
-                  {Time.getYMDTime(createTime)}
+                  {time.parse(createTime, "YYYY年MM月DD日")}
                 </div>
               )
             }
@@ -57,7 +58,7 @@ const First = () => {
                 )}
                 {width < 800 && (
                   <div className="Journal-time-iphone">
-                    {Time.getYMDTime(createTime)}
+                    {time.parse(createTime, "YYYY年MM月DD日")}
                   </div>
                 )}
               </Bubble>

@@ -1,7 +1,8 @@
 import { Image, Skeleton } from "antd";
 import { InsertRowAboveOutlined } from "@ant-design/icons";
+import { time } from "hyl-utils";
 import { useRequest } from "@/hooks";
-import { globalConfig, Time } from "@/utils";
+import { globalConfig } from "@/utils";
 import "./style.scss";
 
 export default function Collection() {
@@ -24,7 +25,7 @@ export default function Collection() {
             <p className="autograph">{autograph}</p>
             <div className="time">
               <InsertRowAboveOutlined className="iconAbove" />
-              <span>{Time.getYearMonth(createTime)}</span>
+              <span>{time.parse(createTime, "YYYY-MM")}</span>
             </div>
           </Skeleton>
         </div>

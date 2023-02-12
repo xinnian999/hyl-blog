@@ -3,8 +3,9 @@ import { Popover } from "@arco-design/web-react";
 import { useRef } from "react";
 import classnames from "classnames";
 import { SmileOutlined } from "@ant-design/icons";
+import { time } from "hyl-utils";
 import { useBoolean, useRedux, useSetState } from "@/hooks";
-import { Time, request } from "@/utils";
+import { request } from "@/utils";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
 import "./style.scss";
@@ -58,7 +59,7 @@ export default function Editor({
       avatar: headPicture,
       author: username,
       email,
-      datetime: Time.getStandardTime(new Date()),
+      datetime: time.parse(new Date()),
       article_id: articleId,
       author_id,
     };

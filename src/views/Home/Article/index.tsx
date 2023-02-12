@@ -1,6 +1,7 @@
 import QueueAnim from "rc-queue-anim";
+import { time } from "hyl-utils";
 import { LinkOutlined } from "@ant-design/icons";
-import { Time, globalConfig } from "@/utils";
+import { globalConfig } from "@/utils";
 import { OverPack } from "@/components";
 import { useRequest } from "@/hooks";
 import "./style.scss";
@@ -44,7 +45,7 @@ export default function Article() {
           >
             {hotArticleData
               .slice(0, 3)
-              .map(({ title, picture, introduce, creatTime, id }: any) => {
+              .map(({ title, picture, introduce, createTime, id }: any) => {
                 return (
                   <div className="item" key={title}>
                     <div className="item-box">
@@ -60,7 +61,7 @@ export default function Article() {
                       <div className="item-content">
                         <div className="item-title">{title}</div>
                         <div className="item-time">
-                          {Time.getYMDTime(creatTime)}
+                          {time.parse(createTime, "YYYY年MM月DD日")}
                         </div>
                         <div>{introduce}</div>
                         <a href={`/article/${id}`} className="more">
