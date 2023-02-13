@@ -5,7 +5,7 @@ import { Drawer } from "@arco-design/web-react";
 import ReactScroll from "react-infinite-scroll-component";
 import { useBoolean, useScroll } from "ahooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import { useWindowSize, useRequest, useMount, useRedux } from "@/hooks";
+import { useWindowSize, useGetData, useMount, useRedux } from "@/hooks";
 import { PageCenter } from "@/components";
 import { batchCopyDom, request } from "@/utils";
 import Search from "./Search";
@@ -53,7 +53,7 @@ function Article() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  const [articleData, runQueryArticle, setArticleData] = useRequest(
+  const [articleData, runQueryArticle, setArticleData] = useGetData(
     "/article/query",
     {
       progress: false,
@@ -73,7 +73,7 @@ function Article() {
     }
   );
 
-  const [hotArticleData] = useRequest("/article/query", {
+  const [hotArticleData] = useGetData("/article/query2", {
     progress: false,
     mockLoadingCount: 5,
     data: {
@@ -84,8 +84,7 @@ function Article() {
     },
   });
 
-  const [categoryData] = useRequest("/category/query", {
-    method: "get",
+  const [categoryData] = useGetData("/category/query", {
     mockLoadingCount: 7,
     data: {},
   });

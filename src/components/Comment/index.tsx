@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
 import { Divider, List, Alert } from "antd";
-import { useRequest, useRedux } from "@/hooks";
+import { useGetData, useRedux } from "@/hooks";
 import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
@@ -13,7 +12,7 @@ interface comment {
 }
 
 function Index({ articleId, title, btnName, hasAnimation }: comment) {
-  const [commentData, run] = useRequest("/comment/query", {
+  const [commentData, run] = useGetData("/comment/query", {
     data: {
       articleId,
       filters: { article_id: articleId },

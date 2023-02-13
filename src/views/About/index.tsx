@@ -2,7 +2,7 @@ import { Timeline, Tag as AntdTag, Card } from "antd";
 import { time } from "hyl-utils";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
 import { PageCenter, Title, Tag, Info, Section, Icon } from "@/components";
-import { useMount, useSetState, useRequest } from "@/hooks";
+import { useMount, useSetState, useGetData } from "@/hooks";
 import "./style.scss";
 
 const About = () => {
@@ -16,7 +16,7 @@ const About = () => {
     year: 0,
   });
 
-  const [updateLog] = useRequest("/updateLog/query");
+  const [updateLog] = useGetData("/updateLog/query");
 
   useMount(() => {
     const t = setInterval(

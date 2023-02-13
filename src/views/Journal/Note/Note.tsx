@@ -1,12 +1,12 @@
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { useRequest } from "@/hooks";
+import { useGetData } from "@/hooks";
 import "./style.scss";
 import { Preview } from "@/components";
 import QueueAnim from "rc-queue-anim";
 
 export default function Note() {
-  const [data] = useRequest("/note/query");
+  const [data] = useGetData("/note/query");
 
   return (
     <div className="note">

@@ -2,7 +2,7 @@ import useSetState from "./useSetState";
 import useScroll from "./useScroll";
 import useWindowSize from "./useWindowSize";
 import useMount from "./useMount";
-import useRequest from "./useRequest";
+import useGetData from "./useGetData";
 import useBoolean from "./useBoolean";
 import useRedux from "./useRedux";
 
@@ -11,7 +11,7 @@ export {
   useScroll,
   useWindowSize,
   useMount,
-  useRequest,
+  useGetData,
   useBoolean,
   useRedux,
 };

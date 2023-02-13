@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "antd";
-import { globalConfig, request } from "@/utils";
+import { request } from "@/utils";
 import {
   SentenceContentWapper,
   Name,

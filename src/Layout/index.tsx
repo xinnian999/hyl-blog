@@ -6,8 +6,8 @@ import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
 import menus from "@/router";
 import { Loading, Redirect } from "@/components";
-import { changeBlogTitle, globalConfig } from "@/utils";
-import { useRequest, useRedux } from "@/hooks";
+import { changeBlogTitle } from "@/utils";
+import { useGetData, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
@@ -17,12 +17,12 @@ function Layout() {
 
   const { store } = useRedux();
 
-  useRequest("/all/getCsrfToken", {
+  useGetData("/all/getCsrfToken", {
     progress: false,
     manual: !!cookie.get("csrf_token"),
   });
 
-  useRequest("/music/query", {
+  useGetData("/music/query", {
     progress: false,
     onSuccess: (res) => {
       const data = res.data.map((item) => ({

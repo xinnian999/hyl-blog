@@ -1,14 +1,12 @@
 import QueueAnim from "rc-queue-anim";
 import { time } from "hyl-utils";
 import { LinkOutlined } from "@ant-design/icons";
-import { globalConfig } from "@/utils";
 import { OverPack } from "@/components";
-import { useRequest } from "@/hooks";
+import { useGetData } from "@/hooks";
 import "./style.scss";
 
 export default function Article() {
-  const [hotArticleData] = useRequest("/article/query", {
-    method: "get",
+  const [hotArticleData] = useGetData("/article/query", {
     progress: false,
     data: {
       pageNum: 1,

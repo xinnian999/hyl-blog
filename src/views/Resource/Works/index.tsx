@@ -1,10 +1,9 @@
 import { Skeleton } from "antd";
-import { useRequest } from "@/hooks";
-import { globalConfig } from "@/utils";
+import { useGetData } from "@/hooks";
 import "./style.scss";
 
 export default function Works() {
-  const [data] = useRequest("/works/query", { mockLoadingCount: 4 });
+  const [data] = useGetData("/works/query", { mockLoadingCount: 4 });
 
   const renderItem = data.map(
     ({ name, picture, link, autograph, loading, id }) => {

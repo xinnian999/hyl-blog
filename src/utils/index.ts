@@ -5,16 +5,11 @@ import getDecode from "./getDecode";
 import batchCopyDom from "./batchCopyDom";
 import stopWriteLoading from "./stopWriteLoading";
 
-const globalConfig = {
-  remoteStaticUrl: "https://cdn.hyl999.co/public",
-};
-
 export {
   request,
   clearLogin,
   changeBlogTitle,
   getDecode,
   batchCopyDom,
-  globalConfig,
   stopWriteLoading,
 };

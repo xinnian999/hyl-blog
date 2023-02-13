@@ -4,3 +4,5 @@ type response = {
 };
 
 declare module "aplayer";
+
+declare const globalConfig: { remoteStaticUrl: string };

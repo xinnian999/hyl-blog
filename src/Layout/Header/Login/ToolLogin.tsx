@@ -1,4 +1,4 @@
-import { useRedux, useRequest } from "@/hooks";
+import { useRedux, useGetData } from "@/hooks";
 import { request } from "@/utils";
 import { Divider, message } from "antd";
 import { cookie } from "hyl-utils";
@@ -15,8 +15,7 @@ const qqLogin = () => {
 export default function ToolLogin({ setState }) {
   const { dispatchAll } = useRedux();
 
-  const [, runGetWx] = useRequest("/qq/getWxQrCode", {
-    method: "get",
+  const [, runGetWx] = useGetData("/qq/getWxQrCode", {
     manual: true,
     progress: false,
     onSuccess: (res: any) => {

@@ -1,13 +1,12 @@
 import { Timeline, Image } from "antd";
 
 import { classnames, time } from "hyl-utils";
-import { globalConfig } from "@/utils";
 import { Bubble, Icon, OverPack } from "@/components";
-import { useWindowSize, useRequest } from "@/hooks";
+import { useWindowSize, useGetData } from "@/hooks";
 import "./style.scss";
 
 const First = () => {
-  const [data] = useRequest("/mood/query");
+  const [data] = useGetData("/mood/query");
 
   const { width } = useWindowSize();
 

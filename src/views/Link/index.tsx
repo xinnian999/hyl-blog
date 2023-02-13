@@ -4,7 +4,7 @@ import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { PageCenter, Banner, Title, Copy } from "@/components";
-import { useRequest } from "@/hooks";
+import { useGetData } from "@/hooks";
 import "./style.scss";
 import { useMemo } from "react";
 
@@ -28,11 +28,8 @@ const yaml = `- name: 心念の空间站
   descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
-  const [data] = useRequest("/link/query", {
+  const [data] = useGetData("/link/query", {
     mockLoadingCount: 8,
-    onFail(res) {
-      console.log(res);
-    },
   });
 
   const renderInfo = useMemo(

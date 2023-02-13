@@ -7,8 +7,8 @@ import { useParams } from "react-router-dom";
 import { time } from "hyl-utils";
 import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
-import { changeBlogTitle } from "@/utils";
-import { useSetState, useWindowSize, useRequest } from "@/hooks";
+import { changeBlogTitle, request } from "@/utils";
+import { useSetState, useWindowSize, useGetData } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
 
@@ -60,7 +60,7 @@ function ArticleDetail() {
 
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
-  useRequest("/article/queryDetail", {
+  useGetData("/article/queryDetail", {
     data: { id: params.id },
     onSuccess: (res) => {
       const [data] = res.data;
@@ -69,9 +69,12 @@ function ArticleDetail() {
       // 设置页面标题
       changeBlogTitle("", data.title);
       // 文章阅读量+1
-      // setTimeout(() => {
-      //   request.put("/article/visit", { id: params.id });
-      // }, 3000);
+      setTimeout(() => {
+        request.put("/article/visit", {
+          id: params.id,
+          updateTime: time.parse(data.updateTime),
+        });
+      }, 3000);
       //查询相关文章
       runGetAbout({
         data: {
@@ -90,7 +93,7 @@ function ArticleDetail() {
     },
   });
 
-  const [, runGetAbout] = useRequest("/article/query", {
+  const [, runGetAbout] = useGetData("/article/query", {
     manual: true,
     progress: false,
   });

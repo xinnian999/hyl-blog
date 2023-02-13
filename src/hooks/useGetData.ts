@@ -2,10 +2,8 @@ import { useState } from "react";
 import Nprogress from "nprogress";
 import { request } from "@/utils";
 import useMount from "./useMount";
-import { pick } from "hyl-utils";
 
 type toolConfig = {
-  method?: "get" | "post" | "put" | "delete";
   data?: object;
   manual?: boolean;
   progress?: boolean;
@@ -17,12 +15,11 @@ type toolConfig = {
 
 type isRun = (props?: toolConfig) => Promise<any>;
 
-type useRequestResult = [any[], isRun, (data: any) => void];
+type useGetDataResult = [any[], isRun, (data: any) => void];
 
 type useStateResult = [any[], (data?: any) => void];
 
 const defaultConfig: toolConfig = {
-  method: "get",
   progress: true,
   onSuccess: undefined,
   onFail: undefined,
@@ -32,14 +29,13 @@ const defaultConfig: toolConfig = {
   cache: false,
 };
 
-//只传入url，默认get请求
 //默认在组件挂载完成时自动发一次请求，可设置config的manual为 true取消自动
 //默认开启progress顶部加载进度条，可设置config的progress为 false
 //默认关闭缓存数据，可设置config的cacheData为 true开启
-function useRequest(
+function useGetData(
   url: string,
   newConfig: toolConfig = defaultConfig
-): useRequestResult {
+): useGetDataResult {
   const config = { ...defaultConfig, ...newConfig };
 
   const [result, setResult]: useStateResult = useState([]);
@@ -67,14 +63,8 @@ function useRequest(
       setResult(data.concat(mockData));
     }
 
-    //合并axios需要的请求配置
-    const options = {
-      url,
-      ...pick(config, ["method", "data"]),
-    };
-
     try {
-      const res = await request(options);
+      const res = await request.get(url, config.data);
 
       const newData = config.cache ? data.concat(res.data) : res.data;
       setResult(newData);
@@ -106,4 +96,4 @@ function useRequest(
   return [result, run, set];
 }
 
-export default useRequest;
+export default useGetData;

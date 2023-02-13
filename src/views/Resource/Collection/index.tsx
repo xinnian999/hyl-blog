@@ -1,12 +1,11 @@
 import { Image, Skeleton } from "antd";
 import { InsertRowAboveOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
-import { useRequest } from "@/hooks";
-import { globalConfig } from "@/utils";
+import { useGetData } from "@/hooks";
 import "./style.scss";
 
 export default function Collection() {
-  const [data] = useRequest("/collection/query", { mockLoadingCount: 4 });
+  const [data] = useGetData("/collection/query", { mockLoadingCount: 4 });
 
   const renderItem = data.map(
     ({ picture, title, autograph, createTime, loading, link, id }) => {
