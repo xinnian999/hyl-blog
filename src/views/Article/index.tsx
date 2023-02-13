@@ -3,9 +3,15 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Divider, Space, Skeleton } from "antd";
 import { Drawer } from "@arco-design/web-react";
 import ReactScroll from "react-infinite-scroll-component";
-import { useBoolean, useScroll } from "ahooks";
+import { useScroll } from "ahooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import { useWindowSize, useGetData, useMount, useRedux } from "@/hooks";
+import {
+  useWindowSize,
+  useGetData,
+  useMount,
+  useRedux,
+  useBoolean,
+} from "@/hooks";
 import { PageCenter } from "@/components";
 import { batchCopyDom, request } from "@/utils";
 import Search from "./Search";
@@ -17,7 +23,22 @@ function Article() {
   const history = useNavigate();
 
   const { dispatchAll } = useRedux();
+
   const [params] = useSearchParams();
+
+  const toobarRef = useRef(null) as any;
+
+  const { current } = useRef({
+    pageNum: 1,
+    category: params.get("category"),
+    total: 10,
+  });
+
+  const scrollNum = useScroll()!;
+
+  const size = useWindowSize();
+
+  const [drawerVisible, on, off] = useBoolean(false);
 
   useMount(() => {
     if (params.get("getUserInfo")) {
@@ -39,20 +60,6 @@ function Article() {
     }
   });
 
-  const toobarRef = useRef(null) as any;
-
-  const { current } = useRef({
-    pageNum: 1,
-    category: params.get("category"),
-    total: 10,
-  });
-
-  const scrollNum = useScroll()!;
-
-  const size = useWindowSize();
-
-  const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
-
   const [articleData, runQueryArticle, setArticleData] = useGetData(
     "/article/query",
     {
@@ -73,7 +80,7 @@ function Article() {
     }
   );
 
-  const [hotArticleData] = useGetData("/article/query2", {
+  const [hotArticleData] = useGetData("/article/query", {
     progress: false,
     mockLoadingCount: 5,
     data: {
@@ -231,14 +238,14 @@ function Article() {
         {size.width > 800 ? (
           Toolbar
         ) : (
-          <div className="toolbarFlag" onClick={setTrue}>
+          <div className="toolbarFlag" onClick={on}>
             <MenuFoldOutlined />
           </div>
         )}
 
         <Drawer
           placement="right"
-          onCancel={setFalse}
+          onCancel={off}
           visible={drawerVisible}
           width="60%"
           footer={null}
