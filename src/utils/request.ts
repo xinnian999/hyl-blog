@@ -5,7 +5,7 @@ import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
 import { cookie } from "hyl-utils";
 
-const request: any = axios.create({
+const request = axios.create({
   baseURL: "/api",
   timeout: 15000,
   withCredentials: true,

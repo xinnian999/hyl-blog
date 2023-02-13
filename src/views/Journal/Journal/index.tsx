@@ -1,9 +1,9 @@
 import { Timeline, Image } from "antd";
-import classnames from "classnames";
+
+import { classnames, time } from "hyl-utils";
+import { globalConfig } from "@/utils";
 import { Bubble, Icon, OverPack } from "@/components";
 import { useWindowSize, useRequest } from "@/hooks";
-import { time } from "hyl-utils";
-import { globalConfig } from "@/utils";
 import "./style.scss";
 
 const First = () => {

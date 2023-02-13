@@ -3,7 +3,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { Divider, Space, Skeleton } from "antd";
 import { Drawer } from "@arco-design/web-react";
 import ReactScroll from "react-infinite-scroll-component";
-import classnames from "classnames";
 import { useBoolean, useScroll } from "ahooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { useWindowSize, useRequest, useMount, useRedux } from "@/hooks";
@@ -12,6 +11,7 @@ import { batchCopyDom, request } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
+import { classnames } from "hyl-utils";
 
 function Article() {
   const history = useNavigate();

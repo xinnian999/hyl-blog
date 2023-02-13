@@ -11,21 +11,13 @@ import {
   Spin,
 } from "antd";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import md5 from "js-md5";
-
 import { clearLogin } from "@/utils";
-import {
-  useSetState,
-  useRequest,
-  useBoolean,
-  useRedux,
-  useWindowSize,
-} from "@/hooks";
+import { useSetState, useBoolean, useRedux, useWindowSize } from "@/hooks";
 import "./style.scss";
 import { PageHeader, Popover } from "@arco-design/web-react";
-import { pick } from "lodash";
-import { getRandom } from "hyl-utils";
+import { getRandom, pick } from "hyl-utils";
 import ToolLogin from "./ToolLogin";
+import { login, register } from "./api";
 
 const avatar = [
   "img_1.jpeg",
@@ -54,13 +46,15 @@ export default function Login() {
 
   const { username, headPicture } = store.userInfo;
 
-  const [, runOnLogin] = useRequest("/user/login", {
-    method: "post",
-    manual: true,
-    progress: true,
-    onSuccess: (res: any) => {
-      const { username } = res.data;
+  const randomAvatar = () => {
+    const random = getRandom(0, 5);
+    setState({
+      imageUrl: `/api/avatar/${avatar[random]}`,
+    });
+  };
 
+  const onLoginUser = (data) => {
+    login(data).then((res) => {
       if (res.status === 0) {
         dispatchAll([
           {
@@ -74,51 +68,28 @@ export default function Login() {
           { type: "CHANGE_LOGIN_MODAL", payload: false },
         ]);
         message.success(`欢迎您!${username}`);
-      }
-      if (res.status === 1) {
+      } else {
         message.warning("登陆失败");
       }
-    },
-  });
-
-  const [, runOnRegister] = useRequest("/user/register", {
-    method: "post",
-    manual: true,
-    progress: true,
-    onSuccess: (res: any) => {
-      if (res.status === 0) {
-        message.success("注册成功");
-        offRegister();
-      }
-      if (res.status === 1) {
-        message.warning("用户名已存在");
-      }
-    },
-  });
-
-  const randomAvatar = () => {
-    const random = getRandom(0, 5);
-    setState({
-      imageUrl: `/api/avatar/${avatar[random]}`,
     });
   };
 
-  const onLoginUser = (values: any) => {
-    const { username, password } = values;
-    runOnLogin({ data: { username, password: md5(password) } });
-  };
-
-  const onRegisterUser = (values: any) => {
+  const onRegisterUser = (values) => {
     if (!imageUrl) {
       randomAvatar();
     }
     setState((state: any) => {
-      runOnRegister({
-        data: {
-          ...values,
-          headPicture: state.imageUrl,
-          password: md5(values.password),
-        },
+      register({
+        ...values,
+        headPicture: state.imageUrl,
+      }).then((res) => {
+        if (res.status === 0) {
+          message.success("注册成功");
+          offRegister();
+        }
+        if (res.status === 1) {
+          message.warning("用户名已存在");
+        }
       });
     });
   };

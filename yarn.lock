@@ -5724,10 +5724,10 @@ human-signals@^2.1.0:
   resolved "https://registry.npmmirror.com/human-signals/-/human-signals-2.1.0.tgz"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-hyl-utils@^1.3.48:
-  version "1.3.48"
-  resolved "https://registry.npmjs.org/hyl-utils/-/hyl-utils-1.3.48.tgz#1a89da7bdc05a2bdce3ec25bbefb714694199fe7"
-  integrity sha512-vfNVNYRODPzBqL3U1UprQiVAVx2MI74AeJT7BaY91Mi1Cx2J37g+ev9ez4/ONkhvOQSBL8RcFdepetc/lLA9Rg==
+hyl-utils@^1.3.50:
+  version "1.3.50"
+  resolved "https://registry.npmjs.org/hyl-utils/-/hyl-utils-1.3.50.tgz#916cacc131b13c85396689e249d56fb24e1470f9"
+  integrity sha512-mnjQjdHZ1syMLqZLMXQnIHbP6YubaGUYRN/Nf9U9wlTwgRUDJNOR7oeSY/WBmuB5S1v9f9feOgD2qsW5aax30Q==
 
 iconv-lite@0.4.24:
   version "0.4.24"
@@ -6632,11 +6632,6 @@ jest@^27.4.3:
     "@jest/core" "^27.5.1"
     import-local "^3.0.2"
     jest-cli "^27.5.1"
-
-jparticles@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.npmmirror.com/jparticles/-/jparticles-3.4.0.tgz"
-  integrity sha512-95d9W2vkRTNZzg9wUONO9ir5xQYSjtBi0BU6mrQnCG61ckIzKRgt1aeQpRu93FHjgX+3XGRNTyo2HfQFOExdaQ==
 
 jquery@^1.9.1:
   version "1.12.4"
@@ -7640,7 +7635,7 @@ mkdirp@~0.5.1:
   dependencies:
     minimist "^1.2.6"
 
-moment@^2.24.0, moment@^2.29.1, moment@^2.29.2:
+moment@^2.24.0, moment@^2.29.2:
   version "2.29.4"
   resolved "https://registry.npmmirror.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==

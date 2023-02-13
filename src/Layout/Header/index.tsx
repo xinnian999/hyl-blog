@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { Icon } from "@/components";
 import menus from "@/router";
-import { useWindowSize, useRedux, useBoolean, useMount } from "@/hooks";
+import { useWindowSize, useRedux, useBoolean } from "@/hooks";
 import Login from "./Login";
 import { Tooltip, Modal, Switch, Button, Popover } from "antd";
 import { useMemo } from "react";
@@ -13,8 +13,6 @@ const theme = [
   { bg: 125, color: "#25b864" },
   { bg: 0, color: "#d6324d" },
 ];
-
-const first = localStorage.getItem("first");
 
 function Header({ style }) {
   const navigate = useNavigate();
@@ -53,13 +51,6 @@ function Header({ style }) {
     []
   );
 
-  useMount(() => {
-    if (!first) {
-      localStorage.setItem("first", "no");
-      on();
-    }
-  });
-
   return (
     <header style={style}>
       <div id="iphone-menus">
@@ -93,7 +84,7 @@ function Header({ style }) {
         closable={false}
         okText="确认"
         cancelText="取消"
-        title={first ? "本站设置" : "欢迎光临本站,修改一下设置?"}
+        title="本站设置"
         onOk={() => window.location.reload()}
         destroyOnClose
       >

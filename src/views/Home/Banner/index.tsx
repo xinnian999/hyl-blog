@@ -2,12 +2,12 @@ import { useMount, useBoolean } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import TweenOne from "rc-tween-one";
 import { useRef } from "react";
-import classNames from "classnames";
 import Canvas from "@/views/Home/Banner/Canvas";
 import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import { useRedux } from "@/hooks";
 import textCustom from "./textCustom";
 import "./style.scss";
+import { classnames } from "hyl-utils";
 
 export default function Banner() {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ export default function Banner() {
       </div>
 
       <div
-        className={classNames("fast-nav", { "fast-nav-hide": visible })}
+        className={classnames("fast-nav", { "fast-nav-hide": visible })}
       ></div>
       {visible && <div className="fast-nav-mask" onClick={toggle}></div>}
       {visible && (

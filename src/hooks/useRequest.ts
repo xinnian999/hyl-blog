@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Nprogress from "nprogress";
-import { pick } from "lodash";
 import { request } from "@/utils";
 import useMount from "./useMount";
+import { pick } from "hyl-utils";
 
 type toolConfig = {
   method?: "get" | "post" | "put" | "delete";
@@ -29,8 +29,7 @@ const defaultConfig: toolConfig = {
   onFail: undefined,
   data: {},
   manual: false,
-  params: {    orderBys:
-    'id desc'},
+  params: { orderBys: "id desc" },
   mockLoadingCount: undefined,
   cache: false,
 };

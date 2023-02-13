@@ -1,22 +1,21 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { BackTop, ConfigProvider } from "antd";
+import { cookie } from "hyl-utils";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
 import menus from "@/router";
 import { Loading, Redirect } from "@/components";
 import { changeBlogTitle, globalConfig } from "@/utils";
-import { useRequest, useRedux, useMount } from "@/hooks";
+import { useRequest, useRedux } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
-import Lantern from "./Lantern";
-import { cookie } from "hyl-utils";
 
 function Layout() {
   const location = useLocation();
 
-  const { store, dispatch } = useRedux();
+  const { store } = useRedux();
 
   useRequest("/all/getCsrfToken", {
     progress: false,
@@ -31,7 +30,7 @@ function Layout() {
         url: `${globalConfig.remoteStaticUrl}/music/${item.url}`,
       }));
 
-      const music = new APlayer({
+      new APlayer({
         container: document.getElementById("aplayer"),
         audio: data, // 音乐信息
         fixed: true, // 开启吸底模式
@@ -40,20 +39,6 @@ function Layout() {
         preload: "auto", // 自动预加载歌曲
         loop: "all", // 播放循环模式、all全部循环 one单曲循环 none只播放一次
         order: "list", //  播放模式，list列表播放, random随机播放
-      });
-
-      music.on("pause", function () {
-        dispatch({
-          type: "CHANGE_AUTOPLAY",
-          payload: false,
-        });
-      });
-
-      music.on("play", function () {
-        dispatch({
-          type: "CHANGE_AUTOPLAY",
-          payload: true,
-        });
       });
     },
   });
@@ -77,10 +62,6 @@ function Layout() {
       canvasBg(store.theme.bg);
     }
   }, [store.theme]);
-
-  useMount(() => {
-    dispatch({ type: "CHANGE_LOGIN_MODAL", payload: false });
-  });
 
   const renderRoutes = useCallback(
     (menu: any) =>
@@ -122,7 +103,6 @@ function Layout() {
         <canvas id="canvasBg"></canvas>
       </div>
       <div id="aplayer"></div>
-      <Lantern />
       <Header style={{ display: isHome && "none" }} />
       <main id="main" className={!isHome ? "isHome" : ""}>
         <Routes>
