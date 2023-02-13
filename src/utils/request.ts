@@ -1,11 +1,9 @@
 import axios from "axios";
 import { notification } from "antd";
-import cookie from "js-cookie";
 import { store } from "@/store";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
-
-console.dir(axios);
+import { cookie } from "hyl-utils";
 
 const request: any = axios.create({
   baseURL: "/api",

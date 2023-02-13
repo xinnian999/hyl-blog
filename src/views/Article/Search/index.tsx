@@ -1,7 +1,8 @@
 import { PureComponent } from "react";
 import { Select } from "@arco-design/web-react";
 import { SearchOutlined } from "@ant-design/icons";
-import { request, debounce } from "@/utils";
+import { request } from "@/utils";
+import { debounce } from "hyl-utils";
 import "./style.scss";
 
 class SearchInput extends PureComponent<any> {

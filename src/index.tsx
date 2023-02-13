@@ -1,9 +1,6 @@
-import "react-app-polyfill/ie9";
-import "react-app-polyfill/stable";
 import "lib-flexible";
 import { createRoot } from "react-dom/client";
 import { notification } from "antd";
-import { isIE } from "@/utils";
 import "antd/dist/antd.variable.min.css";
 import "animate.css";
 import "@arco-design/web-react/dist/css/arco.css";
@@ -12,10 +9,6 @@ import "./jquery.textillate";
 import "@/style/style.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-
-if (isIE()) {
-  alert("请放弃万恶的IE浏览器吧");
-}
 
 document.addEventListener("copy", () => {
   var selecter = window.getSelection()?.toString();

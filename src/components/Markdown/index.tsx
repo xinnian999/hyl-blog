@@ -6,7 +6,7 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
 import { CopyOutlined, LinkOutlined } from "@ant-design/icons";
-import { copy } from "@/utils";
+import { copy } from "hyl-utils";
 import "./style.scss";
 
 const components = {

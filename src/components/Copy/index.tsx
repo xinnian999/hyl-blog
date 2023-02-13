@@ -1,5 +1,5 @@
 import { CopyOutlined } from "@ant-design/icons";
-import { copy } from "@/utils";
+import { copy } from "hyl-utils";
 import "./style.scss";
 
 interface CopyProps {

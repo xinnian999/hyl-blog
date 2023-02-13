@@ -1,7 +1,7 @@
 import { useRedux, useRequest } from "@/hooks";
 import { request } from "@/utils";
 import { Divider, message } from "antd";
-import cookie from "js-cookie";
+import { cookie } from "hyl-utils";
 
 const qqLogin = () => {
   window.open(

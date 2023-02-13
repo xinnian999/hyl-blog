@@ -3,15 +3,15 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { BackTop, ConfigProvider } from "antd";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
-import cookie from "js-cookie";
 import menus from "@/router";
 import { Loading, Redirect } from "@/components";
-import { changeBlogTitle, globalConfig, request } from "@/utils";
+import { changeBlogTitle, globalConfig } from "@/utils";
 import { useRequest, useRedux, useMount } from "@/hooks";
 import Header from "./Header";
 import "./style.scss";
 import canvasBg from "./canvas";
 import Lantern from "./Lantern";
+import { cookie } from "hyl-utils";
 
 function Layout() {
   const location = useLocation();
