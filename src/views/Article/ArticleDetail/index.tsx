@@ -61,7 +61,7 @@ function ArticleDetail() {
   const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
 
   useRequest("/article/queryDetail", {
-    params: { id: params.id },
+    data: { id: params.id },
     onSuccess: (res) => {
       const [data] = res.data;
 
@@ -74,7 +74,7 @@ function ArticleDetail() {
       // }, 3000);
       //查询相关文章
       runGetAbout({
-        params: {
+        data: {
           pageNum: 1,
           pageSize: 6,
           filters: { publish: 1, category: data.category },

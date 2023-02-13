@@ -22,7 +22,7 @@ export default function ToolLogin({ setState }) {
     onSuccess: (res: any) => {
       setState({ wxLoginQr: res.data.qrUrl });
       const timer = setInterval(() => {
-        request("/qq/getLoginStatus").then((res) => {
+        request.get("/qq/getLoginStatus").then((res) => {
           if (res) {
             clearInterval(timer);
             dispatchAll([

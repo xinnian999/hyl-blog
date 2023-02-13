@@ -1,6 +1,6 @@
 import { Comment, List, message } from "antd";
 import { useSelector } from "react-redux";
-import { classnames, httpTohttps, time } from "hyl-utils";
+import { classnames, httpTohttps, pick, time } from "hyl-utils";
 import { useSetState } from "@/hooks";
 import { request } from "@/utils";
 import Editor from "../Editor";
@@ -21,12 +21,17 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
   };
 
   const handleDelete = (itemData: any) => {
-    request.delete("/comment/delete", { params: itemData }).then((res: any) => {
-      if (res.status === 0) {
-        refresh();
-        message.success("删除评论成功");
-      }
-    });
+    request
+      .delete(
+        "/comment/delete",
+        pick(itemData, ["id", "reply_id", "article_id"])
+      )
+      .then((res: any) => {
+        if (res.status === 0) {
+          refresh();
+          message.success("删除评论成功");
+        }
+      });
   };
 
   const renderAction = (item: any) => {
@@ -43,7 +48,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
       },
     ];
 
-    if (author_id === item.author_id) {
+    if (author_id == item.author_id) {
       action.push({
         name: "删除",
         handle: handleDelete,

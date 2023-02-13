@@ -10,7 +10,7 @@ export default function Article() {
   const [hotArticleData] = useRequest("/article/query", {
     method: "get",
     progress: false,
-    params: {
+    data: {
       pageNum: 1,
       pageSize: 3,
       filters: { publish: 1 },

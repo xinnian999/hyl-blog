@@ -7,11 +7,7 @@ import { useWindowSize, useRequest } from "@/hooks";
 import "./style.scss";
 
 const First = () => {
-  const [data] = useRequest("/mood/query", {
-    params: {
-      orderBys: "id desc",
-    },
-  });
+  const [data] = useRequest("/mood/query");
 
   const { width } = useWindowSize();
 

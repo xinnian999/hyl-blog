@@ -21,7 +21,7 @@ function Article() {
 
   useMount(() => {
     if (params.get("getUserInfo")) {
-      request("/qq/getLoginStatus").then((res) => {
+      request.get("/qq/getLoginStatus").then((res) => {
         if (res) {
           dispatchAll([
             {
@@ -57,7 +57,7 @@ function Article() {
     "/article/query",
     {
       progress: false,
-      params: {
+      data: {
         pageNum: current.pageNum,
         pageSize: 5,
         filters:
@@ -76,7 +76,7 @@ function Article() {
   const [hotArticleData] = useRequest("/article/query", {
     progress: false,
     mockLoadingCount: 5,
-    params: {
+    data: {
       pageNum: 1,
       pageSize: 5,
       filters: { publish: 1 },
@@ -87,7 +87,7 @@ function Article() {
   const [categoryData] = useRequest("/category/query", {
     method: "get",
     mockLoadingCount: 7,
-    params: {},
+    data: {},
   });
 
   const renderHotArticle = useMemo(
@@ -163,7 +163,7 @@ function Article() {
                     setArticleData([]);
 
                     runQueryArticle({
-                      params: {
+                      data: {
                         pageNum: 1,
                         pageSize: 5,
                         filters:
@@ -174,11 +174,9 @@ function Article() {
                       },
                     });
                   }}
-                  className={
-                    current.category === name
-                      ? "article-toolbar-category-item categoryActive"
-                      : "article-toolbar-category-item"
-                  }
+                  className={classnames("article-toolbar-category-item", {
+                    categoryActive: current.category === name,
+                  })}
                 >
                   <div>{name === "all" ? "全部" : name} </div>
                 </li>

@@ -7,7 +7,6 @@ import { pick } from "hyl-utils";
 type toolConfig = {
   method?: "get" | "post" | "put" | "delete";
   data?: object;
-  params?: object;
   manual?: boolean;
   progress?: boolean;
   onSuccess?: (res: any) => void;
@@ -27,9 +26,8 @@ const defaultConfig: toolConfig = {
   progress: true,
   onSuccess: undefined,
   onFail: undefined,
-  data: {},
+  data: { orderBys: "id desc" },
   manual: false,
-  params: { orderBys: "id desc" },
   mockLoadingCount: undefined,
   cache: false,
 };
@@ -72,11 +70,12 @@ function useRequest(
     //合并axios需要的请求配置
     const options = {
       url,
-      ...pick(config, ["method", "data", "params"]),
+      ...pick(config, ["method", "data"]),
     };
 
     try {
       const res = await request(options);
+
       const newData = config.cache ? data.concat(res.data) : res.data;
       setResult(newData);
       setData(newData);
