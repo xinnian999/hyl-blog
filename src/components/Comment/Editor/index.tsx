@@ -1,5 +1,4 @@
-import { Button, Input, message, Modal, Space } from "antd";
-import { Popover } from "@arco-design/web-react";
+import { Button, Input, message, Modal, Popover, Space } from "antd";
 import { useRef } from "react";
 import { SmileOutlined } from "@ant-design/icons";
 import { classnames, time } from "hyl-utils";
@@ -147,7 +146,7 @@ export default function Editor({
 
       <Modal
         title="绑定邮箱"
-        visible={open}
+        open={open}
         onCancel={off}
         okText="绑定"
         keyboard={false}

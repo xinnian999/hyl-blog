@@ -16,7 +16,7 @@ export default function Preview({ children, title }) {
       {children}
       <Modal
         title={title}
-        visible={visible}
+        open={visible}
         onCancel={off}
         width="80vw"
         footer={[]}
