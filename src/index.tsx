@@ -4,11 +4,10 @@ import { notification } from "antd";
 import "antd/dist/antd.variable.min.css";
 import "animate.css";
 import "@arco-design/web-react/dist/css/arco.css";
-import "./jquery.lettering";
-import "./jquery.textillate";
+import "@/assets/js/jquery.lettering";
+import "@/assets/js/jquery.textillate";
 import "@/style/style.scss";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 
 document.addEventListener("copy", () => {
   var selecter = window.getSelection()?.toString();
@@ -25,5 +24,3 @@ document.addEventListener("copy", () => {
 
 const root = createRoot(document.getElementById("root")!);
 root.render(<App />);
-
-reportWebVitals();

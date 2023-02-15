@@ -2,6 +2,15 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
+type response = {
+  data: any[];
+  status: number;
+};
+
+declare module "aplayer";
+
+declare const globalConfig: { remoteStaticUrl: string };
+
 declare namespace NodeJS {
   interface ProcessEnv {
     readonly NODE_ENV: "development" | "production" | "test";

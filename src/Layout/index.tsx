@@ -9,8 +9,8 @@ import { Loading, Redirect } from "@/components";
 import { changeBlogTitle } from "@/utils";
 import { useGetData, useRedux } from "@/hooks";
 import Header from "./Header";
+import starBg from "./widgets/starBg";
 import "./style.scss";
-import canvasBg from "./canvas";
 
 function Layout() {
   const location = useLocation();
@@ -59,7 +59,7 @@ function Layout() {
     });
 
     if (!store.simple) {
-      canvasBg(store.theme.bg);
+      starBg(store.theme.bg);
     }
   }, [store.theme]);
 
