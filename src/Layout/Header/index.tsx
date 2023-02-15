@@ -79,7 +79,7 @@ function Header({ style }) {
       </div>
 
       <Modal
-        visible={setVisible}
+        open={setVisible}
         onCancel={off}
         closable={false}
         okText="确认"

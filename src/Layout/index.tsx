@@ -1,6 +1,6 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { BackTop, ConfigProvider } from "antd";
+import { ConfigProvider as AntdProvider, FloatButton } from "antd";
 import { cookie } from "hyl-utils";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
@@ -52,7 +52,7 @@ function Layout() {
 
   // 主题监听
   useEffect(() => {
-    ConfigProvider.config({
+    AntdProvider.config({
       theme: {
         primaryColor: store.theme.color,
       },
@@ -98,7 +98,14 @@ function Layout() {
   const isHome = location.pathname === "/home";
 
   return (
-    <>
+    <AntdProvider
+      theme={{
+        token: {
+          colorPrimary: store.theme.color,
+          fontFamily: "font",
+        },
+      }}
+    >
       <div id="backgroundImg">
         <canvas id="canvasBg"></canvas>
       </div>
@@ -128,8 +135,8 @@ function Layout() {
           京ICP备2021033841号-2
         </a>
       </footer>
-      <BackTop />
-    </>
+      <FloatButton.BackTop visibilityHeight={800} />
+    </AntdProvider>
   );
 }
 

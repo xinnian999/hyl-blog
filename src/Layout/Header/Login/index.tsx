@@ -141,7 +141,7 @@ export default function Login() {
 
       <Modal
         title={isRegister ? "注册" : "登陆"}
-        visible={store.loginModal}
+        open={store.loginModal}
         onCancel={() =>
           dispatch({ type: "CHANGE_LOGIN_MODAL", payload: false })
         }

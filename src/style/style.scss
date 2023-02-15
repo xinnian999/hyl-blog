@@ -37,7 +37,7 @@ body {
 
 #root {
   font-size: 16px;
-  font-family: "font";
+  font-family: "font" !important;
 
   @media screen and (max-width: 500px) {
     font-size: 19px;
@@ -51,6 +51,10 @@ body {
 
 .ant-comment-content-detail {
   white-space: pre-wrap;
+}
+
+.css-dev-only-do-not-override-diro6f {
+  font-family: "font" !important;
 }
 
 ::-webkit-scrollbar {

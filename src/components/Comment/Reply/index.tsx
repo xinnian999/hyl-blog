@@ -1,5 +1,6 @@
-import { Comment, List, message } from "antd";
+import { List, message } from "antd";
 import { useSelector } from "react-redux";
+import { Comment } from "@arco-design/web-react";
 import { classnames, httpTohttps, pick, time } from "hyl-utils";
 import { useSetState } from "@/hooks";
 import { request } from "@/utils";

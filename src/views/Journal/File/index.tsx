@@ -1,5 +1,4 @@
 import { Component } from "react";
-import moment from "moment";
 import { time } from "hyl-utils";
 import { List, Typography, Divider } from "antd";
 import { request } from "@/utils";
@@ -54,7 +53,7 @@ class Index extends Component<isProps, isState> {
             <div onClick={() => navigate(`/article/${item.id}`)}>
               <List.Item className="fileList">
                 <Typography.Text mark>
-                  [{moment(item.createTime).format("MM-DD")}]
+                  [{time.parse(item.createTime, "MM-DD")}]
                 </Typography.Text>{" "}
                 {item.title}
               </List.Item>
