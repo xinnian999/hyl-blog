@@ -1,4 +1,5 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
+import { SettingOutlined } from "@ant-design/icons";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { ConfigProvider as AntdProvider, FloatButton } from "antd";
 import { cookie } from "hyl-utils";
@@ -135,7 +136,11 @@ function Layout() {
           京ICP备2021033841号-2
         </a>
       </footer>
-      <FloatButton.BackTop visibilityHeight={800} />
+
+      <FloatButton.Group shape="square" style={{ right: 60 }}>
+        <FloatButton icon={<SettingOutlined />} />
+        <FloatButton.BackTop visibilityHeight={800} />
+      </FloatButton.Group>
     </AntdProvider>
   );
 }
