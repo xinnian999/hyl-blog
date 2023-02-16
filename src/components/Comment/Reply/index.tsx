@@ -1,7 +1,8 @@
-import { List, message } from "antd";
+import { message, Popconfirm } from "antd";
 import { useSelector } from "react-redux";
-import { Comment } from "@arco-design/web-react";
+import Comment from "../Comment";
 import { classnames, httpTohttps, pick, time } from "hyl-utils";
+import { CommentOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useSetState } from "@/hooks";
 import { request } from "@/utils";
 import Editor from "../Editor";
@@ -9,10 +10,11 @@ import Editor from "../Editor";
 const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
   const { userInfo, loginState } = useSelector((state: any) => state);
 
-  const [{ visible, replyName, replyEmail }, setState] = useSetState({
+  const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
     visible: false,
     replyName: undefined,
     replyEmail: undefined,
+    content: "",
   });
 
   const { id: author_id } = userInfo;
@@ -21,54 +23,52 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
     setState({ visible: false });
   };
 
-  const handleDelete = (itemData: any) => {
-    request
-      .delete(
-        "/comment/delete",
-        pick(itemData, ["id", "reply_id", "article_id"])
-      )
-      .then((res: any) => {
-        if (res.status === 0) {
-          refresh();
-          message.success("删除评论成功");
-        }
-      });
-  };
-
   const renderAction = (item: any) => {
-    const action = [
-      {
-        name: "回复",
-        handle: (itemData: any) => {
-          setState({
-            visible: true,
-            replyName: itemData.author,
-            replyEmail: itemData.email,
-          });
-        },
-      },
+    const handleReply = () => {
+      setState({
+        visible: true,
+        replyName: item.author,
+        replyEmail: item.email,
+        content: item.content,
+      });
+    };
+
+    const handleDelete = () => {
+      request
+        .delete("/comment/delete", pick(item, ["id", "reply_id", "article_id"]))
+        .then((res: any) => {
+          if (res.status === 0) {
+            refresh();
+            message.success("删除评论成功");
+          }
+        });
+    };
+
+    const action: any = [
+      <CommentOutlined onClick={handleReply} key="reply" />,
+      author_id == item.author_id ? (
+        <Popconfirm
+          title="确认删除这条评论吗？"
+          onConfirm={handleDelete}
+          okText="yes"
+          cancelText="no"
+          key="delete"
+        >
+          <DeleteOutlined />
+        </Popconfirm>
+      ) : null,
     ];
 
-    if (author_id == item.author_id) {
-      action.push({
-        name: "删除",
-        handle: handleDelete,
-      });
-    }
-
     if (!loginState) return [];
-    return action.map(({ name, handle }: any) => (
-      <span onClick={() => handle(item)}>{name}</span>
-    ));
+
+    return action;
   };
 
   const author = (item: any) => (
-    <div>
-      <span className="username">
-        {author_id === item.author_id ? `${item.author}（me）` : item.author}
-      </span>
-      {item.author_id === 30 && <span className="boss">站长</span>}
-    </div>
+    <>
+      <span className="username">{item.author}</span>{" "}
+      {item.author_id == 30 && <span className="boss">站长</span>}
+    </>
   );
 
   const classname = classnames("replyItem", {
@@ -86,12 +86,10 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
         datetime={time.parse(commentItem.datetime)}
         className="replyCon"
       >
-        {replyData.length ? (
-          <List
-            className="itemList"
-            dataSource={replyData}
-            itemLayout="horizontal"
-            renderItem={(props: any) => (
+        {replyData.length > 0 &&
+          replyData.map((props, i) => (
+            <>
+              {i > 0 && <hr color="#eee" />}
               <Comment
                 {...props}
                 content={`回复 ${props.reply_name} : ${props.content}`}
@@ -99,17 +97,17 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
                 actions={renderAction(props)}
                 avatar={httpTohttps(props.avatar)}
                 datetime={time.parse(props.datetime)}
-                className="itemList-item"
+                key={props.id}
               />
-            )}
-          />
-        ) : null}
+            </>
+          ))}
       </Comment>
+
       {visible && loginState && (
         <div className="replyEditor">
           <Editor
             btnName={`回复 ${replyName}`}
-            placeholder={`回复 ${replyName}`}
+            placeholder={`${replyName}: ${content}`}
             articleId={commentItem.article_id}
             refresh={refresh}
             replyData={{

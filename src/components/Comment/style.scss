@@ -11,9 +11,6 @@ $bgc: rgba(255, 255, 255, 0.8);
 .commentCon {
   padding-bottom: 15px;
   z-index: 1;
-  // :nth-child(1){
-  //   border-radius: 10px 10px 0 0;
-  // }
 
   .total {
     color: #fff;
@@ -31,6 +28,9 @@ $bgc: rgba(255, 255, 255, 0.8);
     .replyEditor {
       padding-left: 58px;
     }
+  }
+  .itemList {
+    font-size: 12px !important;
   }
   .itemList-item {
     background-color: var(--ant-primary-1);

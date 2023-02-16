@@ -139,7 +139,7 @@ function Layout() {
 
       <FloatButton.Group shape="square" style={{ right: 60 }}>
         <FloatButton icon={<SettingOutlined />} />
-        <FloatButton.BackTop visibilityHeight={800} />
+        <FloatButton.BackTop visibilityHeight={1} />
       </FloatButton.Group>
     </AntdProvider>
   );
