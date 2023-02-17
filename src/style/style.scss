@@ -57,6 +57,10 @@ body {
   font-family: "font" !important;
 }
 
+.primaryColor {
+  color: var(--ant-primary-color);
+}
+
 ::-webkit-scrollbar {
   /*滚动条整体样式*/
   width: 10px;

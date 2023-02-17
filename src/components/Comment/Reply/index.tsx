@@ -1,8 +1,7 @@
 import { message, Popconfirm } from "antd";
 import { useSelector } from "react-redux";
 import Comment from "../Comment";
-import { classnames, httpTohttps, pick, time } from "hyl-utils";
-import { CommentOutlined, DeleteOutlined } from "@ant-design/icons";
+import { classnames, pick } from "hyl-utils";
 import { useSetState } from "@/hooks";
 import { request } from "@/utils";
 import Editor from "../Editor";
@@ -45,7 +44,9 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
     };
 
     const action: any = [
-      <CommentOutlined onClick={handleReply} key="reply" />,
+      <span onClick={handleReply} key="reply">
+        回复
+      </span>,
       author_id == item.author_id ? (
         <Popconfirm
           title="确认删除这条评论吗？"
@@ -54,7 +55,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
           cancelText="no"
           key="delete"
         >
-          <DeleteOutlined />
+          <span>删除</span>
         </Popconfirm>
       ) : null,
     ];
@@ -82,24 +83,25 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
         {...commentItem}
         actions={renderAction(commentItem)}
         author={author(commentItem)}
-        avatar={httpTohttps(commentItem.avatar)}
-        datetime={time.parse(commentItem.datetime)}
-        className="replyCon"
+        className={classnames({ grid: true })}
       >
         {replyData.length > 0 &&
           replyData.map((props, i) => (
-            <>
-              {i > 0 && <hr color="#eee" />}
+            <div key={props.id}>
               <Comment
                 {...props}
-                content={`回复 ${props.reply_name} : ${props.content}`}
+                content={
+                  <span>
+                    回复{" "}
+                    <span className="primaryColor">{props.reply_name}</span> :{" "}
+                    {props.content}
+                  </span>
+                }
                 author={author(props)}
                 actions={renderAction(props)}
-                avatar={httpTohttps(props.avatar)}
-                datetime={time.parse(props.datetime)}
-                key={props.id}
+                className={classnames({ grid: i + 1 !== replyData.length })}
               />
-            </>
+            </div>
           ))}
       </Comment>
 
@@ -120,7 +122,6 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
           />
         </div>
       )}
-      <hr color="#eee" />
     </div>
   );
 };

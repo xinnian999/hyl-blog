@@ -1,3 +1,6 @@
+#comment {
+  padding: 10px 0;
+}
 .commentCard {
   padding: 15px;
   padding-left: 70px;
@@ -13,7 +16,7 @@
       display: inline-block;
     }
     &-datetime {
-      margin-right: 10px;
+      margin-left: 10px;
       color: #555;
       display: inline-block;
       font-size: 13px;
@@ -26,19 +29,16 @@
   }
 
   &-footer {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    font-size: 20px;
-    svg:hover {
-      color: var(--ant-primary-color);
+    font-size: 13px;
+    span {
+      cursor: pointer;
+      color: #555;
     }
   }
 }
 
 .commentReply {
   margin-left: 70px;
-  margin-bottom: 5px;
   border-radius: 10px;
   background-color: var(--ant-primary-2);
   font-size: 13px;
