@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
 import { Icon } from "@/components";
 import menus from "@/router";
-import { useWindowSize, useRedux, useBoolean } from "@/hooks";
+import { useWindowSize, useRedux } from "@/hooks";
 import Login from "./Login";
 import { Tooltip, Modal, Switch, Button, Popover } from "antd";
 import { useMemo } from "react";
@@ -17,11 +17,9 @@ const theme = [
 function Header({ style }) {
   const navigate = useNavigate();
 
-  const [setVisible, on, off] = useBoolean();
-
   const { store, dispatch } = useRedux();
 
-  const { simple, autoplay } = store;
+  const { simple, autoplay, setModal } = store;
 
   const goHome = () => navigate("/home");
 
@@ -68,19 +66,14 @@ function Header({ style }) {
       {width > 1300 && <ul id="nav">{renderMenus}</ul>}
 
       <div className="header-action">
-        <Tooltip title="网站设置">
-          <div className="setting" onClick={on}>
-            <SettingOutlined />
-          </div>
-        </Tooltip>
         <div className="user">
           <Login />
         </div>
       </div>
 
       <Modal
-        open={setVisible}
-        onCancel={off}
+        open={setModal}
+        onCancel={() => dispatch({ type: "CHANGE_SET_MODAL", payload: false })}
         closable={false}
         okText="确认"
         cancelText="取消"

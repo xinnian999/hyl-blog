@@ -15,6 +15,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 li {
@@ -45,20 +46,12 @@ body {
   overflow: hidden;
 }
 
-.el-popover {
-  min-width: 0 !important;
-}
-
-.ant-comment-content-detail {
-  white-space: pre-wrap;
-}
-
-.css-dev-only-do-not-override-diro6f {
-  font-family: "font" !important;
-}
-
 .primaryColor {
   color: var(--ant-primary-color);
+}
+
+p {
+  margin-bottom: 1em;
 }
 
 ::-webkit-scrollbar {

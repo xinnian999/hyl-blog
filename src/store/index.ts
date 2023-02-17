@@ -14,6 +14,7 @@ export type isStore = {
   autoplay: boolean | undefined;
   simple: boolean | undefined;
   loginModal: boolean;
+  setModal: boolean;
 };
 
 //在localStorge中生成key为root的值
@@ -26,13 +27,14 @@ const persistConfig = {
 const reducer = (
   state: isStore = {
     loginState: false,
-    theme:  { bg: 0, color: "#d6324d" },
+    theme: { bg: 0, color: "#d6324d" },
     userInfo: { id: 0, username: "昵称", headPicture: "", email: null },
     autoplay: true,
     simple: false,
     loginModal: false,
+    setModal: false,
   },
-  { type, payload }: any
+  { type, payload }
 ) => {
   switch (type) {
     case "CHANGE_LOGIN_STATE":
@@ -47,6 +49,8 @@ const reducer = (
       return { ...state, simple: payload };
     case "CHANGE_LOGIN_MODAL":
       return { ...state, loginModal: payload };
+    case "CHANGE_SET_MODAL":
+      return { ...state, setModal: payload };
     default:
       return state;
   }

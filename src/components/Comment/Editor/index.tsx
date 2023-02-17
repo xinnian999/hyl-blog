@@ -1,6 +1,6 @@
-import { Button, Input, message, Modal, Popover, Space } from "antd";
+import { Button, Input, message, Modal, Popover, Space, Tooltip } from "antd";
 import { useRef } from "react";
-import { SmileOutlined } from "@ant-design/icons";
+import { SmileOutlined, UndoOutlined } from "@ant-design/icons";
 import { classnames, time } from "hyl-utils";
 import { useBoolean, useRedux, useSetState } from "@/hooks";
 import { request } from "@/utils";
@@ -111,8 +111,16 @@ export default function Editor({
     <div className={classname}>
       <div className="toolbar">
         <Popover content={content} trigger="click">
-          <SmileOutlined className="emoji-icon" />
+          <Tooltip title="表情">
+            <SmileOutlined className="emoji-icon" />
+          </Tooltip>
         </Popover>
+        <Tooltip title="重写">
+          <UndoOutlined
+            onClick={() => setState({ value: "" })}
+            className="emoji-icon"
+          />
+        </Tooltip>
       </div>
       <TextArea
         rows={4}

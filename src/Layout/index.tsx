@@ -16,7 +16,7 @@ import "./style.scss";
 function Layout() {
   const location = useLocation();
 
-  const { store } = useRedux();
+  const { store, dispatch } = useRedux();
 
   useGetData("/all/getCsrfToken", {
     progress: false,
@@ -138,7 +138,10 @@ function Layout() {
       </footer>
 
       <FloatButton.Group shape="square" style={{ right: 60 }}>
-        <FloatButton icon={<SettingOutlined />} />
+        <FloatButton
+          icon={<SettingOutlined />}
+          onClick={() => dispatch({ type: "CHANGE_SET_MODAL", payload: true })}
+        />
         <FloatButton.BackTop visibilityHeight={1} />
       </FloatButton.Group>
     </AntdProvider>

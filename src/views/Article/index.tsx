@@ -42,20 +42,18 @@ function Article() {
 
   useMount(() => {
     if (params.get("getUserInfo")) {
-      request.get("/qq/getLoginStatus").then((res) => {
-        if (res) {
-          dispatchAll([
-            {
-              type: "CHANGE_LOGIN_STATE",
-              payload: true,
-            },
-            {
-              type: "CHANGE_USER_INFO",
-              payload: res,
-            },
-            { type: "CHANGE_LOGIN_MODAL", payload: false },
-          ]);
-        }
+      request.get("/qq/getLoginStatus").then((res: any) => {
+        dispatchAll([
+          {
+            type: "CHANGE_LOGIN_STATE",
+            payload: true,
+          },
+          {
+            type: "CHANGE_USER_INFO",
+            payload: res,
+          },
+          { type: "CHANGE_LOGIN_MODAL", payload: false },
+        ]);
       });
     }
   });
