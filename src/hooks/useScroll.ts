@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
 
 // 监听页面是否滚动到指定位置
-const useScroll = (num?: number) => {
-  const [scrollNum, setScrollNum] = useState(0);
-  const [visible, setVisible] = useState(false);
+const useScroll = () => {
+  const [top, setTop] = useState(0);
+  const [left, setLeft] = useState(0);
   const onScroll = (e: any) => {
-    const scrollNum = e.srcElement.documentElement.scrollTop;
-    setScrollNum(scrollNum);
-
-    if (num && scrollNum >= num) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
+    setTop(e.srcElement.documentElement.scrollTop);
+    setLeft(e.srcElement.documentElement.scrollLeft);
   };
 
   useEffect(() => {
@@ -21,7 +15,7 @@ const useScroll = (num?: number) => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  return [visible, scrollNum];
+  return { top, left };
 };
 
 export default useScroll;

@@ -1,12 +1,11 @@
-import { Row, Col, Tag, Avatar, Skeleton } from "antd";
-import { Tabs } from "@arco-design/web-react";
+import { Row, Col, Tag, Avatar, Skeleton, Tabs } from "antd";
+import type { TabsProps } from "antd";
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { PageCenter, Banner, Title, Copy } from "@/components";
 import { useGetData } from "@/hooks";
 import "./style.scss";
-import { useMemo } from "react";
 
 const tags = [
   { color: "green", icon: <CheckOutlined />, con: "原创优先" },
@@ -32,29 +31,32 @@ export default function Link() {
     mockLoadingCount: 8,
   });
 
-  const renderInfo = useMemo(
-    () => (
-      <Tabs type="card-gutter">
-        <Tabs.TabPane title="中文" key="chinese">
-          <Copy content={info}>
-            <pre className="mylink-info">{info}</pre>
-          </Copy>
-        </Tabs.TabPane>
-        <Tabs.TabPane title="Yaml" key="yaml">
-          <Copy content={yaml}>
-            <Prism
-              showLineNumbers
-              style={tomorrow}
-              language={"xml"}
-              PreTag="div"
-              children={yaml}
-            />
-          </Copy>
-        </Tabs.TabPane>
-      </Tabs>
-    ),
-    []
-  );
+  const items: TabsProps["items"] = [
+    {
+      key: "chinese",
+      label: `中文`,
+      children: (
+        <Copy content={info}>
+          <pre className="mylink-info">{info}</pre>
+        </Copy>
+      ),
+    },
+    {
+      key: "yaml",
+      label: `Yaml`,
+      children: (
+        <Copy content={yaml}>
+          <Prism
+            showLineNumbers
+            style={tomorrow}
+            language={"xml"}
+            PreTag="div"
+            children={yaml}
+          />
+        </Copy>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -78,7 +80,7 @@ export default function Link() {
                 交换友链可在 <b>留言板</b>
                 ，本站友链倒序排列，且不定期清理失效友链
               </p>
-              {renderInfo}
+              <Tabs type="card" items={items} />
             </div>
           </div>
         </div>

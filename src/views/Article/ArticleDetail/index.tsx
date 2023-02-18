@@ -1,14 +1,19 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Divider, Space, Drawer, Skeleton } from "antd";
-import { Anchor } from "@arco-design/web-react";
+import { Divider, Space, Drawer, Skeleton, Anchor } from "antd";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import { TimeBar, PageCenter } from "@/components";
 import { useParams } from "react-router-dom";
 import { time } from "hyl-utils";
-import { useBoolean, useScroll } from "ahooks";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { changeBlogTitle, request } from "@/utils";
-import { useSetState, useWindowSize, useGetData } from "@/hooks";
+import {
+  useSetState,
+  useWindowSize,
+  useGetData,
+  useMount,
+  useScroll,
+  useBoolean,
+} from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
 
@@ -58,7 +63,7 @@ function ArticleDetail() {
 
   const scrollNum = useScroll();
 
-  const [drawerVisible, { setTrue, setFalse }] = useBoolean(false);
+  const [drawerVisible, setTrue, setFalse] = useBoolean(false);
 
   useGetData("/article/queryDetail", {
     data: { id: params.id },
@@ -108,6 +113,18 @@ function ArticleDetail() {
     }
   }, [mdRef.current]);
 
+  useMount(() => {
+    window.addEventListener("scroll", () => {
+      const anchorListEl = document.querySelector(
+        ".ant-anchor-link-title-active"
+      );
+      anchorListEl?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    });
+  });
+
   const renderAnchor = useMemo(
     () => (
       <div
@@ -119,10 +136,10 @@ function ArticleDetail() {
         </div>
         <Divider></Divider>
         <Anchor
-          className="anchorList"
-          boundary={targetOffset}
-          lineless
+          targetOffset={targetOffset}
           affix={false}
+          className="anchorList"
+          style={{ maxHeight: "30vh" }}
         >
           {anchorList.map((item: { id: string; localName: string }) => {
             const { id, localName } = item;
@@ -136,6 +153,7 @@ function ArticleDetail() {
             );
           })}
         </Anchor>
+        {/* <Anchor className="anchorList" dataSource={anchorList}></Anchor> */}
       </div>
     ),
     [anchorList]

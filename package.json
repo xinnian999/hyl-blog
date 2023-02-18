@@ -10,7 +10,6 @@
     "deploy": "yarn build && node ./config/cdn/playUpload.js && node ./deploy.js"
   },
   "dependencies": {
-    "@arco-design/web-react": "^2.40.0",
     "@babel/core": "^7.16.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.3",
     "@svgr/webpack": "^5.5.0",
@@ -21,7 +20,6 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
-    "ahooks": "^3.3.0",
     "animate.css": "^4.1.1",
     "antd": "^5.2.1",
     "aplayer": "^1.10.1",

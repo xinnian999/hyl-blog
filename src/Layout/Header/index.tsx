@@ -1,10 +1,10 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { MenuOutlined, SettingOutlined } from "@ant-design/icons";
+import { MenuOutlined } from "@ant-design/icons";
 import { Icon } from "@/components";
 import menus from "@/router";
 import { useWindowSize, useRedux } from "@/hooks";
 import Login from "./Login";
-import { Tooltip, Modal, Switch, Button, Popover } from "antd";
+import { Modal, Switch, Button, Popover } from "antd";
 import { useMemo } from "react";
 import "./style.scss";
 

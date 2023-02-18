@@ -11,11 +11,10 @@ import {
   Spin,
   Popover,
 } from "antd";
-import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
+import { LoadingOutlined, PlusOutlined, LeftOutlined } from "@ant-design/icons";
 import { clearLogin } from "@/utils";
 import { useSetState, useBoolean, useRedux, useWindowSize } from "@/hooks";
 import "./style.scss";
-import { PageHeader } from "@arco-design/web-react";
 import { getRandom, pick } from "hyl-utils";
 import ToolLogin from "./ToolLogin";
 import { login, register } from "./api";
@@ -151,12 +150,14 @@ export default function Login() {
       >
         {wxLogin ? (
           <>
-            <PageHeader
-              title="微信登陆"
-              subTitle="请使用微信扫码登陆"
-              backIcon
-              onBack={() => setState({ wxLogin: false, wxLoginQr: "" })}
-            />
+            <div className="wxHeader">
+              <LeftOutlined
+                className="wxHeader-back"
+                onClick={() => setState({ wxLogin: false, wxLoginQr: "" })}
+              />
+
+              <h2>请使用微信扫码登陆</h2>
+            </div>
             <div className="wxQrCode">
               <Spin spinning={!wxLoginQr} tip="二维码生成中">
                 <img src={wxLoginQr} alt="" />

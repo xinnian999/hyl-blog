@@ -1,9 +1,7 @@
 import { useRef, useMemo } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Divider, Space, Skeleton } from "antd";
-import { Drawer } from "@arco-design/web-react";
+import { Divider, Space, Skeleton, Drawer } from "antd";
 import ReactScroll from "react-infinite-scroll-component";
-import { useScroll } from "ahooks";
 import { MenuFoldOutlined } from "@ant-design/icons";
 import {
   useWindowSize,
@@ -11,6 +9,7 @@ import {
   useMount,
   useRedux,
   useBoolean,
+  useScroll,
 } from "@/hooks";
 import { PageCenter } from "@/components";
 import { batchCopyDom, request } from "@/utils";
@@ -198,6 +197,7 @@ function Article() {
       )}
     </div>
   );
+  console.log(scrollNum);
 
   return (
     <PageCenter>
@@ -243,13 +243,12 @@ function Article() {
 
         <Drawer
           placement="right"
-          onCancel={off}
-          visible={drawerVisible}
+          onClose={off}
+          open={drawerVisible}
           width="60%"
           footer={null}
           title={null}
-          className="drawer-toolbar"
-          unmountOnExit
+          destroyOnClose
         >
           {Toolbar}
         </Drawer>

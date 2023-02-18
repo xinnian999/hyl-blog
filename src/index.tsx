@@ -2,7 +2,6 @@ import "lib-flexible";
 import { createRoot } from "react-dom/client";
 import { notification } from "antd";
 import "animate.css";
-import "@arco-design/web-react/dist/css/arco.css";
 import "@/assets/js/jquery.lettering";
 import "@/assets/js/jquery.textillate";
 import "@/style/style.scss";

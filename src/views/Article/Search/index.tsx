@@ -1,5 +1,5 @@
 import { PureComponent } from "react";
-import { Select } from "@arco-design/web-react";
+import { Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { request } from "@/utils";
 import { debounce } from "hyl-utils";
@@ -18,9 +18,7 @@ class SearchInput extends PureComponent<any> {
 
   fetch: any = debounce(() => {
     request
-      .get("/article/query", {
-        params: { filters: { title: this.state.value } },
-      })
+      .get("/article/query", { filters: { title: this.state.value } })
       .then((res: response) => {
         if (res.status === 0) {
           this.setState({ data: res.data });
@@ -40,9 +38,7 @@ class SearchInput extends PureComponent<any> {
     const { value } = this.state;
     const { giveData } = this.props;
     request
-      .get("/article/query", {
-        params: { filters: { title: value } },
-      })
+      .get("/article/query", { filters: { title: value } })
       .then((res: response) => {
         giveData(res.data);
       });
@@ -52,11 +48,7 @@ class SearchInput extends PureComponent<any> {
     const { value, data } = this.state;
     const options = data.map((d: any) => {
       return {
-        label: (
-          <div onClick={() => this.setState({ value: d.title }, this.onSearch)}>
-            {d.title}
-          </div>
-        ),
+        label: d.title,
         value: d.title,
       };
     });
@@ -71,8 +63,9 @@ class SearchInput extends PureComponent<any> {
           onSearch={this.handleSearch}
           notFoundContent={null}
           options={options}
-          arrowIcon={null}
           placeholder="搜索文章"
+          className="searchInput"
+          onChange={(val) => this.setState({ value: val }, this.onSearch)}
         ></Select>
         <div className="searchBtn" onClick={this.onSearch}>
           <SearchOutlined />

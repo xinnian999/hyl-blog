@@ -71,7 +71,18 @@
       }
 
       .anchorList {
-        max-height: 30vh;
+        overflow: auto;
+
+        .oneAnchor {
+          font-weight: bold;
+        }
+
+        .twoAnchor {
+          a {
+            font-size: 13px;
+            text-indent: 1em;
+          }
+        }
       }
 
       .aboutArticle {
@@ -92,32 +103,9 @@
         }
       }
     }
-
-    .arco-anchor-link-active {
-      a {
-        color: var(--ant-primary-color);
-      }
-    }
   }
-}
-
-.oneAnchor {
-  font-weight: bold;
-}
-
-.twoAnchor {
-  a {
-    font-size: 13px;
-    text-indent: 1em;
-  }
-
-  color: #fff;
 }
 
 .anchorDrawer {
   padding-top: 10px;
-}
-
-.arco-anchor {
-  width: 100%;
 }
