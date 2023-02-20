@@ -10,6 +10,14 @@ import { useMount } from "@/hooks";
 function App() {
   useMount(() => {
     stopWriteLoading();
+
+    window.addEventListener("scroll", () => {
+      const imgList = document.querySelectorAll("[data-src]");
+
+      imgList.forEach((item: any) => {
+        item.childNodes[0].src = item.attributes["data-src"].value;
+      });
+    });
   });
 
   return (

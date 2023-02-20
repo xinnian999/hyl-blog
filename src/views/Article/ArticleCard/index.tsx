@@ -42,10 +42,11 @@ function ArticleCard(props: any) {
         <div className="content">
           <div className="img-box" onClick={(e) => e.stopPropagation()}>
             <Image
-              src={image || Images}
+              // src={image || Images}
               alt="图片加载失败了...网有点卡..."
               height="100%"
               width="100%"
+              data-src={image || Images}
             />
           </div>
           <div className="content-box">{introduce || "暂无简介..."}</div>

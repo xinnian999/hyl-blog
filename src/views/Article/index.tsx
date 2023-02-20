@@ -197,7 +197,6 @@ function Article() {
       )}
     </div>
   );
-  console.log(scrollNum);
 
   return (
     <PageCenter>
