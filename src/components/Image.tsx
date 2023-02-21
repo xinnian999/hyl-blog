@@ -11,7 +11,6 @@ function Image({ src }) {
   const visible = () => {
     const viewHeight = document.documentElement.clientHeight;
     let rect = ref.current.getBoundingClientRect();
-    console.log(rect, viewHeight);
 
     if (rect.top <= viewHeight && rect.top > -rect.height) {
       on();

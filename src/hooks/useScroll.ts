@@ -1,4 +1,4 @@
-import { throttle } from "@/utils";
+import { throttle } from "hyl-utils";
 import { useState, useEffect } from "react";
 
 // 监听页面是否滚动到指定位置
