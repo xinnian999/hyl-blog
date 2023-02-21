@@ -10,18 +10,6 @@ import { useMount } from "@/hooks";
 function App() {
   useMount(() => {
     stopWriteLoading();
-
-    const viewHeight = document.documentElement.clientHeight;
-    window.addEventListener("scroll", () => {
-      const imgList = document.querySelectorAll("[data-src]");
-
-      imgList.forEach((item: any) => {
-        let rect = item.getBoundingClientRect();
-        if (rect.top <= viewHeight && rect.top > -rect.height) {
-          item.childNodes[0].src = item.attributes["data-src"].value;
-        }
-      });
-    });
   });
 
   return (

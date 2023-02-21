@@ -1,7 +1,6 @@
-import { Timeline, Image } from "antd";
-
+import { Timeline } from "antd";
 import { classnames, time } from "hyl-utils";
-import { Bubble, Icon, OverPack } from "@/components";
+import { Bubble, Icon, OverPack, Image } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
 import "./style.scss";
 
@@ -42,7 +41,10 @@ const First = () => {
             <OverPack playScale={0} targetId="container" always={false}>
               <Bubble
                 type={width > 800 ? (index % 2 === 0 ? 0 : 1) : 0}
-                className="animate__animated animate__fadeInUp"
+                className={classnames(
+                  "animate__animated",
+                  "animate__jackInTheBox"
+                )}
               >
                 <div className="content">{content}</div>
                 <br />

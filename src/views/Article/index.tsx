@@ -12,7 +12,7 @@ import {
   useScroll,
 } from "@/hooks";
 import { PageCenter } from "@/components";
-import { batchCopyDom, request } from "@/utils";
+import { batchCopyDom, lazyImg, request } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";

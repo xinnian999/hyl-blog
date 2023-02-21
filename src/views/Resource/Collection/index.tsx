@@ -1,7 +1,8 @@
-import { Image, Skeleton } from "antd";
+import { Skeleton } from "antd";
 import { InsertRowAboveOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
 import { useGetData } from "@/hooks";
+import { Image } from "@/components";
 import "./style.scss";
 
 export default function Collection() {
@@ -16,10 +17,10 @@ export default function Collection() {
           key={id}
         >
           <Skeleton loading={loading}>
-            <Image
-              src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
-              className="image"
-            />
+            <div className="image">
+              <Image src={`${globalConfig.remoteStaticUrl}/image/${picture}`} />
+            </div>
+
             <div className="title">{title}</div>
             <p className="autograph">{autograph}</p>
             <div className="time">

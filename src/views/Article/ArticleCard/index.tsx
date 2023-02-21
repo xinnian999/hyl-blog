@@ -1,9 +1,8 @@
 import Icon from "@/components/Icon";
-import { Tag, Image, Skeleton } from "antd";
+import { Tag, Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
 import { TagOutlined } from "@ant-design/icons";
-import { TimeBar } from "@/components";
-import Images from "@/assets/img/wallpaper3.jpg";
+import { TimeBar, Image } from "@/components";
 import "./style.scss";
 
 function ArticleCard(props: any) {
@@ -41,13 +40,7 @@ function ArticleCard(props: any) {
         </div>
         <div className="content">
           <div className="img-box" onClick={(e) => e.stopPropagation()}>
-            <Image
-              // src={image || Images}
-              alt="图片加载失败了...网有点卡..."
-              height="100%"
-              width="100%"
-              data-src={image || Images}
-            />
+            <Image src={image} />
           </div>
           <div className="content-box">{introduce || "暂无简介..."}</div>
         </div>
