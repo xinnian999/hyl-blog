@@ -15,6 +15,7 @@ export type isStore = {
   simple: boolean | undefined;
   loginModal: boolean;
   setModal: boolean;
+  dark: boolean;
 };
 
 //在localStorge中生成key为root的值
@@ -33,6 +34,7 @@ const reducer = (
     simple: false,
     loginModal: false,
     setModal: false,
+    dark: false,
   },
   { type, payload }
 ) => {
@@ -51,6 +53,8 @@ const reducer = (
       return { ...state, loginModal: payload };
     case "CHANGE_SET_MODAL":
       return { ...state, setModal: payload };
+    case "CHANGE_DARK":
+      return { ...state, dark: payload };
     default:
       return state;
   }

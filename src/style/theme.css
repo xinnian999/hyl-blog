@@ -14,7 +14,7 @@
     --head-background-color: #fff;
 }
 
-.dark-theme {
+#dark {
     --primary-color: #67b9b8;
     --primary-color50: rgba(103, 185, 184, 0.5);
     --primary-color20: rgba(103, 185, 184, 0.2);

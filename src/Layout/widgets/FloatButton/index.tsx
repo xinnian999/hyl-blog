@@ -1,6 +1,6 @@
 import { Button, Space, App, Tooltip } from "antd";
 import { SettingOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
-import { useScroll } from "@/hooks";
+import { useRedux, useScroll } from "@/hooks";
 import setModalConfig from "./setModal";
 import "./style.scss";
 import { Icon } from "@/components";
@@ -9,6 +9,8 @@ function FloatButton() {
   const { top } = useScroll();
 
   const { modal } = App.useApp();
+
+  const { store, dispatch } = useRedux();
 
   const action = [
     {
@@ -22,9 +24,9 @@ function FloatButton() {
     {
       icon: <Icon type="icon-sun_fill" className="FloatButton-icon" />,
       color: "#558897",
-      message: "关灯",
+      message: store.dark ? "开灯" : "关灯",
       onclick: () => {
-        // modal.confirm(setModalConfig);
+        dispatch({ type: "CHANGE_DARK", payload: !store.dark });
       },
     },
     {

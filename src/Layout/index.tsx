@@ -1,6 +1,6 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { ConfigProvider as AntdProvider, App as AntdApp } from "antd";
+import { ConfigProvider as AntdProvider, App as AntdApp, theme } from "antd";
 import { StyleProvider } from "@ant-design/cssinjs";
 import { cookie } from "hyl-utils";
 import APlayer from "aplayer";
@@ -17,7 +17,7 @@ import "./style.scss";
 function Layout() {
   const location = useLocation();
 
-  const { store } = useRedux();
+  const { store, dispatch } = useRedux();
 
   useGetData("/all/getCsrfToken", {
     progress: false,
@@ -54,16 +54,20 @@ function Layout() {
 
   // 主题监听
   useEffect(() => {
-    AntdProvider.config({
-      theme: {
-        primaryColor: store.theme.color,
-      },
-    });
-
     if (!store.simple) {
       starBg(store.theme.bg);
     }
   }, [store.theme]);
+
+  // 黑夜模式监听
+  useEffect(() => {
+    const body = document.querySelector("body")!;
+    if (store.dark) {
+      body.id = "dark";
+    } else {
+      body.id = "light";
+    }
+  }, [store.dark]);
 
   const renderRoutes = useCallback(
     (menu: any) =>
@@ -106,6 +110,7 @@ function Layout() {
           colorPrimary: store.theme.color,
           fontFamily: "font",
         },
+        // algorithm: store.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
       <AntdApp>
