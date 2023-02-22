@@ -1,11 +1,11 @@
 .ArticleCard {
   padding: 25px;
-  background-color: #fff;
+  background-color: var(--background-color);
   position: relative;
   transition: background-color 1s ease-out;
   opacity: 1;
-  overflow: hidden;
   border-radius: 15px;
+  border: 1px solid var(--border-color);
 
   .topping {
     position: absolute;
@@ -52,7 +52,7 @@
     .img-box {
       width: 300px;
       height: 180px;
-      border: 1px solid #e8e9e7;
+      border: var(--border-color);
       overflow: hidden;
       z-index: 9999;
     }
@@ -61,7 +61,6 @@
       overflow: hidden;
       margin-left: 20px;
       flex: 1;
-      color: #383837;
       text-overflow: ellipsis;
       display: -webkit-box;
       /* 限制在一个块元素显示的文本的行数 */
@@ -87,8 +86,7 @@
 
 .ArticleCard:hover {
   cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 0 10px rgba(26, 34, 34, 0.75);
+  box-shadow: 0px 0px 10px 0px var(--ant-primary-color);
 }
 
 @media screen and (max-width: 800px) {

@@ -1,5 +1,5 @@
 #hall-main {
-  overflow: auto;
+  overflow-y: auto;
   display: flex;
 
   .article-list {
@@ -52,7 +52,7 @@
       .skeletonItem {
         display: flex;
         height: 200px;
-        background-color: rgba($color: #fff, $alpha: 1);
+        background-color: var(--background-color);
         padding: 15px 0;
         border-radius: 10px;
         &-image {
@@ -73,7 +73,6 @@
   flex: 1;
   position: relative;
   margin-left: 20px;
-
   .category-fixed {
     position: fixed;
   }
@@ -89,8 +88,10 @@
 
     &-category {
       padding-top: 20px;
-      background-color: #fff;
+      background-color: var(--background-color);
       border-radius: 0 0 10px 10px;
+      border: 1px solid var(--border-color);
+
       &-skeleton {
         // width: 100%;
         margin-bottom: 5px;
@@ -119,11 +120,11 @@
       }
 
       li:hover {
-        background-color: #eee;
+        background-color: var(--background-color-active);
       }
 
       .categoryActive {
-        background-color: #eee;
+        background-color: var(--background-color-active);
 
         ::after {
           content: "";
@@ -138,12 +139,13 @@
     }
 
     &-hot {
-      background-color: #fff;
+      background-color: var(--background-color);
       margin-top: 20px;
       padding: 10px;
       padding-top: 1px;
       border-radius: 10px;
       font-size: 14px;
+      border: 1px solid var(--border-color);
 
       &-item {
         width: 100%;

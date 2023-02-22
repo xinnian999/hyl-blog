@@ -1,7 +1,6 @@
 .progress-container {
   padding: 50px 0;
-  border: 1px solid #eee;
-
+  border-bottom: 1px solid var(--border-color);
   .progress {
     margin: 0 auto;
     width: 40%;

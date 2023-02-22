@@ -1,36 +1,17 @@
 /*******************配置组件自定义颜色(入口css)******************/
 #light {
-    --primary-color: #1890ff;
-    --primary-color50: rgba(24, 144, 255, 0.5);
-    --primary-color20: rgba(24, 144, 255, 0.2);
-    --main-background-color: #ffffff;
-    --text-color: #555;
-    --text-color65: rgba(0, 0, 0, 0.65);
-    --text-color45: rgba(0, 0, 0, 0.45);
-    --text-color25: rgba(0, 0, 0, 0.25);
-    --text-color10: rgba(0, 0, 0, 0.1);
-    --title-text-color: #000000;
-    --title-text-primary-color: #1890ff;
     --head-background-color: #fff;
+    --footer-background-color:#011425;
+    --background-color:#fff;
+    --background-color-active:#eee;
+    --border-color:#fff;
 }
 
 #dark {
-    --primary-color: #67b9b8;
-    --primary-color50: rgba(103, 185, 184, 0.5);
-    --primary-color20: rgba(103, 185, 184, 0.2);
-    --main-background-color: #000;
-    --text-color: rgba(255, 255, 255, 0.85);
-    --text-color65: rgba(255, 255, 255, 0.65);
-    --text-color45: rgba(255, 255, 255, 0.45);
-    --text-color25: rgba(255, 255, 255, 0.25);
-    --text-color10: rgba(255, 255, 255, 0.1);
-    --title-text-color: #ffffff;
-    --title-text-primary-color: #ffffff;
-    --head-background-color: transparent;
+    --head-background-color: rgba(0,0,0,0.8);
+    --footer-background-color:transparent;
+    --background-color:rgba(0,0,0,0.8);
+    --background-color-active:#303030;
+    --border-color: #303030;
 }
 
-#star{
-    --border-radius: 0px;
-    --head-background-color:transparent;
-    --color:#066197;
-}

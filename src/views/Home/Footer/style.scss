@@ -1,6 +1,6 @@
 .homeFooter {
   min-height: 360px;
-  background-color: #001529;
+  background-color: var(--footer-background-color);
   &-content {
     padding: 80px 10% 40px;
     margin: 0 auto;

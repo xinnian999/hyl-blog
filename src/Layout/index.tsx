@@ -57,6 +57,12 @@ function Layout() {
     if (!store.simple) {
       starBg(store.theme.bg);
     }
+
+    AntdProvider.config({
+      theme: {
+        primaryColor: store.theme.color,
+      },
+    });
   }, [store.theme]);
 
   // 黑夜模式监听
@@ -110,7 +116,7 @@ function Layout() {
           colorPrimary: store.theme.color,
           fontFamily: "font",
         },
-        // algorithm: store.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        algorithm: store.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
       }}
     >
       <AntdApp>

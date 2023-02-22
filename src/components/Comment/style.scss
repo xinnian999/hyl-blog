@@ -1,4 +1,4 @@
-$bgc: rgba(255, 255, 255, 0.9);
+$bgc: var(--background-color);
 
 .commentLoginBtn {
   color: var(--ant-primary-color);
