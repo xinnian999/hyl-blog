@@ -5,7 +5,6 @@ const path = require("path");
 const webpack = require("webpack");
 const resolve = require("resolve");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const LogWebpackPlugin = require("./LogWebpackPlugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const InlineChunkHtmlPlugin = require("react-dev-utils/InlineChunkHtmlPlugin");
 const TerserPlugin = require("terser-webpack-plugin");
@@ -803,7 +802,6 @@ module.exports = function (webpackEnv) {
             },
           },
         }),
-      new LogWebpackPlugin(),
     ].filter(Boolean),
     //webpack排除打包
     externals: {},
