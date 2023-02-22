@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Image as AntdImage } from "antd";
-import altImg from "@/assets/img/wallpaper3.jpg";
+import { Image as AntdImage, Spin } from "antd";
 import { useBoolean, useScroll } from "@/hooks";
+import "./style.scss";
 
 function Image({ src }) {
   const ref: any = useRef(null);
@@ -29,7 +29,7 @@ function Image({ src }) {
           width="100%"
         />
       ) : (
-        <AntdImage src={altImg} height="100%" width="100%" />
+        <Spin className="img-loading" />
       )}
     </div>
   );
