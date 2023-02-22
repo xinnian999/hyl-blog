@@ -52,6 +52,9 @@
       .skeletonItem {
         display: flex;
         height: 200px;
+        background-color: rgba($color: #fff, $alpha: 1);
+        padding: 15px 0;
+        border-radius: 10px;
         &-image {
           width: 300px;
           height: 100%;

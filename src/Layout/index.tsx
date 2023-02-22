@@ -1,7 +1,7 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
-import { SettingOutlined } from "@ant-design/icons";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { ConfigProvider as AntdProvider, FloatButton } from "antd";
+import { ConfigProvider as AntdProvider, App as AntdApp } from "antd";
+import { StyleProvider } from "@ant-design/cssinjs";
 import { cookie } from "hyl-utils";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
@@ -11,12 +11,13 @@ import { changeBlogTitle } from "@/utils";
 import { useGetData, useRedux } from "@/hooks";
 import Header from "./Header";
 import starBg from "./widgets/starBg";
+import FloatButton from "./widgets/FloatButton";
 import "./style.scss";
 
 function Layout() {
   const location = useLocation();
 
-  const { store, dispatch } = useRedux();
+  const { store } = useRedux();
 
   useGetData("/all/getCsrfToken", {
     progress: false,
@@ -107,43 +108,41 @@ function Layout() {
         },
       }}
     >
-      <div id="backgroundImg">
-        <canvas id="canvasBg"></canvas>
-      </div>
-      <div id="aplayer"></div>
-      <Header style={{ display: isHome && "none" }} />
-      <main id="main" className={!isHome ? "isHome" : ""}>
-        <Routes>
-          {renderRoutes(menus)}
-          <Route path="/" element={<Redirect to="/home" />} />
-          <Route path="*" element={<Redirect to="/404" />} />
-        </Routes>
-      </main>
+      <AntdApp>
+        <StyleProvider hashPriority="high">
+          <div id="backgroundImg">
+            <canvas id="canvasBg"></canvas>
+          </div>
+          <div id="aplayer"></div>
+          <Header style={{ display: isHome && "none" }} />
+          <main id="main" className={!isHome ? "isHome" : ""}>
+            <Routes>
+              {renderRoutes(menus)}
+              <Route path="/" element={<Redirect to="/home" />} />
+              <Route path="*" element={<Redirect to="/404" />} />
+            </Routes>
+          </main>
 
-      <footer>
-        <span className="AllRights">
-          ©2021-2022 by <a href="https://motion.ant.design">心 念</a> All Rights
-          Reserved
-        </span>
-        <a
-          className="beianNumber"
-          href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13028102000185"
-        >
-          <img src={require("@/assets/img/备案图标.png")} />
-          冀公网安备 13028102000185号
-        </a>
-        <a href="https://beian.miit.gov.cn/" className="icp">
-          京ICP备2021033841号-2
-        </a>
-      </footer>
+          <footer>
+            <span className="AllRights">
+              ©2021-2022 by <a href="https://motion.ant.design">心 念</a> All
+              Rights Reserved
+            </span>
+            <a
+              className="beianNumber"
+              href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=13028102000185"
+            >
+              <img src={require("@/assets/img/备案图标.png")} />
+              冀公网安备 13028102000185号
+            </a>
+            <a href="https://beian.miit.gov.cn/" className="icp">
+              京ICP备2021033841号-2
+            </a>
+          </footer>
 
-      <FloatButton.Group shape="square" style={{ right: 60 }}>
-        <FloatButton
-          icon={<SettingOutlined />}
-          onClick={() => dispatch({ type: "CHANGE_SET_MODAL", payload: true })}
-        />
-        <FloatButton.BackTop visibilityHeight={1} />
-      </FloatButton.Group>
+          <FloatButton />
+        </StyleProvider>
+      </AntdApp>
     </AntdProvider>
   );
 }
