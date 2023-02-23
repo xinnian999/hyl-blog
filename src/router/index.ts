@@ -28,16 +28,21 @@ const route = [
         title: "说说",
         path: "journal",
         index: true,
+        icon: "icon-wenzhang",
+
         component: lazy(() => import("@/views/Journal/Journal")),
       },
       {
         title: "归档",
         path: "file",
+        icon: "icon-wenzhang",
+
         component: lazy(() => import("@/views/Journal/File")),
       },
       {
         title: "笔记",
         path: "note",
+        icon: "icon-wenzhang",
         component: lazy(() => import("@/views/Journal/Note/Note")),
       },
     ],

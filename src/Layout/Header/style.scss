@@ -23,108 +23,42 @@ header {
 
   #logo {
     font-family: "汉仪霹雳体简";
-    font-size: 35px;
+    font-size: 30px;
     line-height: 60px;
-    position: absolute;
-    left: 15px;
-    top: 0;
+    height: 100%;
     cursor: pointer;
+    display: inline-block;
+    float: left;
   }
 
   #nav {
-    display: inline-flex;
-    margin: 0 auto;
-
+    display: flex;
+    float: right;
     li {
       line-height: 60px;
-      padding: 0 20px;
+      padding: 0 10px;
       position: relative;
       margin-right: 10px;
-      font-size: 18px;
+      font-size: 15px;
       font-weight: bold;
     }
 
     li:hover {
       color: var(--ant-primary-color);
       cursor: pointer;
-
-      &::before {
-        width: 50%;
-      }
-      &::after {
-        width: 50%;
-      }
-    }
-
-    li::before {
-      width: 0%;
-      height: 3px;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      background-color: #6bc30d;
-      background-color: var(--ant-primary-color);
-      content: "";
-      transition: all 0.6s;
-      z-index: 99999;
-    }
-    li::after {
-      width: 0%;
-      height: 3px;
-      position: absolute;
-      bottom: 0;
-      right: 50%;
-      background-color: #6bc30d;
-      background-color: var(--ant-primary-color);
-      content: "";
-      transition: all 0.6s;
-      z-index: 99999;
     }
   }
 
-  .header-action {
-    position: absolute;
-    right: 20px;
-    top: 0;
+  .user {
+    display: inline-block;
     height: 100%;
     line-height: 60px;
-
-    .setting {
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 5px;
-      margin-right: 20px;
-      font-size: 30px;
-      vertical-align: middle;
-      display: inline-block;
-
-      cursor: pointer;
-      &:hover {
-        background-color: var(--ant-primary-color);
-        box-shadow: 0 0 10px rgb(0 0 0 / 50%);
-        color: #eee;
-      }
-    }
-    .user {
-      display: inline-block;
-    }
+    float: right;
   }
+
   .active {
     color: #6bc30d;
     color: var(--ant-primary-color);
-
-    ::before {
-      width: 100% !important;
-      height: 3px;
-      position: absolute;
-      bottom: -1px;
-      left: 0 !important;
-      background-color: #6bc30d;
-      background-color: var(--ant-primary-color);
-      content: "";
-      transition: all 0.6s;
-    }
   }
 
   .iphone-nav {
@@ -150,28 +84,28 @@ header {
   }
 }
 
-@media screen and (max-width: 1300px) {
-  header {
-    #logo {
-      display: inline;
-      position: relative;
-      left: 0;
-    }
+// @media screen and (max-width: 1300px) {
+//   header {
+//     #logo {
+//       display: inline;
+//       position: relative;
+//       left: 0;
+//     }
 
-    #iphone-menus {
-      display: inline;
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
+//     #iphone-menus {
+//       display: inline;
+//       position: absolute;
+//       left: 0;
+//       top: 50%;
+//       transform: translateY(-50%);
+//     }
+//   }
 
-  .ant-col-offset-4 {
-    margin-left: 0;
-  }
-}
+//   .ant-col-offset-4 {
+//     margin-left: 0;
+//   }
+// }
 
-.ant-modal-title {
-  text-align: center;
-}
+// .ant-modal-title {
+//   text-align: center;
+// }

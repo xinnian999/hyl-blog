@@ -46,6 +46,11 @@ body {
   overflow: hidden;
 }
 
+#center {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
 .primaryColor {
   color: var(--ant-primary-color);
 }

@@ -1,0 +1,9 @@
+.twoNav {
+  width: 150px;
+  li {
+    text-align: center;
+    &:hover {
+      background-color: var(--background-color-active);
+    }
+  }
+}
