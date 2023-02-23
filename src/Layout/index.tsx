@@ -8,7 +8,7 @@ import "aplayer/dist/APlayer.min.css";
 import menus from "@/router";
 import { Loading, Redirect } from "@/components";
 import { changeBlogTitle } from "@/utils";
-import { useGetData, useRedux } from "@/hooks";
+import { useGetData, useRedux, useScroll } from "@/hooks";
 import Header from "./Header";
 import starBg from "./widgets/starBg";
 import FloatButton from "./widgets/FloatButton";
@@ -16,6 +16,8 @@ import "./style.scss";
 
 function Layout() {
   const location = useLocation();
+
+  const { top } = useScroll();
 
   const { store, dispatch } = useRedux();
 
@@ -78,6 +80,16 @@ function Layout() {
       bg.style.display = "none";
     }
   }, [store.dark]);
+
+  // 下拉监听
+  useEffect(() => {
+    const header = document.querySelector("header")!;
+    if (top > 10) {
+      header.id = "headerTop";
+    } else {
+      header.id = "";
+    }
+  }, [top]);
 
   const renderRoutes = useCallback(
     (menu: any) =>

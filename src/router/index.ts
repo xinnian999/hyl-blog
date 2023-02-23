@@ -4,14 +4,14 @@ const route = [
   {
     title: "首页",
     path: "/home",
-    icon: "icon-shouye",
+    icon: "icon-shouye1",
     component: lazy(() => import("@/views/Home")),
   },
   {
     title: "文章",
     path: "/article",
     search: "?category=all",
-    icon: "icon-wenzhang",
+    icon: "icon-wenzhang1",
     component: lazy(() => import("@/views/Article")),
   },
   {
@@ -28,21 +28,21 @@ const route = [
         title: "说说",
         path: "journal",
         index: true,
-        icon: "icon-wenzhang",
+        icon: "icon-shuoshuo",
 
         component: lazy(() => import("@/views/Journal/Journal")),
       },
       {
         title: "归档",
         path: "file",
-        icon: "icon-wenzhang",
+        icon: "icon-guidang",
 
         component: lazy(() => import("@/views/Journal/File")),
       },
       {
         title: "笔记",
         path: "note",
-        icon: "icon-wenzhang",
+        icon: "icon-jibiji",
         component: lazy(() => import("@/views/Journal/Note/Note")),
       },
     ],
@@ -50,30 +50,32 @@ const route = [
   {
     title: "友链",
     path: "/link",
-    icon: "icon-LINKS",
+    icon: "icon-lianjie",
     component: lazy(() => import("@/views/Link")),
   },
   {
     title: "留言",
     path: "/message",
-    icon: "icon-liuyan",
+    icon: "icon-liuyan1",
     component: lazy(() => import("@/views/Message")),
   },
   {
     title: "作品",
     path: "/resource",
-    icon: "icon-ziyuan",
+    icon: "icon-ziyuan1",
     component: lazy(() => import("@/views/Resource")),
     children: [
       {
         title: "个人作品",
         index: true,
         path: "works",
+        icon: "icon-zuopin",
         component: lazy(() => import("@/views/Resource/Works")),
       },
       {
         title: "珍藏",
         path: "collection",
+        icon: "icon-aixin_shixin",
         component: lazy(() => import("@/views/Resource/Collection")),
       },
     ],
@@ -81,7 +83,7 @@ const route = [
   {
     title: "关于",
     path: "/about",
-    icon: "icon-guanyu1",
+    icon: "icon-guanyu",
     component: lazy(() => import("@/views/About")),
   },
 

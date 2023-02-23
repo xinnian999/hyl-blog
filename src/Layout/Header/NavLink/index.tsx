@@ -7,19 +7,19 @@ function NavItem(props) {
   const { title, path, search, icon, children } = props;
 
   if (title) {
-    if (children) {
-      return (
-        <NavLink
-          key={title}
-          className="navLink"
-          to={{
-            pathname: path,
-            search,
-          }}
-        >
-          <li>
-            <Icon type={icon} /> {title}
-            <CaretDownOutlined className="down" />
+    return (
+      <NavLink
+        key={title}
+        to={{
+          pathname: path,
+          search,
+        }}
+      >
+        <li>
+          <Icon type={icon} />
+          <span className="nav-title">{title}</span>
+          {children && <CaretDownOutlined className="down" />}
+          {children && (
             <ul className="twoNav">
               {children.map((item) => {
                 return (
@@ -31,21 +31,7 @@ function NavItem(props) {
                 );
               })}
             </ul>
-          </li>
-        </NavLink>
-      );
-    }
-
-    return (
-      <NavLink
-        key={title}
-        to={{
-          pathname: path,
-          search,
-        }}
-      >
-        <li>
-          <Icon type={icon} /> {title}
+          )}
         </li>
       </NavLink>
     );

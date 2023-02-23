@@ -1,60 +1,39 @@
 header {
-  a {
-    color: var(--color);
-  }
   position: fixed;
   width: 100%;
-  background-color: var(--head-background-color);
-  border-bottom: 1px solid var(--border-color);
+  background-color: transparent;
   z-index: 99999;
   width: 100%;
-  height: 60px;
   margin: 0 auto;
   text-align: center;
-  #iphone-menus {
-    font-size: 20px;
-    cursor: pointer;
-    display: none;
-    padding: 0 20px;
-    span {
-      margin: auto;
+  line-height: 60px;
+  backdrop-filter: blur(3px);
+  transition: 0.5s all;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
+  a {
+    color: #fff;
+    &:hover {
+      color: var(--ant-primary-4);
     }
   }
 
   #logo {
     font-family: "汉仪霹雳体简";
     font-size: 30px;
-    line-height: 60px;
-    height: 100%;
     cursor: pointer;
     display: inline-block;
     float: left;
+    color: #fff;
   }
 
   #nav {
     display: flex;
     float: right;
     margin-right: 15px;
-    li {
-      line-height: 60px;
-      padding: 0 10px;
-      position: relative;
-      margin-right: 10px;
-      font-size: 15px;
-      font-weight: bold;
-    }
-
-    li:hover {
-      // color: var(--ant-primary-color);
-      // background-color: var(--background-color-active);
-      cursor: pointer;
-    }
   }
 
   .user {
     display: inline-block;
-    height: 100%;
-    line-height: 60px;
     float: right;
   }
 
@@ -62,52 +41,9 @@ header {
     color: #6bc30d;
     color: var(--ant-primary-color);
   }
-
-  .iphone-nav {
-    margin-bottom: 0;
-    li {
-      width: 100px;
-      border: 1px solid var(--ant-primary-color);
-      font-size: 18px;
-      text-align: center;
-      line-height: 40px;
-      border-radius: 10px;
-      margin-bottom: 5px;
-      font-weight: bold;
-    }
-
-    a {
-      color: #212220;
-    }
-
-    .active {
-      color: var(--ant-primary-color);
-    }
-  }
 }
 
-// @media screen and (max-width: 1300px) {
-//   header {
-//     #logo {
-//       display: inline;
-//       position: relative;
-//       left: 0;
-//     }
-
-//     #iphone-menus {
-//       display: inline;
-//       position: absolute;
-//       left: 0;
-//       top: 50%;
-//       transform: translateY(-50%);
-//     }
-//   }
-
-//   .ant-col-offset-4 {
-//     margin-left: 0;
-//   }
-// }
-
-// .ant-modal-title {
-//   text-align: center;
-// }
+#headerTop {
+  background-color: #2f4154;
+  line-height: 50px;
+}

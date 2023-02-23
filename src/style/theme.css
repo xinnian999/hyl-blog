@@ -8,6 +8,7 @@
     --border-color:#fff;
     --commentReply-background-color:var(--ant-primary-2);
     --about-info-color:#eee;
+    --text-color:rgba(0, 0, 0, 0.88);
 }
 
 #dark {
@@ -19,5 +20,6 @@
     --border-color: var(--ant-primary-color);
     --commentReply-background-color:transparent;
     --about-info-color:transparent;
+    --text-color:rgba(255, 255, 255, 0.85);
 }
 

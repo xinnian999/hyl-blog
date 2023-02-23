@@ -1,7 +1,15 @@
 import { Timeline, Tag as AntdTag, Card } from "antd";
 import { time } from "hyl-utils";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
-import { PageCenter, Title, Tag, Info, Section, Icon } from "@/components";
+import {
+  PageCenter,
+  Title,
+  Tag,
+  Info,
+  Section,
+  Icon,
+  Banner,
+} from "@/components";
 import { useMount, useSetState, useGetData } from "@/hooks";
 import "./style.scss";
 
@@ -29,7 +37,8 @@ const About = () => {
 
   return (
     <>
-      <PageCenter className="animate__animated animate__zoomIn">
+      <Banner title="关于我" />
+      <div id="center" className="animate__animated animate__zoomIn">
         <div id="about">
           <Title>关于我</Title>
           <Info>
@@ -142,7 +151,7 @@ const About = () => {
             </Card>
           </Info>
         </div>
-      </PageCenter>
+      </div>
     </>
   );
 };

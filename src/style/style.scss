@@ -49,6 +49,13 @@ body {
 #center {
   max-width: 1280px;
   margin: 0 auto;
+  &:after {
+    content: "";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
 }
 
 .primaryColor {

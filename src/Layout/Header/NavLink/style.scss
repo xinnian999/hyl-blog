@@ -1,32 +1,53 @@
-.twoNav {
-  width: 100px;
-  background-color: var(--background-color);
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 60px;
+#nav {
   li {
+    padding: 0 10px;
+    position: relative;
+    font-size: 15px;
+    font-weight: bold;
     text-align: center;
-    &:hover {
-      background-color: var(--background-color-active);
+
+    .nav-title {
+      padding: 0 5px;
+    }
+
+    .down {
+      display: inline-block;
+      transition: 0.5s all;
+    }
+
+    .twoNav {
+      width: 100px;
+      background-color: #2f4154;
+      box-shadow: 0 4px 7px 0 rgb(0 0 0 / 50%);
+      overflow: hidden;
+      height: 0;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 60px;
+      border-radius: 10px;
+      transition: 0.5s all;
+
+      li {
+        &:hover {
+          background-color: var(--background-color-active);
+        }
+      }
+
+      .twoNavLi {
+        margin-right: 0 !important;
+      }
+    }
+
+    &:hover .twoNav {
+      opacity: 1;
+      top: 50px;
+      height: auto;
+      padding: 10px 0;
+    }
+
+    &:hover .down {
+      transform: rotate(180deg);
     }
   }
-
-  .twoNavLi {
-    margin-right: 0 !important;
-  }
-}
-
-#nav {
-  .ant-popover-inner {
-    padding: 0 !important;
-    overflow: hidden;
-  }
-
-  .down {
-    display: inline;
-  }
-}
-.navLink:hover .twoNav {
-  display: block;
 }
