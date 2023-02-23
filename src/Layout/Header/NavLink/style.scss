@@ -1,9 +1,32 @@
 .twoNav {
-  width: 150px;
+  width: 100px;
+  background-color: var(--background-color);
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 60px;
   li {
     text-align: center;
     &:hover {
       background-color: var(--background-color-active);
     }
   }
+
+  .twoNavLi {
+    margin-right: 0 !important;
+  }
+}
+
+#nav {
+  .ant-popover-inner {
+    padding: 0 !important;
+    overflow: hidden;
+  }
+
+  .down {
+    display: inline;
+  }
+}
+.navLink:hover .twoNav {
+  display: block;
 }

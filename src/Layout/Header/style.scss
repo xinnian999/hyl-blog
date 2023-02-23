@@ -34,6 +34,7 @@ header {
   #nav {
     display: flex;
     float: right;
+    margin-right: 15px;
     li {
       line-height: 60px;
       padding: 0 10px;
@@ -44,7 +45,8 @@ header {
     }
 
     li:hover {
-      color: var(--ant-primary-color);
+      // color: var(--ant-primary-color);
+      // background-color: var(--background-color-active);
       cursor: pointer;
     }
   }
