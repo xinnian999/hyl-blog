@@ -1,5 +1,6 @@
 .Works {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: var(--background-color-shallow);
+  border: 1px solid var(--border-color);
   border-radius: 15px;
   padding: 30px;
   display: flex;

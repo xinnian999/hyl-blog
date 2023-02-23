@@ -22,7 +22,7 @@ function FloatButton() {
       },
     },
     {
-      icon: <Icon type="icon-sun_fill" className="FloatButton-icon" />,
+      icon: <Icon type={store.dark ? "icon-moon-fill" : "icon-sun_fill"} />,
       color: "#558897",
       message: store.dark ? "开灯" : "关灯",
       onclick: () => {

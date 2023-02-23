@@ -5,7 +5,8 @@
   .cardContainer {
     padding: 20px;
     width: 23%;
-    background-color: rgba(255, 255, 255);
+    background-color: var(--background-color-shallow);
+    border: 1px solid var(--border-color);
     border-radius: 15px;
     margin: 0 10px 15px;
     cursor: pointer;
@@ -31,7 +32,6 @@
     }
 
     .autograph {
-      color: #555;
       font-size: 13px;
       height: 40px;
       overflow: hidden;

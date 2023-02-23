@@ -1,5 +1,6 @@
 #file {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: var(--background-color-shallow);
+  border: 1px solid var(--border-color);
   padding-top: 5px;
   border-radius: 15px;
   .fileTitle {

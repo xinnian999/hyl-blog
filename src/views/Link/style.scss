@@ -1,8 +1,7 @@
-$bg: rgba(255, 255, 255);
-
 .explain {
   padding: 15px;
-  background-color: $bg;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
   border-radius: 15px;
   &-main {
     margin-left: 20px;
@@ -25,7 +24,9 @@ $bg: rgba(255, 255, 255);
 .link-main {
   margin-top: 25px;
   .linkItem {
-    background-color: $bg;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+
     cursor: pointer;
     padding: 15px;
     margin-bottom: 26px;

@@ -55,7 +55,7 @@ function Layout() {
   // 主题监听
   useEffect(() => {
     if (!store.simple) {
-      starBg(store.theme.bg);
+      // starBg(store.theme.bg);
     }
 
     AntdProvider.config({
@@ -70,8 +70,12 @@ function Layout() {
     const body = document.querySelector("body")!;
     if (store.dark) {
       body.id = "dark";
+      starBg(store.theme.bg);
     } else {
       body.id = "light";
+
+      const bg: any = document.querySelector("#canvasBg")!;
+      bg.style.display = "none";
     }
   }, [store.dark]);
 

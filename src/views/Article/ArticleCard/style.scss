@@ -86,7 +86,7 @@
 
 .ArticleCard:hover {
   cursor: pointer;
-  box-shadow: 0px 0px 10px 0px var(--ant-primary-color);
+  background-color: var(--background-color-active);
 }
 
 @media screen and (max-width: 800px) {

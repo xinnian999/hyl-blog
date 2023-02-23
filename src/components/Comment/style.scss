@@ -18,6 +18,7 @@ $bgc: var(--background-color);
   .ant-list-items {
     border-radius: 15px;
     overflow: hidden;
+    border: 1px solid var(--border-color);
   }
 
   .replyItem {

@@ -3,15 +3,21 @@
     --head-background-color: #fff;
     --footer-background-color:#011425;
     --background-color:#fff;
+    --background-color-shallow:rgba(255,255,255,0.8);
     --background-color-active:#eee;
     --border-color:#fff;
+    --commentReply-background-color:var(--ant-primary-2);
+    --about-info-color:#eee;
 }
 
 #dark {
     --head-background-color: rgba(0,0,0,0.8);
     --footer-background-color:transparent;
-    --background-color:rgba(0,0,0,0.8);
+    --background-color:transparent;
+    --background-color-shallow:transparent;
     --background-color-active:#303030;
-    --border-color: #303030;
+    --border-color: var(--ant-primary-color);
+    --commentReply-background-color:transparent;
+    --about-info-color:transparent;
 }
 
