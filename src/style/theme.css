@@ -24,7 +24,7 @@ body{
     --background-color-shallow:transparent;
     --background-color-active:#111111;
     --border-color: #303030;
-    --commentReply-background-color:transparent;
+    --commentReply-background-color: var(--ant-primary-10);
     --about-info-color:transparent;
     --text-color:rgba(255, 255, 255, 0.85);
 }

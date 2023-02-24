@@ -1,17 +1,16 @@
 #comment {
-  padding: 10px 0;
+  padding: 20px 0;
+  padding-left: 70px;
+  position: relative;
 }
 .commentCard {
-  padding: 15px;
-  padding-left: 70px;
-  padding-bottom: 10px;
-  position: relative;
+  // padding: 10px 0;
 
+  &-avatar {
+    position: absolute !important;
+    left: 15px;
+  }
   &-head {
-    &-avatar {
-      position: absolute !important;
-      left: 15px;
-    }
     &-name {
       display: inline-block;
     }
@@ -34,12 +33,11 @@
       cursor: pointer;
       color: #555;
     }
+    margin-bottom: 20px;
   }
 }
 
 .commentReply {
-  margin-left: 70px;
-  border-radius: 10px;
-  background-color: var(--commentReply-background-color);
   font-size: 13px;
+  border-left: 1px dashed #eee;
 }

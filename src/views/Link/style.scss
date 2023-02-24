@@ -1,50 +1,55 @@
-.explain {
-  padding: 15px;
-  background-color: var(--background-color-block);
-  border-radius: 15px;
-  &-main {
-    margin-left: 20px;
+#Link {
+  position: relative;
+  top: -50px;
 
-    .tags {
-      margin-bottom: 30px;
-    }
+  .link-main {
+    margin-top: 25px;
+    .linkItem {
+      background-color: var(--background-color-block);
 
-    .content {
-      line-height: 25px;
-      .mylink-info {
-        background: var(--ant-primary-2);
-        padding: 10px;
+      cursor: pointer;
+      padding: 15px;
+      margin-bottom: 26px;
+      min-height: 150px;
+      transition: 0.6s all;
+      border-radius: 15px;
+
+      .avatar {
+        margin-right: 15px;
+        margin-bottom: 10px;
+      }
+
+      span {
+        font-size: 16px;
         font-weight: bold;
+      }
+
+      &:hover {
+        box-shadow: 0 0 15px rgba(50, 250, 255, 0.95);
+        opacity: 0.8;
       }
     }
   }
-}
 
-.link-main {
-  margin-top: 25px;
-  .linkItem {
-    background-color: var(--background-color-block);
-
-    cursor: pointer;
+  .explain {
     padding: 15px;
-    margin-bottom: 26px;
-    min-height: 150px;
-    transition: 0.6s all;
+    background-color: var(--background-color-block);
     border-radius: 15px;
+    &-main {
+      margin-left: 20px;
 
-    .avatar {
-      margin-right: 15px;
-      margin-bottom: 10px;
-    }
+      .tags {
+        margin-bottom: 30px;
+      }
 
-    span {
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    &:hover {
-      box-shadow: 0 0 15px rgba(50, 250, 255, 0.95);
-      opacity: 0.8;
+      .content {
+        line-height: 25px;
+        .mylink-info {
+          background: var(--ant-primary-10);
+          padding: 10px;
+          font-weight: bold;
+        }
+      }
     }
   }
 }

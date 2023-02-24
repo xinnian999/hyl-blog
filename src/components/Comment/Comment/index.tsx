@@ -13,13 +13,13 @@ function Comment({
 }) {
   return (
     <div id="comment" className={className}>
+      <Avatar
+        className="commentCard-avatar"
+        src={httpTohttps(avatar)}
+        size={40}
+      />
       <div className="commentCard">
         <div className="commentCard-head">
-          <Avatar
-            className="commentCard-head-avatar"
-            src={httpTohttps(avatar)}
-            size={40}
-          />
           <div className="commentCard-head-name">{author}</div>
           <div className="commentCard-head-datetime">
             {time.parseFrom(datetime)}
@@ -28,8 +28,9 @@ function Comment({
         <div className="commentCard-content">{content}</div>
 
         <Space className="commentCard-footer">{actions}</Space>
+        {/* {children && <div className="commentReply"> {children}</div>} */}
+        {children && children}
       </div>
-      {children && <div className="commentReply"> {children}</div>}
     </div>
   );
 }

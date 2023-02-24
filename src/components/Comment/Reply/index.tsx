@@ -87,41 +87,42 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
       >
         {replyData.length > 0 &&
           replyData.map((props, i) => (
-            <div key={props.id}>
-              <Comment
-                {...props}
-                content={
-                  <span>
-                    回复{" "}
-                    <span className="primaryColor">{props.reply_name}</span> :{" "}
-                    {props.content}
-                  </span>
-                }
-                author={author(props)}
-                actions={renderAction(props)}
-                className={classnames({ grid: i + 1 !== replyData.length })}
-              />
+            <div className="commentReply">
+              <div key={props.id}>
+                <Comment
+                  {...props}
+                  content={
+                    <span>
+                      回复{" "}
+                      <span className="primaryColor">{props.reply_name}</span> :{" "}
+                      {props.content}
+                    </span>
+                  }
+                  author={author(props)}
+                  actions={renderAction(props)}
+                  className={classnames({ grid: i + 1 !== replyData.length })}
+                />
+              </div>
             </div>
           ))}
+        {visible && loginState && (
+          <div className="replyEditor">
+            <Editor
+              btnName={`回复 ${replyName}`}
+              placeholder={`${replyName}: ${content}`}
+              articleId={commentItem.article_id}
+              refresh={refresh}
+              replyData={{
+                reply_id: commentItem.id,
+                reply_name: replyName,
+                reply_Email: replyEmail,
+              }}
+              onClose={cancelEditor}
+              hasAnimation
+            />
+          </div>
+        )}
       </Comment>
-
-      {visible && loginState && (
-        <div className="replyEditor">
-          <Editor
-            btnName={`回复 ${replyName}`}
-            placeholder={`${replyName}: ${content}`}
-            articleId={commentItem.article_id}
-            refresh={refresh}
-            replyData={{
-              reply_id: commentItem.id,
-              reply_name: replyName,
-              reply_Email: replyEmail,
-            }}
-            onClose={cancelEditor}
-            hasAnimation
-          />
-        </div>
-      )}
     </div>
   );
 };
