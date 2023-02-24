@@ -77,42 +77,10 @@ function Article() {
     }
   );
 
-  const [hotArticleData] = useGetData("/article/query", {
-    progress: false,
-    mockLoadingCount: 5,
-    data: {
-      pageNum: 1,
-      pageSize: 5,
-      filters: { publish: 1 },
-      orderBys: "visits desc",
-    },
-  });
-
   const [categoryData] = useGetData("/category/query", {
     mockLoadingCount: 7,
     data: {},
   });
-
-  const renderHotArticle = useMemo(
-    () =>
-      hotArticleData.map(({ title, id, loading }: any, index: number) => {
-        if (loading)
-          return (
-            <Skeleton.Input
-              active
-              className="article-toolbar-hot-item"
-              key={id}
-            />
-          );
-        return (
-          <li className="article-toolbar-hot-item" key={id}>
-            <div className={`index index${index + 1}`}>{index + 1}</div>
-            <span onClick={() => history(`/article/${id}`)}>{title}</span>
-          </li>
-        );
-      }),
-    [hotArticleData]
-  );
 
   const paragraph = (
     <Space direction="vertical" className="skeleton" size={20}>
@@ -193,7 +161,7 @@ function Article() {
 
   return (
     <>
-      <Plate title="文章" autograph="文章集合" />
+      <Plate title="文章" autograph="文章集合" bg="bg7.jpg" />
       <div id="article" className="center">
         <div className="article-list">
           {articleData.length ? (

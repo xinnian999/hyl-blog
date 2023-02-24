@@ -1,15 +1,31 @@
+import { useRedux } from "@/hooks";
 import "./style.scss";
 
 interface PlateType {
   title: string;
   autograph?: string;
   children?: any;
+  bg?: string;
 }
 
-function Plate({ title = "标题", autograph = "", children }: PlateType) {
+function Plate({
+  title = "标题",
+  autograph = "",
+  children,
+  bg = "bg1.webp",
+}: PlateType) {
+  const { store } = useRedux();
+
   return (
     <>
-      <div className="plate-head">
+      <div
+        className="plate-head"
+        style={{
+          backgroundImage: `url(${require(`@/assets/img/bg/${
+            store.dark ? "bg8.jpg" : bg
+          }`)})`,
+        }}
+      >
         <div className="plate-head-info">
           <h2>{title}</h2>
           <p>{autograph} </p>

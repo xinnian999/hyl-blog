@@ -198,7 +198,7 @@ function ArticleDetail() {
 
         <Comment articleId={params.id} title="评论区" btnName="提交评论" />
       </div>
-
+      {/* 
       {size.width > 800 ? (
         <div className="ArticleDetail-toolbar" ref={toolbarRef}>
           <div
@@ -217,7 +217,7 @@ function ArticleDetail() {
         <div className="anchorFlag" onClick={setTrue}>
           <MenuFoldOutlined />
         </div>
-      )}
+      )} */}
 
       <Drawer
         placement="right"

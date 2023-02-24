@@ -1,7 +1,6 @@
 .explain {
   padding: 15px;
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
+  background-color: var(--background-color-block);
   border-radius: 15px;
   &-main {
     margin-left: 20px;
@@ -24,8 +23,7 @@
 .link-main {
   margin-top: 25px;
   .linkItem {
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color);
+    background-color: var(--background-color-block);
 
     cursor: pointer;
     padding: 15px;

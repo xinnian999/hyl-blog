@@ -19,7 +19,7 @@ function Layout() {
 
   const { top } = useScroll();
 
-  const { store, dispatch } = useRedux();
+  const { store } = useRedux();
 
   useGetData("/all/getCsrfToken", {
     progress: false,

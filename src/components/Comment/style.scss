@@ -1,4 +1,4 @@
-$bgc: var(--background-color);
+$bgc: var(--background-color-block);
 
 .commentLoginBtn {
   color: var(--ant-primary-color);
@@ -18,7 +18,6 @@ $bgc: var(--background-color);
   .ant-list-items {
     border-radius: 15px;
     overflow: hidden;
-    border: 1px solid var(--border-color);
   }
 
   .replyItem {
@@ -43,6 +42,6 @@ $bgc: var(--background-color);
   }
 
   .grid {
-    border-bottom: 2px solid #fff;
+    border-bottom: 1px solid #fff;
   }
 }

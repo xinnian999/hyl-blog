@@ -1,8 +1,6 @@
-$bgc: rgba(255, 255, 255);
-
 .comment-editor {
   z-index: 99;
-  background-color: $bgc;
+  background-color: var(--background-color-block);
   padding: 15px;
   border-radius: 10px;
   .editor {
@@ -12,7 +10,7 @@ $bgc: rgba(255, 255, 255);
     line-height: 35px;
     width: 100%;
     border: 1px solid #d9d9d9;
-    background-color: #fff;
+    background-color: var(--background-color);
     border-bottom: none;
     padding-left: 10px;
     .emoji-icon {
