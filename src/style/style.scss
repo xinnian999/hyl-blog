@@ -46,8 +46,8 @@ body {
   overflow: hidden;
 }
 
-#center {
-  max-width: 1280px;
+.center {
+  max-width: var(--heart-width);
   margin: 0 auto;
   &:after {
     content: "";
@@ -56,6 +56,10 @@ body {
     clear: both;
     visibility: hidden;
   }
+}
+
+.box-shadow {
+  box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
 }
 
 .primaryColor {

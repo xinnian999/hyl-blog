@@ -22,7 +22,6 @@
     }
     .content {
       display: flex;
-
       .item {
         margin-top: 50px;
         width: 33.33%;
@@ -31,7 +30,7 @@
         position: relative;
         .item-box {
           background-color: var(--background-color);
-          border: 1px solid var(--border-color);
+          background-color: var(--background-color-active);
           height: 100%;
         }
         .item-img {

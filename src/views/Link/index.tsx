@@ -3,7 +3,7 @@ import type { TabsProps } from "antd";
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { PageCenter, Banner, Title, Copy } from "@/components";
+import { PageCenter, Plate, Title, Copy } from "@/components";
 import { useGetData } from "@/hooks";
 import "./style.scss";
 
@@ -59,48 +59,45 @@ export default function Link() {
   ];
 
   return (
-    <>
-      <Banner
-        title="友 情 链 接"
-        autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
-      />
-      <PageCenter>
-        <div className="explain">
-          <Title>链接申请说明</Title>
-          <div className="explain-main">
-            <p className="tags">
-              {tags.map((item) => (
-                <Tag color={item.color} icon={item.icon} key={item.con}>
-                  {item.con}
-                </Tag>
-              ))}
+    <Plate
+      title="友 情 链 接"
+      autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
+    >
+      <div className="explain">
+        <Title>链接申请说明</Title>
+        <div className="explain-main">
+          <p className="tags">
+            {tags.map((item) => (
+              <Tag color={item.color} icon={item.icon} key={item.con}>
+                {item.con}
+              </Tag>
+            ))}
+          </p>
+          <div className="content">
+            <p>
+              交换友链可在 <b>留言板</b>
+              ，本站友链倒序排列，且不定期清理失效友链
             </p>
-            <div className="content">
-              <p>
-                交换友链可在 <b>留言板</b>
-                ，本站友链倒序排列，且不定期清理失效友链
-              </p>
-              <Tabs type="card" items={items} />
-            </div>
+            <Tabs type="card" items={items} />
           </div>
         </div>
+      </div>
 
-        <Row gutter={26} wrap className="link-main">
-          {data.map(({ avator, name, descr, link, id, loading }) => {
-            return (
-              <Col span={6} onClick={() => window.open(link)} key={id}>
-                <div className="linkItem">
-                  <Skeleton loading={loading} active>
-                    <Avatar src={avator} className="avatar" />
-                    <span>{name}</span>
-                    <div>{descr}</div>
-                  </Skeleton>
-                </div>
-              </Col>
-            );
-          })}
-        </Row>
-      </PageCenter>
-    </>
+      <Row gutter={26} wrap className="link-main">
+        {data.map(({ avator, name, descr, link, id, loading }) => {
+          return (
+            <Col span={6} onClick={() => window.open(link)} key={id}>
+              <div className="linkItem">
+                <Skeleton loading={loading} active>
+                  <Avatar src={avator} className="avatar" />
+                  <span>{name}</span>
+                  <div>{descr}</div>
+                </Skeleton>
+              </div>
+            </Col>
+          );
+        })}
+      </Row>
+    </Plate>
   );
 }

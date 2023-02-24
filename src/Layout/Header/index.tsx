@@ -11,7 +11,7 @@ function Header({ style }) {
 
   return (
     <header style={style}>
-      <div id="center">
+      <div className="center">
         <div id="logo" onClick={goHome}>
           <span>心念の空间站</span>
         </div>

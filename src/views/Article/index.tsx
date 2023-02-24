@@ -11,7 +11,7 @@ import {
   useBoolean,
   useScroll,
 } from "@/hooks";
-import { Banner } from "@/components";
+import { Plate } from "@/components";
 import { batchCopyDom, request } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
@@ -129,7 +129,7 @@ function Article() {
   );
 
   const Toolbar = (
-    <div className="article-toolbar-container" ref={toobarRef}>
+    <div className="article-toolbar-container box-shadow" ref={toobarRef}>
       <div
         className={classnames("article-toolbar ", {
           "category-fixed": scrollNum?.top > 780,
@@ -188,72 +188,63 @@ function Article() {
           )}
         </ul>
       </div>
-
-      {scrollNum?.top < 780 && (
-        <ul className="article-toolbar-hot">
-          <Divider className="article-toolbar-hot-title">热门文章</Divider>
-          {renderHotArticle}
-        </ul>
-      )}
     </div>
   );
 
   return (
     <>
-      <Banner title="文章" autograph="文章集合" />
-      <div id="center">
-        <div id="hall-main">
-          <div className="article-list">
-            {articleData.length ? (
-              <ReactScroll
-                scrollThreshold={0.65}
-                dataLength={articleData.length}
-                next={() =>
-                  runQueryArticle({
-                    cache: true,
-                  })
-                }
-                hasMore={articleData.length < current.total}
-                loader={paragraph}
-                endMessage={
-                  <Divider plain className="article-footer">
-                    <span className="shadowText">没有更多文章了</span> ---- 🤐
-                  </Divider>
-                }
-              >
-                <Space direction="vertical" className="listStyle">
-                  {articleData.map((item: any) => (
-                    <span key={item.title}>
-                      <ArticleCard data={item} />
-                    </span>
-                  ))}
-                </Space>
-              </ReactScroll>
-            ) : (
-              paragraph
-            )}
-          </div>
-
-          {size.width > 800 ? (
-            Toolbar
+      <Plate title="文章" autograph="文章集合" />
+      <div id="article" className="center">
+        <div className="article-list">
+          {articleData.length ? (
+            <ReactScroll
+              scrollThreshold={0.65}
+              dataLength={articleData.length}
+              next={() =>
+                runQueryArticle({
+                  cache: true,
+                })
+              }
+              hasMore={articleData.length < current.total}
+              loader={paragraph}
+              endMessage={
+                <Divider plain className="article-footer">
+                  <span className="shadowText">没有更多文章了</span> ---- 🤐
+                </Divider>
+              }
+            >
+              <Space direction="vertical" className="listStyle">
+                {articleData.map((item: any) => (
+                  <span key={item.title}>
+                    <ArticleCard data={item} />
+                  </span>
+                ))}
+              </Space>
+            </ReactScroll>
           ) : (
-            <div className="toolbarFlag" onClick={on}>
-              <MenuFoldOutlined />
-            </div>
+            paragraph
           )}
-
-          <Drawer
-            placement="right"
-            onClose={off}
-            open={drawerVisible}
-            width="60%"
-            footer={null}
-            title={null}
-            destroyOnClose
-          >
-            {Toolbar}
-          </Drawer>
         </div>
+
+        {size.width > 800 ? (
+          Toolbar
+        ) : (
+          <div className="toolbarFlag" onClick={on}>
+            <MenuFoldOutlined />
+          </div>
+        )}
+
+        <Drawer
+          placement="right"
+          onClose={off}
+          open={drawerVisible}
+          width="60%"
+          footer={null}
+          title={null}
+          destroyOnClose
+        >
+          {Toolbar}
+        </Drawer>
       </div>
     </>
   );

@@ -8,7 +8,7 @@ import {
   Info,
   Section,
   Icon,
-  Banner,
+  Plate,
 } from "@/components";
 import { useMount, useSetState, useGetData } from "@/hooks";
 import "./style.scss";
@@ -37,8 +37,7 @@ const About = () => {
 
   return (
     <>
-      <Banner title="关于我" />
-      <div id="center" className="animate__animated animate__zoomIn">
+      <Plate title="关于我">
         <div id="about">
           <Title>关于我</Title>
           <Info>
@@ -151,7 +150,7 @@ const About = () => {
             </Card>
           </Info>
         </div>
-      </div>
+      </Plate>
     </>
   );
 };

@@ -1,8 +1,13 @@
 /*******************配置组件自定义颜色(入口css)******************/
+body{
+    --heart-width:1200px;
+}
+
 #light {
     --head-background-color: #fff;
     --footer-background-color:#011425;
     --background-color:#fff;
+    --background-color-block:#fff;
     --background-color-shallow:rgba(255,255,255,0.8);
     --background-color-active:#eee;
     --border-color:#fff;
@@ -15,6 +20,7 @@
     --head-background-color: rgba(0,0,0,0.8);
     --footer-background-color:transparent;
     --background-color:transparent;
+    --background-color-block:rgb(48, 48, 48,0.8);
     --background-color-shallow:transparent;
     --background-color-active:#303030;
     --border-color: var(--ant-primary-color);

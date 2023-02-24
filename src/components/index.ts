@@ -3,7 +3,7 @@ import Icon from "./Icon";
 import Comment from "./Comment";
 import Loading from "./Loading";
 import TimeBar from "./TimeBar";
-import Banner from "./Banner";
+import Plate from "./Plate";
 import Copy from "./Copy";
 import Markdown from "./Markdown";
 import {
@@ -26,7 +26,7 @@ export {
   Comment,
   Loading,
   TimeBar,
-  Banner,
+  Plate,
   Error,
   withProgress,
   withRouter,

@@ -1,4 +1,4 @@
-.banner-container {
+.plate-head {
   position: relative;
   height: 500px;
   width: 100%;
@@ -6,7 +6,7 @@
   background-image: url("~@/assets/img/bg/bg1.webp");
   background-size: cover;
   background-position: center;
-  .content {
+  &-info {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -21,4 +21,13 @@
       font-size: 20px;
     }
   }
+}
+
+.plate-main {
+  width: var(--heart-width);
+  background-color: var(--background-color);
+  margin: 0 auto;
+  border-radius: 15px;
+  position: relative;
+  top: -50px;
 }

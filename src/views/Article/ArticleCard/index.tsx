@@ -27,7 +27,7 @@ function ArticleCard(props: any) {
   return (
     <Skeleton loading={loading}>
       <div
-        className="ArticleCard animate__animated animate__zoomIn"
+        className="ArticleCard  animate__animated animate__zoomIn"
         onClick={() => history(`/article/${id}`)}
         key={id}
       >

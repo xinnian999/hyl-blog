@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { Divider, Space, Drawer, Skeleton, Anchor } from "antd";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import { TimeBar, PageCenter } from "@/components";
+import { TimeBar, PageCenter, Plate } from "@/components";
 import { useParams } from "react-router-dom";
 import { time } from "hyl-utils";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
@@ -190,23 +190,8 @@ function ArticleDetail() {
   );
 
   return (
-    <PageCenter id="ArticleDetail">
+    <Plate title={title} autograph={createTime}>
       <div className="ArticleDetail">
-        <div className="time">
-          <TimeBar time={createTime} />
-        </div>
-        <div className="title">
-          <span>{title}</span>
-        </div>
-        <Divider className="article-info">
-          <Space size={25}>
-            <small>作者：心念 </small>
-            <small>阅读量：{visits}</small>
-            <small className="updateTime">
-              更新于 {time.parse(updateTime)}
-            </small>
-          </Space>
-        </Divider>
         <Skeleton loading={!content} paragraph={{ rows: 30 }}>
           <Markdown content={content} ref={mdRef} />
         </Skeleton>
@@ -242,7 +227,7 @@ function ArticleDetail() {
       >
         <div className="anchorDrawer">{renderAnchor}</div>
       </Drawer>
-    </PageCenter>
+    </Plate>
   );
 }
 export default ArticleDetail;
