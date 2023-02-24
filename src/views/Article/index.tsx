@@ -100,7 +100,7 @@ function Article() {
     <div className="article-toolbar-container box-shadow" ref={toobarRef}>
       <div
         className={classnames("article-toolbar ", {
-          "category-fixed": scrollNum?.top > 780,
+          "category-fixed": scrollNum?.top > 390,
         })}
         style={{ width: toobarRef.current?.clientWidth }}
       >
@@ -127,7 +127,7 @@ function Article() {
                 <li
                   key={name}
                   onClick={() => {
-                    window.scrollTo(0, 0);
+                    window.scrollTo(780, 0);
                     history(`/article?category=${name}`);
                     current.category = name;
                     current.pageNum = 1;
@@ -161,7 +161,11 @@ function Article() {
 
   return (
     <>
-      <Plate title="文章" autograph="文章集合" bg="bg7.jpg" />
+      <Plate
+        title="文章"
+        autograph="人是要整活的——没活了，可不就是死了么？"
+        bg="bg7.jpg"
+      />
       <div id="article" className="center">
         <div className="article-list">
           {articleData.length ? (

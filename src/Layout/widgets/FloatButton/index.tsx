@@ -48,7 +48,7 @@ function FloatButton() {
       {action.map(({ icon, color, message, onclick }) => {
         if (top > 1) {
           return (
-            <Tooltip title={message} placement="left">
+            <Tooltip title={message} placement="left" key={message}>
               <Button
                 type="primary"
                 icon={icon}

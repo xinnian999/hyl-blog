@@ -8,9 +8,13 @@ import {
   ChangeBar,
 } from "./StyleComponents";
 import { OverPack } from "@/components";
+import { useRedux } from "@/hooks";
 
 function SentenceContent() {
   const [visible, setVisible] = useState(true);
+
+  const { store } = useRedux();
+
   const [{ name, content }, setSentence] = useState({
     name: "",
     content: "",
@@ -29,10 +33,12 @@ function SentenceContent() {
           const img = new Image();
           img.src = `${globalConfig.remoteStaticUrl}/image/${data[0].picture}`;
           img.onload = function () {
-            const imgEl = document.querySelector(".SentenceContent");
-
-            //@ts-ignore
-            imgEl.style.backgroundImage = `url(${globalConfig.remoteStaticUrl}/image/${data[0].picture})`;
+            const imgEl: any = document.querySelector(".SentenceContent");
+            if (store.dark) {
+              imgEl.style.backgroundImage = "";
+            } else {
+              imgEl.style.backgroundImage = `url(${globalConfig.remoteStaticUrl}/image/${data[0].picture})`;
+            }
           };
         }
       });
@@ -40,7 +46,7 @@ function SentenceContent() {
 
   useEffect(() => {
     querySentence();
-  }, []);
+  }, [store.dark]);
 
   return (
     <SentenceContentWapper className="SentenceContent">

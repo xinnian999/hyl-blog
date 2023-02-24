@@ -2,7 +2,6 @@
   overflow: auto;
   position: relative;
   top: -50px;
-  // display: flex;
 
   .article-list {
     width: 75%;
@@ -73,7 +72,6 @@
 }
 
 .article-toolbar-container {
-  // flex: 1;
   position: relative;
   margin-left: 20px;
   display: inline-block;
@@ -87,8 +85,9 @@
   }
 
   .article-toolbar {
-    color: #787977;
-
+    background-color: var(--background-color-block);
+    border-radius: 10px;
+    overflow: hidden;
     &-search {
       padding: 10px;
       background-color: gray;

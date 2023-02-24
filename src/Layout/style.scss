@@ -46,7 +46,9 @@ footer {
   .beianNumber {
     margin-right: 15px;
     img {
-      float: left;
+      // float: left;
+      vertical-align: middle;
+      margin-right: 5px;
     }
   }
 

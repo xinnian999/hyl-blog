@@ -29,9 +29,10 @@
 
         position: relative;
         .item-box {
-          background-color: var(--background-color);
           background-color: var(--background-color-active);
           height: 100%;
+          border-radius: 10px;
+          overflow: hidden;
         }
         .item-img {
           width: 100%;

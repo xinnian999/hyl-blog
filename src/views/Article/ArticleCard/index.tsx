@@ -45,9 +45,8 @@ function ArticleCard(props: any) {
           <div className="content-box">{introduce || "暂无简介..."}</div>
         </div>
         <div className="toolbar">
-          <TagOutlined />{" "}
           {category.split(",").map((item: string) => (
-            <Tag color="pink" key={item}>
+            <Tag icon={<Icon type="icon-biaoqian2" />} color="pink" key={item}>
               {item}
             </Tag>
           ))}

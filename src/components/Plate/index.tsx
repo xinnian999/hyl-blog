@@ -1,9 +1,10 @@
 import { useRedux } from "@/hooks";
+import { ReactNode } from "react";
 import "./style.scss";
 
 interface PlateType {
   title: string;
-  autograph?: string;
+  autograph?: string | ReactNode;
   children?: any;
   bg?: string;
 }

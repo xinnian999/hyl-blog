@@ -1,18 +1,26 @@
 #nav {
-  li {
-    padding: 0 10px;
+  .navItem {
     position: relative;
-    font-size: 15px;
-    font-weight: bold;
-    text-align: center;
 
-    .nav-title {
-      padding: 0 5px;
-    }
+    li {
+      padding: 0 10px;
+      position: relative;
+      font-size: 15px;
+      font-weight: bold;
+      text-align: center;
 
-    .down {
-      display: inline-block;
-      transition: 0.5s all;
+      .nav-title {
+        padding: 0 5px;
+      }
+
+      .down {
+        display: inline-block;
+        transition: 0.5s all;
+      }
+
+      &:hover .down {
+        transform: rotate(180deg);
+      }
     }
 
     .twoNav {
@@ -44,10 +52,6 @@
       top: 50px;
       height: auto;
       padding: 10px 0;
-    }
-
-    &:hover .down {
-      transform: rotate(180deg);
     }
   }
 }

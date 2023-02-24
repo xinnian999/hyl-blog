@@ -3,7 +3,7 @@ import type { TabsProps } from "antd";
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { PageCenter, Plate, Title, Copy } from "@/components";
+import { Plate, Title, Copy } from "@/components";
 import { useGetData } from "@/hooks";
 import "./style.scss";
 
@@ -60,7 +60,7 @@ export default function Link() {
 
   return (
     <Plate
-      title="友 情 链 接"
+      title="友情链接"
       autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
     >
       <div className="explain">

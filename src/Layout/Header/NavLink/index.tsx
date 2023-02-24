@@ -6,10 +6,9 @@ import "./style.scss";
 function NavItem(props) {
   const { title, path, search, icon, children } = props;
 
-  if (title) {
-    return (
+  return (
+    <div className="navItem">
       <NavLink
-        key={title}
         to={{
           pathname: path,
           search,
@@ -19,24 +18,23 @@ function NavItem(props) {
           <Icon type={icon} />
           <span className="nav-title">{title}</span>
           {children && <CaretDownOutlined className="down" />}
-          {children && (
-            <ul className="twoNav">
-              {children.map((item) => {
-                return (
-                  <NavLink to={`${path}/${item.path}`}>
-                    <li className="twoNavLi">
-                      <Icon type={item.icon} /> {item.title}
-                    </li>
-                  </NavLink>
-                );
-              })}
-            </ul>
-          )}
         </li>
       </NavLink>
-    );
-  }
-  return null;
+      {children && (
+        <ul className="twoNav">
+          {children.map((item) => {
+            return (
+              <NavLink key={item.title} to={`${path}/${item.path}`}>
+                <li className="twoNavLi">
+                  <Icon type={item.icon} /> {item.title}
+                </li>
+              </NavLink>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
 }
 
 export default NavItem;

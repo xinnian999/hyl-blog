@@ -22,8 +22,8 @@ body{
     --background-color:transparent;
     --background-color-block:rgb(48, 48, 48,0.8);
     --background-color-shallow:transparent;
-    --background-color-active:#303030;
-    --border-color: var(--ant-primary-color);
+    --background-color-active:#111111;
+    --border-color: #303030;
     --commentReply-background-color:transparent;
     --about-info-color:transparent;
     --text-color:rgba(255, 255, 255, 0.85);

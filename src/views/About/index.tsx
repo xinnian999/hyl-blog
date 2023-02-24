@@ -1,15 +1,7 @@
 import { Timeline, Tag as AntdTag, Card } from "antd";
 import { time } from "hyl-utils";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
-import {
-  PageCenter,
-  Title,
-  Tag,
-  Info,
-  Section,
-  Icon,
-  Plate,
-} from "@/components";
+import { Title, Tag, Info, Section, Icon, Plate } from "@/components";
 import { useMount, useSetState, useGetData } from "@/hooks";
 import "./style.scss";
 
@@ -37,7 +29,7 @@ const About = () => {
 
   return (
     <>
-      <Plate title="关于我">
+      <Plate title="关于">
         <div id="about">
           <Title>关于我</Title>
           <Info>

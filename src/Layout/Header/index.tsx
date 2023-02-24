@@ -20,9 +20,11 @@ function Header({ style }) {
           <Login />
         </div>
         <ul id="nav">
-          {menus.map((item: any) => (
-            <NavItem {...item} />
-          ))}
+          {menus
+            .filter((item) => item.title)
+            .map((item: any) => (
+              <NavItem key={item.title} {...item} />
+            ))}
         </ul>
       </div>
     </header>

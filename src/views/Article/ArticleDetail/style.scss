@@ -1,108 +1,93 @@
-#ArticleDetail {
-  display: flex;
-  overflow: hidden;
-  .anchorFlag {
-    position: fixed;
-    right: 0;
-    top: 30%;
-    background-color: #eee;
-    font-size: 25px;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-
-  .ArticleDetail {
-    background-color: var(--background-color);
-    padding: 10px 30px;
-    position: relative;
-    width: calc(75% - 20px);
-    border: 1px solid var(--border-color);
-    @media screen and (max-width: 800px) {
-      width: 100%;
-      .updateTime {
-        position: absolute;
-        right: 0;
-        top: 150%;
-        width: 100%;
-      }
-    }
-    border-radius: 10px;
-    .time {
+.ArticleDetail {
+  position: relative;
+  top: -50px;
+}
+.detail {
+  background-color: var(--background-color);
+  position: relative;
+  width: calc(75% - 20px);
+  padding: 10px 20px;
+  border: 1px solid var(--border-color);
+  display: inline-block;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    .updateTime {
       position: absolute;
-      top: 0;
       right: 0;
-    }
-
-    .title {
-      text-align: center;
-      font-size: 25px;
-      @media screen and (max-width: 800px) {
-        width: 80%;
-      }
-    }
-
-    .article-info {
-      position: relative;
-
-      small {
-        color: #787977;
-      }
+      top: 150%;
+      width: 100%;
     }
   }
+  border-radius: 10px;
+  .time {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
-  .ArticleDetail-toolbar {
-    width: 25%;
-    margin-left: 15px;
+  .title {
+    text-align: center;
+    font-size: 25px;
+    @media screen and (max-width: 800px) {
+      width: 80%;
+    }
+  }
+}
 
-    &-fixed {
-      position: fixed;
+.ArticleDetail-toolbar {
+  width: 25%;
+  margin-left: 15px;
+  display: inline-block;
+  vertical-align: top;
+  &-fixed {
+    position: fixed;
+    top: 60px;
+  }
+
+  &-item {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    font-size: 15px;
+    .catalogue {
+      font-size: 18px;
+    }
+    .ant-divider-horizontal {
+      margin: 10px auto;
     }
 
-    &-item {
-      background-color: var(--background-color);
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      padding: 15px;
-      margin-bottom: 20px;
-      font-size: 15px;
-      .catalogue {
-        font-size: 18px;
-      }
-      .ant-divider-horizontal {
-        margin: 10px auto;
+    .anchorList {
+      overflow: auto;
+
+      .oneAnchor {
+        font-weight: bold;
       }
 
-      .anchorList {
-        overflow: auto;
-
-        .oneAnchor {
-          font-weight: bold;
-        }
-
-        .twoAnchor {
-          a {
-            font-size: 13px;
-            text-indent: 1em;
-          }
+      .twoAnchor {
+        a {
+          font-size: 13px;
+          text-indent: 1em;
         }
       }
+    }
 
-      .aboutArticle {
-        max-height: 30vh;
-        overflow: auto;
+    .aboutArticle {
+      max-height: 30vh;
+      overflow: auto;
+    }
+
+    .aboutArticle-item {
+      margin-bottom: 10px;
+      &-title {
+        cursor: pointer;
+        &:hover {
+          color: var(--ant-primary-color);
+        }
       }
-
-      .aboutArticle-item {
-        margin-bottom: 10px;
-        &-title {
-          cursor: pointer;
-          &:hover {
-            color: var(--ant-primary-color);
-          }
-        }
-        &-info {
-          color: #909090;
-        }
+      &-info {
+        color: #909090;
       }
     }
   }

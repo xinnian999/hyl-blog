@@ -1,10 +1,13 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Divider, Space, Drawer, Skeleton, Anchor } from "antd";
-import { MenuFoldOutlined } from "@ant-design/icons";
-import { TimeBar, PageCenter, Plate } from "@/components";
+import { Divider, Space, Drawer, Skeleton, Anchor, Tag } from "antd";
+import { Icon, Plate } from "@/components";
 import { useParams } from "react-router-dom";
-import { time } from "hyl-utils";
-import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
+import { classnames, time } from "hyl-utils";
+import {
+  UnorderedListOutlined,
+  CheckSquareOutlined,
+  MenuFoldOutlined,
+} from "@ant-design/icons";
 import { changeBlogTitle, request } from "@/utils";
 import {
   useSetState,
@@ -41,6 +44,7 @@ function ArticleDetail() {
       anchorList,
       targetOffset,
       aboutArticle,
+      category,
     },
     setState,
   ] = useSetState<State>({
@@ -58,6 +62,7 @@ function ArticleDetail() {
 
   const params = useParams();
   const mdRef: any = useRef(null);
+  const ArticleDetailRef: any = useRef(null);
   const toolbarRef: any = useRef(null);
   const size = useWindowSize();
 
@@ -153,7 +158,6 @@ function ArticleDetail() {
             );
           })}
         </Anchor>
-        {/* <Anchor className="anchorList" dataSource={anchorList}></Anchor> */}
       </div>
     ),
     [anchorList]
@@ -162,7 +166,7 @@ function ArticleDetail() {
   const renderAboutArticle = useMemo(
     () => (
       <div
-        className="ArticleDetail-toolbar-item"
+        className="ArticleDetail-toolbar-item  box-shadow"
         style={{ width: toolbarRef.current?.clientWidth }}
       >
         <div className="catalogue">
@@ -190,44 +194,76 @@ function ArticleDetail() {
   );
 
   return (
-    <Plate title={title} autograph={createTime}>
-      <div className="ArticleDetail">
-        <Skeleton loading={!content} paragraph={{ rows: 30 }}>
-          <Markdown content={content} ref={mdRef} />
-        </Skeleton>
+    <>
+      <Plate
+        title={title}
+        bg="bg7.jpg"
+        autograph={
+          <Space size={20}>
+            <span>
+              {category.split(",").map((item: string) => (
+                <Tag
+                  icon={<Icon type="icon-biaoqian2" />}
+                  color="pink"
+                  key={item}
+                >
+                  {item}
+                </Tag>
+              ))}
+            </span>
+            <span>
+              <Icon type="icon-fabu" /> 发布日期：
+              {time.parse(createTime, "YYYY-MM-DD")}
+            </span>
+            <span>
+              <Icon type="icon-banbengengxin" /> 更新日期：
+              {time.parse(updateTime, "YYYY-MM-DD")}
+            </span>
+            <span>
+              <Icon type="icon-word" /> 文章字数：
+              {content.length > 1000
+                ? `${~~(content.length / 100) / 10}k`
+                : content.length}
+            </span>
+          </Space>
+        }
+      ></Plate>
+      <div className="ArticleDetail center" ref={ArticleDetailRef}>
+        <div className="detail box-shadow">
+          <Skeleton loading={!content} paragraph={{ rows: 30 }}>
+            <Markdown content={content} ref={mdRef} />
+          </Skeleton>
+          <Comment articleId={params.id} title="评论区" btnName="提交评论" />
+        </div>
 
-        <Comment articleId={params.id} title="评论区" btnName="提交评论" />
-      </div>
-      {/* 
-      {size.width > 800 ? (
-        <div className="ArticleDetail-toolbar" ref={toolbarRef}>
-          <div
-            className={
-              (scrollNum &&
-                scrollNum.top > 200 &&
-                "ArticleDetail-toolbar-fixed") ||
-              ""
-            }
-          >
-            {renderAnchor}
-            {renderAboutArticle}
+        {size.width > 800 ? (
+          <div className="ArticleDetail-toolbar" ref={toolbarRef}>
+            <div
+              className={classnames({
+                "ArticleDetail-toolbar-fixed":
+                  scrollNum.top > 390 && "ArticleDetail-toolbar-fixed",
+              })}
+            >
+              {renderAnchor}
+              {renderAboutArticle}
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="anchorFlag" onClick={setTrue}>
-          <MenuFoldOutlined />
-        </div>
-      )} */}
+        ) : (
+          <div className="anchorFlag" onClick={setTrue}>
+            <MenuFoldOutlined />
+          </div>
+        )}
 
-      <Drawer
-        placement="right"
-        onClose={setFalse}
-        open={drawerVisible}
-        width="60%"
-      >
-        <div className="anchorDrawer">{renderAnchor}</div>
-      </Drawer>
-    </Plate>
+        <Drawer
+          placement="right"
+          onClose={setFalse}
+          open={drawerVisible}
+          width="60%"
+        >
+          <div className="anchorDrawer">{renderAnchor}</div>
+        </Drawer>
+      </div>
+    </>
   );
 }
 export default ArticleDetail;

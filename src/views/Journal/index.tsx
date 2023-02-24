@@ -1,10 +1,10 @@
 import { Outlet } from "react-router-dom";
-import { PageCenter, Plate } from "@/components";
+import { Plate } from "@/components";
 
 export default function Journal() {
   return (
     <>
-      <Plate title="日 志" autograph="每天进步一点点">
+      <Plate title="日志" autograph="越努力，越幸运">
         <Outlet />
       </Plate>
     </>
