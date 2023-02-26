@@ -2,7 +2,7 @@ header {
   position: fixed;
   width: 100%;
   background-color: transparent;
-  z-index: 99999;
+  z-index: 10;
   width: 100%;
   margin: 0 auto;
   text-align: center;
@@ -17,6 +17,17 @@ header {
     }
   }
 
+  #iphone-menus {
+    display: none;
+    padding: 0 15px;
+    font-size: 18px;
+    color: #fff;
+    @media screen and (max-width: 800px) {
+      display: inline-block;
+      float: left;
+    }
+  }
+
   #logo {
     font-family: "汉仪霹雳体简";
     font-size: 30px;
@@ -24,17 +35,27 @@ header {
     display: inline-block;
     float: left;
     color: #fff;
+    @media screen and (max-width: 800px) {
+      margin: 0 auto;
+      float: none;
+    }
   }
 
   #nav {
     display: flex;
     float: right;
     margin-right: 15px;
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
   }
 
   .user {
     display: inline-block;
     float: right;
+    @media screen and (max-width: 800px) {
+      margin-right: 20px;
+    }
   }
 
   .active {

@@ -3,6 +3,7 @@ import menus from "@/router";
 import Login from "./Login";
 import "./style.scss";
 import NavItem from "./NavLink";
+import IphoneNav from "./IphoneNav";
 
 function Header({ style }) {
   const navigate = useNavigate();
@@ -12,6 +13,8 @@ function Header({ style }) {
   return (
     <header style={style}>
       <div className="center">
+        <IphoneNav />
+
         <div id="logo" onClick={goHome}>
           <span>心念の空间站</span>
         </div>

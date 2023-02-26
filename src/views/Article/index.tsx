@@ -201,7 +201,7 @@ function Article() {
         {size.width > 800 ? (
           Toolbar
         ) : (
-          <div className="toolbarFlag" onClick={on}>
+          <div className="toolbarFlag box-shadow" onClick={on}>
             <MenuFoldOutlined />
           </div>
         )}
@@ -214,6 +214,7 @@ function Article() {
           footer={null}
           title={null}
           destroyOnClose
+          getContainer={() => document.getElementById("main")!}
         >
           {Toolbar}
         </Drawer>

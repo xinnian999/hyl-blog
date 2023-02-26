@@ -2,6 +2,7 @@
   overflow: auto;
   position: relative;
   top: -50px;
+  padding: 0 20px;
 
   .article-list {
     width: 75%;
@@ -79,9 +80,17 @@
   vertical-align: top;
   border-radius: 10px;
   overflow: hidden;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    margin-left: 0;
+  }
+
   .category-fixed {
     position: fixed;
     top: 60px;
+    @media screen and (max-width: 800px) {
+      position: static;
+    }
   }
 
   .article-toolbar {
@@ -151,7 +160,7 @@
   position: fixed;
   right: 0;
   top: 30%;
-  background-color: #eee;
+  background-color: var(--background-color-block);
   font-size: 25px;
   padding: 5px 10px;
   cursor: pointer;

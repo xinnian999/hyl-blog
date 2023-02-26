@@ -2,6 +2,9 @@
   padding: 20px 0;
   padding-left: 50px;
   position: relative;
+  @media screen and (max-width: 800px) {
+    padding-left: 70px;
+  }
 }
 .commentCard {
   &-avatar {

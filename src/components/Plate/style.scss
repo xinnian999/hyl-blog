@@ -26,10 +26,11 @@
 }
 
 .plate-main {
-  width: var(--heart-width);
+  max-width: var(--heart-width);
   background-color: var(--background-color);
   margin: 0 auto;
   border-radius: 15px;
   position: relative;
   top: -50px;
+  padding: 0 20px;
 }

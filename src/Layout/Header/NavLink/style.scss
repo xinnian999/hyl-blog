@@ -1,57 +1,59 @@
-#nav {
-  .navItem {
+.navItem {
+  position: relative;
+
+  li {
+    padding: 0 10px;
     position: relative;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
 
-    li {
-      padding: 0 10px;
-      position: relative;
-      font-size: 15px;
-      font-weight: bold;
-      text-align: center;
-
-      .nav-title {
-        padding: 0 5px;
-      }
-
-      .down {
-        display: inline-block;
-        transition: 0.5s all;
-      }
-
-      &:hover .down {
-        transform: rotate(180deg);
-      }
+    .nav-title {
+      padding: 0 5px;
     }
 
-    .twoNav {
-      width: 100px;
-      background-color: #2f4154;
-      box-shadow: 0 4px 7px 0 rgb(0 0 0 / 50%);
-      overflow: hidden;
-      height: 0;
-      opacity: 0;
-      position: absolute;
-      left: 0;
-      top: 60px;
-      border-radius: 10px;
+    .down {
+      display: inline-block;
       transition: 0.5s all;
-
-      li {
-        &:hover {
-          background-color: var(--background-color-active);
-        }
-      }
-
-      .twoNavLi {
-        margin-right: 0 !important;
-      }
     }
 
-    &:hover .twoNav {
-      opacity: 1;
-      top: 50px;
-      height: auto;
-      padding: 10px 0;
+    &:hover .down {
+      transform: rotate(180deg);
     }
   }
+
+  .twoNav {
+    width: 100px;
+    background-color: #2f4154;
+    box-shadow: 0 4px 7px 0 rgb(0 0 0 / 50%);
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 60px;
+    border-radius: 10px;
+    transition: 0.5s all;
+
+    li {
+      &:hover {
+        background-color: var(--background-color-active);
+      }
+    }
+
+    .twoNavLi {
+      margin-right: 0 !important;
+    }
+  }
+
+  &:hover .twoNav {
+    opacity: 1;
+    top: 50px;
+    height: auto;
+    padding: 10px 0;
+  }
+}
+.active {
+  color: #6bc30d;
+  color: var(--ant-primary-color);
 }
