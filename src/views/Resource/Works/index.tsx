@@ -32,6 +32,7 @@ export default function Works() {
     <Plate
       title="个人作品"
       autograph="你知道太阳为什么是太阳吗？因为它从不在乎别人的目光"
+      bg="bg15.jpg"
     >
       <div className="Works">{renderItem}</div>
     </Plate>

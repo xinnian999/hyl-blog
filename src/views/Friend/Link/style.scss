@@ -1,6 +1,5 @@
 #Link {
   position: relative;
-  top: -50px;
 
   .explain {
     padding: 15px;
@@ -34,6 +33,7 @@
     .linkItem {
       background-color: var(--background-color-block);
       width: calc(25% - 40px);
+      background-color: var(--highlight-background-color);
       @media screen and (max-width: 800px) {
         width: calc(100% - 40px);
       }

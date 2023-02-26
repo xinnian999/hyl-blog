@@ -29,7 +29,7 @@ const About = () => {
 
   return (
     <>
-      <Plate title="关于">
+      <Plate title="关于" autograph="越努力，越幸运" bg="bg14.jpg">
         <div id="about">
           <Title>关于我</Title>
           <Info>
