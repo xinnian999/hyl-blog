@@ -2,7 +2,7 @@ import { Component } from "react";
 import { time } from "hyl-utils";
 import { List, Typography, Divider } from "antd";
 import { request } from "@/utils";
-import { withRouter, Title } from "@/components";
+import { withRouter, Title, Plate } from "@/components";
 import "./style.scss";
 
 interface isProps {
@@ -53,38 +53,40 @@ class Index extends Component<isProps, isState> {
     });
 
     return (
-      <div id="file">
-        <Title>
-          居然用了
-          {this.diff.year}年零{this.diff.month}个月 才写了{data.length}
-          篇文章
-        </Title>
-        {datasource.map(({ year, list }) => {
-          return (
-            <>
-              <Divider orientation="left" className="year">
-                {year}
-              </Divider>
+      <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
+        <div id="file">
+          <Title>
+            居然用了
+            {this.diff.year}年零{this.diff.month}个月 才写了{data.length}
+            篇文章
+          </Title>
+          {datasource.map(({ year, list }) => {
+            return (
+              <>
+                <Divider orientation="left" className="year">
+                  {year}
+                </Divider>
 
-              <List
-                bordered
-                dataSource={list}
-                loading={!data.length}
-                renderItem={(item: any) => (
-                  <div onClick={() => navigate(`/article/${item.id}`)}>
-                    <List.Item className="fileList">
-                      <Typography.Text mark>
-                        [{time.parse(item.createTime, "MM-DD")}]
-                      </Typography.Text>{" "}
-                      {item.title}
-                    </List.Item>
-                  </div>
-                )}
-              />
-            </>
-          );
-        })}
-      </div>
+                <List
+                  bordered
+                  dataSource={list}
+                  loading={!data.length}
+                  renderItem={(item: any) => (
+                    <div onClick={() => navigate(`/article/${item.id}`)}>
+                      <List.Item className="fileList">
+                        <Typography.Text mark>
+                          [{time.parse(item.createTime, "MM-DD")}]
+                        </Typography.Text>{" "}
+                        {item.title}
+                      </List.Item>
+                    </div>
+                  )}
+                />
+              </>
+            );
+          })}
+        </div>
+      </Plate>
     );
   }
 }

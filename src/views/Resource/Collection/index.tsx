@@ -2,7 +2,7 @@ import { Skeleton } from "antd";
 import { InsertRowAboveOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
 import { useGetData } from "@/hooks";
-import { Image } from "@/components";
+import { Image, Plate } from "@/components";
 import "./style.scss";
 
 export default function Collection() {
@@ -33,5 +33,12 @@ export default function Collection() {
     }
   );
 
-  return <div className="Collection">{renderItem}</div>;
+  return (
+    <Plate
+      title="珍藏"
+      autograph="I like you,but just like you.我喜欢你，仅仅如此，喜欢而已"
+    >
+      <div className="Collection">{renderItem}</div>
+    </Plate>
+  );
 }

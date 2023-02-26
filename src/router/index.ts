@@ -47,39 +47,40 @@ const route = [
       },
     ],
   },
+  {
+    title: "社交",
+    path: "/friend",
+    icon: "icon-lianjie",
+    component: lazy(() => import("@/views/Friend")),
+    children: [
+      {
+        title: "友链",
+        path: "link",
+        icon: "icon-lianjie",
+        index: true,
+        component: lazy(() => import("@/views/Friend/Link")),
+      },
+      {
+        title: "留言",
+        path: "message",
+        icon: "icon-liuyan1",
+        component: lazy(() => import("@/views/Friend/Message")),
+      },
+    ],
+  },
+
   // {
-  //   title: "社交",
-  //   path: "/friend",
+  //   title: "友链",
+  //   path: "/link",
   //   icon: "icon-lianjie",
   //   component: lazy(() => import("@/views/Link")),
-  //   children: [
-  //     {
-  //       title: "友链",
-  //       path: "/link",
-  //       icon: "icon-lianjie",
-  //       component: lazy(() => import("@/views/Link")),
-  //     },
-  //     {
-  //       title: "留言",
-  //       path: "/message",
-  //       icon: "icon-liuyan1",
-  //       component: lazy(() => import("@/views/Message")),
-  //     },
-  //   ],
   // },
-
-  {
-    title: "友链",
-    path: "/link",
-    icon: "icon-lianjie",
-    component: lazy(() => import("@/views/Link")),
-  },
-  {
-    title: "留言",
-    path: "/message",
-    icon: "icon-liuyan1",
-    component: lazy(() => import("@/views/Message")),
-  },
+  // {
+  //   title: "留言",
+  //   path: "/message",
+  //   icon: "icon-liuyan1",
+  //   component: lazy(() => import("@/views/Message")),
+  // },
 
   {
     title: "作品",

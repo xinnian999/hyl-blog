@@ -1,6 +1,7 @@
 import { Skeleton } from "antd";
 import { useGetData } from "@/hooks";
 import "./style.scss";
+import { Plate } from "@/components";
 
 export default function Works() {
   const [data] = useGetData("/works/query", { mockLoadingCount: 4 });
@@ -27,5 +28,12 @@ export default function Works() {
     }
   );
 
-  return <div className="Works">{renderItem}</div>;
+  return (
+    <Plate
+      title="个人作品"
+      autograph="你知道太阳为什么是太阳吗？因为它从不在乎别人的目光"
+    >
+      <div className="Works">{renderItem}</div>
+    </Plate>
+  );
 }
