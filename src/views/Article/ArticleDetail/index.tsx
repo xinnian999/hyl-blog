@@ -199,7 +199,10 @@ function ArticleDetail() {
         title={title}
         bg="bg7.jpg"
         autograph={
-          <Space size={20}>
+          <Space
+            size={20}
+            direction={size.width > 800 ? "horizontal" : "vertical"}
+          >
             <span>
               {category.split(",").map((item: string) => (
                 <Tag
@@ -241,7 +244,7 @@ function ArticleDetail() {
             <div
               className={classnames({
                 "ArticleDetail-toolbar-fixed":
-                  scrollNum.top > 390 && "ArticleDetail-toolbar-fixed",
+                  scrollNum.top > 490 && "ArticleDetail-toolbar-fixed",
               })}
             >
               {renderAnchor}

@@ -95,12 +95,13 @@ function Article() {
       )}
     </Space>
   );
+  console.log(scrollNum?.top);
 
   const Toolbar = (
     <div className="article-toolbar-container box-shadow" ref={toobarRef}>
       <div
         className={classnames("article-toolbar ", {
-          "category-fixed": scrollNum?.top > 390,
+          "category-fixed": scrollNum?.top > 490,
         })}
         style={{ width: toobarRef.current?.clientWidth }}
       >
