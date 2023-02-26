@@ -63,44 +63,48 @@ export default function Link() {
       <Plate
         title="友情链接"
         autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
-      ></Plate>
-      <div id="Link" className="center">
-        <div className="explain">
-          <Title>链接申请说明</Title>
-          <div className="explain-main">
-            <p className="tags">
-              {tags.map((item) => (
-                <Tag color={item.color} icon={item.icon} key={item.con}>
-                  {item.con}
-                </Tag>
-              ))}
-            </p>
-            <div className="content">
-              <p>
-                交换友链可在 <b>留言板</b>
-                ，本站友链倒序排列，且不定期清理失效友链
+      >
+        {" "}
+        <div id="Link" className="center">
+          <div className="explain">
+            <Title>链接申请说明</Title>
+            <div className="explain-main">
+              <p className="tags">
+                {tags.map((item) => (
+                  <Tag color={item.color} icon={item.icon} key={item.con}>
+                    {item.con}
+                  </Tag>
+                ))}
               </p>
-              <Tabs type="card" items={items} />
+              <div className="content">
+                <p>
+                  交换友链可在 <b>留言板</b>
+                  ，本站友链倒序排列，且不定期清理失效友链
+                </p>
+                <Tabs type="card" items={items} />
+              </div>
             </div>
           </div>
-        </div>
 
-        <Row gutter={26} wrap className="link-main">
-          {data.map(({ avator, name, descr, link, id, loading }) => {
-            return (
-              <Col span={6} onClick={() => window.open(link)} key={id}>
-                <div className="linkItem">
+          <div className="link-main">
+            {data.map(({ avator, name, descr, link, id, loading }) => {
+              return (
+                <div
+                  className="linkItem"
+                  onClick={() => window.open(link)}
+                  key={id}
+                >
                   <Skeleton loading={loading} active>
                     <Avatar src={avator} className="avatar" />
                     <span>{name}</span>
                     <div>{descr}</div>
                   </Skeleton>
                 </div>
-              </Col>
-            );
-          })}
-        </Row>
-      </div>
+              );
+            })}
+          </div>
+        </div>
+      </Plate>
     </>
   );
 }

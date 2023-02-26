@@ -6,10 +6,12 @@
     color: var(--ant-primary-7);
   }
 }
-.commentCon {
-  padding-bottom: 15px;
-  z-index: 1;
 
+#comment {
+  padding: 20px 40px;
+}
+.commentCon {
+  z-index: 1;
   .total {
     padding-left: 10px;
   }
@@ -20,6 +22,7 @@
 
   .replyItem {
     background-color: var(--background-color-block);
+
     .replyCon {
       padding-left: 24px;
     }

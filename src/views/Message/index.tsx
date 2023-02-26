@@ -1,4 +1,5 @@
 import { Plate, Comment } from "@/components";
+import "./style.scss";
 
 export default function Message() {
   return (

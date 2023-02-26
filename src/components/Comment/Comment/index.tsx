@@ -1,3 +1,4 @@
+import { Icon } from "@/components";
 import { Avatar, Space } from "antd";
 import { time, httpTohttps } from "hyl-utils";
 import "./style.scss";
@@ -9,10 +10,10 @@ function Comment({
   datetime,
   content,
   children,
-  actions,
+  reply,
 }) {
   return (
-    <div id="comment" className={className}>
+    <div id="commentCard" className={className}>
       <Avatar
         className="commentCard-avatar"
         src={httpTohttps(avatar)}
@@ -24,11 +25,13 @@ function Comment({
           <div className="commentCard-head-datetime">
             {time.parseFrom(datetime)}
           </div>
+
+          <span className="commentCard-head-replyBtn" onClick={reply}>
+            <Icon type="icon-shuoshuo" /> 回复
+          </span>
         </div>
         <div className="commentCard-content">{content}</div>
 
-        <Space className="commentCard-footer">{actions}</Space>
-        {/* {children && <div className="commentReply"> {children}</div>} */}
         {children && children}
       </div>
     </div>

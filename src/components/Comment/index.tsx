@@ -44,7 +44,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
   };
 
   return (
-    <>
+    <div id="comment">
       {title && <Divider>{title}</Divider>}
       {store.loginState ? (
         <Editor
@@ -85,7 +85,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
         locale={{ emptyText: "暂无评论，快发表第一个热评！" }}
         loading={!commentData.length && articleId === 99999}
       />
-    </>
+    </div>
   );
 }
 

@@ -1,16 +1,15 @@
-#comment {
+#commentCard {
   padding: 20px 0;
-  padding-left: 70px;
+  padding-left: 50px;
   position: relative;
 }
 .commentCard {
-  // padding: 10px 0;
-
   &-avatar {
     position: absolute !important;
-    left: 15px;
+    left: 5px;
   }
   &-head {
+    position: relative;
     &-name {
       display: inline-block;
     }
@@ -20,11 +19,22 @@
       display: inline-block;
       font-size: 13px;
     }
+    &-replyBtn {
+      position: absolute;
+      right: 10px;
+      cursor: pointer;
+      &:hover {
+        color: var(--ant-primary-color);
+      }
+    }
   }
 
   &-content {
     white-space: pre-wrap;
-    margin: 20px 0;
+    background-color: var(--highlight-background-color);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 5px;
   }
 
   &-footer {
@@ -33,11 +43,9 @@
       cursor: pointer;
       color: #555;
     }
-    margin-bottom: 20px;
   }
 }
 
 .commentReply {
   font-size: 13px;
-  border-left: 1px dashed #eee;
 }

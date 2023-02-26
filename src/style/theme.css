@@ -11,7 +11,7 @@ body{
     --background-color-shallow:rgba(255,255,255,0.8);
     --background-color-active:#eee;
     --border-color:#fff;
-    --commentReply-background-color:var(--ant-primary-2);
+    --highlight-background-color:var(--ant-primary-2);
     --about-info-color:#eee;
     --text-color:rgba(0, 0, 0, 0.88);
 }
@@ -24,7 +24,7 @@ body{
     --background-color-shallow:transparent;
     --background-color-active:#111111;
     --border-color: #303030;
-    --commentReply-background-color: var(--ant-primary-10);
+    --highlight-background-color: var(--ant-primary-10);
     --about-info-color:transparent;
     --text-color:rgba(255, 255, 255, 0.85);
 }

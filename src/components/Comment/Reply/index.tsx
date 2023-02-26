@@ -22,48 +22,57 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
     setState({ visible: false });
   };
 
-  const renderAction = (item: any) => {
-    const handleReply = () => {
-      setState({
-        visible: true,
-        replyName: item.author,
-        replyEmail: item.email,
-        content: item.content,
-      });
-    };
-
-    const handleDelete = () => {
-      request
-        .delete("/comment/delete", pick(item, ["id", "reply_id", "article_id"]))
-        .then((res: any) => {
-          if (res.status === 0) {
-            refresh();
-            message.success("删除评论成功");
-          }
-        });
-    };
-
-    const action: any = [
-      <span onClick={handleReply} key="reply">
-        回复
-      </span>,
-      author_id == item.author_id ? (
-        <Popconfirm
-          title="确认删除这条评论吗？"
-          onConfirm={handleDelete}
-          okText="yes"
-          cancelText="no"
-          key="delete"
-        >
-          <span>删除</span>
-        </Popconfirm>
-      ) : null,
-    ];
-
-    if (!loginState) return [];
-
-    return action;
+  const handleReply = (props) => {
+    setState({
+      visible: true,
+      replyName: props.author,
+      replyEmail: props.email,
+      content: props.content,
+    });
   };
+
+  // const renderAction = (item: any) => {
+  //   const handleReply = () => {
+  //     setState({
+  //       visible: true,
+  //       replyName: item.author,
+  //       replyEmail: item.email,
+  //       content: item.content,
+  //     });
+  //   };
+
+  //   const handleDelete = () => {
+  //     request
+  //       .delete("/comment/delete", pick(item, ["id", "reply_id", "article_id"]))
+  //       .then((res: any) => {
+  //         if (res.status === 0) {
+  //           refresh();
+  //           message.success("删除评论成功");
+  //         }
+  //       });
+  //   };
+
+  //   const action: any = [
+  //     <span onClick={handleReply} key="reply">
+  //       回复
+  //     </span>,
+  //     author_id == item.author_id ? (
+  //       <Popconfirm
+  //         title="确认删除这条评论吗？"
+  //         onConfirm={handleDelete}
+  //         okText="yes"
+  //         cancelText="no"
+  //         key="delete"
+  //       >
+  //         <span>删除</span>
+  //       </Popconfirm>
+  //     ) : null,
+  //   ];
+
+  //   if (!loginState) return [];
+
+  //   return action;
+  // };
 
   const author = (item: any) => (
     <>
@@ -81,9 +90,10 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
     <div className={classname}>
       <Comment
         {...commentItem}
-        actions={renderAction(commentItem)}
+        // actions={renderAction(commentItem)}
         author={author(commentItem)}
         className={classnames({ grid: true })}
+        reply={() => handleReply(commentItem)}
       >
         {replyData.length > 0 &&
           replyData.map((props, i) => (
@@ -99,7 +109,8 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
                     </span>
                   }
                   author={author(props)}
-                  actions={renderAction(props)}
+                  // actions={renderAction(props)}
+                  reply={() => handleReply(props)}
                   className={classnames({ grid: i + 1 !== replyData.length })}
                 />
               </div>
