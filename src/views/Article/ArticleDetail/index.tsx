@@ -262,6 +262,7 @@ function ArticleDetail() {
           onClose={setFalse}
           open={drawerVisible}
           width="60%"
+          getContainer={() => document.getElementById("main")!}
         >
           <div className="anchorDrawer">{renderAnchor}</div>
         </Drawer>

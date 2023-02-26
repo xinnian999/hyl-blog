@@ -7,6 +7,7 @@ header {
   margin: 0 auto;
   text-align: center;
   line-height: 60px;
+  height: 60px;
   backdrop-filter: blur(3px);
   transition: 0.5s all;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
@@ -67,4 +68,5 @@ header {
 #headerTop {
   background-color: #2f4154;
   line-height: 50px;
+  height: 50px;
 }

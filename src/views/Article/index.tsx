@@ -29,7 +29,7 @@ function Article() {
 
   const { current } = useRef({
     pageNum: 1,
-    category: params.get("category"),
+    category: params.get("category") || "all",
     total: 10,
   });
 
@@ -95,7 +95,6 @@ function Article() {
       )}
     </Space>
   );
-  console.log(scrollNum?.top);
 
   const Toolbar = (
     <div className="article-toolbar-container box-shadow" ref={toobarRef}>

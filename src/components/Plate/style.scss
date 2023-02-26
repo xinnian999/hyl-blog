@@ -34,5 +34,7 @@
   border-radius: 15px;
   position: relative;
   top: -50px;
-  padding: 0 20px;
+  @media screen and (max-width: 800px) {
+    margin: 0 20px;
+  }
 }
