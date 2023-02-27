@@ -14,12 +14,12 @@
 
     .down {
       display: inline-block;
-      transition: 0.5s all;
+      transition: 0.5s transform;
     }
+  }
 
-    &:hover .down {
-      transform: rotate(180deg);
-    }
+  &:hover .down {
+    transform: rotate(180deg);
   }
 
   .twoNav {
@@ -33,7 +33,7 @@
     left: 0;
     top: 60px;
     border-radius: 10px;
-    transition: 0.5s all;
+    transition: 0.5s opacity;
 
     li {
       &:hover {
