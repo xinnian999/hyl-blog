@@ -110,7 +110,8 @@
       "jsx-a11y/alt-text": 0
     },
     "globals": {
-      "wx": true
+      "wx": true,
+      "$": true
     }
   },
   "browserslist": {
