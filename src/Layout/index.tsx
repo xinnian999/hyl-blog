@@ -1,7 +1,10 @@
 import { useEffect, Suspense, useCallback, Fragment } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { ConfigProvider as AntdProvider, App as AntdApp, theme } from "antd";
-import { StyleProvider } from "@ant-design/cssinjs";
+import {
+  legacyLogicalPropertiesTransformer,
+  StyleProvider,
+} from "@ant-design/cssinjs";
 import { cookie } from "hyl-utils";
 import APlayer from "aplayer";
 import "aplayer/dist/APlayer.min.css";
@@ -136,7 +139,10 @@ function Layout() {
       }}
     >
       <AntdApp>
-        <StyleProvider hashPriority="high">
+        <StyleProvider
+          hashPriority="high"
+          transformers={[legacyLogicalPropertiesTransformer]}
+        >
           <div id="backgroundImg">
             <canvas id="canvasBg"></canvas>
           </div>
