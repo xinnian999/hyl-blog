@@ -1,0 +1,29 @@
+footer {
+  background-color: var(--footer-background-color);
+  color: #fff;
+  text-align: center;
+  padding: 30px 0;
+  border-top: 1px solid rgba(233, 233, 233, 0.1);
+  a {
+    color: var(--ant-primary-color);
+  }
+
+  .AllRights {
+    display: block;
+  }
+
+  .beianNumber {
+    margin-right: 15px;
+    img {
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+
+  @media screen and (max-width: 600px) {
+    .icp,
+    .beianNumber {
+      display: block;
+    }
+  }
+}

@@ -66,6 +66,10 @@ body {
   color: var(--ant-primary-color);
 }
 
+#nprogress .bar {
+  background: var(--ant-primary-color);
+}
+
 p {
   margin-bottom: 1em;
 }
