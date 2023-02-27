@@ -104,14 +104,3 @@ p {
     transparent
   );
 }
-
-// 移动端适配
-@media screen and (max-width: 800px) {
-  .nav {
-    display: none !important;
-  }
-
-  .article-list {
-    width: 100% !important;
-  }
-}

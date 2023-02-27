@@ -2,9 +2,7 @@ import "lib-flexible";
 import { createRoot } from "react-dom/client";
 import { notification } from "antd";
 import "animate.css";
-import "@/assets/js/jquery.lettering";
-import "@/assets/js/jquery.textillate";
-import "@/style/style.scss";
+import "@/style/global.scss";
 import App from "./App";
 
 notification.config({

@@ -1,5 +1,4 @@
-import jQuery from "jquery";
-(function ($) {
+(function () {
   "use strict";
 
   function isInEffect(effect) {
@@ -232,4 +231,4 @@ import jQuery from "jquery";
     inEffects: [],
     outEffects: ["hinge"],
   };
-})(jQuery);
+})();

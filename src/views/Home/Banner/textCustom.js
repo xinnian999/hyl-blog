@@ -1,5 +1,3 @@
-import $ from "jquery";
-
 function textCustom() {
   $(function () {
     $(".text2").textillate({

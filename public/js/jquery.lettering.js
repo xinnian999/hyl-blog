@@ -1,6 +1,4 @@
-import jQuery from "jquery";
-
-(function ($) {
+(function lettering() {
   function injector(t, splitter, klass, after) {
     var a = t.text().split(splitter),
       inject = "";
@@ -48,4 +46,4 @@ import jQuery from "jquery";
     $.error("Method " + method + " does not exist on jQuery.lettering");
     return this;
   };
-})(jQuery);
+})();

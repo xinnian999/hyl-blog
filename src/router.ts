@@ -26,11 +26,11 @@ const route = [
     children: [
       {
         title: "说说",
-        path: "journal",
+        path: "say",
         index: true,
         icon: "icon-shuoshuo",
 
-        component: lazy(() => import("@/views/Journal/Journal")),
+        component: lazy(() => import("@/views/Journal/Say")),
       },
       {
         title: "归档",

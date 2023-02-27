@@ -53,7 +53,6 @@ function IphoneNav() {
           defaultOpenKeys={["sub1"]}
           mode="inline"
           theme="dark"
-          //   inlineCollapsed={collapsed}
           items={items}
         />
       </Drawer>

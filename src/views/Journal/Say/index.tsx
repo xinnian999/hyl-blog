@@ -4,7 +4,7 @@ import { Bubble, Icon, OverPack, Image, Plate } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
 import "./style.scss";
 
-const First = () => {
+const Say = () => {
   const [data] = useGetData("/mood/query");
 
   const { width } = useWindowSize();
@@ -73,4 +73,4 @@ const First = () => {
   );
 };
 
-export default First;
+export default Say;
