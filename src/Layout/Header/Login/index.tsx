@@ -120,7 +120,7 @@ export default function Login() {
   return (
     <>
       {store.loginState ? (
-        <Popover content={renderUserMenus} trigger="hover">
+        <Popover content={renderUserMenus} trigger="hover" placement="bottom">
           <Avatar
             src={headPicture}
             className="userAvatar"

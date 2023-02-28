@@ -15,7 +15,7 @@ function Header() {
 
   return (
     <header
-      id={top > 500 ? "headerTop" : ""}
+      id={top > 1 ? "headerTop" : ""}
       style={{ display: location.pathname === "/home" ? "none" : "block" }}
     >
       <div className="center">
