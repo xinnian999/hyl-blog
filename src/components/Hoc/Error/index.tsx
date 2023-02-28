@@ -1,6 +1,6 @@
 import React from "react";
 import { Alert, Button } from "antd";
-import { stopWriteLoading } from "@/utils";
+import { removeDom } from "hyl-utils";
 import "./style.scss";
 
 const ErrorBlock = ({ errorInfo }) => {
@@ -25,7 +25,7 @@ const ErrorBlock = ({ errorInfo }) => {
 };
 
 const ErrorBoundary = (Comp) => {
-  return class ErrorBoundaryComp extends React.Component {
+  return class ErrorBoundaryComp extends React.Component<any, any> {
     constructor(props) {
       super(props);
       this.state = {
@@ -35,7 +35,7 @@ const ErrorBoundary = (Comp) => {
     }
 
     static getDerivedStateFromError(error) {
-      stopWriteLoading();
+      removeDom("#loading-box");
       return { hasError: true, errorInfo: error };
     }
 

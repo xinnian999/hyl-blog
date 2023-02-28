@@ -3,16 +3,14 @@ import Layout from "@/Layout";
 import { Error } from "@/components";
 import { store, persistor, prestrainImage } from "@/config";
 import { PersistGate } from "redux-persist/integration/react";
-import { stopWriteLoading, imgPrestrain } from "@/utils";
 import { useGetData, useMount } from "@/hooks";
 import { BrowserRouter } from "react-router-dom";
-import { cookie } from "hyl-utils";
+import { cookie, removeDom, imgPrestrain } from "hyl-utils";
 
 function App() {
   useMount(() => {
-    stopWriteLoading();
-
     imgPrestrain(prestrainImage);
+    removeDom("#loading-box");
   });
 
   useGetData("/all/getCsrfToken", {
