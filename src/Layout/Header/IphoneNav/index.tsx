@@ -1,5 +1,5 @@
 import { Drawer, Menu } from "antd";
-import menus from "@/router";
+import { router } from "@/config";
 import { useBoolean } from "@/hooks";
 import { MenuOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -12,7 +12,7 @@ type MenuItem = Required<MenuProps>["items"][number];
 function IphoneNav() {
   const [open, on, off] = useBoolean(false);
 
-  const items = menus
+  const items = router
     .filter((item) => item.title)
     .map((item: any) => {
       const { title, icon, children, path } = item;

@@ -8,11 +8,12 @@
   background-color: #374140;
 }
 .loading{
-  width: 80px;
+  width: 100%;
   height: 40px;
   margin: auto;
   text-align: center;
 }
+
 .loading span{
   display: inline-block;
   width: 8px;
@@ -22,6 +23,14 @@
   -webkit-animation: load 1s ease infinite;
   animation: load 1s ease infinite;
 }
+
+.loading .loading-tip{
+  margin-top: 30px;
+  font-size: 25px;
+  color: #fff;
+  letter-spacing: 5px;
+}
+
 @-webkit-keyframes load{
   0%,100%{
     height: 40px;

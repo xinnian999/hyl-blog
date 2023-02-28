@@ -1,10 +1,10 @@
-import menus from "@/router";
+import { router } from "@/config";
 
 const changeBlogTitle = (path?: string, title?: string) => {
   if (path === "/home") return (document.title = `心念の空间站`);
   if (title) return (document.title = `${title} · 心念の空间站`);
 
-  menus.forEach((item) => {
+  router.forEach((item) => {
     if (item.path === path) {
       document.title = `${item.title!} · 心念の空间站`;
     }

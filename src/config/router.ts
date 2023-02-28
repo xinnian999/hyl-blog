@@ -68,20 +68,6 @@ const route = [
       },
     ],
   },
-
-  // {
-  //   title: "友链",
-  //   path: "/link",
-  //   icon: "icon-lianjie",
-  //   component: lazy(() => import("@/views/Link")),
-  // },
-  // {
-  //   title: "留言",
-  //   path: "/message",
-  //   icon: "icon-liuyan1",
-  //   component: lazy(() => import("@/views/Message")),
-  // },
-
   {
     title: "作品",
     path: "/resource",

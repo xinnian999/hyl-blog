@@ -1,4 +1,4 @@
-import { store } from "@/store";
+import { store } from "@/config";
 import { cookie } from "hyl-utils";
 import request from "./request";
 

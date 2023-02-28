@@ -1,6 +1,6 @@
 import { useCallback, Fragment, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import menus from "@/router";
+import { router } from "@/config";
 import { Loading, Redirect } from "@/components";
 import "./style.scss";
 
@@ -40,7 +40,7 @@ function Main() {
   return (
     <main id="main">
       <Routes>
-        {renderRoutes(menus)}
+        {renderRoutes(router)}
         <Route path="/" element={<Redirect to="/home" />} />
         <Route path="*" element={<Redirect to="/404" />} />
       </Routes>

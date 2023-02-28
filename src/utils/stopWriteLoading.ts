@@ -1,8 +1,7 @@
 const stopWriteLoading = () => {
-  const loadingDom: any = document.querySelector("#loading-box");
+  const loadingDom = document.querySelector("#loading-box");
   if (loadingDom) {
-    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    loadingDom.style.display = "none";
+    loadingDom.remove();
   }
 };
 
