@@ -1,4 +1,5 @@
 import { useRedux } from "@/hooks";
+import { classnames } from "hyl-utils";
 import { ReactNode } from "react";
 import "./style.scss";
 
@@ -33,7 +34,13 @@ function Plate({
         </div>
       </div>
 
-      {children && <div className="plate-main box-shadow">{children}</div>}
+      {children && (
+        <div
+          className={classnames("plate-main", { "box-shadow": !store.dark })}
+        >
+          {children}
+        </div>
+      )}
     </>
   );
 }

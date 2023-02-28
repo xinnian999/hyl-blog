@@ -1,6 +1,8 @@
 import APlayer from "aplayer";
 import { useGetData, useRedux } from "@/hooks";
 import "aplayer/dist/APlayer.min.css";
+import "./style.scss";
+import { useEffect } from "react";
 
 function Music() {
   const { store } = useRedux();
@@ -27,6 +29,17 @@ function Music() {
       });
     },
   });
+
+  useEffect(() => {
+    const music = document.getElementById("aplayer");
+
+    if (store.dark) {
+      music?.classList.add("aplayerDark");
+    } else {
+      music?.classList.remove("aplayerDark");
+    }
+  }, [store.dark]);
+
   return <div id="aplayer"></div>;
 }
 

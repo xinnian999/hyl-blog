@@ -10,7 +10,7 @@ const theme = [
 const Set = () => {
   const { store, dispatch } = useRedux();
 
-  const { simple, autoplay } = store;
+  const { autoplay } = store;
 
   return (
     <ul className="setModal">
@@ -44,18 +44,6 @@ const Set = () => {
             </div>
           );
         })}
-      </li>
-      <li>
-        <h4>简约模式：</h4>
-        <Switch
-          checked={simple}
-          onChange={(val) => {
-            dispatch({ type: "CHANGE_SIMPLE", payload: val });
-          }}
-        />
-        <span className="tip">
-          开启后，会隐藏本站得canvas特效，防止引起电脑风扇的咆哮
-        </span>
       </li>
 
       <li>
