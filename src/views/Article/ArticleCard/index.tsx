@@ -1,7 +1,6 @@
 import Icon from "@/components/Icon";
 import { Tag, Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
-import { TagOutlined } from "@ant-design/icons";
 import { TimeBar, Image } from "@/components";
 import "./style.scss";
 

@@ -1,10 +1,12 @@
 .comment-editor {
   z-index: 99;
-  background-color: var(--background-color-block);
+  background-color: var(--highlight-background-color);
   padding: 15px;
   border-radius: 10px;
   .editor {
     margin-bottom: 10px;
+    border-radius: 0;
+    outline: none;
   }
   .toolbar {
     line-height: 35px;

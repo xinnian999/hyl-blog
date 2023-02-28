@@ -1,5 +1,4 @@
 import { Icon } from "@/components";
-import { Button } from "antd";
 import "./style.scss";
 
 export default function Demo() {

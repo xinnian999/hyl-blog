@@ -1,4 +1,4 @@
-import { Row, Col, Tag, Avatar, Skeleton, Tabs } from "antd";
+import { Tag, Avatar, Skeleton, Tabs } from "antd";
 import type { TabsProps } from "antd";
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";

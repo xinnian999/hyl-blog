@@ -1,5 +1,6 @@
 import { Icon } from "@/components";
-import { Avatar, Space } from "antd";
+import { useRedux } from "@/hooks";
+import { Avatar } from "antd";
 import { time, httpTohttps } from "hyl-utils";
 import "./style.scss";
 
@@ -12,6 +13,8 @@ function Comment({
   children,
   reply,
 }) {
+  const { store } = useRedux();
+
   return (
     <div id="commentCard" className={className}>
       <Avatar
@@ -26,9 +29,11 @@ function Comment({
             {time.parseFrom(datetime)}
           </div>
 
-          <span className="commentCard-head-replyBtn" onClick={reply}>
-            <Icon type="icon-shuoshuo" /> 回复
-          </span>
+          {store.loginState && (
+            <span className="commentCard-head-replyBtn" onClick={reply}>
+              <Icon type="icon-shuoshuo" /> 回复
+            </span>
+          )}
         </div>
         <div className="commentCard-content">{content}</div>
 

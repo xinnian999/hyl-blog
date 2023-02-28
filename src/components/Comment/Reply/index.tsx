@@ -1,13 +1,11 @@
-import { message, Popconfirm } from "antd";
 import { useSelector } from "react-redux";
-import Comment from "../Comment";
-import { classnames, pick } from "hyl-utils";
+import Comment from "../CommentCard";
+import { classnames } from "hyl-utils";
 import { useSetState } from "@/hooks";
-import { request } from "@/utils";
 import Editor from "../Editor";
 
 const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
-  const { userInfo, loginState } = useSelector((state: any) => state);
+  const { loginState } = useSelector((state: any) => state);
 
   const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
     visible: false,
@@ -15,8 +13,6 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
     replyEmail: undefined,
     content: "",
   });
-
-  const { id: author_id } = userInfo;
 
   const cancelEditor = () => {
     setState({ visible: false });
@@ -30,49 +26,6 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
       content: props.content,
     });
   };
-
-  // const renderAction = (item: any) => {
-  //   const handleReply = () => {
-  //     setState({
-  //       visible: true,
-  //       replyName: item.author,
-  //       replyEmail: item.email,
-  //       content: item.content,
-  //     });
-  //   };
-
-  //   const handleDelete = () => {
-  //     request
-  //       .delete("/comment/delete", pick(item, ["id", "reply_id", "article_id"]))
-  //       .then((res: any) => {
-  //         if (res.status === 0) {
-  //           refresh();
-  //           message.success("删除评论成功");
-  //         }
-  //       });
-  //   };
-
-  //   const action: any = [
-  //     <span onClick={handleReply} key="reply">
-  //       回复
-  //     </span>,
-  //     author_id == item.author_id ? (
-  //       <Popconfirm
-  //         title="确认删除这条评论吗？"
-  //         onConfirm={handleDelete}
-  //         okText="yes"
-  //         cancelText="no"
-  //         key="delete"
-  //       >
-  //         <span>删除</span>
-  //       </Popconfirm>
-  //     ) : null,
-  //   ];
-
-  //   if (!loginState) return [];
-
-  //   return action;
-  // };
 
   const author = (item: any) => (
     <>
@@ -90,30 +43,26 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
     <div className={classname}>
       <Comment
         {...commentItem}
-        // actions={renderAction(commentItem)}
         author={author(commentItem)}
         className={classnames({ grid: true })}
         reply={() => handleReply(commentItem)}
       >
         {replyData.length > 0 &&
           replyData.map((props, i) => (
-            <div className="commentReply">
-              <div key={props.id}>
-                <Comment
-                  {...props}
-                  content={
-                    <span>
-                      回复{" "}
-                      <span className="primaryColor">{props.reply_name}</span> :{" "}
-                      {props.content}
-                    </span>
-                  }
-                  author={author(props)}
-                  // actions={renderAction(props)}
-                  reply={() => handleReply(props)}
-                  className={classnames({ grid: i + 1 !== replyData.length })}
-                />
-              </div>
+            <div className="commentReply" key={props.id}>
+              <Comment
+                {...props}
+                content={
+                  <span>
+                    回复{" "}
+                    <span className="primaryColor">{props.reply_name}</span> :{" "}
+                    {props.content}
+                  </span>
+                }
+                author={author(props)}
+                reply={() => handleReply(props)}
+                className={classnames({ grid: i + 1 !== replyData.length })}
+              />
             </div>
           ))}
         {visible && loginState && (

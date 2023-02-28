@@ -39,7 +39,6 @@ function ArticleDetail() {
       content,
       title,
       createTime,
-      visits,
       updateTime,
       anchorList,
       targetOffset,
