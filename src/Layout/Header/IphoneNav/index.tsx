@@ -52,7 +52,6 @@ function IphoneNav() {
           defaultSelectedKeys={["1"]}
           defaultOpenKeys={["sub1"]}
           mode="inline"
-          theme="dark"
           items={items}
         />
       </Drawer>

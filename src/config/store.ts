@@ -12,7 +12,6 @@ export type isStore = {
     email: string | null;
   };
   autoplay: boolean | undefined;
-  simple: boolean | undefined;
   loginModal: boolean;
   setModal: boolean;
   dark: boolean;
@@ -31,7 +30,6 @@ const reducer = (
     theme: { bg: 0, color: "#d6324d" },
     userInfo: { id: 0, username: "昵称", headPicture: "", email: null },
     autoplay: true,
-    simple: false,
     loginModal: false,
     setModal: false,
     dark: false,
@@ -47,8 +45,6 @@ const reducer = (
       return { ...state, userInfo: { ...state.userInfo, ...payload } };
     case "CHANGE_AUTOPLAY":
       return { ...state, autoplay: payload };
-    case "CHANGE_SIMPLE":
-      return { ...state, simple: payload };
     case "CHANGE_LOGIN_MODAL":
       return { ...state, loginModal: payload };
     case "CHANGE_SET_MODAL":

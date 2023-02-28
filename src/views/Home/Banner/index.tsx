@@ -4,7 +4,6 @@ import TweenOne from "rc-tween-one";
 import { useRef } from "react";
 import Canvas from "@/views/Home/Banner/Canvas";
 import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import { useRedux } from "@/hooks";
 import textCustom from "./textCustom";
 import "./style.scss";
 import { classnames } from "hyl-utils";
@@ -16,12 +15,8 @@ export default function Banner() {
 
   const drawerRef = useRef(null);
 
-  const { store } = useRedux();
-
   useMount(() => {
-    if (!store.simple) {
-      textCustom();
-    }
+    textCustom();
   });
 
   const goNext = () => {
