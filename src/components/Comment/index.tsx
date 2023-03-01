@@ -9,9 +9,16 @@ interface comment {
   title?: string;
   btnName: string;
   hasAnimation?: boolean;
+  className?: string;
 }
 
-function Index({ articleId, title, btnName, hasAnimation }: comment) {
+function Index({
+  articleId,
+  title,
+  btnName,
+  hasAnimation,
+  className,
+}: comment) {
   const [commentData, run] = useGetData("/comment/query", {
     data: {
       articleId,
@@ -44,7 +51,7 @@ function Index({ articleId, title, btnName, hasAnimation }: comment) {
   };
 
   return (
-    <div id="comment">
+    <div id="comment" className={className}>
       {title && <Divider>{title}</Divider>}
       {store.loginState ? (
         <Editor

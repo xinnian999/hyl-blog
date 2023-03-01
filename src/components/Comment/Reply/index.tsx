@@ -44,7 +44,6 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
       <Comment
         {...commentItem}
         author={author(commentItem)}
-        className={classnames({ grid: true })}
         reply={() => handleReply(commentItem)}
       >
         {replyData.length > 0 &&
@@ -61,7 +60,6 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
                 }
                 author={author(props)}
                 reply={() => handleReply(props)}
-                className={classnames({ grid: i + 1 !== replyData.length })}
               />
             </div>
           ))}

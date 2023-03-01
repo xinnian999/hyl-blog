@@ -8,21 +8,30 @@
 }
 
 #comment {
-  padding: 20px 40px;
+  padding: 20px 0;
+  .ant-list-header {
+    padding-bottom: 5px;
+    padding-top: 20px;
+    border: none;
+  }
 }
 .commentCon {
   z-index: 1;
+
   .total {
     padding-left: 10px;
   }
   .ant-list-items {
-    border-radius: 15px;
     overflow: hidden;
+    border-radius: 15px;
   }
 
   .replyItem {
     background-color: var(--background-color-block);
-
+    border-bottom: 1px solid #eee;
+    &:last-child {
+      border: none;
+    }
     .replyCon {
       padding-left: 24px;
     }
@@ -39,7 +48,7 @@
     padding-top: 15px;
   }
 
-  .grid {
-    border-bottom: 1px solid #eee;
-  }
+  // .grid {
+  //   border-bottom: 1px solid #eee;
+  // }
 }
