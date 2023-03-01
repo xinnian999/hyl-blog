@@ -19,8 +19,6 @@ import ArticleCard from "./ArticleCard";
 import "./style.scss";
 
 function Article() {
-  const history = useNavigate();
-
   const { dispatchAll } = useRedux();
 
   const [params] = useSearchParams();
@@ -127,8 +125,7 @@ function Article() {
                 <li
                   key={name}
                   onClick={() => {
-                    window.scrollTo(780, 0);
-                    history(`/article?category=${name}`);
+                    window.scrollTo(0, 500);
                     current.category = name;
                     current.pageNum = 1;
                     setArticleData([]);

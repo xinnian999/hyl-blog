@@ -10,7 +10,6 @@ const route = [
   {
     title: "文章",
     path: "/article",
-    search: "?category=all",
     icon: "icon-wenzhang1",
     component: lazy(() => import("@/views/Article")),
   },

@@ -36,7 +36,7 @@ export default function Banner() {
         </p>
         <button
           className="bannerContent-Button  animate__animated animate__zoomIn"
-          onClick={() => navigate("/article?category=all")}
+          onClick={() => navigate("/article")}
         >
           Enter Blog
         </button>
