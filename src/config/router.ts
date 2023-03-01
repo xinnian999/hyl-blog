@@ -53,17 +53,17 @@ const route = [
     component: lazy(() => import("@/views/Friend")),
     children: [
       {
-        title: "友链",
-        path: "link",
-        icon: "icon-lianjie",
-        component: lazy(() => import("@/views/Friend/Link")),
-      },
-      {
         title: "留言",
         path: "message",
         index: true,
         icon: "icon-liuyan1",
         component: lazy(() => import("@/views/Friend/Message")),
+      },
+      {
+        title: "友链",
+        path: "link",
+        icon: "icon-lianjie",
+        component: lazy(() => import("@/views/Friend/Link")),
       },
     ],
   },
