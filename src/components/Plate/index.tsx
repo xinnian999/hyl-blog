@@ -30,7 +30,7 @@ function Plate({
       >
         <div className="plate-head-info">
           <h2>{title}</h2>
-          <p>{autograph} </p>
+          <div className="plate-head-info-autograph">{autograph} </div>
         </div>
       </div>
 

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from "react";
 import { Divider, Space, Drawer, Skeleton, Anchor, Tag } from "antd";
 import { Icon, Plate } from "@/components";
 import { useParams } from "react-router-dom";
-import { classnames, time } from "hyl-utils";
+import { classnames, time, throttle } from "hyl-utils";
 import {
   UnorderedListOutlined,
   CheckSquareOutlined,
@@ -118,15 +118,23 @@ function ArticleDetail() {
   }, [mdRef.current]);
 
   useMount(() => {
-    window.addEventListener("scroll", () => {
-      const anchorListEl = document.querySelector(
-        ".ant-anchor-link-title-active"
-      );
-      anchorListEl?.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      });
-    });
+    window.addEventListener(
+      "scroll",
+      throttle(() => {
+        if (document.querySelector(".ant-anchor-link-title-active")) {
+          $(".anchorList")
+            .stop()
+            .animate(
+              {
+                scrollTop:
+                  $(".ant-anchor-link-title-active").position().top -
+                  $(".anchorList").height() / 2,
+              },
+              500
+            );
+        }
+      }, 500)
+    );
   });
 
   const renderAnchor = useMemo(
@@ -242,8 +250,7 @@ function ArticleDetail() {
           <div className="ArticleDetail-toolbar" ref={toolbarRef}>
             <div
               className={classnames({
-                "ArticleDetail-toolbar-fixed":
-                  scrollNum.top > 490 && "ArticleDetail-toolbar-fixed",
+                "ArticleDetail-toolbar-fixed": scrollNum.top > 490,
               })}
             >
               {renderAnchor}

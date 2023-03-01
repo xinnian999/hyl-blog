@@ -9,6 +9,7 @@ type response = {
 };
 
 declare module "aplayer";
+declare const $;
 
 declare const globalConfig: { remoteStaticUrl: string; iconfont: string };
 
