@@ -24,12 +24,7 @@
   animation: load 1s ease infinite;
 }
 
-.loading .loading-tip{
-  margin-top: 30px;
-  font-size: 25px;
-  color: #fff;
-  letter-spacing: 5px;
-}
+
 
 @-webkit-keyframes load{
   0%,100%{

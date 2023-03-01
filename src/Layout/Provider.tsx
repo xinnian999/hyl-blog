@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useRedux } from "@/hooks";
 import { changeBlogTitle } from "@/utils";
+import starBg from "./widgets/Background/starBg";
 
 function Provider({ children }) {
   const { store } = useRedux();
@@ -22,11 +23,15 @@ function Provider({ children }) {
 
   // 主题监听
   useEffect(() => {
+    const { color, bg } = store.theme;
     AntdProvider.config({
       theme: {
-        primaryColor: store.theme.color,
+        primaryColor: color,
       },
     });
+    if (store.dark) {
+      starBg(bg);
+    }
   }, [store.theme]);
 
   return (
