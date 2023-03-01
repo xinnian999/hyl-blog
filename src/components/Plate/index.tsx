@@ -20,18 +20,20 @@ function Plate({
 
   return (
     <>
-      <div
-        className="plate-head"
-        style={{
-          backgroundImage: `url(${require(`@/assets/img/bg/${
-            store.dark ? "bg8.jpg" : bg
-          }`)})`,
-        }}
-      >
+      <div className="plate-head">
         <div className="plate-head-info">
           <h2>{title}</h2>
           <div className="plate-head-info-autograph">{autograph} </div>
         </div>
+        <div
+          className="plate-head-bg"
+          style={{
+            opacity: store.dark ? "0.7" : "1",
+            backgroundImage: `url(${require(`@/assets/img/bg/${
+              store.dark ? "bg8.jpg" : bg
+            }`)})`,
+          }}
+        ></div>
       </div>
 
       {children && (

@@ -204,7 +204,7 @@ function ArticleDetail() {
     <>
       <Plate
         title={title}
-        bg="bg7.jpg"
+        bg="bg18.jpg"
         autograph={
           <Space
             size={20}

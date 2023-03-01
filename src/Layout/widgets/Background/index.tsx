@@ -1,5 +1,6 @@
 import { useRedux } from "@/hooks";
 import { useEffect } from "react";
+import PmRibbon from "pm-ribbon";
 import starBg from "./starBg";
 import "./style.scss";
 
@@ -22,6 +23,7 @@ function Lantern() {
   return (
     <div id="backgroundImg">
       <canvas id="canvasBg"></canvas>
+      {!store.dark && <PmRibbon clickChangeDom={document} />}
     </div>
   );
 }

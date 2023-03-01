@@ -1,17 +1,21 @@
 .plate-head {
   position: relative;
   height: 600px;
-  width: 100%;
-  opacity: 0.8;
-  background-color: antiquewhite;
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
+
+  &-bg {
+    height: 100%;
+    // background-color: antiquewhite;
+    background-size: cover;
+    background-position: center;
+  }
   &-info {
-    color: #fff;
+    color: var(--plate-text-color);
     text-align: center;
     width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-70%);
+    z-index: 9;
     h2 {
       font-weight: 500;
       font-size: 40px;

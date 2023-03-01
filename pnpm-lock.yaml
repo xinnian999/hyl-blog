@@ -53,6 +53,7 @@ specifiers:
   mini-css-extract-plugin: ^2.4.5
   nprogress: ^0.2.0
   ora: ^5.1.0
+  pm-ribbon: ^3.0.0
   postcss: ^8.4.4
   postcss-flexbugs-fixes: ^5.0.2
   postcss-loader: ^6.2.1
@@ -144,6 +145,7 @@ dependencies:
   lib-flexible: 0.3.2
   mini-css-extract-plugin: 2.7.2_webpack@5.75.0
   nprogress: 0.2.0
+  pm-ribbon: 3.0.0
   postcss: 8.4.21
   postcss-flexbugs-fixes: 5.0.2_postcss@8.4.21
   postcss-loader: 6.2.1_6jdsrmfenkuhhw3gx4zvjlznce
@@ -8877,6 +8879,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       find-up: 3.0.0
+    dev: false
+
+  /pm-ribbon/3.0.0:
+    resolution: {integrity: sha512-sj/fSOhUajY3/VrAcGqxqiRq9o99AIIo486E5GOXAx9pTrKy0fKTx9D49aPtt7oQbccj2Ck1DjrsHu9auulxNg==}
     dev: false
 
   /postcss-attribute-case-insensitive/5.0.2_postcss@8.4.21:

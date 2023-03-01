@@ -4,28 +4,22 @@ body{
 }
 
 #light {
-    --head-background-color: #fff;
     --footer-background-color:#011425;
     --background-color:#fff;
     --background-color-block:#fff;
-    --background-color-shallow:rgba(255,255,255,0.8);
     --background-color-active:#eee;
     --border-color:#fff;
     --highlight-background-color:var(--ant-primary-2);
-    --about-info-color:#eee;
-    --text-color:rgba(0, 0, 0, 0.88);
+    --plate-text-color:rgba(255,255,255);
 }
 
 #dark {
-    --head-background-color: rgba(0,0,0,0.8);
     --footer-background-color:transparent;
     --background-color:transparent;
     --background-color-block:rgb(48, 48, 48,0.8);
-    --background-color-shallow:transparent;
     --background-color-active:#111111;
     --border-color: #303030;
     --highlight-background-color: var(--ant-primary-10);
-    --about-info-color:transparent;
-    --text-color:rgba(255, 255, 255, 0.85);
+    --plate-text-color:rgba(255, 255, 255, 0.85);
 }
 

@@ -164,7 +164,7 @@ function Article() {
       <Plate
         title="文章"
         autograph="人是要整活的——没活了，可不就是死了么？"
-        bg="bg7.jpg"
+        bg="bg18.jpg"
       />
       <div id="article" className="center">
         <div className="article-list">
