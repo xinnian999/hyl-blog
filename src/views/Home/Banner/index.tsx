@@ -29,10 +29,10 @@ export default function Banner() {
       <Canvas />
       <div className="bannerContent">
         <p className="bannerContent-title text1 animate__animated animate__zoomIn">
-          心念 の 空间站
+          {globalConfig.title}
         </p>
         <p className="bannerContent-autograph text2  animate__animated animate__zoomIn">
-          犹一心一意，念念不忘
+          {globalConfig.description}
         </p>
         <button
           className="bannerContent-Button  animate__animated animate__zoomIn"

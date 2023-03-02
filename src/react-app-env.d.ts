@@ -11,7 +11,12 @@ type response = {
 declare module "aplayer";
 declare const $;
 
-declare const globalConfig: { remoteStaticUrl: string; iconfont: string };
+declare const globalConfig: {
+  remoteStaticUrl: string;
+  iconfont: string;
+  title: string;
+  description: string;
+};
 
 declare namespace NodeJS {
   interface ProcessEnv {

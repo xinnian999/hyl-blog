@@ -22,7 +22,7 @@ function Header() {
         <IphoneNav />
 
         <div id="logo" onClick={() => navigate("/home")}>
-          <span>心念の空间站</span>
+          <span>{globalConfig.title}</span>
         </div>
 
         <div className="user">

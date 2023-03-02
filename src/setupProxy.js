@@ -1,23 +1,16 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
+const config = require("../public/globalConfig.json");
 
 module.exports = function (app) {
-  app.use(
-    "/api",
-    createProxyMiddleware({
-      target: "https://www.hyl999.co:7777",
-      changeOrigin: true,
-      pathRewrite: { "^/api": "" },
-      secure: false,
-    })
-  );
-
-  app.use(
-    "/cdn",
-    createProxyMiddleware({
-      target: "https://cdn.hyl999.co/public",
-      changeOrigin: true,
-      pathRewrite: { "^/cdn": "" },
-      secure: false,
-    })
-  );
+  config.proxy.forEach(({ path, url }) => {
+    app.use(
+      path,
+      createProxyMiddleware({
+        target: url,
+        changeOrigin: true,
+        pathRewrite: { [`^${path}`]: "" },
+        secure: false,
+      })
+    );
+  });
 };

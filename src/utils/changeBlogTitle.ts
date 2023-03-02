@@ -1,17 +1,17 @@
 import { router } from "@/config";
 
 const changeBlogTitle = (path?: string, title?: string) => {
-  if (path === "/home") return (document.title = `心念の空间站`);
-  if (title) return (document.title = `${title} · 心念の空间站`);
+  if (path === "/home") return (document.title = `${globalConfig.title}`);
+  if (title) return (document.title = `${title} · ${globalConfig.title}`);
 
   router.forEach((item) => {
     if (item.path === path) {
-      document.title = `${item.title!} · 心念の空间站`;
+      document.title = `${item.title!} · ${globalConfig.title}`;
     }
     if (item.children) {
       item.children.forEach((v) => {
         if (`${item.path}/${v.path}` === path) {
-          document.title = `${v.title!} · 心念の空间站`;
+          document.title = `${v.title!} · ${globalConfig.title}`;
         }
       });
     }
