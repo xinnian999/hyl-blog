@@ -7,41 +7,36 @@ type toolConfig = {
   data?: object;
   manual?: boolean;
   progress?: boolean;
-  onSuccess?: (res: any) => void;
-  onFail?: (res: any) => void;
+  onSuccess?: (res: responseType) => void;
+  onFail?: (err: Response) => void;
   mockLoadingCount?: number;
   cache?: boolean;
 };
 
-type isRun = (props?: toolConfig) => Promise<any>;
+type runFn = (props?: toolConfig) => Promise<responseType>;
 
-type useGetDataResult = [any[], isRun, (data: any) => void];
+// type useGetDataResult = [any[],];
 
-type useStateResult = [any[], (data?: any) => void];
-
-const defaultConfig: toolConfig = {
+const defaultConfig: Required<toolConfig> = {
   progress: true,
-  onSuccess: undefined,
-  onFail: undefined,
+  onSuccess: () => {},
+  onFail: () => {},
   data: { orderBys: "id desc" },
   manual: false,
-  mockLoadingCount: undefined,
+  mockLoadingCount: 0,
   cache: false,
 };
 
 //默认在组件挂载完成时自动发一次请求，可设置config的manual为 true取消自动
 //默认开启progress顶部加载进度条，可设置config的progress为 false
 //默认关闭缓存数据，可设置config的cacheData为 true开启
-function useGetData(
-  url: string,
-  newConfig: toolConfig = defaultConfig
-): useGetDataResult {
+function useGetData<T>(url: string, newConfig: toolConfig = defaultConfig) {
   const config = { ...defaultConfig, ...newConfig };
 
-  const [result, setResult]: useStateResult = useState([]);
-  const [data, setData]: useStateResult = useState([]);
+  const [result, setResult] = useState([]);
+  const [data, setData] = useState([]);
 
-  const run: isRun = async (runProps) => {
+  const run: runFn = async (runProps) => {
     //重复请求的新配置合并
     if (runProps) {
       Object.assign(config, runProps);
@@ -52,7 +47,7 @@ function useGetData(
       Nprogress.start();
     }
 
-    //是否mock骨架屏加载数据
+    //mock骨架屏加载数据
     if (config.mockLoadingCount) {
       const mockData = [...new Array(config.mockLoadingCount)].map(
         (item, index) => ({
@@ -60,7 +55,7 @@ function useGetData(
           id: `${index}-key`,
         })
       );
-      setResult(data.concat(mockData));
+      setResult(data.concat(mockData as any));
     }
 
     try {
@@ -71,18 +66,18 @@ function useGetData(
       setData(newData);
 
       //调用成功的回调函数
-      if (config.onSuccess) config.onSuccess(res);
+      config.onSuccess(res);
 
       return res;
     } catch (e) {
       //调用失败的回调函数
-      if (config.onFail) config.onFail(e);
+      config.onFail(e as Response);
 
       return e;
     }
   };
 
-  const set = (data: any) => {
+  const set = (data) => {
     setResult(data);
     setData(data);
   };
@@ -93,7 +88,7 @@ function useGetData(
     }
   });
 
-  return [result, run, set];
+  return [result, run, set] as [T[], runFn, (data: any[]) => void];
 }
 
 export default useGetData;

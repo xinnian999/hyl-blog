@@ -7,6 +7,16 @@ import { Plate, Title, Copy } from "@/components";
 import { useGetData } from "@/hooks";
 import "./style.scss";
 
+type Data = {
+  name: string;
+  avator: string;
+  link: string;
+  descr: string;
+  loading: boolean;
+  createTime: string;
+  id: number;
+};
+
 const tags = [
   { color: "green", icon: <CheckOutlined />, con: "原创优先" },
   { color: "green", icon: <CheckOutlined />, con: "技术优先" },
@@ -27,7 +37,7 @@ const yaml = `- name: ${globalConfig.title}
   descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
-  const [data] = useGetData("/link/query", {
+  const [data] = useGetData<Data>("/link/query", {
     mockLoadingCount: 8,
   });
 

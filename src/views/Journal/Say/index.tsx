@@ -4,8 +4,15 @@ import { Bubble, Icon, OverPack, Image, Plate } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
 import "./style.scss";
 
+type Data = {
+  content: string;
+  picture: string;
+  category: string;
+  createTime: string;
+};
+
 const Say = () => {
-  const [data] = useGetData("/mood/query");
+  const [data] = useGetData<Data>("/mood/query");
 
   const { width } = useWindowSize();
 

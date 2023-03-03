@@ -3,9 +3,10 @@
 /// <reference types="react-dom" />
 /// <reference path="path/types.d.ts" />
 
-type response = {
+declare type responseType = {
   data: any[];
   status: number;
+  total: number;
 };
 
 declare module "aplayer";

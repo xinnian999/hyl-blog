@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
 import Comment from "../CommentCard";
 import { classnames } from "hyl-utils";
-import { useSetState } from "@/hooks";
+import { useSetState, useRedux } from "@/hooks";
 import Editor from "../Editor";
 
-const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
-  const { loginState } = useSelector((state: any) => state);
+const Reply = ({ commentItem, refresh, replyData, hasAnimation }) => {
+  const { store } = useRedux();
 
   const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
     visible: false,
@@ -63,7 +62,7 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }: any) => {
               />
             </div>
           ))}
-        {visible && loginState && (
+        {visible && store.loginState && (
           <div className="replyEditor">
             <Editor
               btnName={`回复 ${replyName}`}

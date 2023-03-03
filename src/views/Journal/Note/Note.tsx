@@ -5,8 +5,16 @@ import "./style.scss";
 import { Plate, Preview } from "@/components";
 import QueueAnim from "rc-queue-anim";
 
+type Data = {
+  content: string;
+  title: string;
+  category: string;
+  createTime: string;
+  id: number;
+};
+
 export default function Note() {
-  const [data] = useGetData("/note/query");
+  const [data] = useGetData<Data>("/note/query");
 
   return (
     <Plate

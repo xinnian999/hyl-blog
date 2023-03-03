@@ -3,8 +3,17 @@ import { useGetData } from "@/hooks";
 import "./style.scss";
 import { Plate } from "@/components";
 
+type Data = {
+  name: string;
+  picture: string;
+  link: string;
+  autograph: string;
+  loading: boolean;
+  id: number;
+};
+
 export default function Works() {
-  const [data] = useGetData("/works/query", { mockLoadingCount: 4 });
+  const [data] = useGetData<Data>("/works/query", { mockLoadingCount: 4 });
 
   const renderItem = data.map(
     ({ name, picture, link, autograph, loading, id }) => {

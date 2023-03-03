@@ -4,22 +4,27 @@ import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
 
-interface comment {
-  articleId: any;
+interface CommentType {
+  articleId: string;
   title?: string;
   btnName: string;
   hasAnimation?: boolean;
   className?: string;
 }
 
-function Index({
+interface CommentData {
+  id: number;
+  reply_id: number;
+}
+
+function Comment({
   articleId,
   title,
   btnName,
   hasAnimation,
   className,
-}: comment) {
-  const [commentData, run] = useGetData("/comment/query", {
+}: CommentType) {
+  const [commentData, run] = useGetData<CommentData>("/comment/query", {
     data: {
       articleId,
       filters: { article_id: articleId },
@@ -29,13 +34,11 @@ function Index({
 
   const { store, dispatch } = useRedux();
 
-  const currentCommentData = commentData.filter(
-    (item: any) => item.reply_id === 0 || !item.reply_id
-  );
+  const currentCommentData = commentData.filter((item) => !item.reply_id);
 
-  const commentItem = (props: any) => {
+  const commentItem = (props: CommentData) => {
     const replyData = commentData
-      .filter((item: any) => {
+      .filter((item) => {
         return item.reply_id === props.id;
       })
       .reverse();
@@ -83,17 +86,17 @@ function Index({
         dataSource={currentCommentData}
         header={
           <span className="total">{`${currentCommentData.length}条${
-            articleId === 99999 ? "留言" : "评论"
+            articleId === "99999" ? "留言" : "评论"
           }`}</span>
         }
         itemLayout="horizontal"
         className="commentCon"
         renderItem={commentItem}
         locale={{ emptyText: "暂无评论，快发表第一个热评！" }}
-        loading={!commentData.length && articleId === 99999}
+        loading={!commentData.length && articleId === "99999"}
       />
     </div>
   );
 }
 
-export default Index;
+export default Comment;

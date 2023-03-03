@@ -5,6 +5,11 @@ import { Title, Tag, Info, Section, Icon, Plate } from "@/components";
 import { useMount, useSetState, useGetData } from "@/hooks";
 import "./style.scss";
 
+type updateLogData = {
+  content: string;
+  createTime: string;
+};
+
 const About = () => {
   const [onTime, setState] = useSetState({
     millisecond: 0,
@@ -16,7 +21,7 @@ const About = () => {
     year: 0,
   });
 
-  const [updateLog] = useGetData("/updateLog/query");
+  const [updateLog] = useGetData<updateLogData>("/updateLog/query");
 
   useMount(() => {
     const t = setInterval(

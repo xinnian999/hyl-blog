@@ -236,7 +236,11 @@ function ArticleDetail() {
           <Skeleton loading={!content} paragraph={{ rows: 30 }}>
             <Markdown content={content} ref={mdRef} />
           </Skeleton>
-          <Comment articleId={params.id} title="评论区" btnName="提交评论" />
+          <Comment
+            articleId={params.id as string}
+            title="评论区"
+            btnName="提交评论"
+          />
         </div>
 
         {size.width > 800 ? (

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { To, useNavigate } from "react-router-dom";
 
-function Redirect({ to }: any) {
+function Redirect({ to }: { to: To }) {
   let navigate = useNavigate();
   useEffect(() => {
     navigate(to);
