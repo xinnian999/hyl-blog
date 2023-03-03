@@ -6,5 +6,6 @@
   "proxy": [
     { "path": "/api", "url": "https://www.hyl999.co:7777" },
     { "path": "/cdn", "url": "https://cdn.hyl999.co/public" }
-  ]
+  ],
+  "view": []
 }

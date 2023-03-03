@@ -1,6 +1,5 @@
 let prestrainImagePath = [
   "/img/bg/bg14.jpg",
-  "/img/bg/bg7.jpg",
   "/img/bg/bg12.png",
   "/img/bg/bg13.jpg",
   "/img/bg/bg15.jpg",
