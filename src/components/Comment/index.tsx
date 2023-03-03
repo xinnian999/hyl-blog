@@ -4,7 +4,7 @@ import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
 
-interface CommentType {
+interface CommentProps {
   articleId: string;
   title?: string;
   btnName: string;
@@ -21,7 +21,9 @@ export interface CommentData {
   article_id: string;
 }
 
-function Comment({ articleId, title, btnName, className }: CommentType) {
+function Comment(props: CommentProps) {
+  const { articleId, title, btnName, className } = props;
+
   const [commentData, run] = useGetData<CommentData>("/comment/query", {
     data: {
       articleId,
