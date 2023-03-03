@@ -4,19 +4,11 @@ import { Avatar } from "antd";
 import { time, httpTohttps } from "hyl-utils";
 import "./style.scss";
 
-function Comment({
-  className,
-  avatar,
-  author,
-  datetime,
-  content,
-  children,
-  reply,
-}) {
+function Comment({ avatar, author, datetime, content, children, reply }) {
   const { store } = useRedux();
 
   return (
-    <div id="commentCard" className={className}>
+    <div id="commentCard">
       <Avatar
         className="commentCard-avatar"
         src={httpTohttps(avatar)}

@@ -1,9 +1,17 @@
 import Comment from "../CommentCard";
-import { classnames } from "hyl-utils";
 import { useSetState, useRedux } from "@/hooks";
 import Editor from "../Editor";
+import type { CommentData } from "../index";
 
-const Reply = ({ commentItem, refresh, replyData, hasAnimation }) => {
+interface ReplyProps {
+  commentItem: CommentData;
+  refresh: Function;
+  replyData: any;
+}
+
+const Reply = (props: ReplyProps) => {
+  const { commentItem, refresh, replyData } = props;
+
   const { store } = useRedux();
 
   const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
@@ -33,13 +41,8 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }) => {
     </>
   );
 
-  const classname = classnames("replyItem", {
-    animate__animated: hasAnimation,
-    animate__zoomIn: hasAnimation,
-  });
-
   return (
-    <div className={classname}>
+    <div className="replyItem animate__animated animate__zoomIn">
       <Comment
         {...commentItem}
         author={author(commentItem)}
@@ -75,7 +78,6 @@ const Reply = ({ commentItem, refresh, replyData, hasAnimation }) => {
                 reply_Email: replyEmail,
               }}
               onClose={cancelEditor}
-              hasAnimation
             />
           </div>
         )}

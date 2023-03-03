@@ -1,7 +1,7 @@
 import { Button, Input, message, Modal, Popover, Space, Tooltip } from "antd";
 import { useRef } from "react";
 import { SmileOutlined, UndoOutlined } from "@ant-design/icons";
-import { classnames, time } from "hyl-utils";
+import { time } from "hyl-utils";
 import { useBoolean, useRedux, useSetState } from "@/hooks";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
@@ -17,7 +17,6 @@ interface editor {
   refresh: Function;
   onClose?: any;
   placeholder?: string;
-  hasAnimation?: boolean;
 }
 
 export default function Editor({
@@ -27,7 +26,6 @@ export default function Editor({
   refresh,
   placeholder,
   onClose,
-  hasAnimation,
 }: editor) {
   const [{ value, loading }, setState] = useSetState({
     value: "",
@@ -102,13 +100,8 @@ export default function Editor({
     </ul>
   );
 
-  const classname = classnames("comment-editor", {
-    animate__animated: hasAnimation,
-    animate__fadeInDown: hasAnimation,
-  });
-
   return (
-    <div className={classname}>
+    <div className="comment-editor animate__animated animate__zoomIn">
       <div className="toolbar">
         <Popover content={content} trigger="click">
           <Tooltip title="表情">

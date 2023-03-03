@@ -8,22 +8,20 @@ interface CommentType {
   articleId: string;
   title?: string;
   btnName: string;
-  hasAnimation?: boolean;
   className?: string;
 }
 
-interface CommentData {
+export interface CommentData {
   id: number;
   reply_id: number;
+  avatar: string;
+  author: string;
+  datetime: string;
+  content: string;
+  article_id: string;
 }
 
-function Comment({
-  articleId,
-  title,
-  btnName,
-  hasAnimation,
-  className,
-}: CommentType) {
+function Comment({ articleId, title, btnName, className }: CommentType) {
   const [commentData, run] = useGetData<CommentData>("/comment/query", {
     data: {
       articleId,
@@ -43,26 +41,14 @@ function Comment({
       })
       .reverse();
 
-    return (
-      <Reply
-        commentItem={props}
-        refresh={run}
-        replyData={replyData}
-        hasAnimation={hasAnimation}
-      />
-    );
+    return <Reply commentItem={props} refresh={run} replyData={replyData} />;
   };
 
   return (
     <div id="comment" className={className}>
       {title && <Divider>{title}</Divider>}
       {store.loginState ? (
-        <Editor
-          btnName={btnName}
-          articleId={articleId}
-          refresh={run}
-          hasAnimation={hasAnimation}
-        />
+        <Editor btnName={btnName} articleId={articleId} refresh={run} />
       ) : (
         <Alert
           message={
