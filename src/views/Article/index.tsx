@@ -3,13 +3,7 @@ import { Divider, Space, Skeleton, Drawer, Spin } from "antd";
 import { classnames } from "hyl-utils";
 import ReactScroll from "react-infinite-scroll-component";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import {
-  useWindowSize,
-  useGetData,
-  useBoolean,
-  useScroll,
-  useSetState,
-} from "@/hooks";
+import { useWindowSize, useGetData, useBoolean, useScroll } from "@/hooks";
 import { Plate } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search";
@@ -146,7 +140,7 @@ function Article() {
               }
               endMessage={
                 <Divider plain className="article-footer">
-                  <span className="shadowText">没有更多文章了</span> ---- 🤐
+                  没有更多文章了 ---- 🤐
                 </Divider>
               }
             >
