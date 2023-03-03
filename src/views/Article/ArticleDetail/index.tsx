@@ -1,13 +1,9 @@
 import { useEffect, useMemo, useRef } from "react";
-import { Divider, Space, Drawer, Skeleton, Anchor, Tag } from "antd";
-import { Icon, Plate } from "@/components";
+import { Divider, Space, Skeleton, Anchor, Tag } from "antd";
+import { Icon, Plate, Drawer } from "@/components";
 import { useParams } from "react-router-dom";
 import { classnames, time, throttle } from "hyl-utils";
-import {
-  UnorderedListOutlined,
-  CheckSquareOutlined,
-  MenuFoldOutlined,
-} from "@ant-design/icons";
+import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { changeBlogTitle, request } from "@/utils";
 import {
   useSetState,
@@ -15,7 +11,6 @@ import {
   useGetData,
   useMount,
   useScroll,
-  useBoolean,
 } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
@@ -66,8 +61,6 @@ function ArticleDetail() {
   const size = useWindowSize();
 
   const scrollNum = useScroll();
-
-  const [drawerVisible, setTrue, setFalse] = useBoolean(false);
 
   useGetData("/article/queryDetail", {
     data: { id: params.id },
@@ -258,20 +251,10 @@ function ArticleDetail() {
             </div>
           </div>
         ) : (
-          <div className="anchorFlag" onClick={setTrue}>
-            <MenuFoldOutlined />
-          </div>
+          <Drawer placement="right" className="anchorFlag">
+            <div className="anchorDrawer">{renderAnchor}</div>
+          </Drawer>
         )}
-
-        <Drawer
-          placement="right"
-          onClose={setFalse}
-          open={drawerVisible}
-          width="60%"
-          getContainer={() => document.getElementById("main")!}
-        >
-          <div className="anchorDrawer">{renderAnchor}</div>
-        </Drawer>
       </div>
     </>
   );

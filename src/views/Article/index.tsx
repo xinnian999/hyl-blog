@@ -1,10 +1,9 @@
 import { useRef } from "react";
-import { Divider, Space, Skeleton, Drawer, Spin } from "antd";
+import { Divider, Space, Skeleton, Spin } from "antd";
 import { classnames } from "hyl-utils";
 import ReactScroll from "react-infinite-scroll-component";
-import { MenuFoldOutlined } from "@ant-design/icons";
-import { useWindowSize, useGetData, useBoolean, useScroll } from "@/hooks";
-import { Plate } from "@/components";
+import { useWindowSize, useGetData, useScroll } from "@/hooks";
+import { Plate, Drawer } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
@@ -22,8 +21,6 @@ function Article() {
   const scrollNum = useScroll()!;
 
   const size = useWindowSize();
-
-  const [drawerVisible, on, off] = useBoolean(false);
 
   const [categoryData] = useGetData("/category/query", {
     mockLoadingCount: 7,
@@ -175,23 +172,10 @@ function Article() {
         {size.width > 800 ? (
           Toolbar
         ) : (
-          <div className="toolbarFlag box-shadow" onClick={on}>
-            <MenuFoldOutlined />
-          </div>
+          <Drawer className="toolbarFlag box-shadow" placement="right">
+            {Toolbar}
+          </Drawer>
         )}
-
-        <Drawer
-          placement="right"
-          onClose={off}
-          open={drawerVisible}
-          width="60%"
-          footer={null}
-          title={null}
-          destroyOnClose
-          getContainer={() => document.getElementById("main")!}
-        >
-          {Toolbar}
-        </Drawer>
       </div>
     </>
   );

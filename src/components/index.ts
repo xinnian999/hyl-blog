@@ -18,6 +18,7 @@ import { withRouter, withProgress, Error } from "./Hoc";
 import Redirect from "./Redirect";
 import Preview from "./Preview";
 import Image from "./Image";
+import Drawer from "./Drawer";
 
 const OverPack: any = ScrollAnim.OverPack;
 
@@ -42,4 +43,5 @@ export {
   Markdown,
   Preview,
   Image,
+  Drawer,
 };

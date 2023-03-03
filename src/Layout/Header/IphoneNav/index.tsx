@@ -1,17 +1,13 @@
-import { Drawer, Menu } from "antd";
+import { Menu } from "antd";
 import { router } from "@/config";
-import { useBoolean } from "@/hooks";
-import { MenuOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import { Icon } from "@/components";
+import { Icon, Drawer } from "@/components";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 function IphoneNav() {
-  const [open, on, off] = useBoolean(false);
-
   const items = router
     .filter((item) => item.title)
     .map((item: any) => {
@@ -36,26 +32,14 @@ function IphoneNav() {
     });
 
   return (
-    <>
-      <div id="iphone-menus" onClick={on}>
-        <MenuOutlined />
-      </div>
-      <Drawer
-        title="导航菜单"
-        placement="left"
-        onClose={off}
-        width="60%"
-        open={open}
-        getContainer={() => document.getElementById("main")!}
-      >
-        <Menu
-          defaultSelectedKeys={["1"]}
-          defaultOpenKeys={["sub1"]}
-          mode="inline"
-          items={items}
-        />
-      </Drawer>
-    </>
+    <Drawer id="iphone-menus" title="导航菜单" placement="left">
+      <Menu
+        defaultSelectedKeys={["1"]}
+        defaultOpenKeys={["sub1"]}
+        mode="inline"
+        items={items}
+      />
+    </Drawer>
   );
 }
 
