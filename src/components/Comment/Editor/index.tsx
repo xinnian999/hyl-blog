@@ -3,10 +3,10 @@ import { useRef } from "react";
 import { SmileOutlined, UndoOutlined } from "@ant-design/icons";
 import { classnames, time } from "hyl-utils";
 import { useBoolean, useRedux, useSetState } from "@/hooks";
-import { request } from "@/utils";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
 import "./style.scss";
+import { addCommentApi } from "@/api/comment";
 
 const { TextArea } = Input;
 
@@ -66,7 +66,7 @@ export default function Editor({
     }
 
     setState({ loading: true });
-    request.post("/comment/add", data).then((res: any) => {
+    addCommentApi(data).then((res: any) => {
       if (res.status === 0) {
         setState({ loading: false, value: "" });
         refresh();

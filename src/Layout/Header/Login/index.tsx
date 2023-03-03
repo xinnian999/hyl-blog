@@ -11,13 +11,13 @@ import {
   Spin,
   Popover,
 } from "antd";
+import { getRandom, pick } from "hyl-utils";
 import { LoadingOutlined, PlusOutlined, LeftOutlined } from "@ant-design/icons";
+import { loginApi, registerApi } from "@/api/user";
 import { clearLogin } from "@/utils";
 import { useSetState, useBoolean, useRedux, useWindowSize } from "@/hooks";
-import "./style.scss";
-import { getRandom, pick } from "hyl-utils";
 import ToolLogin from "./ToolLogin";
-import { login, register } from "./api";
+import "./style.scss";
 
 const avatar = [
   "img_1.jpeg",
@@ -54,7 +54,7 @@ export default function Login() {
   };
 
   const onLoginUser = (data) => {
-    login(data).then((res) => {
+    loginApi(data).then((res) => {
       if (res.status === 0) {
         dispatchAll([
           {
@@ -79,7 +79,7 @@ export default function Login() {
       randomAvatar();
     }
     setState((state: any) => {
-      register({
+      registerApi({
         ...values,
         headPicture: state.imageUrl,
       }).then((res) => {

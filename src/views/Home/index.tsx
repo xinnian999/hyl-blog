@@ -1,5 +1,5 @@
 import Banner from "./Banner";
-import Article from "./Article";
+import HotArticle from "./HotArticle";
 import SentenceContent from "./SentenceContent";
 import Footer from "./Footer";
 import Progress from "./Progress";
@@ -9,9 +9,7 @@ export default function Home() {
   return (
     <div id="home">
       <Banner />
-      <Article />
-
-      {/* <BtnContent /> */}
+      <HotArticle />
       <SentenceContent />
       <Progress />
       <Footer />

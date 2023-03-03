@@ -5,7 +5,9 @@ import {
 } from "@ant-design/cssinjs";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useRedux } from "@/hooks";
+import { cookie, removeDom, imgPrestrain, url } from "hyl-utils";
+import { useGetData, useMount, useRedux } from "@/hooks";
+import { prestrainImage } from "@/config";
 import { changeBlogTitle } from "@/utils";
 import starBg from "./widgets/Background/starBg";
 
@@ -13,6 +15,36 @@ function Provider({ children }) {
   const { store } = useRedux();
 
   const location = useLocation();
+
+  const { dispatchAll } = useRedux();
+
+  useMount(() => {
+    imgPrestrain(prestrainImage);
+    removeDom("#loading-box");
+  });
+
+  useGetData("/all/getCsrfToken", {
+    progress: false,
+    manual: !!cookie.get("csrf_token"),
+  });
+
+  useGetData("/qq/getLoginStatus", {
+    manual: !!url.getParams("getUserInfo"),
+    progress: false,
+    onSuccess(res) {
+      dispatchAll([
+        {
+          type: "CHANGE_LOGIN_STATE",
+          payload: true,
+        },
+        {
+          type: "CHANGE_USER_INFO",
+          payload: res,
+        },
+        { type: "CHANGE_LOGIN_MODAL", payload: false },
+      ]);
+    },
+  });
 
   // 路由监听
   useEffect(() => {

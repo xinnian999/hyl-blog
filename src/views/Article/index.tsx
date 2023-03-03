@@ -1,26 +1,17 @@
 import { useRef } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
-import { Divider, Space, Skeleton, Drawer } from "antd";
+import { useSearchParams } from "react-router-dom";
+import { Divider, Space, Skeleton, Drawer, Spin } from "antd";
 import { classnames } from "hyl-utils";
 import ReactScroll from "react-infinite-scroll-component";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import {
-  useWindowSize,
-  useGetData,
-  useMount,
-  useRedux,
-  useBoolean,
-  useScroll,
-} from "@/hooks";
+import { useWindowSize, useGetData, useBoolean, useScroll } from "@/hooks";
 import { Plate } from "@/components";
-import { batchCopyDom, request } from "@/utils";
+import { batchCopyDom } from "@/utils";
 import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
 
 function Article() {
-  const { dispatchAll } = useRedux();
-
   const [params] = useSearchParams();
 
   const toobarRef = useRef(null) as any;
@@ -37,22 +28,9 @@ function Article() {
 
   const [drawerVisible, on, off] = useBoolean(false);
 
-  useMount(() => {
-    if (params.get("getUserInfo")) {
-      request.get("/qq/getLoginStatus").then((res: any) => {
-        dispatchAll([
-          {
-            type: "CHANGE_LOGIN_STATE",
-            payload: true,
-          },
-          {
-            type: "CHANGE_USER_INFO",
-            payload: res,
-          },
-          { type: "CHANGE_LOGIN_MODAL", payload: false },
-        ]);
-      });
-    }
+  const [categoryData] = useGetData("/category/query", {
+    mockLoadingCount: 7,
+    data: {},
   });
 
   const [articleData, runQueryArticle, setArticleData] = useGetData(
@@ -74,11 +52,6 @@ function Article() {
       },
     }
   );
-
-  const [categoryData] = useGetData("/category/query", {
-    mockLoadingCount: 7,
-    data: {},
-  });
 
   const paragraph = (
     <Space direction="vertical" className="skeleton" size={20}>
@@ -167,7 +140,7 @@ function Article() {
         <div className="article-list">
           {articleData.length ? (
             <ReactScroll
-              scrollThreshold={0.65}
+              scrollThreshold={0.95}
               dataLength={articleData.length}
               next={() =>
                 runQueryArticle({
@@ -175,7 +148,11 @@ function Article() {
                 })
               }
               hasMore={articleData.length < current.total}
-              loader={paragraph}
+              loader={
+                <Divider plain className="article-footer">
+                  <Spin />
+                </Divider>
+              }
               endMessage={
                 <Divider plain className="article-footer">
                   <span className="shadowText">没有更多文章了</span> ---- 🤐
