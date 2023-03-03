@@ -1,10 +1,15 @@
 import { useRef } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Divider, Space, Skeleton, Drawer, Spin } from "antd";
 import { classnames } from "hyl-utils";
 import ReactScroll from "react-infinite-scroll-component";
 import { MenuFoldOutlined } from "@ant-design/icons";
-import { useWindowSize, useGetData, useBoolean, useScroll } from "@/hooks";
+import {
+  useWindowSize,
+  useGetData,
+  useBoolean,
+  useScroll,
+  useSetState,
+} from "@/hooks";
 import { Plate } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search";
@@ -12,13 +17,11 @@ import ArticleCard from "./ArticleCard";
 import "./style.scss";
 
 function Article() {
-  const [params] = useSearchParams();
-
   const toobarRef = useRef(null) as any;
 
   const { current } = useRef({
     pageNum: 1,
-    category: params.get("category") || "all",
+    category: "all",
     total: 10,
   });
 
@@ -53,19 +56,24 @@ function Article() {
     }
   );
 
-  const paragraph = (
-    <Space direction="vertical" className="skeleton" size={20}>
-      {batchCopyDom(
-        () => (
-          <div className="skeletonItem">
-            <Skeleton.Button active className="skeletonItem-image" />
-            <Skeleton paragraph={{ rows: 5 }} active round className="" />
-          </div>
-        ),
-        5
-      )}
-    </Space>
-  );
+  const categoryClick = (name) => {
+    window.scrollTo(0, 500);
+    current.category = name;
+    current.pageNum = 1;
+    setArticleData([]);
+
+    runQueryArticle({
+      data: {
+        pageNum: 1,
+        pageSize: 5,
+        filters:
+          current.category === "all"
+            ? { publish: 1 }
+            : { publish: 1, category: name },
+        orderBys: "topping desc,id desc",
+      },
+    });
+  };
 
   const Toolbar = (
     <div className="article-toolbar-container box-shadow" ref={toobarRef}>
@@ -97,24 +105,7 @@ function Article() {
               return (
                 <li
                   key={name}
-                  onClick={() => {
-                    window.scrollTo(0, 500);
-                    current.category = name;
-                    current.pageNum = 1;
-                    setArticleData([]);
-
-                    runQueryArticle({
-                      data: {
-                        pageNum: 1,
-                        pageSize: 5,
-                        filters:
-                          current.category === "all"
-                            ? { publish: 1 }
-                            : { publish: 1, category: name },
-                        orderBys: "topping desc,id desc",
-                      },
-                    });
-                  }}
+                  onClick={() => categoryClick(name)}
                   className={classnames("article-toolbar-category-item", {
                     categoryActive: current.category === name,
                   })}
@@ -168,7 +159,22 @@ function Article() {
               </Space>
             </ReactScroll>
           ) : (
-            paragraph
+            <Space direction="vertical" className="skeleton" size={20}>
+              {batchCopyDom(
+                () => (
+                  <div className="skeletonItem">
+                    <Skeleton.Button active className="skeletonItem-image" />
+                    <Skeleton
+                      paragraph={{ rows: 5 }}
+                      active
+                      round
+                      className=""
+                    />
+                  </div>
+                ),
+                5
+              )}
+            </Space>
           )}
         </div>
 
