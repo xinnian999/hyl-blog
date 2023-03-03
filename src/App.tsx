@@ -6,6 +6,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { useGetData, useMount } from "@/hooks";
 import { BrowserRouter } from "react-router-dom";
 import { cookie, removeDom, imgPrestrain } from "hyl-utils";
+console.log("123");
 
 function App() {
   useMount(() => {
