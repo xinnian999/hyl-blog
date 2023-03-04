@@ -11,12 +11,7 @@ class SearchInput extends PureComponent<any> {
     value: "",
   };
 
-  componentWillUnmount() {
-    // 销毁防抖函数产生的闭包
-    this.fetch = null;
-  }
-
-  fetch: any = debounce(() => {
+  fetch = debounce(() => {
     request
       .get("/article/query", { filters: { title: this.state.value } })
       .then((res: responseType) => {

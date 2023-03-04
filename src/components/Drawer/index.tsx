@@ -1,14 +1,16 @@
 import { Drawer as AntdDrawer } from "antd";
 import { useBoolean } from "@/hooks";
 import { MenuOutlined } from "@ant-design/icons";
-type drawerProps = {
+
+interface DrawerProps {
   children: any;
   className?: string;
   id?: string;
   title?: string;
   placement: any;
-};
-function Drawer({ children, className, id, title, placement }: drawerProps) {
+}
+
+function Drawer({ children, className, id, title, placement }: DrawerProps) {
   const [open, on, off] = useBoolean(false);
 
   return (

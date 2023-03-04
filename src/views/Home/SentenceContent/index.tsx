@@ -25,7 +25,7 @@ function SentenceContent() {
     setVisible(false);
     request
       .get("/lines/queryRandOne", { params: { no: name } })
-      .then(({ data, status }: any) => {
+      .then(({ data, status }) => {
         if (status === 0) {
           setSentence(data[0]);
           setVisible(true);
@@ -33,7 +33,9 @@ function SentenceContent() {
           const img = new Image();
           img.src = `${globalConfig.remoteStaticUrl}/image/${data[0].picture}`;
           img.onload = function () {
-            const imgEl: any = document.querySelector(".SentenceContent");
+            const imgEl = document.querySelector(
+              ".SentenceContent"
+            ) as HTMLElement;
             if (store.dark) {
               imgEl.style.backgroundImage = "";
             } else {

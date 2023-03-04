@@ -1,58 +1,46 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Divider, Space, Skeleton, Anchor, Tag } from "antd";
 import { Icon, Plate, Drawer } from "@/components";
 import { useParams } from "react-router-dom";
 import { classnames, time, throttle } from "hyl-utils";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
-import { changeBlogTitle, request } from "@/utils";
+import { changeBlogTitle } from "@/utils";
 import {
   useSetState,
   useWindowSize,
   useGetData,
-  useMount,
   useScroll,
+  useMount,
 } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
+import { addArticleVisits, queryAboutArticle } from "@/api/article";
 
 interface State {
-  content: string;
-  title: string;
-  createTime: string;
-  updateTime: string;
-  comments: any;
+  info: Pick<
+    articleItem,
+    "content" | "title" | "createTime" | "updateTime" | "visits" | "category"
+  >;
   anchorList: any;
-  visits: number;
-  targetOffset: any;
-  category: string;
-  aboutArticle: any[];
+  targetOffset: number;
+  aboutArticle: articleItem[];
 }
 
 function ArticleDetail() {
-  const [
-    {
-      content,
-      title,
-      createTime,
-      updateTime,
-      anchorList,
-      targetOffset,
-      aboutArticle,
-      category,
-    },
-    setState,
-  ] = useSetState<State>({
-    content: "",
-    title: "这是一个文章的标题",
-    createTime: time.parse(new Date()),
-    comments: [],
-    anchorList: [],
-    visits: 0,
-    updateTime: time.parse(new Date()),
-    category: "",
-    targetOffset: undefined,
-    aboutArticle: [],
-  });
+  const [{ info, targetOffset, anchorList, aboutArticle }, setState] =
+    useSetState<State>({
+      info: {
+        content: "",
+        title: "这是一个文章的标题",
+        createTime: time.parse(new Date()),
+        visits: 0,
+        updateTime: time.parse(new Date()),
+        category: "",
+      },
+      targetOffset: 0,
+      anchorList: [],
+      aboutArticle: [],
+    });
 
   const params = useParams();
   const mdRef: any = useRef(null);
@@ -67,67 +55,57 @@ function ArticleDetail() {
     onSuccess: (res) => {
       const [data] = res.data;
 
-      setState(data);
-      // 设置页面标题
-      changeBlogTitle("", data.title);
-      // 文章阅读量+1
-      setTimeout(() => {
-        request.put("/article/visit", {
-          id: params.id,
-          updateTime: time.parse(data.updateTime),
-        });
-      }, 3000);
+      setState({ info: data });
+
       //查询相关文章
-      runGetAbout({
-        data: {
-          pageNum: 1,
-          pageSize: 6,
-          filters: { publish: 1, category: data.category },
-          orderBys: "topping desc,id desc",
-        },
-      }).then((res) => {
+      queryAboutArticle(data.category).then((res) => {
         setState({
           aboutArticle: res.data.filter(
             (item) => item.id !== Number(params.id)
           ),
         });
       });
+
+      // 设置页面标题
+      changeBlogTitle("", data.title);
+
+      // 文章阅读量+1
+      setTimeout(() => {
+        addArticleVisits({
+          id: params.id,
+          updateTime: time.parse(data.updateTime),
+        });
+      }, 3000);
+
+      //生成锚点
+      setTimeout(() => {
+        setState({
+          anchorList: [...mdRef.current.children[0].querySelectorAll("h2,h3")],
+          targetOffset: window.innerHeight / 4,
+        });
+      });
     },
   });
 
-  const [, runGetAbout] = useGetData("/article/query", {
-    manual: true,
-    progress: false,
-  });
-
-  useEffect(() => {
-    if (mdRef.current) {
-      //生成锚点
-      setState({
-        anchorList: [...mdRef.current.children[0].querySelectorAll("h2,h3")],
-        targetOffset: window.innerHeight / 4,
-      });
-    }
-  }, [mdRef.current]);
-
   useMount(() => {
-    window.addEventListener(
-      "scroll",
-      throttle(() => {
-        if (document.querySelector(".ant-anchor-link-title-active")) {
-          $(".anchorList")
-            .stop()
-            .animate(
-              {
-                scrollTop:
-                  $(".ant-anchor-link-title-active").position().top -
-                  $(".anchorList").height() / 2,
-              },
-              500
-            );
-        }
-      }, 500)
-    );
+    const scrollAnchor = throttle(() => {
+      if (document.querySelector(".ant-anchor-link-title-active")) {
+        $(".anchorList")
+          .stop()
+          .animate(
+            {
+              scrollTop:
+                $(".ant-anchor-link-title-active").position().top -
+                $(".anchorList").height() / 2,
+            },
+            500
+          );
+      }
+    }, 500);
+
+    window.addEventListener("scroll", scrollAnchor);
+
+    return () => window.removeEventListener("scroll", scrollAnchor);
   });
 
   const renderAnchor = useMemo(
@@ -192,6 +170,8 @@ function ArticleDetail() {
     ),
     [aboutArticle]
   );
+
+  const { title, category, createTime, updateTime, content } = info;
 
   return (
     <>

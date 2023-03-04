@@ -88,7 +88,7 @@ function useGetData<T>(url: string, newConfig: toolConfig = defaultConfig) {
     }
   });
 
-  return [result, run, set] as [T[], runFn, (data: any[]) => void];
+  return [result, run, set] as [T[], runFn, (data: T[]) => void];
 }
 
 export default useGetData;

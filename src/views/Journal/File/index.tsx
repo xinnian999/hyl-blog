@@ -1,94 +1,76 @@
-import { Component } from "react";
 import { time } from "hyl-utils";
 import { List, Typography, Divider } from "antd";
-import { request } from "@/utils";
-import { withRouter, Title, Plate } from "@/components";
+import { Title, Plate } from "@/components";
 import "./style.scss";
+import { useGetData } from "@/hooks";
+import { useNavigate } from "react-router-dom";
 
-interface isProps {
-  navigate: any;
-}
-interface isState {
-  data: any[];
-}
-class Index extends Component<isProps, isState> {
-  state = {
-    data: [],
-  };
+type Data = {
+  createTime: string;
+};
 
-  diff = { year: 0, month: 0 };
+function File() {
+  const navigate = useNavigate();
 
-  componentDidMount() {
-    request.get("/article/query", { orderBys: "id desc" }).then((res: any) => {
-      const { data } = res;
-      this.setState({ data });
-      const startTime = data[data.length - 1]?.createTime;
-      this.diff = time.duration(startTime);
-    });
-  }
+  const [data] = useGetData<Data>("/article/query");
 
-  render() {
-    const { data } = this.state;
-    const { navigate } = this.props;
+  const diff = time.duration(data[data.length - 1]?.createTime);
 
-    let datasource = [];
+  const yearKeys: any = [
+    ...new Set(
+      data.map((item: any) =>
+        new Date(item.createTime).getFullYear().toString()
+      )
+    ),
+  ];
 
-    let yearKeys: any = [
-      ...new Set(
-        data.map((item: any) =>
-          new Date(item.createTime).getFullYear().toString()
-        )
-      ),
-    ];
-
-    datasource = yearKeys.map((item) => {
-      const obj: any = { year: item, list: [] };
-      data.forEach((v: any) => {
-        if (v.createTime.includes(item)) {
-          obj.list.push(v);
-        }
-      });
-
-      return obj;
+  const datasource = yearKeys.map((item) => {
+    const obj: any = { year: item, list: [] };
+    data.forEach((v: any) => {
+      if (v.createTime.includes(item)) {
+        obj.list.push(v);
+      }
     });
 
-    return (
-      <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
-        <div id="file">
-          <Title>
-            居然用了
-            {this.diff.year}年零{this.diff.month}个月 才写了{data.length}
-            篇文章
-          </Title>
-          {datasource.map(({ year, list }) => {
-            return (
-              <>
-                <Divider orientation="left" className="year">
-                  {year}
-                </Divider>
+    return obj;
+  });
 
-                <List
-                  bordered
-                  dataSource={list}
-                  loading={!data.length}
-                  renderItem={(item: any) => (
-                    <div onClick={() => navigate(`/article/${item.id}`)}>
-                      <List.Item className="fileList">
-                        <Typography.Text mark>
-                          [{time.parse(item.createTime, "MM-DD")}]
-                        </Typography.Text>{" "}
-                        {item.title}
-                      </List.Item>
-                    </div>
-                  )}
-                />
-              </>
-            );
-          })}
-        </div>
-      </Plate>
-    );
-  }
+  return (
+    <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
+      <div id="file">
+        <Title>
+          居然用了
+          {diff.year}年零{diff.month}个月 才写了{data.length}
+          篇文章
+        </Title>
+        {datasource.map(({ year, list }) => {
+          return (
+            <>
+              <Divider orientation="left" className="year">
+                {year}
+              </Divider>
+
+              <List
+                bordered
+                dataSource={list}
+                loading={!data.length}
+                renderItem={(item: any) => (
+                  <div onClick={() => navigate(`/article/${item.id}`)}>
+                    <List.Item className="fileList">
+                      <Typography.Text mark>
+                        [{time.parse(item.createTime, "MM-DD")}]
+                      </Typography.Text>{" "}
+                      {item.title}
+                    </List.Item>
+                  </div>
+                )}
+              />
+            </>
+          );
+        })}
+      </div>
+    </Plate>
+  );
 }
 
-export default withRouter(Index);
+export default File;

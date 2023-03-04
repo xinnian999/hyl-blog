@@ -46,7 +46,7 @@ export default function Footer() {
                 key={title}
               >
                 <h2>{title}</h2>
-                {children.map((v: any) => {
+                {children.map((v) => {
                   return (
                     <p className="v" key={v.title}>
                       <a href={v.link || null}>{v.title}</a>

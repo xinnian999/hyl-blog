@@ -5,7 +5,7 @@ import ReactScroll from "react-infinite-scroll-component";
 import { useWindowSize, useGetData, useScroll } from "@/hooks";
 import { Plate, Drawer } from "@/components";
 import { batchCopyDom } from "@/utils";
-import Search from "./Search";
+import Search from "./Search/index";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
 
@@ -22,14 +22,13 @@ function Article() {
 
   const size = useWindowSize();
 
-  const [categoryData] = useGetData("/category/query", {
+  const [categoryData] = useGetData<categoryItem>("/category/query", {
     mockLoadingCount: 7,
     data: {},
   });
 
-  const [articleData, runQueryArticle, setArticleData] = useGetData(
-    "/article/query",
-    {
+  const [articleData, runQueryArticle, setArticleData] =
+    useGetData<articleItem>("/article/query", {
       progress: false,
       data: {
         pageNum: current.pageNum,
@@ -44,8 +43,7 @@ function Article() {
         current.total = res.total;
         current.pageNum++;
       },
-    }
-  );
+    });
 
   const categoryClick = (name) => {
     window.scrollTo(0, 500);
@@ -76,15 +74,15 @@ function Article() {
       >
         <div className="article-toolbar-search">
           <Search
-            giveData={(data: any) => {
+            giveData={(data: articleItem[]) => {
               setArticleData(data);
               current.total = -1;
             }}
           />
         </div>
         <ul className="article-toolbar-category">
-          {[{ name: "all" }, ...categoryData].map(
-            ({ name, loading, id }: any) => {
+          {[{ name: "all", id: 0 }, ...categoryData].map(
+            ({ name, loading, id }) => {
               if (loading)
                 return (
                   <Skeleton.Input
@@ -122,7 +120,7 @@ function Article() {
         <div className="article-list">
           {articleData.length ? (
             <ReactScroll
-              scrollThreshold={0.95}
+              scrollThreshold={1}
               dataLength={articleData.length}
               next={() =>
                 runQueryArticle({
@@ -141,11 +139,9 @@ function Article() {
                 </Divider>
               }
             >
-              <Space direction="vertical" className="listStyle">
-                {articleData.map((item: any) => (
-                  <span key={item.title}>
-                    <ArticleCard data={item} />
-                  </span>
+              <Space size={20} direction="vertical" className="listStyle">
+                {articleData.map((item) => (
+                  <ArticleCard {...item} key={item.id} />
                 ))}
               </Space>
             </ReactScroll>

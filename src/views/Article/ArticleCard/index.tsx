@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { TimeBar, Image } from "@/components";
 import "./style.scss";
 
-function ArticleCard(props: any) {
+interface ArticleCardProps extends articleItem {
+  loading?: boolean;
+}
+
+function ArticleCard(props: ArticleCardProps) {
   const {
     title,
     id,
@@ -17,7 +21,7 @@ function ArticleCard(props: any) {
     topping,
     loading,
     type,
-  } = props.data;
+  } = props;
 
   const history = useNavigate();
 

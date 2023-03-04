@@ -19,70 +19,24 @@ declare const globalConfig: {
   description: string;
 };
 
-declare namespace NodeJS {
-  interface ProcessEnv {
-    readonly NODE_ENV: "development" | "production" | "test";
-    readonly PUBLIC_URL: string;
-  }
+declare interface articleItem {
+  title: string;
+  category: string;
+  introduce: string;
+  content: string;
+  picture: string;
+  type: number;
+  visits: number;
+  comments: number;
+  publish: number;
+  topping: number;
+  createTime: string;
+  updateTime: string;
+  id: number;
 }
 
-declare module "*.avif" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.bmp" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.gif" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.jpg" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.jpeg" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.png" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.webp" {
-  const src: string;
-  export default src;
-}
-
-declare module "*.svg" {
-  import * as React from "react";
-
-  export const ReactComponent: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & { title?: string }
-  >;
-
-  const src: string;
-  export default src;
-}
-
-declare module "*.module.css" {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
-
-declare module "*.module.scss" {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
-
-declare module "*.module.sass" {
-  const classes: { readonly [key: string]: string };
-  export default classes;
-}
+declare type categoryItem = {
+  name: string;
+  loading?: boolean;
+  id: number;
+};

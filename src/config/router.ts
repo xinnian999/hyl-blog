@@ -35,7 +35,7 @@ const route = [
         path: "file",
         icon: "icon-guidang",
 
-        component: lazy(() => import("@/views/Journal/File")),
+        component: lazy(() => import("@/views/Journal/File/index")),
       },
       {
         title: "笔记",

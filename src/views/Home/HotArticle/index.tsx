@@ -5,8 +5,16 @@ import { OverPack } from "@/components";
 import { useGetData } from "@/hooks";
 import "./style.scss";
 
+type Data = {
+  title: string;
+  picture: string;
+  introduce: string;
+  createTime: string;
+  id: number;
+};
+
 export default function Article() {
-  const [hotArticleData] = useGetData("/article/query", {
+  const [data] = useGetData<Data>("/article/query", {
     progress: false,
     data: {
       pageNum: 1,
@@ -41,9 +49,9 @@ export default function Article() {
               { opacity: [1, 0], translateY: [0, -300] },
             ]}
           >
-            {hotArticleData
+            {data
               .slice(0, 3)
-              .map(({ title, picture, introduce, createTime, id }: any) => {
+              .map(({ title, picture, introduce, createTime, id }) => {
                 return (
                   <div className="item" key={title}>
                     <div className="item-box">
