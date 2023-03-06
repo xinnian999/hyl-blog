@@ -11,16 +11,6 @@ interface CommentProps {
   className?: string;
 }
 
-export interface CommentData {
-  id: number;
-  reply_id: number;
-  avatar: string;
-  author: string;
-  datetime: string;
-  content: string;
-  article_id: string;
-}
-
 function Comment(props: CommentProps) {
   const { articleId, title, btnName, className } = props;
 

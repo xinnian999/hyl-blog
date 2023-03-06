@@ -16,19 +16,9 @@ import { Comment, Markdown } from "@/components";
 import "./style.scss";
 import { addArticleVisits, queryAboutArticle } from "../api";
 
-interface State {
-  info: Pick<
-    articleItem,
-    "content" | "title" | "createTime" | "updateTime" | "visits" | "category"
-  >;
-  anchorList: any;
-  targetOffset: number;
-  aboutArticle: articleItem[];
-}
-
 function ArticleDetail() {
   const [{ info, targetOffset, anchorList, aboutArticle }, setState] =
-    useSetState<State>({
+    useSetState<ArticleDetailState>({
       info: {
         content: "",
         title: "这是一个文章的标题",

@@ -1,7 +1,6 @@
 import Comment from "../CommentCard";
 import { useSetState, useRedux } from "@/hooks";
 import Editor from "../Editor";
-import type { CommentData } from "../index";
 
 interface ReplyProps {
   commentItem: CommentData;

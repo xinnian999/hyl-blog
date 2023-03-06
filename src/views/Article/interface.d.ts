@@ -1,4 +1,4 @@
-interface articleItem {
+interface articleItem extends Item {
   title: string;
   category: string;
   introduce: string;
@@ -9,13 +9,22 @@ interface articleItem {
   comments: number;
   publish: number;
   topping: number;
-  createTime: string;
-  updateTime: string;
-  id: number;
 }
 
-interface categoryItem {
+interface categoryItem extends Item {
   name: string;
+}
+
+interface ArticleDetailState {
+  info: Pick<
+    articleItem,
+    "content" | "title" | "createTime" | "updateTime" | "visits" | "category"
+  >;
+  anchorList: any;
+  targetOffset: number;
+  aboutArticle: articleItem[];
+}
+
+interface ArticleCardProps extends articleItem {
   loading?: boolean;
-  id: number;
 }

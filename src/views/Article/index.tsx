@@ -23,7 +23,6 @@ function Article() {
   const size = useWindowSize();
 
   const [categoryData] = useGetData<categoryItem>("/category/query", {
-    mockLoadingCount: 7,
     data: {},
   });
 
@@ -81,29 +80,17 @@ function Article() {
           />
         </div>
         <ul className="article-toolbar-category">
-          {[{ name: "all", id: 0 }, ...categoryData].map(
-            ({ name, loading, id }) => {
-              if (loading)
-                return (
-                  <Skeleton.Input
-                    key={id}
-                    className="article-toolbar-category-item"
-                    active
-                  />
-                );
-              return (
-                <li
-                  key={name}
-                  onClick={() => categoryClick(name)}
-                  className={classnames("article-toolbar-category-item", {
-                    categoryActive: current.category === name,
-                  })}
-                >
-                  <div>{name === "all" ? "全部" : name} </div>
-                </li>
-              );
-            }
-          )}
+          {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
+            <li
+              key={name}
+              onClick={() => categoryClick(name)}
+              className={classnames("article-toolbar-category-item", {
+                categoryActive: current.category === name,
+              })}
+            >
+              {name === "all" ? "全部" : name}
+            </li>
+          ))}
         </ul>
       </div>
     </div>

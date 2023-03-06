@@ -13,6 +13,12 @@ type responseType = {
   total: number;
 };
 
+interface Item {
+  id: number;
+  createTime: string;
+  updateTime: string;
+}
+
 module "aplayer";
 
 module "rc-scroll-anim";

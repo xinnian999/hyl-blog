@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { TimeBar, Image } from "@/components";
 import "./style.scss";
 
-interface ArticleCardProps extends articleItem {
-  loading?: boolean;
-}
-
 function ArticleCard(props: ArticleCardProps) {
   const {
     title,
