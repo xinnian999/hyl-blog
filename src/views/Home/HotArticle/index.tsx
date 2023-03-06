@@ -1,7 +1,7 @@
 import QueueAnim from "rc-queue-anim";
 import { time } from "hyl-utils";
 import { LinkOutlined } from "@ant-design/icons";
-import { OverPack } from "@/components";
+import { OverPack } from "rc-scroll-anim";
 import { useGetData } from "@/hooks";
 import "./style.scss";
 

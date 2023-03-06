@@ -1,47 +1,14 @@
-import ScrollAnim from "rc-scroll-anim";
-import Icon from "./Icon";
-import Comment from "./Comment";
-import Loading from "./Loading";
-import TimeBar from "./TimeBar";
-import Plate from "./Plate";
-import Copy from "./Copy";
-import Markdown from "./Markdown";
-import {
-  PageCenter,
-  Bubble,
-  Title,
-  Tag,
-  Info,
-  Section,
-} from "./StyleComponent";
-import { withRouter, withProgress, Error } from "./Hoc";
-import Redirect from "./Redirect";
-import Preview from "./Preview";
-import Image from "./Image";
-import Drawer from "./Drawer";
+export { Bubble, Title, Tag, Info, Section } from "./StyleComponent";
 
-const OverPack: any = ScrollAnim.OverPack;
-
-export {
-  Icon,
-  Comment,
-  Loading,
-  TimeBar,
-  Plate,
-  Error,
-  withProgress,
-  withRouter,
-  PageCenter,
-  Bubble,
-  Title,
-  Tag,
-  Info,
-  Section,
-  Redirect,
-  Copy,
-  OverPack,
-  Markdown,
-  Preview,
-  Image,
-  Drawer,
-};
+export { default as Drawer } from "./Drawer";
+export { default as Error } from "./Error";
+export { default as Image } from "./Image";
+export { default as Redirect } from "./Redirect";
+export { default as Preview } from "./Preview";
+export { default as Markdown } from "./Markdown";
+export { default as Copy } from "./Copy";
+export { default as Plate } from "./Plate";
+export { default as TimeBar } from "./TimeBar";
+export { default as Loading } from "./Loading";
+export { default as Comment } from "./Comment";
+export { default as Icon } from "./Icon";

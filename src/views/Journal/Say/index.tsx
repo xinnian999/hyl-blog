@@ -1,6 +1,7 @@
 import { Timeline } from "antd";
 import { classnames, time } from "hyl-utils";
-import { Bubble, Icon, OverPack, Image, Plate } from "@/components";
+import { OverPack } from "rc-scroll-anim";
+import { Bubble, Icon, Image, Plate } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
 import "./style.scss";
 

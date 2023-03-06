@@ -7,7 +7,7 @@ import {
   Lines,
   ChangeBar,
 } from "./StyleComponents";
-import { OverPack } from "@/components";
+import { OverPack } from "rc-scroll-anim";
 import { useRedux } from "@/hooks";
 
 function SentenceContent() {

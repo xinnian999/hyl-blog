@@ -1,4 +1,4 @@
-import { OverPack } from "@/components";
+import { OverPack } from "rc-scroll-anim";
 import "./style.scss";
 
 const footerData = [
