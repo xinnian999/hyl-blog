@@ -28,7 +28,10 @@ const defaultConfig: Required<toolConfig> = {
   cache: false,
 };
 
-function useGetData<T>(url: string, newConfig: toolConfig = defaultConfig) {
+function useGetData<T = any>(
+  url: string,
+  newConfig: toolConfig = defaultConfig
+) {
   const config = { ...defaultConfig, ...newConfig };
 
   const [result, setResult] = useState([]);

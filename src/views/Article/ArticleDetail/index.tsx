@@ -14,7 +14,7 @@ import {
 } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
-import { addArticleVisits, queryAboutArticle } from "@/api/article";
+import { addArticleVisits, queryAboutArticle } from "../api";
 
 interface State {
   info: Pick<

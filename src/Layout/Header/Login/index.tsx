@@ -13,7 +13,7 @@ import {
 } from "antd";
 import { getRandom, pick } from "hyl-utils";
 import { LoadingOutlined, PlusOutlined, LeftOutlined } from "@ant-design/icons";
-import { loginApi, registerApi } from "@/api/user";
+import { loginApi, registerApi } from "./api";
 import { clearLogin } from "@/utils";
 import { useSetState, useBoolean, useRedux, useWindowSize } from "@/hooks";
 import ToolLogin from "./ToolLogin";

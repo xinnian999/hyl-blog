@@ -6,7 +6,7 @@ import { useBoolean, useRedux, useSetState } from "@/hooks";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
 import "./style.scss";
-import { addCommentApi } from "@/api/comment";
+import { addCommentApi } from "../api";
 
 const { TextArea } = Input;
 
