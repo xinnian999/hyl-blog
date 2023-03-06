@@ -96,6 +96,28 @@ function Article() {
     </div>
   );
 
+  const reactScrollProps = {
+    scrollThreshold: 1,
+    dataLength: articleData.length,
+    next: () => {
+      runQueryArticle({
+        cache: true,
+      });
+    },
+
+    hasMore: articleData.length < current.total,
+    loader: (
+      <Divider plain className="article-footer">
+        <Spin />
+      </Divider>
+    ),
+    endMessage: (
+      <Divider plain className="article-footer">
+        没有更多文章了 ---- 🤐
+      </Divider>
+    ),
+  };
+
   return (
     <>
       <Plate
@@ -106,26 +128,7 @@ function Article() {
       <div id="article" className="center">
         <div className="article-list">
           {articleData.length ? (
-            <ReactScroll
-              scrollThreshold={1}
-              dataLength={articleData.length}
-              next={() =>
-                runQueryArticle({
-                  cache: true,
-                })
-              }
-              hasMore={articleData.length < current.total}
-              loader={
-                <Divider plain className="article-footer">
-                  <Spin />
-                </Divider>
-              }
-              endMessage={
-                <Divider plain className="article-footer">
-                  没有更多文章了 ---- 🤐
-                </Divider>
-              }
-            >
+            <ReactScroll {...reactScrollProps}>
               <Space size={20} direction="vertical" className="listStyle">
                 {articleData.map((item) => (
                   <ArticleCard {...item} key={item.id} />

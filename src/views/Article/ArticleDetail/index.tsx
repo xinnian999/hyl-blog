@@ -98,67 +98,61 @@ function ArticleDetail() {
     return () => window.removeEventListener("scroll", scrollAnchor);
   });
 
-  const renderAnchor = useMemo(
-    () => (
-      <div
-        className="ArticleDetail-toolbar-item"
-        style={{ width: toolbarRef.current?.clientWidth }}
-      >
-        <div className="catalogue">
-          <UnorderedListOutlined /> 本章目录
-        </div>
-        <Divider></Divider>
-        <Anchor
-          targetOffset={targetOffset}
-          affix={false}
-          className="anchorList"
-          style={{ maxHeight: "30vh" }}
-        >
-          {anchorList.map((item: { id: string; localName: string }) => {
-            const { id, localName } = item;
-            return (
-              <Anchor.Link
-                key={id}
-                href={`#${id}`}
-                title={id}
-                className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
-              />
-            );
-          })}
-        </Anchor>
+  const renderAnchor = (
+    <div
+      className="ArticleDetail-toolbar-item"
+      style={{ width: toolbarRef.current?.clientWidth }}
+    >
+      <div className="catalogue">
+        <UnorderedListOutlined /> 本章目录
       </div>
-    ),
-    [anchorList]
+      <Divider></Divider>
+      <Anchor
+        targetOffset={targetOffset}
+        affix={false}
+        className="anchorList"
+        style={{ maxHeight: "30vh" }}
+      >
+        {anchorList.map((item: { id: string; localName: string }) => {
+          const { id, localName } = item;
+          return (
+            <Anchor.Link
+              key={id}
+              href={`#${id}`}
+              title={id}
+              className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
+            />
+          );
+        })}
+      </Anchor>
+    </div>
   );
 
-  const renderAboutArticle = useMemo(
-    () => (
-      <div
-        className="ArticleDetail-toolbar-item  box-shadow"
-        style={{ width: toolbarRef.current?.clientWidth }}
-      >
-        <div className="catalogue">
-          <CheckSquareOutlined /> 相关阅读
-        </div>
-        <Divider></Divider>
-        <div className="aboutArticle">
-          {aboutArticle.map(({ title, visits, comments, id }) => (
-            <div className="aboutArticle-item" key={title}>
-              <div
-                className="aboutArticle-item-title"
-                onClick={() => window.open(`/article/${id}`, "_self")}
-              >
-                {title}
-              </div>
-              <div className="aboutArticle-item-info">
-                {comments}评论 | {visits}阅读
-              </div>
-            </div>
-          ))}
-        </div>
+  const renderAboutArticle = (
+    <div
+      className="ArticleDetail-toolbar-item  box-shadow"
+      style={{ width: toolbarRef.current?.clientWidth }}
+    >
+      <div className="catalogue">
+        <CheckSquareOutlined /> 相关阅读
       </div>
-    ),
-    [aboutArticle]
+      <Divider></Divider>
+      <div className="aboutArticle">
+        {aboutArticle.map(({ title, visits, comments, id }) => (
+          <div className="aboutArticle-item" key={title}>
+            <div
+              className="aboutArticle-item-title"
+              onClick={() => window.open(`/article/${id}`, "_self")}
+            >
+              {title}
+            </div>
+            <div className="aboutArticle-item-info">
+              {comments}评论 | {visits}阅读
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 
   const { title, category, createTime, updateTime, content } = info;
