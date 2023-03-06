@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 import { Divider, Space, Skeleton, Spin } from "antd";
 import { classnames } from "hyl-utils";
 import ReactScroll from "react-infinite-scroll-component";
@@ -44,34 +44,84 @@ function Article() {
       },
     });
 
-  const categoryClick = (name) => {
-    window.scrollTo(0, 500);
-    current.category = name;
-    current.pageNum = 1;
-    setArticleData([]);
-
-    runQueryArticle({
-      data: {
-        pageNum: 1,
-        pageSize: 5,
-        filters:
-          current.category === "all"
-            ? { publish: 1 }
-            : { publish: 1, category: name },
-        orderBys: "topping desc,id desc",
+  const articleList = useMemo(() => {
+    const reactScrollProps = {
+      scrollThreshold: 1,
+      dataLength: articleData.length,
+      next: () => {
+        runQueryArticle({
+          cache: true,
+        });
       },
-    });
-  };
 
-  const Toolbar = (
-    <div className="article-toolbar-container box-shadow" ref={toobarRef}>
+      hasMore: articleData.length < current.total,
+      loader: (
+        <Divider plain className="article-footer">
+          <Spin />
+        </Divider>
+      ),
+      endMessage: (
+        <Divider plain className="article-footer">
+          没有更多文章了 ---- 🤐
+        </Divider>
+      ),
+    };
+
+    if (articleData.length) {
+      return (
+        <ReactScroll {...reactScrollProps}>
+          <Space size={20} direction="vertical" className="listStyle">
+            {articleData.map((item) => (
+              <ArticleCard {...item} key={item.id} />
+            ))}
+          </Space>
+        </ReactScroll>
+      );
+    }
+
+    return (
+      <Space direction="vertical" className="skeleton" size={20}>
+        {batchCopyDom(
+          () => (
+            <div className="skeletonItem">
+              <Skeleton.Button active className="skeletonItem-image" />
+              <Skeleton paragraph={{ rows: 5 }} active round className="" />
+            </div>
+          ),
+          5
+        )}
+      </Space>
+    );
+  }, [articleData]);
+
+  const toolbar = useMemo(() => {
+    const categoryClick = (name) => {
+      window.scrollTo(0, 500);
+      current.category = name;
+      current.pageNum = 1;
+      setArticleData([]);
+
+      runQueryArticle({
+        data: {
+          pageNum: 1,
+          pageSize: 5,
+          filters:
+            current.category === "all"
+              ? { publish: 1 }
+              : { publish: 1, category: name },
+          orderBys: "topping desc,id desc",
+        },
+      });
+    };
+
+    const el = (
       <div
-        className={classnames("article-toolbar ", {
+        className={classnames("article-toolbar-main", {
           "category-fixed": scrollNum?.top > 490,
         })}
         style={{ width: toobarRef.current?.clientWidth }}
       >
-        <div className="article-toolbar-search">
+        <div className="article-toolbar-main-search">
           <Search
             giveData={(data: articleItem[]) => {
               setArticleData(data);
@@ -79,12 +129,12 @@ function Article() {
             }}
           />
         </div>
-        <ul className="article-toolbar-category">
+        <ul className="article-toolbar-main-category">
           {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
             <li
               key={name}
               onClick={() => categoryClick(name)}
-              className={classnames("article-toolbar-category-item", {
+              className={classnames("article-toolbar-main-category-item", {
                 categoryActive: current.category === name,
               })}
             >
@@ -93,30 +143,18 @@ function Article() {
           ))}
         </ul>
       </div>
-    </div>
-  );
+    );
 
-  const reactScrollProps = {
-    scrollThreshold: 1,
-    dataLength: articleData.length,
-    next: () => {
-      runQueryArticle({
-        cache: true,
-      });
-    },
+    if (size.width < 800) {
+      return (
+        <Drawer className="toolbarFlag box-shadow" placement="right">
+          {el}
+        </Drawer>
+      );
+    }
 
-    hasMore: articleData.length < current.total,
-    loader: (
-      <Divider plain className="article-footer">
-        <Spin />
-      </Divider>
-    ),
-    endMessage: (
-      <Divider plain className="article-footer">
-        没有更多文章了 ---- 🤐
-      </Divider>
-    ),
-  };
+    return el;
+  }, [current.category, scrollNum]);
 
   return (
     <>
@@ -126,42 +164,11 @@ function Article() {
         bg="bg18.jpg"
       />
       <div id="article" className="center">
-        <div className="article-list">
-          {articleData.length ? (
-            <ReactScroll {...reactScrollProps}>
-              <Space size={20} direction="vertical" className="listStyle">
-                {articleData.map((item) => (
-                  <ArticleCard {...item} key={item.id} />
-                ))}
-              </Space>
-            </ReactScroll>
-          ) : (
-            <Space direction="vertical" className="skeleton" size={20}>
-              {batchCopyDom(
-                () => (
-                  <div className="skeletonItem">
-                    <Skeleton.Button active className="skeletonItem-image" />
-                    <Skeleton
-                      paragraph={{ rows: 5 }}
-                      active
-                      round
-                      className=""
-                    />
-                  </div>
-                ),
-                5
-              )}
-            </Space>
-          )}
-        </div>
+        <div className="article-list">{articleList}</div>
 
-        {size.width > 800 ? (
-          Toolbar
-        ) : (
-          <Drawer className="toolbarFlag box-shadow" placement="right">
-            {Toolbar}
-          </Drawer>
-        )}
+        <div className="article-toolbar box-shadow" ref={toobarRef}>
+          {toolbar}
+        </div>
       </div>
     </>
   );

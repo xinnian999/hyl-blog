@@ -4,6 +4,8 @@ import { Title, Plate } from "@/components";
 import "./style.scss";
 import { useGetData } from "@/hooks";
 import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import React from "react";
 
 type Data = {
   createTime: string;
@@ -16,24 +18,26 @@ function File() {
 
   const diff = time.duration(data[data.length - 1]?.createTime);
 
-  const yearKeys: any = [
-    ...new Set(
-      data.map((item: any) =>
-        new Date(item.createTime).getFullYear().toString()
-      )
-    ),
-  ];
+  const datasource = useMemo(() => {
+    const yearKeys: any = [
+      ...new Set(
+        data.map((item: any) =>
+          new Date(item.createTime).getFullYear().toString()
+        )
+      ),
+    ];
 
-  const datasource = yearKeys.map((item) => {
-    const obj: any = { year: item, list: [] };
-    data.forEach((v: any) => {
-      if (v.createTime.includes(item)) {
-        obj.list.push(v);
-      }
+    return yearKeys.map((item) => {
+      const obj: any = { year: item, list: [] };
+      data.forEach((v: any) => {
+        if (v.createTime.includes(item)) {
+          obj.list.push(v);
+        }
+      });
+
+      return obj;
     });
-
-    return obj;
-  });
+  }, [data]);
 
   return (
     <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
@@ -45,7 +49,7 @@ function File() {
         </Title>
         {datasource.map(({ year, list }) => {
           return (
-            <>
+            <React.Fragment key={year}>
               <Divider orientation="left" className="year">
                 {year}
               </Divider>
@@ -65,7 +69,7 @@ function File() {
                   </div>
                 )}
               />
-            </>
+            </React.Fragment>
           );
         })}
       </div>

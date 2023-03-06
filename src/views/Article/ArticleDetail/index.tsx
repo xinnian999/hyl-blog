@@ -157,44 +157,38 @@ function ArticleDetail() {
 
   const { title, category, createTime, updateTime, content } = info;
 
+  const articleInfo = useMemo(
+    () => (
+      <Space size={20} direction={size.width > 800 ? "horizontal" : "vertical"}>
+        <span>
+          {category.split(",").map((item: string) => (
+            <Tag icon={<Icon type="icon-biaoqian2" />} color="pink" key={item}>
+              {item}
+            </Tag>
+          ))}
+        </span>
+        <span>
+          <Icon type="icon-fabu" /> 发布日期：
+          {time.parse(createTime, "YYYY-MM-DD")}
+        </span>
+        <span>
+          <Icon type="icon-banbengengxin" /> 更新日期：
+          {time.parse(updateTime, "YYYY-MM-DD")}
+        </span>
+        <span>
+          <Icon type="icon-word" /> 文章字数：
+          {content.length > 1000
+            ? `${~~(content.length / 100) / 10}k`
+            : content.length}
+        </span>
+      </Space>
+    ),
+    [info, size]
+  );
+
   return (
     <>
-      <Plate
-        title={title}
-        bg="bg18.jpg"
-        autograph={
-          <Space
-            size={20}
-            direction={size.width > 800 ? "horizontal" : "vertical"}
-          >
-            <span>
-              {category.split(",").map((item: string) => (
-                <Tag
-                  icon={<Icon type="icon-biaoqian2" />}
-                  color="pink"
-                  key={item}
-                >
-                  {item}
-                </Tag>
-              ))}
-            </span>
-            <span>
-              <Icon type="icon-fabu" /> 发布日期：
-              {time.parse(createTime, "YYYY-MM-DD")}
-            </span>
-            <span>
-              <Icon type="icon-banbengengxin" /> 更新日期：
-              {time.parse(updateTime, "YYYY-MM-DD")}
-            </span>
-            <span>
-              <Icon type="icon-word" /> 文章字数：
-              {content.length > 1000
-                ? `${~~(content.length / 100) / 10}k`
-                : content.length}
-            </span>
-          </Space>
-        }
-      ></Plate>
+      <Plate title={title} bg="bg18.jpg" autograph={articleInfo} />
       <div className="ArticleDetail center" ref={ArticleDetailRef}>
         <div className="detail box-shadow">
           <Skeleton loading={!content} paragraph={{ rows: 30 }}>

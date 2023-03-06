@@ -1,6 +1,6 @@
 import { useRedux } from "@/hooks";
 import { classnames } from "hyl-utils";
-import { ReactNode } from "react";
+import { memo, ReactNode } from "react";
 import "./style.scss";
 
 interface PlateType {
@@ -47,4 +47,4 @@ function Plate({
   );
 }
 
-export default Plate;
+export default memo(Plate);

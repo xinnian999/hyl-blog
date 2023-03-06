@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { forwardRef } from "react";
+import { forwardRef, memo } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
@@ -59,12 +59,11 @@ const components = {
 };
 
 const MarkDetail = (props, ref) => {
-  const { content, maxHeight } = props;
+  const { content } = props;
 
   return (
     <div
       style={{
-        height: `${maxHeight}px`,
         overflow: "hidden",
         position: "relative",
       }}
@@ -81,4 +80,4 @@ const MarkDetail = (props, ref) => {
   );
 };
 
-export default forwardRef(MarkDetail);
+export default memo(forwardRef(MarkDetail));

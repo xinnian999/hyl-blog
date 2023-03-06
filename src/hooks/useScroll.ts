@@ -8,7 +8,7 @@ const useScroll = () => {
   const onScroll: any = throttle((e: any) => {
     setTop(e.srcElement.documentElement.scrollTop);
     setLeft(e.srcElement.documentElement.scrollLeft);
-  }, 0);
+  }, 50);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
