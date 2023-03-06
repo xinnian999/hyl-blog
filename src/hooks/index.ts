@@ -1,17 +1,7 @@
-import useSetState from "./useSetState";
-import useScroll from "./useScroll";
-import useWindowSize from "./useWindowSize";
-import useMount from "./useMount";
-import useGetData from "./useGetData";
-import useBoolean from "./useBoolean";
-import useRedux from "./useRedux";
-
-export {
-  useSetState,
-  useScroll,
-  useWindowSize,
-  useMount,
-  useGetData,
-  useBoolean,
-  useRedux,
-};
+export { default as useSetState } from "./useSetState";
+export { default as useScroll } from "./useScroll";
+export { default as useWindowSize } from "./useWindowSize";
+export { default as useMount } from "./useMount";
+export { default as useGetData } from "./useGetData";
+export { default as useBoolean } from "./useBoolean";
+export { default as useRedux } from "./useRedux";

@@ -1,7 +1,5 @@
-import request from "./request";
-import clearLogin from "./clearLogin";
-import changeBlogTitle from "./changeBlogTitle";
-import getDecode from "./getDecode";
-import batchCopyDom from "./batchCopyDom";
-
-export { request, clearLogin, changeBlogTitle, getDecode, batchCopyDom };
+export { default as request } from "./request";
+export { default as clearLogin } from "./clearLogin";
+export { default as changeBlogTitle } from "./changeBlogTitle";
+export { default as getDecode } from "./getDecode";
+export { default as batchCopyDom } from "./batchCopyDom";

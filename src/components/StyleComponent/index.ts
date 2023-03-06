@@ -1,8 +1,6 @@
-import PageCenter from "./PageCenter";
-import Bubble from "./Bubble";
-import Title from "./Title";
-import Tag from "./Tag";
-import Info from "./Info";
-import Section from "./Section";
-
-export { PageCenter, Bubble, Title, Tag, Info, Section };
+export { default as PageCenter } from "./PageCenter";
+export { default as Bubble } from "./Bubble";
+export { default as Title } from "./Title";
+export { default as Tag } from "./Tag";
+export { default as Info } from "./Info";
+export { default as Section } from "./Section";

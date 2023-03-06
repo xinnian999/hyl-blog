@@ -1,9 +1,9 @@
 import { Provider as ReduxProvider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter } from "react-router-dom";
 import Layout from "@/Layout";
 import { Error } from "@/components";
 import { store, persistor } from "@/config";
-import { PersistGate } from "redux-persist/integration/react";
-import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (

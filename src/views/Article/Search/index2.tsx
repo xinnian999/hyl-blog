@@ -6,10 +6,10 @@ import "./style.scss";
 import { useSetState } from "@/hooks";
 import { useCallback } from "react";
 
-type State = {
+interface State {
   value: string;
   data: any[];
-};
+}
 
 function Search(props) {
   const [{ value, data }, setState] = useSetState<State>({

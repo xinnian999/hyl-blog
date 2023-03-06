@@ -15,8 +15,9 @@ type toolConfig = {
 
 type runFn = (props?: toolConfig) => Promise<responseType>;
 
-// type useGetDataResult = [any[],];
-
+//默认在组件挂载完成时自动发一次请求，可设置config的manual为 true取消自动
+//默认开启progress顶部加载进度条，可设置config的progress为 false
+//默认关闭缓存数据，可设置config的cacheData为 true开启
 const defaultConfig: Required<toolConfig> = {
   progress: true,
   onSuccess: () => {},
@@ -27,9 +28,6 @@ const defaultConfig: Required<toolConfig> = {
   cache: false,
 };
 
-//默认在组件挂载完成时自动发一次请求，可设置config的manual为 true取消自动
-//默认开启progress顶部加载进度条，可设置config的progress为 false
-//默认关闭缓存数据，可设置config的cacheData为 true开启
 function useGetData<T>(url: string, newConfig: toolConfig = defaultConfig) {
   const config = { ...defaultConfig, ...newConfig };
 
