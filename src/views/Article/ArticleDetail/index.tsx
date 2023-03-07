@@ -1,14 +1,15 @@
 import { useMemo, useRef } from "react";
-import { Divider, Space, Skeleton, Anchor, Tag } from "antd";
-import { Icon, Plate } from "@/components";
+import { Space, Skeleton, Tag } from "antd";
+import { Icon, Plate, Anchor } from "@/components";
 import { useParams } from "react-router-dom";
-import { time, throttle } from "hyl-utils";
+import { time } from "hyl-utils";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { changeBlogTitle } from "@/utils";
-import { useSetState, useWindowSize, useGetData, useMount } from "@/hooks";
+import { useSetState, useWindowSize, useGetData } from "@/hooks";
 import { Comment, Markdown } from "@/components";
-import "./style.scss";
 import { addArticleVisits, queryAboutArticle } from "../api";
+import ToolItem from "./ToolItem";
+import "./style.scss";
 
 function ArticleDetail() {
   const [{ info, targetOffset, anchorList, aboutArticle }, setState] =
@@ -28,7 +29,6 @@ function ArticleDetail() {
 
   const params = useParams();
   const mdRef: any = useRef(null);
-  const toolbarRef: any = useRef(null);
   const size = useWindowSize();
 
   useGetData("/article/queryDetail", {
@@ -67,84 +67,6 @@ function ArticleDetail() {
       });
     },
   });
-
-  useMount(() => {
-    const scrollAnchor = throttle(() => {
-      if (document.querySelector(".ant-anchor-link-title-active")) {
-        $(".anchorList")
-          .stop()
-          .animate(
-            {
-              scrollTop:
-                $(".ant-anchor-link-title-active").position().top -
-                $(".anchorList").height() / 2,
-            },
-            500
-          );
-      }
-    }, 500);
-
-    window.addEventListener("scroll", scrollAnchor);
-
-    return () => window.removeEventListener("scroll", scrollAnchor);
-  });
-
-  const renderAnchor = (
-    <div
-      className="articleDetail-toolbar-item"
-      style={{ width: toolbarRef.current?.clientWidth }}
-    >
-      <div className="catalogue">
-        <UnorderedListOutlined /> 本章目录
-      </div>
-      <Divider></Divider>
-      <Anchor
-        targetOffset={targetOffset}
-        affix={false}
-        className="anchorList"
-        style={{ maxHeight: "30vh" }}
-      >
-        {anchorList.map((item: { id: string; localName: string }) => {
-          const { id, localName } = item;
-          return (
-            <Anchor.Link
-              key={id}
-              href={`#${id}`}
-              title={id}
-              className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
-            />
-          );
-        })}
-      </Anchor>
-    </div>
-  );
-
-  const renderAboutArticle = (
-    <div
-      className="articleDetail-toolbar-item  box-shadow"
-      style={{ width: toolbarRef.current?.clientWidth }}
-    >
-      <div className="catalogue">
-        <CheckSquareOutlined /> 相关阅读
-      </div>
-      <Divider></Divider>
-      <div className="aboutArticle">
-        {aboutArticle.map(({ title, visits, comments, id }) => (
-          <div className="aboutArticle-item" key={title}>
-            <div
-              className="aboutArticle-item-title"
-              onClick={() => window.open(`/article/${id}`, "_self")}
-            >
-              {title}
-            </div>
-            <div className="aboutArticle-item-info">
-              {comments}评论 | {visits}阅读
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 
   const { title, category, createTime, updateTime, content } = info;
 
@@ -196,9 +118,33 @@ function ArticleDetail() {
           />
         </div>
       </Plate.List>
+
       <Plate.Toolbar>
-        {renderAnchor}
-        {renderAboutArticle}
+        <ToolItem title="本章目录" icon={<UnorderedListOutlined />}>
+          <Anchor
+            targetOffset={targetOffset}
+            style={{ maxHeight: "30vh" }}
+            anchorData={anchorList}
+          />
+        </ToolItem>
+
+        <ToolItem title="相关阅读" icon={<CheckSquareOutlined />}>
+          <div className="aboutArticle">
+            {aboutArticle.map(({ title, visits, comments, id }) => (
+              <div className="aboutArticle-item" key={title}>
+                <div
+                  className="aboutArticle-item-title"
+                  onClick={() => window.open(`/article/${id}`, "_self")}
+                >
+                  {title}
+                </div>
+                <div className="aboutArticle-item-info">
+                  {comments}评论 | {visits}阅读
+                </div>
+              </div>
+            ))}
+          </div>
+        </ToolItem>
       </Plate.Toolbar>
     </Plate>
   );

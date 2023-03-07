@@ -101,7 +101,7 @@ export default function Editor({
   );
 
   return (
-    <div className="comment-editor animate__animated animate__zoomIn">
+    <div className="comment-editor animate__animated animate__fadeInDown">
       <div className="toolbar">
         <Popover content={content} trigger="click">
           <Tooltip title="表情">

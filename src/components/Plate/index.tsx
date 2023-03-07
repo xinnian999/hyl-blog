@@ -1,8 +1,7 @@
-import { classnames } from "hyl-utils";
-import { useRedux } from "@/hooks";
-import "./style.scss";
 import Banner from "./Banner";
 import Toolbar from "./Toolbar";
+import Main from "./Main";
+import "./style.scss";
 
 function Plate({ children, id, ...props }: PlateProps) {
   return (
@@ -14,15 +13,6 @@ function Plate({ children, id, ...props }: PlateProps) {
     </>
   );
 }
-
-const Main = ({ children, id }) => {
-  const { store } = useRedux();
-  return (
-    <div id={id} className={classnames("main", { "box-shadow": !store.dark })}>
-      {children}
-    </div>
-  );
-};
 
 Plate.Main = Main;
 Plate.List = ({ children }) => <div className="list">{children}</div>;
