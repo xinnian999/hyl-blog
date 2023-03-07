@@ -10,7 +10,7 @@ interface ToolItemProps {
 function ToolItem(props: ToolItemProps) {
   const { title, icon, children } = props;
   return (
-    <div className="toolItem  box-shadow">
+    <div className="toolItem">
       <div className="catalogue">
         {icon} <span>{title}</span>
       </div>

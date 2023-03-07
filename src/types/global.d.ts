@@ -19,6 +19,9 @@ interface Item {
   updateTime: string;
 }
 
-module "aplayer";
-
-module "rc-scroll-anim";
+interface DomProps {
+  id?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  children?: React.ReactNode;
+}

@@ -30,7 +30,6 @@
     justify-content: space-around;
 
     .linkItem {
-      background-color: var(--background-color-block);
       width: calc(25% - 40px);
       background-color: var(--highlight-background-color);
       @media screen and (max-width: 800px) {

@@ -4,7 +4,7 @@ import { classnames } from "hyl-utils";
 import { useMemo, useRef } from "react";
 import "./style.scss";
 
-const Toolbar = ({ children }) => {
+const Toolbar = ({ children, className = "" }: DomProps) => {
   const toobarRef = useRef(null) as any;
 
   const size = useWindowSize();
@@ -17,7 +17,7 @@ const Toolbar = ({ children }) => {
         style={{
           width: size.width > 800 ? toobarRef.current?.clientWidth : "auto",
         }}
-        className={classnames({
+        className={classnames(className, {
           "plate-toolbar-fixed": scrollNum?.top > 490,
         })}
       >

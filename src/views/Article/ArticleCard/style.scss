@@ -2,7 +2,8 @@
   padding: 25px;
   background-color: var(--background-color);
   position: relative;
-  // transition: 1s all;
+  transition: 0.7s all;
+  border: 1px solid var(--border-color);
   border-radius: 15px;
 
   .topping {
@@ -84,7 +85,7 @@
 
 .ArticleCard:hover {
   cursor: pointer;
-  background-color: var(--background-color-active);
+  background-color: var(--highlight-background-color);
 }
 
 @media screen and (max-width: 800px) {
