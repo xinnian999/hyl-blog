@@ -1,4 +1,4 @@
-.note {
+#note {
   border: 1px solid var(--border-color);
   border-radius: 5px;
   overflow: hidden;
@@ -22,7 +22,7 @@
     font-size: 15px;
     font-weight: bold;
   }
-  &-item {
+  .note-item {
     display: inline-block;
     vertical-align: top;
     width: 300px;
@@ -34,8 +34,8 @@
     text-align: center;
     &-content {
       padding: 10px;
-
-      background-color: var(--background-color);
+      background-color: var(--highlight-background-color);
+      border-radius: 10px;
       border: 1px solid var(--border-color);
     }
   }

@@ -23,7 +23,7 @@ const Say = () => {
       autograph="不必慌张，活好当下，来日方长；不必失望，人间值得，未来可期。"
       bg="bg13.jpg"
     >
-      <div className="Journal">
+      <Plate.Main id="Journal">
         <Timeline
           mode={width > 800 ? "alternate" : "left"}
           pending={<div>查询中···</div>}
@@ -76,7 +76,7 @@ const Say = () => {
             </Timeline.Item>
           ))}
         </Timeline>
-      </div>
+      </Plate.Main>
     </Plate>
   );
 };

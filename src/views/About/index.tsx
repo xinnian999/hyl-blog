@@ -35,7 +35,7 @@ const About = () => {
   return (
     <>
       <Plate title="关于" autograph="越努力，越幸运" bg="bg14.jpg">
-        <div id="about">
+        <Plate.Main id="about">
           <Title>关于我</Title>
           <Info>
             99年来到这个世界，河北唐山人
@@ -146,7 +146,7 @@ const About = () => {
               <img src={require("@/assets/img/about/gongzhonghao.jpg")} />
             </Card>
           </Info>
-        </div>
+        </Plate.Main>
       </Plate>
     </>
   );

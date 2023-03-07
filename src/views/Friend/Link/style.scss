@@ -3,7 +3,6 @@
 
   .explain {
     padding: 15px;
-    background-color: var(--background-color-block);
     border-radius: 15px;
     &-main {
       margin-left: 20px;
@@ -61,16 +60,6 @@
       &:last-child {
         margin-right: auto;
       }
-    }
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .link-main {
-    display: block;
-
-    .ant-col-6 {
-      max-width: 100%;
     }
   }
 }

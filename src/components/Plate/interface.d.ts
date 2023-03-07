@@ -3,6 +3,7 @@ interface PlateProps {
   autograph?: import("react").ReactNode;
   children?: any;
   bg?: string;
+  id?: string;
 }
 
-type BannerProps = Omit<PlateProps, "children">;
+type BannerProps = Omit<PlateProps, "children", "id">;

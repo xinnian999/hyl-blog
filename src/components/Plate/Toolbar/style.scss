@@ -5,12 +5,7 @@
   margin-left: 15px;
   position: relative;
 
-  &-content {
-    // background-color: var(--background-color);
-    box-shadow: var(--box-shadow);
-  }
-
-  &-content-fixed {
+  &-fixed {
     position: fixed;
     top: 70px;
   }

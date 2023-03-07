@@ -22,7 +22,7 @@ export default function Note() {
       autograph="哪里有天才，我是把别人喝咖啡的工夫都用在了工作上了。"
       bg="bg16.jpg"
     >
-      <div className="note">
+      <Plate.Main id="note">
         <QueueAnim
           className="demo-content"
           animConfig={[
@@ -49,7 +49,7 @@ export default function Note() {
             );
           })}
         </QueueAnim>
-      </div>
+      </Plate.Main>
     </Plate>
   );
 }

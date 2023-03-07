@@ -1,17 +1,11 @@
 import { useMemo, useRef } from "react";
 import { Divider, Space, Skeleton, Anchor, Tag } from "antd";
-import { Icon, Plate, Drawer } from "@/components";
+import { Icon, Plate } from "@/components";
 import { useParams } from "react-router-dom";
-import { classnames, time, throttle } from "hyl-utils";
+import { time, throttle } from "hyl-utils";
 import { UnorderedListOutlined, CheckSquareOutlined } from "@ant-design/icons";
 import { changeBlogTitle } from "@/utils";
-import {
-  useSetState,
-  useWindowSize,
-  useGetData,
-  useScroll,
-  useMount,
-} from "@/hooks";
+import { useSetState, useWindowSize, useGetData, useMount } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import "./style.scss";
 import { addArticleVisits, queryAboutArticle } from "../api";
@@ -34,11 +28,8 @@ function ArticleDetail() {
 
   const params = useParams();
   const mdRef: any = useRef(null);
-  const ArticleDetailRef: any = useRef(null);
   const toolbarRef: any = useRef(null);
   const size = useWindowSize();
-
-  const scrollNum = useScroll();
 
   useGetData("/article/queryDetail", {
     data: { id: params.id },
@@ -100,7 +91,7 @@ function ArticleDetail() {
 
   const renderAnchor = (
     <div
-      className="ArticleDetail-toolbar-item"
+      className="articleDetail-toolbar-item"
       style={{ width: toolbarRef.current?.clientWidth }}
     >
       <div className="catalogue">
@@ -130,7 +121,7 @@ function ArticleDetail() {
 
   const renderAboutArticle = (
     <div
-      className="ArticleDetail-toolbar-item  box-shadow"
+      className="articleDetail-toolbar-item  box-shadow"
       style={{ width: toolbarRef.current?.clientWidth }}
     >
       <div className="catalogue">
@@ -187,10 +178,14 @@ function ArticleDetail() {
   );
 
   return (
-    <>
-      <Plate title={title} bg="bg18.jpg" autograph={articleInfo} />
-      <div className="ArticleDetail center" ref={ArticleDetailRef}>
-        <div className="detail box-shadow">
+    <Plate
+      title={title}
+      bg="bg18.jpg"
+      autograph={articleInfo}
+      id="articleDetail"
+    >
+      <Plate.List>
+        <div className="content box-shadow">
           <Skeleton loading={!content} paragraph={{ rows: 30 }}>
             <Markdown content={content} ref={mdRef} />
           </Skeleton>
@@ -200,25 +195,12 @@ function ArticleDetail() {
             btnName="提交评论"
           />
         </div>
-
-        {size.width > 800 ? (
-          <div className="ArticleDetail-toolbar" ref={toolbarRef}>
-            <div
-              className={classnames({
-                "ArticleDetail-toolbar-fixed": scrollNum.top > 490,
-              })}
-            >
-              {renderAnchor}
-              {renderAboutArticle}
-            </div>
-          </div>
-        ) : (
-          <Drawer placement="right" className="anchorFlag">
-            <div className="anchorDrawer">{renderAnchor}</div>
-          </Drawer>
-        )}
-      </div>
-    </>
+      </Plate.List>
+      <Plate.Toolbar>
+        {renderAnchor}
+        {renderAboutArticle}
+      </Plate.Toolbar>
+    </Plate>
   );
 }
 export default ArticleDetail;

@@ -41,7 +41,7 @@ function File() {
 
   return (
     <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
-      <div id="file">
+      <Plate.Main id="file">
         <Title>
           居然用了
           {diff.year}年零{diff.month}个月 才写了{data.length}
@@ -72,7 +72,7 @@ function File() {
             </React.Fragment>
           );
         })}
-      </div>
+      </Plate.Main>
     </Plate>
   );
 }

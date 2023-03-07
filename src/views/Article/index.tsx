@@ -112,10 +112,11 @@ function Article() {
       title="文章"
       autograph="人是要整活的——没活了，可不就是死了么？"
       bg="bg18.jpg"
+      id="article"
     >
       <Plate.List>{articleList}</Plate.List>
       <Plate.Toolbar>
-        <div className="article-toolbar-search">
+        <div className="article-search">
           <Search
             giveData={(data: articleItem[]) => {
               setArticleData(data);
@@ -123,12 +124,12 @@ function Article() {
             }}
           />
         </div>
-        <ul className="article-toolbar-category">
+        <ul className="article-category">
           {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
             <li
               key={name}
               onClick={() => categoryClick(name)}
-              className={classnames("article-toolbar-category-item", {
+              className={classnames("article-category-item", {
                 categoryActive: current.category === name,
               })}
             >

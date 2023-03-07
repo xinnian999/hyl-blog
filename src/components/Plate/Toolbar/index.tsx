@@ -17,8 +17,8 @@ const Toolbar = ({ children }) => {
         style={{
           width: size.width > 800 ? toobarRef.current?.clientWidth : "auto",
         }}
-        className={classnames("plate-toolbar-content", {
-          "plate-toolbar-content-fixed": scrollNum?.top > 490,
+        className={classnames({
+          "plate-toolbar-fixed": scrollNum?.top > 490,
         })}
       >
         {children}

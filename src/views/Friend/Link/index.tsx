@@ -75,8 +75,7 @@ export default function Link() {
         autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
         bg="bg12.png"
       >
-        {" "}
-        <div id="Link" className="center">
+        <Plate.Main id="Link">
           <div className="explain">
             <Title>链接申请说明</Title>
             <div className="explain-main">
@@ -114,7 +113,7 @@ export default function Link() {
               );
             })}
           </div>
-        </div>
+        </Plate.Main>
       </Plate>
     </>
   );
