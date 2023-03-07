@@ -1,48 +1,24 @@
-import { useRedux } from "@/hooks";
 import { classnames } from "hyl-utils";
-import { memo, ReactNode } from "react";
+import { memo } from "react";
+import { useRedux } from "@/hooks";
 import "./style.scss";
+import Banner from "./Banner";
 
-interface PlateType {
-  title: string;
-  autograph?: string | ReactNode;
-  children?: any;
-  bg?: string;
-}
-
-function Plate({
-  title = "标题",
-  autograph = "",
-  children,
-  bg = "bg1.webp",
-}: PlateType) {
+function Plate({ children, ...props }: PlateProps) {
   const { store } = useRedux();
 
   return (
     <>
-      <div className="plate-head">
-        <div className="plate-head-info">
-          <h2>{title}</h2>
-          <div className="plate-head-info-autograph">{autograph} </div>
-        </div>
-        <div
-          className="plate-head-bg"
-          style={{
-            opacity: store.dark ? "0.7" : "1",
-            backgroundImage: `url(${require(`@/assets/img/bg/${
-              store.dark ? "bg8.jpg" : bg
-            }`)})`,
-          }}
-        ></div>
-      </div>
+      <Banner {...props} />
 
-      {children && (
-        <div
-          className={classnames("plate-main", { "box-shadow": !store.dark })}
-        >
-          {children}
-        </div>
-      )}
+      <div className="plate-main">
+        {/* {children && (
+          <div className={classnames({ "box-shadow": !store.dark })}>
+            {children}
+          </div>
+        )} */}
+        {children}
+      </div>
     </>
   );
 }

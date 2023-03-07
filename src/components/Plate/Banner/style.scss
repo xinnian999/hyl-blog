@@ -1,0 +1,30 @@
+.plate-banner {
+  position: relative;
+  height: 600px;
+
+  &-bg {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  &-info {
+    color: var(--plate-text-color);
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-70%);
+    z-index: 9;
+    h2 {
+      font-weight: 500;
+      font-size: 40px;
+      margin-bottom: 20px;
+      letter-spacing: 5px;
+      text-shadow: 0px 0px 10px black;
+    }
+    &-autograph {
+      font-size: 20px;
+      text-shadow: 0px 0px 10px black;
+    }
+  }
+}

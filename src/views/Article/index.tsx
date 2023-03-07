@@ -85,10 +85,10 @@ function Article() {
           () => (
             <div className="skeletonItem">
               <Skeleton.Button active className="skeletonItem-image" />
-              <Skeleton paragraph={{ rows: 5 }} active round className="" />
+              <Skeleton paragraph={{ rows: 5 }} active round />
             </div>
           ),
-          5
+          3
         )}
       </Space>
     );
@@ -119,7 +119,9 @@ function Article() {
         className={classnames("article-toolbar-main", {
           "category-fixed": scrollNum?.top > 490,
         })}
-        style={{ width: toobarRef.current?.clientWidth }}
+        style={{
+          width: size.width > 800 ? toobarRef.current?.clientWidth : "auto",
+        }}
       >
         <div className="article-toolbar-main-search">
           <Search
@@ -166,7 +168,7 @@ function Article() {
       <div id="article" className="center">
         <div className="article-list">{articleList}</div>
 
-        <div className="article-toolbar box-shadow" ref={toobarRef}>
+        <div className="article-toolbar" ref={toobarRef}>
           {toolbar}
         </div>
       </div>
