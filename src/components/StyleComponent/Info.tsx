@@ -3,7 +3,7 @@ import r from "./r";
 
 const Info = styled.div`
   padding: ${r`30px`};
-  background-color: var(--background-color);
+  background-color: var(--highlight-background-color);
   line-height: ${r`35px`};
   overflow: auto;
 `;

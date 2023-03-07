@@ -4,19 +4,23 @@ body{
 }
 
 #light {
-    --footer-background-color:#011425;
     --background-color:#fff;
     --border-color:#fff;
-    --highlight-background-color:var(--ant-primary-2);
+    --highlight-background-color:var(--ant-primary-1);
     --plate-text-color:rgba(255,255,255);
     --box-shadow: 0 15px 35px rgb(50 50 93 / 10%);
+
+    --home-background-color:#fff;
+    --homeFoot-background-color:#011425;
 }
 
 #dark {
-    --footer-background-color:rgb(48, 48, 48,0.5);
     --background-color:rgb(48, 48, 48,0.5);
     --border-color: #303030;
     --highlight-background-color: var(--ant-primary-10);
     --plate-text-color:rgba(255, 255, 255, 0.85);
     --box-shadow: 0 1px 10px rgb(255 255 255 / 30%);
+
+    --home-background-color:transparent;
+    --homeFoot-background-color:transparent;
 }
