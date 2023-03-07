@@ -1,6 +1,7 @@
 /*******************配置组件自定义颜色(入口css)******************/
 body{
     --heart-width:1200px;
+    --box-shadow: 0 15px 35px rgb(50 50 93 / 10%), 0 5px 15px rgb(0 0 0 / 7%);
 }
 
 #light {
@@ -15,7 +16,7 @@ body{
 
 #dark {
     --footer-background-color:transparent;
-    --background-color:transparent;
+    --background-color:rgb(48, 48, 48,0.5);
     --background-color-block:rgb(48, 48, 48,0.8);
     --background-color-active:#111111;
     --border-color: #303030;

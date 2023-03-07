@@ -2,25 +2,19 @@ import { useMemo, useRef } from "react";
 import { Divider, Space, Skeleton, Spin } from "antd";
 import { classnames } from "hyl-utils";
 import ReactScroll from "react-infinite-scroll-component";
-import { useWindowSize, useGetData, useScroll } from "@/hooks";
-import { Plate, Drawer } from "@/components";
+import { useGetData } from "@/hooks";
+import { Plate } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search/index";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
 
 function Article() {
-  const toobarRef = useRef(null) as any;
-
   const { current } = useRef({
     pageNum: 1,
     category: "all",
     total: 10,
   });
-
-  const scrollNum = useScroll()!;
-
-  const size = useWindowSize();
 
   const [categoryData] = useGetData<categoryItem>("/category/query", {
     data: {},
@@ -70,7 +64,7 @@ function Article() {
     if (articleData.length) {
       return (
         <ReactScroll {...reactScrollProps}>
-          <Space size={20} direction="vertical" className="listStyle">
+          <Space size={20} direction="vertical" style={{ width: "100%" }}>
             {articleData.map((item) => (
               <ArticleCard {...item} key={item.id} />
             ))}
@@ -84,7 +78,7 @@ function Article() {
         {batchCopyDom(
           () => (
             <div className="skeletonItem">
-              <Skeleton.Button active className="skeletonItem-image" />
+              <Skeleton.Image active className="skeletonItem-image" />
               <Skeleton paragraph={{ rows: 5 }} active round />
             </div>
           ),
@@ -94,36 +88,34 @@ function Article() {
     );
   }, [articleData]);
 
-  const toolbar = useMemo(() => {
-    const categoryClick = (name) => {
-      window.scrollTo(0, 500);
-      current.category = name;
-      current.pageNum = 1;
-      setArticleData([]);
+  const categoryClick = (name) => {
+    window.scrollTo(0, 450);
+    current.category = name;
+    current.pageNum = 1;
+    setArticleData([]);
 
-      runQueryArticle({
-        data: {
-          pageNum: 1,
-          pageSize: 5,
-          filters:
-            current.category === "all"
-              ? { publish: 1 }
-              : { publish: 1, category: name },
-          orderBys: "topping desc,id desc",
-        },
-      });
-    };
+    runQueryArticle({
+      data: {
+        pageNum: 1,
+        pageSize: 5,
+        filters:
+          current.category === "all"
+            ? { publish: 1 }
+            : { publish: 1, category: name },
+        orderBys: "topping desc,id desc",
+      },
+    });
+  };
 
-    const el = (
-      <div
-        className={classnames("article-toolbar-main", {
-          "category-fixed": scrollNum?.top > 490,
-        })}
-        style={{
-          width: size.width > 800 ? toobarRef.current?.clientWidth : "auto",
-        }}
-      >
-        <div className="article-toolbar-main-search">
+  return (
+    <Plate
+      title="文章"
+      autograph="人是要整活的——没活了，可不就是死了么？"
+      bg="bg18.jpg"
+    >
+      <Plate.List>{articleList}</Plate.List>
+      <Plate.Toolbar>
+        <div className="article-toolbar-search">
           <Search
             giveData={(data: articleItem[]) => {
               setArticleData(data);
@@ -131,12 +123,12 @@ function Article() {
             }}
           />
         </div>
-        <ul className="article-toolbar-main-category">
+        <ul className="article-toolbar-category">
           {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
             <li
               key={name}
               onClick={() => categoryClick(name)}
-              className={classnames("article-toolbar-main-category-item", {
+              className={classnames("article-toolbar-category-item", {
                 categoryActive: current.category === name,
               })}
             >
@@ -144,35 +136,8 @@ function Article() {
             </li>
           ))}
         </ul>
-      </div>
-    );
-
-    if (size.width < 800) {
-      return (
-        <Drawer className="toolbarFlag box-shadow" placement="right">
-          {el}
-        </Drawer>
-      );
-    }
-
-    return el;
-  }, [current.category, scrollNum]);
-
-  return (
-    <>
-      <Plate
-        title="文章"
-        autograph="人是要整活的——没活了，可不就是死了么？"
-        bg="bg18.jpg"
-      />
-      <div id="article" className="center">
-        <div className="article-list">{articleList}</div>
-
-        <div className="article-toolbar" ref={toobarRef}>
-          {toolbar}
-        </div>
-      </div>
-    </>
+      </Plate.Toolbar>
+    </Plate>
   );
 }
 

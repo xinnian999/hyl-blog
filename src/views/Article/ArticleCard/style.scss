@@ -1,9 +1,8 @@
 .ArticleCard {
   padding: 25px;
-  background-color: var(--background-color-block);
+  background-color: var(--background-color);
   position: relative;
-  transition: background-color 1s ease-out;
-  opacity: 1;
+  // transition: 1s all;
   border-radius: 15px;
 
   .topping {
