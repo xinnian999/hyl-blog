@@ -29,7 +29,7 @@ function Provider({ children }) {
   });
 
   useGetData("/qq/getLoginStatus", {
-    manual: !!url.getParams("getUserInfo"),
+    manual: !url.getParams("getUserInfo"),
     progress: false,
     onSuccess(res) {
       dispatchAll([
