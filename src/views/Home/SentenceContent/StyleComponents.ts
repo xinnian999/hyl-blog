@@ -9,7 +9,7 @@ export const SentenceContentWapper = styled.div`
   background-attachment: fixed;
   background-size: cover;
   color: #fff;
-  text-shadow: 2px 2px var(--ant-primary-color);
+  text-shadow: 0px 0px 10px black;
   border: 1px solid var(--border-color);
 `;
 export const SentenceContentBox = styled.div`

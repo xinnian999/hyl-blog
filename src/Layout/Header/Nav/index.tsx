@@ -29,8 +29,7 @@ function NavItem(props: routeItem) {
             return (
               <NavLink key={item.title} to={`${path}/${item.path}`}>
                 <li className="twoNavLi">
-                  {icon && <Icon type={icon} />}
-                  {item.title}
+                  {item.icon && <Icon type={item.icon} />} {item.title}
                 </li>
               </NavLink>
             );
