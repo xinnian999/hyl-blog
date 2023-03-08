@@ -5,8 +5,6 @@ import { Loading, Redirect } from "@/components";
 import "./style.scss";
 
 function Main() {
-  console.log("main");
-
   const renderRoutes = (menu: any) =>
     menu.map(({ path, children, index, title, ...item }: any) => {
       return (

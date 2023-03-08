@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Image as AntdImage, Spin } from "antd";
 import { useBoolean, useScroll } from "@/hooks";
 import "./style.scss";
@@ -19,18 +19,23 @@ function Image({ src }) {
 
   useEffect(visible, [scroll]);
 
-  return (
-    <div id="Image" ref={ref}>
-      {flag ? (
+  const el = useMemo(() => {
+    if (flag) {
+      return (
         <AntdImage
           src={src}
           alt="图片加载失败了...网有点卡..."
           height="100%"
           width="100%"
         />
-      ) : (
-        <Spin className="img-loading" />
-      )}
+      );
+    }
+    return <Spin className="img-loading" />;
+  }, [flag]);
+
+  return (
+    <div id="Image" ref={ref}>
+      {el}
     </div>
   );
 }
