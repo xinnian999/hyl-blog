@@ -1,21 +1,6 @@
-import { createStore } from "redux";
+import { legacy_createStore as createStore } from "redux";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-
-export type isStore = {
-  loginState: boolean;
-  theme: { bg: number; color: string };
-  userInfo: {
-    id: number;
-    username: string;
-    headPicture: string;
-    email: string | null;
-  };
-  autoplay: boolean | undefined;
-  loginModal: boolean;
-  setModal: boolean;
-  dark: boolean;
-};
 
 //在localStorge中生成key为root的值
 const persistConfig = {

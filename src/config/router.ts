@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-const route = [
+const route: routeItem[] = [
   {
     title: "首页",
     path: "/home",

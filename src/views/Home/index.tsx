@@ -1,7 +1,7 @@
 import Banner from "./Banner";
 import HotArticle from "./HotArticle";
 import SentenceContent from "./SentenceContent";
-import Footer from "./Footer";
+import HomeFooter from "./HomeFooter";
 import Progress from "./Progress";
 import "./style.scss";
 
@@ -12,7 +12,7 @@ export default function Home() {
       <HotArticle />
       <SentenceContent />
       <Progress />
-      <Footer />
+      <HomeFooter />
     </div>
   );
 }

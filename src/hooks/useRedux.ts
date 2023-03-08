@@ -1,4 +1,3 @@
-import { isStore } from "@/config/store";
 import { useSelector, useDispatch } from "react-redux";
 
 type dispatchAll = (dispatchData: { type: string; payload: any }[]) => void;

@@ -5,19 +5,20 @@ import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
 
-function NavItem(props) {
-  const { title, path, search, icon, children } = props;
+function NavItem(props: routeItem) {
+  const { title, path, icon, children } = props;
 
   return (
     <div className="navItem">
       <NavLink
-        to={{
-          pathname: path,
-          search,
-        }}
+        to={
+          children
+            ? `${path}/${children.find((item) => item.index)!.path}`
+            : path
+        }
       >
         <li>
-          <Icon type={icon} />
+          {icon && <Icon type={icon} />}
           <span className="nav-title">{title}</span>
           {children && <CaretDownOutlined className="down" />}
         </li>
@@ -28,7 +29,8 @@ function NavItem(props) {
             return (
               <NavLink key={item.title} to={`${path}/${item.path}`}>
                 <li className="twoNavLi">
-                  <Icon type={item.icon} /> {item.title}
+                  {icon && <Icon type={icon} />}
+                  {item.title}
                 </li>
               </NavLink>
             );

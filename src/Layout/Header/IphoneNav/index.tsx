@@ -2,13 +2,15 @@ import { Menu } from "antd";
 import { router } from "@/config";
 import type { MenuProps } from "antd";
 import { Icon, Drawer } from "@/components";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import "./style.scss";
 import { memo } from "react";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
 function IphoneNav() {
+  const localtion = useLocation();
+
   const items = router
     .filter((item) => item.title)
     .map((item: any) => {
@@ -16,15 +18,15 @@ function IphoneNav() {
 
       const r: any = {
         ...item,
-        label: <NavLink to={path}>{title}</NavLink>,
-        key: title,
+        label: children ? title : <NavLink to={path}>{title}</NavLink>,
+        key: path,
         icon: <Icon type={icon} />,
       } as MenuItem;
 
       if (children) {
         r.children = children.map((v) => ({
           label: <NavLink to={`${path}/${v.path}`}>{v.title}</NavLink>,
-          key: v.title,
+          key: `${path}/${v.path}`,
           icon: <Icon type={v.icon} />,
         }));
       }
@@ -35,8 +37,8 @@ function IphoneNav() {
   return (
     <Drawer id="iphone-menus" title="导航菜单" placement="left">
       <Menu
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["sub1"]}
+        defaultSelectedKeys={[localtion.pathname]}
+        defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}
         mode="inline"
         items={items}
       />
