@@ -1,7 +1,7 @@
 import { Drawer } from "@/components";
 import { useWindowSize, useScroll } from "@/hooks";
 import { classnames } from "hyl-utils";
-import { useMemo, useRef } from "react";
+import { useRef } from "react";
 import "./style.scss";
 
 const Toolbar = ({ children, className = "" }: DomProps) => {
