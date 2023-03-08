@@ -40,7 +40,7 @@ function Article() {
 
   const articleList = useMemo(() => {
     const reactScrollProps = {
-      scrollThreshold: 1,
+      scrollThreshold: 0.98,
       dataLength: articleData.length,
       next: () => {
         runQueryArticle({

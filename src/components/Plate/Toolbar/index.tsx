@@ -11,34 +11,28 @@ const Toolbar = ({ children, className = "" }: DomProps) => {
 
   const scrollNum = useScroll()!;
 
-  const toolbar = useMemo(() => {
-    const el = (
-      <div
-        style={{
-          width: size.width > 800 ? toobarRef.current?.clientWidth : "auto",
-        }}
-        className={classnames(className, {
-          "plate-toolbar-fixed": scrollNum?.top > 490,
-        })}
-      >
-        {children}
-      </div>
-    );
-
-    if (size.width < 800) {
-      return (
-        <Drawer className="toolbarFlag box-shadow" placement="right">
-          {el}
-        </Drawer>
-      );
-    }
-
-    return el;
-  }, [scrollNum]);
+  const el = (
+    <div
+      style={{
+        width: size.width > 800 ? toobarRef.current?.clientWidth : "auto",
+      }}
+      className={classnames(className, {
+        "plate-toolbar-fixed": scrollNum?.top > 490,
+      })}
+    >
+      {children}
+    </div>
+  );
 
   return (
     <div className="plate-toolbar" ref={toobarRef}>
-      {toolbar}
+      {size.width < 800 ? (
+        <Drawer className="toolbarFlag box-shadow" placement="right">
+          {el}
+        </Drawer>
+      ) : (
+        el
+      )}
     </div>
   );
 };

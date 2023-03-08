@@ -4,6 +4,7 @@ import type { MenuProps } from "antd";
 import { Icon, Drawer } from "@/components";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
+import { memo } from "react";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -43,4 +44,4 @@ function IphoneNav() {
   );
 }
 
-export default IphoneNav;
+export default memo(IphoneNav);

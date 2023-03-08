@@ -18,6 +18,7 @@ import { clearLogin } from "@/utils";
 import { useSetState, useBoolean, useRedux, useWindowSize } from "@/hooks";
 import ToolLogin from "./ToolLogin";
 import "./style.scss";
+import { memo } from "react";
 
 const avatar = [
   "img_1.jpeg",
@@ -28,7 +29,7 @@ const avatar = [
   "img_6.jpg",
 ];
 
-export default function Login() {
+function Login() {
   const [{ imageUrl, loading, wxLogin, wxLoginQr }, setState] =
     useSetState<any>({
       imageUrl: "",
@@ -266,3 +267,5 @@ export default function Login() {
     </>
   );
 }
+
+export default memo(Login);

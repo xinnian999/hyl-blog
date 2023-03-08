@@ -2,9 +2,10 @@ import { Icon } from "@/components";
 import { useRedux } from "@/hooks";
 import { Avatar } from "antd";
 import { time, httpTohttps } from "hyl-utils";
+import { memo } from "react";
 import "./style.scss";
 
-function Comment({ avatar, author, datetime, content, children, reply }) {
+function CommentCard({ avatar, author, datetime, content, children, reply }) {
   const { store } = useRedux();
 
   return (
@@ -35,4 +36,4 @@ function Comment({ avatar, author, datetime, content, children, reply }) {
   );
 }
 
-export default Comment;
+export default memo(CommentCard);

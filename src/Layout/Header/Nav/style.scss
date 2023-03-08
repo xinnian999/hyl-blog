@@ -57,3 +57,12 @@
   color: #6bc30d;
   color: var(--ant-primary-color);
 }
+
+#nav {
+  display: flex;
+  float: right;
+  margin-right: 15px;
+  @media screen and (max-width: 800px) {
+    display: none;
+  }
+}

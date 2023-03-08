@@ -1,7 +1,13 @@
 .homeFooter {
   min-height: 360px;
   background-color: var(--homeFoot-background-color);
+  padding-bottom: 70px;
+  @media screen and (max-width: 800px) {
+    padding-bottom: 120px;
+  }
+
   &-content {
+    border-bottom: 1px solid #303030;
     padding: 80px 10% 40px;
     margin: 0 auto;
     display: flex;

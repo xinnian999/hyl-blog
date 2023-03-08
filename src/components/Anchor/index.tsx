@@ -1,12 +1,12 @@
 import { useMount } from "@/hooks";
 import { Anchor as AntdAnchor } from "antd";
 import { throttle } from "hyl-utils";
+import { memo } from "react";
 import "./style.scss";
 
-interface AnchorProps {
+interface AnchorProps extends DomProps {
   anchorData: any[];
   targetOffset: number;
-  style: React.CSSProperties;
 }
 
 function Anchor(props: AnchorProps) {
@@ -54,4 +54,4 @@ function Anchor(props: AnchorProps) {
   );
 }
 
-export default Anchor;
+export default memo(Anchor);

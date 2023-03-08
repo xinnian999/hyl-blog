@@ -1,4 +1,4 @@
-import Comment from "../CommentCard";
+import CommentCard from "../CommentCard";
 import { useSetState, useRedux } from "@/hooks";
 import Editor from "../Editor";
 
@@ -42,15 +42,15 @@ const Reply = (props: ReplyProps) => {
 
   return (
     <div className="replyItem animate__animated animate__zoomIn">
-      <Comment
+      <CommentCard
         {...commentItem}
         author={author(commentItem)}
         reply={() => handleReply(commentItem)}
       >
         {replyData.length > 0 &&
-          replyData.map((props, i) => (
+          replyData.map((props) => (
             <div className="commentReply" key={props.id}>
-              <Comment
+              <CommentCard
                 {...props}
                 content={
                   <span>
@@ -80,7 +80,7 @@ const Reply = (props: ReplyProps) => {
             />
           </div>
         )}
-      </Comment>
+      </CommentCard>
     </div>
   );
 };

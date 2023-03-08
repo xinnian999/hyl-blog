@@ -5,7 +5,7 @@ interface Props {
   tip?: string;
 }
 
-const Loading = ({ size, tip }: Props) => {
+const Loading = ({ size = "default", tip = "玩命加载中..." }: Props) => {
   return (
     <div id="Loading">
       <div id="content">
@@ -15,11 +15,6 @@ const Loading = ({ size, tip }: Props) => {
       </div>
     </div>
   );
-};
-
-Loading.defaultProps = {
-  size: "default",
-  tip: "玩命加载中...",
 };
 
 export default Loading;

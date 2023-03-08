@@ -1,16 +1,16 @@
 import { Drawer as AntdDrawer } from "antd";
 import { useBoolean } from "@/hooks";
 import { MenuOutlined } from "@ant-design/icons";
+import { memo } from "react";
 
-interface DrawerProps {
-  children: any;
-  className?: string;
-  id?: string;
+interface DrawerProps extends DomProps {
   title?: string;
   placement: any;
 }
 
-function Drawer({ children, className, id, title, placement }: DrawerProps) {
+function Drawer(props: DrawerProps) {
+  const { children, className, id, title, placement } = props;
+
   const [open, on, off] = useBoolean(false);
 
   return (
@@ -33,4 +33,4 @@ function Drawer({ children, className, id, title, placement }: DrawerProps) {
   );
 }
 
-export default Drawer;
+export default memo(Drawer);

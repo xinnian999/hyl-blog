@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useScroll } from "@/hooks";
-import { router } from "@/config";
+
 import Login from "./Login";
-import NavItem from "./NavLink";
+import Nav from "./Nav";
 import IphoneNav from "./IphoneNav";
 import "./style.scss";
 
@@ -28,13 +28,8 @@ function Header() {
         <div className="user">
           <Login />
         </div>
-        <ul id="nav">
-          {router
-            .filter((item) => item.title)
-            .map((item: any) => (
-              <NavItem key={item.title} {...item} />
-            ))}
-        </ul>
+
+        <Nav />
       </div>
     </header>
   );

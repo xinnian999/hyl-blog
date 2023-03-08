@@ -1,5 +1,7 @@
 import { Icon } from "@/components";
+import { router } from "@/config";
 import { CaretDownOutlined } from "@ant-design/icons";
+import { memo } from "react";
 import { NavLink } from "react-router-dom";
 import "./style.scss";
 
@@ -37,4 +39,14 @@ function NavItem(props) {
   );
 }
 
-export default NavItem;
+const Nav = () => (
+  <ul id="nav">
+    {router
+      .filter((item) => item.title)
+      .map((item: any) => (
+        <NavItem key={item.title} {...item} />
+      ))}
+  </ul>
+);
+
+export default memo(Nav);
