@@ -5,6 +5,10 @@
   .main {
     width: 70%;
     margin: 0 auto;
+    @media screen and (max-width: 800px) {
+      width: 90%;
+    }
+
     .title {
       font-size: 35px;
       text-align: center;
@@ -22,11 +26,16 @@
     }
     .content {
       display: flex;
+      @media screen and (max-width: 800px) {
+        flex-direction: column;
+      }
       .item {
         margin-top: 50px;
         width: 33.33%;
         padding: 0 20px;
-
+        @media screen and (max-width: 800px) {
+          width: 100%;
+        }
         position: relative;
         .item-box {
           background-color: var(--highlight-background-color);
@@ -101,18 +110,6 @@
             margin-top: 50px;
           }
         }
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .main {
-    width: 90% !important;
-    .content {
-      flex-direction: column;
-      .item {
-        width: 100% !important;
       }
     }
   }

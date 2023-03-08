@@ -36,22 +36,41 @@
   position: relative;
   top: -50px;
   padding-bottom: 50px;
+  display: flex;
   @media screen and (max-width: 800px) {
     margin: 0 20px;
   }
 
-  .main {
+  .plate-main {
     background-color: var(--background-color);
     border-radius: 15px;
     box-shadow: var(--box-shadow);
+    flex: 1;
   }
 
-  .list {
-    width: calc(75% - 15px);
-    display: inline-block;
+  .plate-list {
+    width: calc(75% - 25px);
+  }
 
-    @media screen and (max-width: 800px) {
-      width: 100%;
+  .plate-toolbar {
+    width: 25%;
+    margin-left: 25px;
+    position: relative;
+
+    &-fixed {
+      position: fixed;
+      top: 70px;
     }
+  }
+
+  .toolbarFlag {
+    position: fixed;
+    right: 0;
+    top: 30%;
+    background-color: var(--highlight-background-color);
+    font-size: 25px;
+    padding: 5px 10px;
+    cursor: pointer;
+    z-index: 999;
   }
 }

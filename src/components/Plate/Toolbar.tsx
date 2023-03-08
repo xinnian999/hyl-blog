@@ -24,15 +24,16 @@ const Toolbar = ({ children, className = "" }: DomProps) => {
     </div>
   );
 
+  if (size.width < 800) {
+    return (
+      <Drawer className="toolbarFlag box-shadow" placement="right">
+        {el}
+      </Drawer>
+    );
+  }
   return (
     <div className="plate-toolbar" ref={toobarRef}>
-      {size.width < 800 ? (
-        <Drawer className="toolbarFlag box-shadow" placement="right">
-          {el}
-        </Drawer>
-      ) : (
-        el
-      )}
+      {el}
     </div>
   );
 };

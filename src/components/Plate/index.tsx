@@ -45,7 +45,9 @@ function Plate(props: PlateProps) {
 }
 
 Plate.Main = Main;
-Plate.List = (props: DomProps) => <div className="list">{props.children}</div>;
+Plate.List = (props: DomProps) => (
+  <div className="plate-list">{props.children}</div>
+);
 Plate.Toolbar = Toolbar;
 
 export default Plate;

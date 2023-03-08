@@ -107,7 +107,7 @@ function ArticleDetail() {
       id="articleDetail"
     >
       <Plate.List>
-        <div className="content box-shadow">
+        <div className="content">
           <Skeleton loading={!content} paragraph={{ rows: 30 }}>
             <Markdown content={content} ref={mdRef} />
           </Skeleton>

@@ -4,7 +4,7 @@ const Main = (props: DomProps) => {
   const { children, className = "", id = "" } = props;
 
   return (
-    <div id={id} className={classnames("main", className)}>
+    <div id={id} className={classnames("plate-main", className)}>
       {children}
     </div>
   );
