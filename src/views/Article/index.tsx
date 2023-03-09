@@ -64,7 +64,7 @@ function Article() {
     if (articleData.length) {
       return (
         <ReactScroll {...reactScrollProps}>
-          <Space size={20} direction="vertical" style={{ width: "100%" }}>
+          <Space size={30} direction="vertical" style={{ width: "100%" }}>
             {articleData.map((item) => (
               <ArticleCard {...item} key={item.id} />
             ))}

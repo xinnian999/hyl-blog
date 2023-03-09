@@ -5,7 +5,8 @@
   transition: 0.7s all;
   border: 1px solid var(--border-color);
   border-radius: 15px;
-
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
   .topping {
     position: absolute;
     height: 20px;
