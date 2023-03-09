@@ -22,10 +22,9 @@ function Drawer(props: DrawerProps) {
         title={title}
         placement={placement}
         onClose={off}
-        width="50%"
+        width="60%"
         open={open}
         destroyOnClose
-        getContainer={() => document.getElementById("main")!}
       >
         {children}
       </AntdDrawer>

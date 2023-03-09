@@ -115,7 +115,7 @@ function Article() {
       id="article"
     >
       <Plate.List>{articleList}</Plate.List>
-      <Plate.Toolbar className="tool">
+      <Plate.Toolbar className="article-toolbar">
         <div className="article-search">
           <Search
             giveData={(data: articleItem[]) => {
