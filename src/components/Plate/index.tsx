@@ -2,6 +2,7 @@ import { useRedux } from "@/hooks";
 import Toolbar from "./Toolbar";
 import Main from "./Main";
 import "./style.scss";
+import { PlateBanner, PlateBannerBg, PlateBannerInfo } from "./styled";
 
 interface PlateProps extends DomProps {
   title: string;
@@ -23,21 +24,20 @@ function Plate(props: PlateProps) {
 
   return (
     <div id={id} className={className}>
-      <div className="plate-banner">
-        <div className="plate-banner-info">
+      <PlateBanner>
+        <PlateBannerInfo>
           <h2>{title}</h2>
-          <div className="plate-banner-info-autograph">{autograph} </div>
-        </div>
-        <div
-          className="plate-banner-bg"
+          <div className="autograph">{autograph} </div>
+        </PlateBannerInfo>
+        <PlateBannerBg
           style={{
             opacity: store.dark ? "0.7" : "1",
             backgroundImage: `url(${require(`@/assets/img/bg/${
               store.dark ? "bg8.jpg" : bg
             }`)})`,
           }}
-        ></div>
-      </div>
+        ></PlateBannerBg>
+      </PlateBanner>
 
       <div className="plate-content">{children}</div>
     </div>
