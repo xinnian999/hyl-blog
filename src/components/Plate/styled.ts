@@ -1,10 +1,10 @@
-import { adaptation } from "@/utils";
 import styled from "styled-components";
+import { adaptation } from "@/utils";
 
-export const PlateBanner = styled.div`
+export const PlateBanner = adaptation(styled.div`
   position: relative;
   height: 600px;
-`;
+`);
 
 export const PlateBannerBg = styled.div`
   height: 100%;
@@ -27,7 +27,7 @@ export const PlateBannerInfo = adaptation(styled.div`
     letter-spacing: 5px;
     text-shadow: 0px 0px 10px black;
   }
-  &-autograph {
+  .autograph {
     font-size: 20px;
     text-shadow: 0px 0px 10px black;
     padding: 0 20px;
