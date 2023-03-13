@@ -19,7 +19,7 @@ function Header() {
       style={{ display: location.pathname === "/home" ? "none" : "block" }}
     >
       <div className="center">
-        <IphoneNav />
+        {/* <IphoneNav /> */}
 
         <div id="logo" onClick={() => navigate("/home")}>
           <span>{globalConfig.title}</span>

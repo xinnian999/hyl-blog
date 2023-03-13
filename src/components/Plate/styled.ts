@@ -34,5 +34,44 @@ export const PlateBannerInfo = styled.div`
   }
 `;
 
+export const PlateContent = styled.div`
+  position: fixed;
+  right: 0;
+  top: 30%;
+  background-color: var(--highlight-background-color);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 10px 0 0 10px;
+  overflow: hidden;
+  font-size: 25px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 999;
+  display: none;
+  @media screen and (max-width: 800px) {
+    display: block;
+  }
+`;
+
+export const ToolbarFlag = styled.div`
+  position: fixed;
+  right: 0;
+  top: 30%;
+  background-color: var(--highlight-background-color);
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--border-color);
+  border-radius: 10px 0 0 10px;
+  overflow: hidden;
+  font-size: 25px;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 999;
+  display: none;
+  @media screen and (max-width: 800px) {
+    display: block;
+  }
+`;
+
 adaptation(PlateBanner);
 adaptation(PlateBannerInfo);
+adaptation(ToolbarFlag);

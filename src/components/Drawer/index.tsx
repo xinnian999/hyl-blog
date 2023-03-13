@@ -6,18 +6,19 @@ import { memo } from "react";
 interface DrawerProps extends DomProps {
   title?: string;
   placement: any;
+  Flag: any;
 }
 
 function Drawer(props: DrawerProps) {
-  const { children, className, id, title, placement } = props;
+  const { children, className, id, title, placement, Flag } = props;
 
   const [open, on, off] = useBoolean(false);
 
   return (
     <>
-      <div className={className} id={id} onClick={on}>
+      <Flag onClick={on}>
         <MenuOutlined />
-      </div>
+      </Flag>
       <AntdDrawer
         title={title}
         placement={placement}

@@ -4,7 +4,10 @@ const adaptation = (component: any) => {
   const template: string = component.componentStyle.rules[0];
 
   const newTemplate = template.replace(/\d+px/gm, (match) => {
-    return parseInt(match) / ratio + "rem";
+    if (match === "800px") {
+      return match;
+    }
+    return ~~((parseInt(match) / ratio) * 100) / 100 + "rem";
   });
 
   component.componentStyle.rules = [newTemplate];

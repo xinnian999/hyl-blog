@@ -35,14 +35,14 @@ function IphoneNav() {
     });
 
   return (
-    <Drawer id="iphone-menus" title="导航菜单" placement="left">
-      <Menu
-        defaultSelectedKeys={[localtion.pathname]}
-        defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}
-        mode="inline"
-        items={items}
-      />
-    </Drawer>
+    // <Drawer id="iphone-menus" title="导航菜单" placement="left">
+    <Menu
+      defaultSelectedKeys={[localtion.pathname]}
+      defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}
+      mode="inline"
+      items={items}
+    />
+    // </Drawer>
   );
 }
 
