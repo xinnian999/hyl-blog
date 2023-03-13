@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { adaptation } from "@/utils";
 
-export const PlateBanner = adaptation(styled.div`
+export const PlateBanner = styled.div`
   position: relative;
   height: 600px;
-`);
+`;
 
 export const PlateBannerBg = styled.div`
   height: 100%;
@@ -12,7 +12,7 @@ export const PlateBannerBg = styled.div`
   background-position: center;
 `;
 
-export const PlateBannerInfo = adaptation(styled.div`
+export const PlateBannerInfo = styled.div`
   color: var(--plate-text-color);
   text-align: center;
   width: 100%;
@@ -32,4 +32,7 @@ export const PlateBannerInfo = adaptation(styled.div`
     text-shadow: 0px 0px 10px black;
     padding: 0 20px;
   }
-`);
+`;
+
+adaptation(PlateBanner);
+adaptation(PlateBannerInfo);

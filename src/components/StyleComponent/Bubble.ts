@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { adaptation } from "@/utils";
 
 interface Bubble {
   type: number;
@@ -27,5 +28,7 @@ const BubbleBox = styled.div<Bubble>`
     ${(props) => `border-${props.type ? "left" : "right"}-color`}: #484348;
   }
 `;
+
+adaptation(BubbleBox);
 
 export default BubbleBox;

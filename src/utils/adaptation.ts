@@ -8,6 +8,6 @@ const adaptation = (component: any) => {
   });
 
   component.componentStyle.rules = [newTemplate];
-  return component;
 };
+
 export default adaptation;
