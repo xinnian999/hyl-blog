@@ -1,6 +1,6 @@
 const ratio = 54; // 根据项目配置比例的方式自行设定
 
-const adaptation = (component) => {
+const adaptation = (component: any) => {
   const template: string = component.componentStyle.rules[0];
 
   const newTemplate = template.replace(/\d+px/gm, (match) => {
