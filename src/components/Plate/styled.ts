@@ -1,8 +1,9 @@
+import { adaptation } from "@/utils";
 import styled from "styled-components";
 
 export const PlateBanner = styled.div`
   position: relative;
-  height: 11.1111rem;
+  height: 600px;
 `;
 
 export const PlateBannerBg = styled.div`
@@ -11,7 +12,7 @@ export const PlateBannerBg = styled.div`
   background-position: center;
 `;
 
-export const PlateBannerInfo = styled.div`
+export const PlateBannerInfo = adaptation(styled.div`
   color: var(--plate-text-color);
   text-align: center;
   width: 100%;
@@ -21,14 +22,14 @@ export const PlateBannerInfo = styled.div`
   z-index: 9;
   h2 {
     font-weight: 500;
-    font-size: 0.7407rem;
-    margin-bottom: 0.3704rem;
-    letter-spacing: 0.0926rem;
-    text-shadow: 0rem 0rem 0.1852rem black;
+    font-size: 40px;
+    margin-bottom: 20px;
+    letter-spacing: 5px;
+    text-shadow: 0px 0px 10px black;
   }
-  .autograph {
-    font-size: 0.3704rem;
-    text-shadow: 0rem 0rem 0.1852rem black;
-    padding: 0 0.3704rem;
+  &-autograph {
+    font-size: 20px;
+    text-shadow: 0px 0px 10px black;
+    padding: 0 20px;
   }
-`;
+`);

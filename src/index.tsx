@@ -1,10 +1,9 @@
-// import "lib-flexible";
 import { createRoot } from "react-dom/client";
 import { notification } from "antd";
 import "animate.css";
 import "@/style/global.scss";
 import App from "./App";
-import flexible from "@/config/flexible";
+import { flexible } from "@/utils";
 
 flexible();
 
