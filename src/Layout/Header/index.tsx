@@ -21,12 +21,11 @@ function Header() {
         <div id="logo" onClick={() => navigate("/home")}>
           <span>{globalConfig.title}</span>
         </div>
+        <Nav />
 
         <div className="user">
           <Login />
         </div>
-
-        <Nav />
       </div>
     </HeaderWrapper>
   );
