@@ -26,30 +26,35 @@ export const HeaderWrapper = styled.header<{
     }
   }
 
-  #logo {
-    font-family: "汉仪霹雳体简";
-    font-size: 30px;
-    cursor: pointer;
-    display: inline-block;
-    float: left;
-    color: #fff;
-    @media screen and (max-width: 800px) {
-      margin: 0 auto;
-      float: none;
-    }
-  }
+  .center {
+    max-width: var(--heart-width);
+    margin: 0 auto;
 
-  .user {
-    display: inline-block;
-    float: right;
-    @media screen and (max-width: 800px) {
-      margin-right: 20px;
+    #logo {
+      font-family: "汉仪霹雳体简";
+      font-size: 30px;
+      cursor: pointer;
+      display: inline-block;
+      float: left;
+      color: #fff;
+      @media screen and (max-width: 800px) {
+        margin: 0 auto;
+        float: none;
+      }
     }
-  }
 
-  .active {
-    color: #6bc30d;
-    color: var(--ant-primary-color);
+    .user {
+      display: inline-block;
+      float: right;
+      @media screen and (max-width: 800px) {
+        margin-right: 20px;
+      }
+    }
+
+    .active {
+      color: #6bc30d;
+      color: var(--ant-primary-color);
+    }
   }
 `;
 
