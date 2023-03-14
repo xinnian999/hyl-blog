@@ -20,7 +20,6 @@ const adaptation = (component: any) => {
   const style = component.componentStyle.rules.map((item) => {
     if (typeof item === "function") {
       // const fnBody = r(item.toString().match(/\{([\s\S]*)\}$/)[1]);
-      // console.log(fnBody);
 
       // return new Function("props", fnBody);
       return item;
