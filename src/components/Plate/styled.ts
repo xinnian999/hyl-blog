@@ -72,6 +72,6 @@ export const ToolbarFlag = styled.div`
   }
 `;
 
-adaptation(PlateBanner);
-adaptation(PlateBannerInfo);
-adaptation(ToolbarFlag);
+// adaptation(PlateBanner);
+// adaptation(PlateBannerInfo);
+// adaptation(ToolbarFlag);

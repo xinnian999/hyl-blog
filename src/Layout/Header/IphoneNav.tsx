@@ -3,8 +3,24 @@ import { router } from "@/config";
 import type { MenuProps } from "antd";
 import { Icon, Drawer } from "@/components";
 import { NavLink, useLocation } from "react-router-dom";
-import "./style.scss";
 import { memo } from "react";
+import styled from "styled-components";
+
+const IphoneNavFlag = styled.div`
+  display: none;
+  padding: 0 15px;
+  font-size: 18px;
+  color: #fff;
+
+  @media screen and (max-width: 800px) {
+    display: inline-block;
+    float: left;
+  }
+
+  a {
+    color: inherit;
+  }
+`;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -35,14 +51,14 @@ function IphoneNav() {
     });
 
   return (
-    // <Drawer id="iphone-menus" title="导航菜单" placement="left">
-    <Menu
-      defaultSelectedKeys={[localtion.pathname]}
-      defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}
-      mode="inline"
-      items={items}
-    />
-    // </Drawer>
+    <Drawer Flag={IphoneNavFlag} title="导航菜单" placement="left">
+      <Menu
+        defaultSelectedKeys={[localtion.pathname]}
+        defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}
+        mode="inline"
+        items={items}
+      />
+    </Drawer>
   );
 }
 

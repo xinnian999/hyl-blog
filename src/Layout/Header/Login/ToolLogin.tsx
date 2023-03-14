@@ -2,6 +2,7 @@ import { useRedux, useGetData } from "@/hooks";
 import { request } from "@/utils";
 import { Divider, message } from "antd";
 import { cookie } from "hyl-utils";
+import { ToolLoginBar } from "./styled";
 
 const qqLogin = () => {
   window.open(
@@ -46,7 +47,7 @@ export default function ToolLogin({ setState }) {
   return (
     <>
       <Divider>第三方登录</Divider>
-      <div className="toolLogin">
+      <ToolLoginBar>
         <svg
           className="qqLogin"
           fill="#50c8fd"
@@ -77,7 +78,7 @@ export default function ToolLogin({ setState }) {
             fillRule="evenodd"
           ></path>
         </svg>
-      </div>
+      </ToolLoginBar>
     </>
   );
 }

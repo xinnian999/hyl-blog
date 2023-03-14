@@ -66,6 +66,10 @@ body {
   color: var(--ant-primary-color);
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 #nprogress .bar {
   background: var(--ant-primary-color);
 }

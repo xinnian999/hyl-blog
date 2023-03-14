@@ -3,6 +3,8 @@ const ignore = ["screen", "text-shadow", "box-shadow", "border"]; // 需要排�
 
 const r = (str: string) => {
   return str.replace(/.*\d+px\)?/gm, (match) => {
+    if (ignore.includes("screen")) return match;
+
     if (ignore.includes(match.trimStart().split(":")[0])) {
       return match;
     }
@@ -17,13 +19,16 @@ const r = (str: string) => {
 const adaptation = (component: any) => {
   const style = component.componentStyle.rules.map((item) => {
     if (typeof item === "function") {
-      const fnBody = r(item.toString().match(/\{([\s\S]*)\}$/)[1]);
+      // const fnBody = r(item.toString().match(/\{([\s\S]*)\}$/)[1]);
+      // console.log(fnBody);
 
-      return new Function("props", fnBody);
+      // return new Function("props", fnBody);
+      return item;
     }
 
     return r(item);
   });
+  console.log(style);
 
   component.componentStyle.rules = style;
 };

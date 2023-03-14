@@ -4,7 +4,7 @@ import { useScroll } from "@/hooks";
 import Login from "./Login";
 import Nav from "./Nav";
 import IphoneNav from "./IphoneNav";
-import "./style.scss";
+import { HeaderWrapper } from "./styled";
 
 function Header() {
   const navigate = useNavigate();
@@ -14,12 +14,9 @@ function Header() {
   const { top } = useScroll();
 
   return (
-    <header
-      id={top > 1 ? "headerTop" : ""}
-      style={{ display: location.pathname === "/home" ? "none" : "block" }}
-    >
+    <HeaderWrapper scrollTop={top} pathname={location.pathname}>
       <div className="center">
-        {/* <IphoneNav /> */}
+        <IphoneNav />
 
         <div id="logo" onClick={() => navigate("/home")}>
           <span>{globalConfig.title}</span>
@@ -31,7 +28,7 @@ function Header() {
 
         <Nav />
       </div>
-    </header>
+    </HeaderWrapper>
   );
 }
 

@@ -29,6 +29,6 @@ const BubbleBox = styled.div<Bubble>`
   }
 `;
 
-adaptation(BubbleBox);
+// adaptation(BubbleBox);
 
 export default BubbleBox;
