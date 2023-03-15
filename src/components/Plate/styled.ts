@@ -80,6 +80,6 @@ export const ToolbarFlag = styled.div`
   }
 `;
 
-// adaptation(PlateBanner);
+adaptation(PlateBanner);
 // adaptation(PlateBannerInfo);
 // adaptation(ToolbarFlag);
