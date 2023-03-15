@@ -1,36 +1,41 @@
 import styled from "styled-components";
 import { adaptation } from "@/utils";
 
-export const PlateBanner = styled.div`
+interface PlateBannerProps {
+  bg: string;
+  dark: boolean;
+}
+
+export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
   height: 600px;
-`;
-
-export const PlateBannerBg = styled.div`
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-`;
-
-export const PlateBannerInfo = styled.div`
-  color: var(--plate-text-color);
-  text-align: center;
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-70%);
-  z-index: 9;
-  h2 {
-    font-weight: 500;
-    font-size: 40px;
-    margin-bottom: 20px;
-    letter-spacing: 5px;
-    text-shadow: 0px 0px 10px black;
+  .bg {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: ${(props) => (props.dark ? "0.7" : "1")};
+    /* background-image: url("@/assets/img/bg/bg8.jpg"); */
   }
-  .autograph {
-    font-size: 20px;
-    text-shadow: 0px 0px 10px black;
-    padding: 0 20px;
+  .info {
+    color: var(--plate-text-color);
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-70%);
+    z-index: 9;
+    h2 {
+      font-weight: 500;
+      font-size: 40px;
+      margin-bottom: 20px;
+      letter-spacing: 5px;
+      text-shadow: 0px 0px 10px black;
+    }
+    .autograph {
+      font-size: 20px;
+      text-shadow: 0px 0px 10px black;
+      padding: 0 20px;
+    }
   }
 `;
 
