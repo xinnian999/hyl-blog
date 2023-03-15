@@ -3,8 +3,6 @@ const ignore = ["text-shadow", "box-shadow", "border"]; // 需要排除转换的
 
 const r = (str: string) => {
   return str.replace(/.*\d+px.*/gm, (match) => {
-    console.log(match);
-
     if (match.includes("screen")) return match;
 
     if (ignore.includes(match.trimStart().split(":")[0])) {

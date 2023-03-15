@@ -58,7 +58,8 @@ export const NavWrapper = styled.ul`
   .navItem {
     position: relative;
 
-    li {
+    &-main {
+      display: block;
       padding: 0 10px;
       position: relative;
       font-size: 15px;
@@ -79,6 +80,12 @@ export const NavWrapper = styled.ul`
       transform: rotate(180deg);
     }
 
+    &:hover .twoNav {
+      opacity: 1;
+      top: 50px;
+      height: auto;
+    }
+
     .twoNav {
       width: 100px;
       background-color: #2f4154;
@@ -93,21 +100,14 @@ export const NavWrapper = styled.ul`
       transition: 0.5s opacity;
 
       li {
+        padding: 0;
         &:hover {
-          background-color: var(--background-color-active);
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+        a {
+          display: block;
         }
       }
-
-      .twoNavLi {
-        margin-right: 0 !important;
-      }
-    }
-
-    &:hover .twoNav {
-      opacity: 1;
-      top: 50px;
-      height: auto;
-      padding: 10px 0;
     }
   }
 `;
