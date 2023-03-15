@@ -3,6 +3,7 @@ import { clearLogin } from "@/utils";
 import { useRedux, useWindowSize } from "@/hooks";
 import { memo } from "react";
 import LoginModal from "./LoginModal";
+import { LoginWrapper } from "./styled";
 
 function Login() {
   const { store, dispatch } = useRedux();
@@ -18,7 +19,7 @@ function Login() {
   );
 
   return (
-    <>
+    <LoginWrapper>
       {store.loginState ? (
         <Popover content={renderUserMenus} trigger="hover" placement="bottom">
           <Avatar src={headPicture} size={width > 800 ? 35 : 30} />
@@ -36,7 +37,7 @@ function Login() {
       )}
 
       <LoginModal />
-    </>
+    </LoginWrapper>
   );
 }
 

@@ -6,25 +6,23 @@ import { NavLink, useLocation } from "react-router-dom";
 import { memo } from "react";
 import styled from "styled-components";
 
-const IphoneNavFlag = styled.div`
+const MobileNavFlag = styled.div`
   display: none;
   padding: 0 15px;
   font-size: 18px;
   color: #fff;
-
+  a {
+    color: inherit;
+  }
   @media screen and (max-width: 800px) {
     display: inline-block;
     float: left;
-  }
-
-  a {
-    color: inherit;
   }
 `;
 
 type MenuItem = Required<MenuProps>["items"][number];
 
-function IphoneNav() {
+function MobileNav() {
   const localtion = useLocation();
 
   const items = router
@@ -51,7 +49,7 @@ function IphoneNav() {
     });
 
   return (
-    <Drawer Flag={IphoneNavFlag} title="导航菜单" placement="left">
+    <Drawer Flag={MobileNavFlag} title="导航菜单" placement="left">
       <Menu
         defaultSelectedKeys={[localtion.pathname]}
         defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}
@@ -62,4 +60,4 @@ function IphoneNav() {
   );
 }
 
-export default memo(IphoneNav);
+export default memo(MobileNav);

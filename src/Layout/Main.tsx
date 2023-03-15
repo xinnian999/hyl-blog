@@ -2,7 +2,6 @@ import { Fragment, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import { router } from "@/config";
 import { Loading, Redirect } from "@/components";
-import "./style.scss";
 
 function Main() {
   const renderRoutes = (menu: any) =>
@@ -35,7 +34,7 @@ function Main() {
     });
 
   return (
-    <main id="main">
+    <main>
       <Routes>
         {renderRoutes(router)}
         <Route path="/" element={<Redirect to="/home" />} />

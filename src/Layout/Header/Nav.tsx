@@ -1,9 +1,9 @@
 import { Icon } from "@/components";
-import { router } from "@/config";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { memo } from "react";
 import { NavLink } from "react-router-dom";
-import "./style.scss";
+import { NavWrapper } from "./styled";
+import { router } from "@/config";
 
 function NavItem(props: routeItem) {
   const { title, path, icon, children } = props;
@@ -41,13 +41,13 @@ function NavItem(props: routeItem) {
 }
 
 const Nav = () => (
-  <ul id="nav">
+  <NavWrapper>
     {router
       .filter((item) => item.title)
-      .map((item: any) => (
+      .map((item) => (
         <NavItem key={item.title} {...item} />
       ))}
-  </ul>
+  </NavWrapper>
 );
 
 export default memo(Nav);

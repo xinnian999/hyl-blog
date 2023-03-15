@@ -1,10 +1,9 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useScroll } from "@/hooks";
-
 import Login from "./Login";
 import Nav from "./Nav";
-import IphoneNav from "./IphoneNav";
-import { HeaderWrapper } from "./styled";
+import MobileNav from "./MobileNav";
+import { HeaderWrapper, Logo } from "./styled";
 
 function Header() {
   const navigate = useNavigate();
@@ -13,20 +12,15 @@ function Header() {
 
   const { top } = useScroll();
 
+  const goHome = () => navigate("/home");
+
   return (
     <HeaderWrapper scrollTop={top} pathname={location.pathname}>
-      <div className="center">
-        <IphoneNav />
-
-        <div id="logo" onClick={() => navigate("/home")}>
-          <span>{globalConfig.title}</span>
-        </div>
-
-        <div className="user">
-          <Login />
-        </div>
-
+      <div className="main">
+        <MobileNav />
+        <Logo onClick={goHome}>{globalConfig.title}</Logo>
         <Nav />
+        <Login />
       </div>
     </HeaderWrapper>
   );

@@ -1,5 +1,12 @@
 import styled from "styled-components";
 
+export const LoginWrapper = styled.div`
+  display: inline-block;
+  @media screen and (max-width: 800px) {
+    margin-right: 20px;
+  }
+`;
+
 export const ToolLoginBar = styled.div`
   padding: 0 20px;
   text-align: center;
