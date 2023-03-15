@@ -43,21 +43,36 @@ export const PlateBanner = styled.div<PlateBannerProps>`
 `;
 
 export const PlateContent = styled.div`
-  position: fixed;
-  right: 0;
-  top: 30%;
-  background-color: var(--highlight-background-color);
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
-  border-radius: 10px 0 0 10px;
-  overflow: hidden;
-  font-size: 25px;
-  padding: 5px 10px;
-  cursor: pointer;
-  z-index: 999;
-  display: none;
+  max-width: var(--heart-width);
+  margin: 0 auto;
+  position: relative;
+  top: -50px;
+  padding-bottom: 50px;
+  display: flex;
   @media screen and (max-width: 800px) {
-    display: block;
+    margin: 0 20px;
+  }
+
+  .plate-main {
+    background-color: var(--background-color);
+    border-radius: 15px;
+    box-shadow: var(--box-shadow);
+    flex: 1;
+  }
+  .plate-list {
+    width: calc(75% - 25px);
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
+
+  .plate-toolbar {
+    width: 25%;
+    margin-left: 25px;
+    position: relative;
+    @media screen and (max-width: 800px) {
+      display: none;
+    }
   }
 `;
 

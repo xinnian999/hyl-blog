@@ -1,8 +1,7 @@
 import { useRedux } from "@/hooks";
 import Toolbar from "./Toolbar";
 import Main from "./Main";
-import "./style.scss";
-import { PlateBanner } from "./styled";
+import { PlateBanner, PlateContent } from "./styled";
 
 interface PlateProps extends DomProps {
   title: string;
@@ -32,7 +31,7 @@ function Plate(props: PlateProps) {
         </div>
       </PlateBanner>
 
-      <div className="plate-content">{children}</div>
+      <PlateContent>{children}</PlateContent>
     </div>
   );
 }

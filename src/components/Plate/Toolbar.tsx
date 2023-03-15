@@ -3,7 +3,6 @@ import { Affix } from "antd";
 import { classnames } from "hyl-utils";
 import { useRef } from "react";
 import { ToolbarFlag } from "./styled";
-import "./style.scss";
 
 const Toolbar = ({ children, className = "" }: DomProps) => {
   const toobarRef = useRef(null) as any;
