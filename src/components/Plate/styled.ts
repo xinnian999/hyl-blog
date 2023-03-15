@@ -14,7 +14,10 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     background-size: cover;
     background-position: center;
     opacity: ${(props) => (props.dark ? "0.7" : "1")};
-    /* background-image: url("@/assets/img/bg/bg8.jpg"); */
+    background-image: ${(props) =>
+      `url(${require(`@/assets/img/bg/${
+        props.dark ? "bg8.jpg" : props.bg
+      }`)})`};
   }
   .info {
     color: var(--plate-text-color);

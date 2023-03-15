@@ -25,18 +25,11 @@ function Plate(props: PlateProps) {
   return (
     <div id={id} className={className}>
       <PlateBanner dark={store.dark} bg={bg}>
+        <div className="bg"></div>
         <div className="info">
           <h2>{title}</h2>
           <div className="autograph">{autograph} </div>
         </div>
-        <div
-          className="bg"
-          style={{
-            backgroundImage: `url(${require(`@/assets/img/bg/${
-              store.dark ? "bg8.jpg" : bg
-            }`)})`,
-          }}
-        ></div>
       </PlateBanner>
 
       <div className="plate-content">{children}</div>
