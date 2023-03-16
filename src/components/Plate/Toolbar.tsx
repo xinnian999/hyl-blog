@@ -1,26 +1,15 @@
 import { Drawer } from "@/components";
 import { Affix } from "antd";
-import { classnames } from "hyl-utils";
-import { useRef } from "react";
-import { ToolbarFlag } from "./styled";
+import { ToolbarWrapper, ToolbarFlag } from "./styled";
 
-const Toolbar = ({ children, className = "" }: DomProps) => {
-  const toobarRef = useRef(null) as any;
-
-  const el = (
-    <Affix offsetTop={80}>
-      <div className={classnames(className, {})}>{children}</div>
-    </Affix>
-  );
-
+const Toolbar = ({ children }: DomProps) => {
   return (
     <>
-      <div className="plate-toolbar" ref={toobarRef}>
-        {el}
-      </div>
-
+      <ToolbarWrapper>
+        <Affix offsetTop={80}>{children}</Affix>
+      </ToolbarWrapper>
       <Drawer placement="right" Flag={ToolbarFlag}>
-        <div className={classnames(className, {})}>{children}</div>
+        {children}
       </Drawer>
     </>
   );

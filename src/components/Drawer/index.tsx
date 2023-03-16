@@ -26,6 +26,7 @@ function Drawer(props: DrawerProps) {
         width="60%"
         open={open}
         destroyOnClose
+        getContainer={() => document.querySelector("#main")!}
       >
         {children}
       </AntdDrawer>

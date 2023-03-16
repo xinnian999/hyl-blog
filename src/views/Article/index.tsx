@@ -8,6 +8,7 @@ import { batchCopyDom } from "@/utils";
 import Search from "./Search/index";
 import ArticleCard from "./ArticleCard";
 import "./style.scss";
+import { ArticleSkeleton } from "./styled";
 
 function Article() {
   const { current } = useRef({
@@ -74,13 +75,13 @@ function Article() {
     }
 
     return (
-      <Space direction="vertical" className="skeleton" size={20}>
+      <Space style={{ width: "100%" }} direction="vertical" size={20}>
         {batchCopyDom(
           () => (
-            <div className="skeletonItem">
-              <Skeleton.Image active className="skeletonItem-image" />
+            <ArticleSkeleton>
+              <Skeleton.Image active className="image" />
               <Skeleton paragraph={{ rows: 5 }} active round />
-            </div>
+            </ArticleSkeleton>
           ),
           3
         )}
@@ -115,28 +116,30 @@ function Article() {
       id="article"
     >
       <Plate.List>{articleList}</Plate.List>
-      <Plate.Toolbar className="article-toolbar">
-        <div className="article-search">
-          <Search
-            giveData={(data: articleItem[]) => {
-              setArticleData(data);
-              current.total = -1;
-            }}
-          />
+      <Plate.Toolbar>
+        <div className="article-toolbar">
+          <div className="article-search">
+            <Search
+              giveData={(data: articleItem[]) => {
+                setArticleData(data);
+                current.total = -1;
+              }}
+            />
+          </div>
+          <ul className="article-category">
+            {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
+              <li
+                key={name}
+                onClick={() => categoryClick(name)}
+                className={classnames("article-category-item", {
+                  categoryActive: current.category === name,
+                })}
+              >
+                {name === "all" ? "全部" : name}
+              </li>
+            ))}
+          </ul>
         </div>
-        <ul className="article-category">
-          {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
-            <li
-              key={name}
-              onClick={() => categoryClick(name)}
-              className={classnames("article-category-item", {
-                categoryActive: current.category === name,
-              })}
-            >
-              {name === "all" ? "全部" : name}
-            </li>
-          ))}
-        </ul>
       </Plate.Toolbar>
     </Plate>
   );

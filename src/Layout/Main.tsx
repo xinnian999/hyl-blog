@@ -34,7 +34,7 @@ function Main() {
     });
 
   return (
-    <main>
+    <main id="main">
       <Routes>
         {renderRoutes(router)}
         <Route path="/" element={<Redirect to="/home" />} />

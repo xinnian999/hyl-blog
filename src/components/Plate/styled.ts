@@ -52,27 +52,28 @@ export const PlateContent = styled.div`
   @media screen and (max-width: 800px) {
     margin: 0 20px;
   }
+`;
 
-  .plate-main {
-    background-color: var(--background-color);
-    border-radius: 15px;
-    box-shadow: var(--box-shadow);
-    flex: 1;
-  }
-  .plate-list {
-    width: calc(75% - 25px);
-    @media screen and (max-width: 800px) {
-      width: 100%;
-    }
-  }
+export const Main = styled.div`
+  background-color: var(--background-color);
+  border-radius: 15px;
+  box-shadow: var(--box-shadow);
+  flex: 1;
+`;
 
-  .plate-toolbar {
-    width: 25%;
-    margin-left: 25px;
-    position: relative;
-    @media screen and (max-width: 800px) {
-      display: none;
-    }
+export const List = styled.div`
+  width: calc(75% - 25px);
+  @media screen and (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
+export const ToolbarWrapper = styled.div`
+  width: 25%;
+  margin-left: 25px;
+  position: relative;
+  @media screen and (max-width: 800px) {
+    display: none;
   }
 `;
 
