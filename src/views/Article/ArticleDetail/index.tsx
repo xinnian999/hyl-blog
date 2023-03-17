@@ -9,7 +9,7 @@ import { useSetState, useWindowSize, useGetData } from "@/hooks";
 import { Comment, Markdown } from "@/components";
 import { addArticleVisits, queryAboutArticle } from "../api";
 import ToolItem from "./ToolItem";
-import "./style.scss";
+import { ArticleDetailMain, AboutArticle } from "./styled";
 
 function ArticleDetail() {
   const [{ info, targetOffset, anchorList, aboutArticle }, setState] =
@@ -107,7 +107,7 @@ function ArticleDetail() {
       id="articleDetail"
     >
       <Plate.List>
-        <div className="content">
+        <ArticleDetailMain>
           <Skeleton loading={!content} paragraph={{ rows: 30 }}>
             <Markdown content={content} ref={mdRef} />
           </Skeleton>
@@ -116,7 +116,7 @@ function ArticleDetail() {
             title="评论区"
             btnName="提交评论"
           />
-        </div>
+        </ArticleDetailMain>
       </Plate.List>
 
       <Plate.Toolbar>
@@ -129,21 +129,21 @@ function ArticleDetail() {
         </ToolItem>
 
         <ToolItem title="相关阅读" icon={<CheckSquareOutlined />}>
-          <div className="aboutArticle">
+          <AboutArticle>
             {aboutArticle.map(({ title, visits, comments, id }) => (
-              <div className="aboutArticle-item" key={title}>
+              <div className="item" key={title}>
                 <div
-                  className="aboutArticle-item-title"
+                  className="item-title"
                   onClick={() => window.open(`/article/${id}`, "_self")}
                 >
                   {title}
                 </div>
-                <div className="aboutArticle-item-info">
+                <div className="item-info">
                   {comments}评论 | {visits}阅读
                 </div>
               </div>
             ))}
-          </div>
+          </AboutArticle>
         </ToolItem>
       </Plate.Toolbar>
     </Plate>

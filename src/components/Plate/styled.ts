@@ -58,7 +58,7 @@ export const Main = styled.div`
   background-color: var(--background-color);
   border-radius: 15px;
   box-shadow: var(--box-shadow);
-  flex: 1;
+  width: 100%;
 `;
 
 export const List = styled.div`

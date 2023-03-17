@@ -62,6 +62,10 @@ body {
   background: var(--ant-primary-color);
 }
 
+.infinite-scroll-component {
+  overflow: visible !important;
+}
+
 .ant-modal-title {
   text-align: center;
 }

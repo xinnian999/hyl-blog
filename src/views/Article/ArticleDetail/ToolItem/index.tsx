@@ -1,5 +1,5 @@
 import { Divider } from "antd";
-import "./style.scss";
+import { ToolItem as ToolItemWrapper } from "../styled";
 
 interface ToolItemProps {
   title: string;
@@ -10,13 +10,13 @@ interface ToolItemProps {
 function ToolItem(props: ToolItemProps) {
   const { title, icon, children } = props;
   return (
-    <div className="toolItem">
+    <ToolItemWrapper>
       <div className="catalogue">
         {icon} <span>{title}</span>
       </div>
       <Divider></Divider>
-      <div className="aboutArticle">{children}</div>
-    </div>
+      {children}
+    </ToolItemWrapper>
   );
 }
 

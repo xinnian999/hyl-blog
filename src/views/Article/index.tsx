@@ -7,8 +7,7 @@ import { Plate } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search/index";
 import ArticleCard from "./ArticleCard";
-import "./style.scss";
-import { ArticleSkeleton } from "./styled";
+import { ArticleSkeleton, ArticleToolbar } from "./styled";
 
 function Article() {
   const { current } = useRef({
@@ -113,12 +112,11 @@ function Article() {
       title="文章"
       autograph="人是要整活的——没活了，可不就是死了么？"
       bg="bg18.jpg"
-      id="article"
     >
       <Plate.List>{articleList}</Plate.List>
       <Plate.Toolbar>
-        <div className="article-toolbar">
-          <div className="article-search">
+        <ArticleToolbar>
+          <div className="search">
             <Search
               giveData={(data: articleItem[]) => {
                 setArticleData(data);
@@ -126,12 +124,12 @@ function Article() {
               }}
             />
           </div>
-          <ul className="article-category">
+          <ul className="category">
             {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
               <li
                 key={name}
                 onClick={() => categoryClick(name)}
-                className={classnames("article-category-item", {
+                className={classnames("category-item", {
                   categoryActive: current.category === name,
                 })}
               >
@@ -139,7 +137,7 @@ function Article() {
               </li>
             ))}
           </ul>
-        </div>
+        </ArticleToolbar>
       </Plate.Toolbar>
     </Plate>
   );
