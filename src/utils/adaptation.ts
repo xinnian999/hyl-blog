@@ -19,10 +19,10 @@ const r = (str: string) => {
 const adaptation = (component: any) => {
   const style = component.componentStyle.rules.map((item) => {
     if (typeof item === "function") {
-      let fn;
-      eval(`fn=${r(item.toString())}`);
-
-      return fn;
+      // let fn;
+      // eval(`fn=${r(item.toString())}`);
+      // return fn;
+      return item;
     }
 
     return r(item);
