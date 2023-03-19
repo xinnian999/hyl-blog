@@ -4,8 +4,6 @@ import { ReactNode } from "react";
 import { ToolbarWrapper, ToolbarItem, ToolbarFlag } from "./styled";
 
 const Toolbar = ({ children }: DomProps) => {
-  console.log(children);
-
   const el = Array.isArray(children) ? (
     <div>
       {(children as ReactNode[]).map((item) => {

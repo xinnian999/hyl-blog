@@ -1,9 +1,7 @@
-import { Plate } from "@/components";
 import { useMount } from "@/hooks";
-import "./style.scss";
-import { DemoMain, VideoButton } from "./styled";
+import { VideoButton as VideoButtonWrapper } from "./styled";
 
-export default function Demo() {
+export default function Demo({ onClick }) {
   useMount(() => {
     navigator.mediaDevices
       .getUserMedia({
@@ -19,13 +17,12 @@ export default function Demo() {
       });
   });
   return (
-    <Plate title={"demo"}>
-      <DemoMain>
-        <VideoButton>
-          <video src=""></video>
-          <div className="text">Enter Blog</div>
-        </VideoButton>
-      </DemoMain>
-    </Plate>
+    <VideoButtonWrapper
+      onClick={onClick}
+      className="animate__animated animate__zoomIn"
+    >
+      <video></video>
+      <div className="text">Enter Blog</div>
+    </VideoButtonWrapper>
   );
 }
