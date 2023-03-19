@@ -1,6 +1,8 @@
-#about {
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const AboutWrapper = styled(Plate.Main)`
   padding: 15px;
-  border: 1px solid var(--border-color);
   a {
     color: var(--ant-primary-color);
   }
@@ -44,4 +46,4 @@
       }
     }
   }
-}
+`;

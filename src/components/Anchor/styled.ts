@@ -1,4 +1,6 @@
-.anchor {
+import styled from "styled-components";
+
+export const AnchorWrpper = styled.div`
   overflow: auto;
 
   .oneAnchor {
@@ -11,4 +13,4 @@
       text-indent: 1em;
     }
   }
-}
+`;

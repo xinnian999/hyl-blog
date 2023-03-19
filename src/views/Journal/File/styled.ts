@@ -1,5 +1,7 @@
-#file {
-  border: 1px solid var(--border-color);
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const FileWrapper = styled(Plate.Main)`
   .fileTitle {
     font-weight: bold;
     font-size: 25px;
@@ -19,4 +21,4 @@
   .count {
     font-size: 20px;
   }
-}
+`;

@@ -1,11 +1,11 @@
 import { time } from "hyl-utils";
 import { List, Typography, Divider } from "antd";
 import { Title, Plate } from "@/components";
-import "./style.scss";
 import { useGetData } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import React from "react";
+import { FileWrapper } from "./styled";
 
 type Data = {
   createTime: string;
@@ -41,7 +41,7 @@ function File() {
 
   return (
     <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
-      <Plate.Main id="file">
+      <FileWrapper>
         <Title>
           居然用了
           {diff.year}年零{diff.month}个月 才写了{data.length}
@@ -72,7 +72,7 @@ function File() {
             </React.Fragment>
           );
         })}
-      </Plate.Main>
+      </FileWrapper>
     </Plate>
   );
 }

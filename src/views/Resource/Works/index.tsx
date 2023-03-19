@@ -1,7 +1,7 @@
 import { Skeleton } from "antd";
 import { useGetData } from "@/hooks";
-import "./style.scss";
 import { Plate } from "@/components";
+import { WorkWrapper } from "./styled";
 
 type Data = {
   name: string;
@@ -43,7 +43,7 @@ export default function Works() {
       autograph="你知道太阳为什么是太阳吗？因为它从不在乎别人的目光"
       bg="bg15.jpg"
     >
-      <Plate.Main id="work">{renderItem}</Plate.Main>
+      <WorkWrapper>{renderItem}</WorkWrapper>
     </Plate>
   );
 }

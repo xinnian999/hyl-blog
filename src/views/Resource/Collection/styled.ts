@@ -1,8 +1,9 @@
-#collection {
-  border-radius: 15px;
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const CollectionWrapper = styled(Plate.Main)`
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid var(--border-color);
   padding: 20px 0;
   .cardContainer {
     padding: 20px;
@@ -54,4 +55,4 @@
       opacity: 0.9;
     }
   }
-}
+`;

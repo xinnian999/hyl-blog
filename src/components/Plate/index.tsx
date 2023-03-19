@@ -9,19 +9,12 @@ interface PlateProps extends DomProps {
 }
 
 function Plate(props: PlateProps) {
-  const {
-    title = "标题",
-    autograph = "",
-    bg = "bg1.webp",
-    children,
-    id,
-    className,
-  } = props;
+  const { title = "标题", autograph = "", bg = "bg1.webp", children } = props;
 
   const { store } = useRedux();
 
   return (
-    <div id={id} className={className}>
+    <>
       <PlateBanner dark={store.dark} bg={bg}>
         <div className="bg"></div>
         <div className="info">
@@ -31,7 +24,7 @@ function Plate(props: PlateProps) {
       </PlateBanner>
 
       <PlateContent>{children}</PlateContent>
-    </div>
+    </>
   );
 }
 

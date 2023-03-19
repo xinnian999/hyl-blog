@@ -3,7 +3,7 @@ import { classnames, time } from "hyl-utils";
 import { OverPack } from "rc-scroll-anim";
 import { Bubble, Icon, Image, Plate } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
-import "./style.scss";
+import { JournalWrapper } from "./styled";
 
 type Data = {
   content: string;
@@ -23,7 +23,7 @@ const Say = () => {
       autograph="不必慌张，活好当下，来日方长；不必失望，人间值得，未来可期。"
       bg="bg13.jpg"
     >
-      <Plate.Main id="Journal">
+      <JournalWrapper>
         <Timeline
           mode={width > 800 ? "alternate" : "left"}
           pending={<div>查询中···</div>}
@@ -76,7 +76,7 @@ const Say = () => {
             </Timeline.Item>
           ))}
         </Timeline>
-      </Plate.Main>
+      </JournalWrapper>
     </Plate>
   );
 };

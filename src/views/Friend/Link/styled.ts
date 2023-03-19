@@ -1,4 +1,7 @@
-#Link {
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const LinkWrapper = styled(Plate.Main)`
   position: relative;
 
   .explain {
@@ -61,4 +64,4 @@
       }
     }
   }
-}
+`;

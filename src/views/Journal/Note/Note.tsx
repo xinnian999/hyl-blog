@@ -1,9 +1,9 @@
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { useGetData } from "@/hooks";
-import "./style.scss";
 import { Plate, Preview } from "@/components";
 import QueueAnim from "rc-queue-anim";
+import { NoteWrapper } from "./styled";
 
 type Data = {
   content: string;
@@ -22,9 +22,8 @@ export default function Note() {
       autograph="哪里有天才，我是把别人喝咖啡的工夫都用在了工作上了。"
       bg="bg16.jpg"
     >
-      <Plate.Main id="note">
+      <NoteWrapper>
         <QueueAnim
-          className="demo-content"
           animConfig={[
             { opacity: [1, 0], translateY: [0, 300] },
             { opacity: [1, 0], translateY: [0, -300] },
@@ -49,7 +48,7 @@ export default function Note() {
             );
           })}
         </QueueAnim>
-      </Plate.Main>
+      </NoteWrapper>
     </Plate>
   );
 }

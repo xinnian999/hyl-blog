@@ -1,5 +1,7 @@
-#note {
-  border-radius: 5px;
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const NoteWrapper = styled(Plate.Main)`
   overflow: hidden;
   padding: 10px;
 
@@ -38,4 +40,10 @@
       border: 1px solid var(--border-color);
     }
   }
-}
+
+  @media screen and (max-width: 800px) {
+    .animate__fadeInUp {
+      margin-right: 0;
+    }
+  }
+`;

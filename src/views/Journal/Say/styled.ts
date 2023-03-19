@@ -1,6 +1,8 @@
-#Journal {
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const JournalWrapper = styled(Plate.Main)`
   padding: 60px 40px;
-  border-radius: 15px;
 
   .ant-timeline-item-tail {
     border-color: #d7e4ed;
@@ -62,12 +64,4 @@
     margin-top: 10px;
     text-align: right;
   }
-}
-
-@media screen and (max-width: 800px) {
-  .Journal {
-    .animate__fadeInUp {
-      margin-right: 0;
-    }
-  }
-}
+`;

@@ -5,7 +5,7 @@ import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import { Plate, Title, Copy } from "@/components";
 import { useGetData } from "@/hooks";
-import "./style.scss";
+import { LinkWrapper } from "./styled";
 
 type Data = {
   name: string;
@@ -76,7 +76,7 @@ export default function Link() {
         bg="bg12.png"
         id="Link"
       >
-        <Plate.Main>
+        <LinkWrapper>
           <div className="explain">
             <Title>链接申请说明</Title>
             <div className="explain-main">
@@ -114,7 +114,7 @@ export default function Link() {
               );
             })}
           </div>
-        </Plate.Main>
+        </LinkWrapper>
       </Plate>
     </>
   );

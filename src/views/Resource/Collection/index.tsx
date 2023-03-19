@@ -3,7 +3,7 @@ import { InsertRowAboveOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
 import { useGetData } from "@/hooks";
 import { Image, Plate } from "@/components";
-import "./style.scss";
+import { CollectionWrapper } from "./styled";
 
 type Data = {
   title: string;
@@ -48,7 +48,7 @@ export default function Collection() {
       title="珍藏"
       autograph="I like you,but just like you.我喜欢你，仅仅如此，喜欢而已"
     >
-      <Plate.Main id="collection">{renderItem}</Plate.Main>
+      <CollectionWrapper>{renderItem}</CollectionWrapper>
     </Plate>
   );
 }

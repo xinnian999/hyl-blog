@@ -2,7 +2,7 @@ import { useMount } from "@/hooks";
 import { Anchor as AntdAnchor } from "antd";
 import { throttle } from "hyl-utils";
 import { memo } from "react";
-import "./style.scss";
+import { AnchorWrpper } from "./styled";
 
 interface AnchorProps extends DomProps {
   anchorData: any[];
@@ -33,24 +33,21 @@ function Anchor(props: AnchorProps) {
     return () => window.removeEventListener("scroll", scrollAnchor);
   });
   return (
-    <AntdAnchor
-      targetOffset={targetOffset}
-      affix={false}
-      className="anchor"
-      style={style}
-    >
-      {anchorData.map((item: { id: string; localName: string }) => {
-        const { id, localName } = item;
-        return (
-          <AntdAnchor.Link
-            key={id}
-            href={`#${id}`}
-            title={id}
-            className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
-          />
-        );
-      })}
-    </AntdAnchor>
+    <AnchorWrpper>
+      <AntdAnchor targetOffset={targetOffset} affix={false} style={style}>
+        {anchorData.map((item: { id: string; localName: string }) => {
+          const { id, localName } = item;
+          return (
+            <AntdAnchor.Link
+              key={id}
+              href={`#${id}`}
+              title={id}
+              className={localName === "h2" ? "oneAnchor" : "twoAnchor"}
+            />
+          );
+        })}
+      </AntdAnchor>
+    </AnchorWrpper>
   );
 }
 

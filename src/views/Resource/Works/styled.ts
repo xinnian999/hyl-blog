@@ -1,6 +1,7 @@
-#work {
-  border: 1px solid var(--border-color);
-  border-radius: 15px;
+import { Plate } from "@/components";
+import styled from "styled-components";
+
+export const WorkWrapper = styled(Plate.Main)`
   padding: 30px;
   display: flex;
   justify-content: space-around;
@@ -64,4 +65,4 @@
       }
     }
   }
-}
+`;
