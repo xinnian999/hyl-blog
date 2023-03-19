@@ -1,6 +1,6 @@
 import { useRedux } from "@/hooks";
 import Toolbar from "./Toolbar";
-import { PlateBanner, PlateContent, List, Main } from "./styled";
+import { PlateBanner, PlateContent, Main } from "./styled";
 
 interface PlateProps extends DomProps {
   title: string;
@@ -36,7 +36,6 @@ function Plate(props: PlateProps) {
 }
 
 Plate.Main = Main;
-Plate.List = List;
 Plate.Toolbar = Toolbar;
 
 export default Plate;

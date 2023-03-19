@@ -58,14 +58,8 @@ export const Main = styled.div`
   background-color: var(--background-color);
   border-radius: 15px;
   box-shadow: var(--box-shadow);
-  width: 100%;
-`;
-
-export const List = styled.div`
-  width: calc(75% - 25px);
-  @media screen and (max-width: 800px) {
-    width: 100%;
-  }
+  border: 1px solid var(--border-color);
+  flex: 1;
 `;
 
 export const ToolbarWrapper = styled.div`
@@ -75,6 +69,14 @@ export const ToolbarWrapper = styled.div`
   @media screen and (max-width: 800px) {
     display: none;
   }
+`;
+
+export const ToolbarItem = styled.div`
+  background-color: var(--background-color);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: var(--box-shadow);
+  overflow: hidden;
 `;
 
 export const ToolbarFlag = styled.div`

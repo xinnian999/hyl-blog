@@ -7,7 +7,7 @@ import { Plate } from "@/components";
 import { batchCopyDom } from "@/utils";
 import Search from "./Search/index";
 import ArticleCard from "./ArticleCard";
-import { ArticleSkeleton, ArticleToolbar } from "./styled";
+import { ArticleMain, ArticleSkeleton, ArticleCategory } from "./styled";
 
 function Article() {
   const { current } = useRef({
@@ -64,7 +64,7 @@ function Article() {
     if (articleData.length) {
       return (
         <ReactScroll {...reactScrollProps}>
-          <Space size={30} direction="vertical" style={{ width: "100%" }}>
+          <Space size={25} direction="vertical" style={{ width: "100%" }}>
             {articleData.map((item) => (
               <ArticleCard {...item} key={item.id} />
             ))}
@@ -113,9 +113,9 @@ function Article() {
       autograph="人是要整活的——没活了，可不就是死了么？"
       bg="bg18.jpg"
     >
-      <Plate.List>{articleList}</Plate.List>
+      <ArticleMain>{articleList}</ArticleMain>
       <Plate.Toolbar>
-        <ArticleToolbar>
+        <ArticleCategory>
           <div className="search">
             <Search
               giveData={(data: articleItem[]) => {
@@ -124,20 +124,20 @@ function Article() {
               }}
             />
           </div>
-          <ul className="category">
+          <ul className="categoryList">
             {[{ name: "all", id: 0 }, ...categoryData].map(({ name }) => (
               <li
                 key={name}
                 onClick={() => categoryClick(name)}
-                className={classnames("category-item", {
-                  categoryActive: current.category === name,
+                className={classnames({
+                  active: current.category === name,
                 })}
               >
                 {name === "all" ? "全部" : name}
               </li>
             ))}
           </ul>
-        </ArticleToolbar>
+        </ArticleCategory>
       </Plate.Toolbar>
     </Plate>
   );

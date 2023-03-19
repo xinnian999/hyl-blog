@@ -1,5 +1,5 @@
 import { Divider } from "antd";
-import { ToolItem as ToolItemWrapper } from "../styled";
+import { ToolItem as ToolItemWrapper } from "./styled";
 
 interface ToolItemProps {
   title: string;

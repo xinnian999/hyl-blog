@@ -1,10 +1,9 @@
+import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const ArticleDetailMain = styled.div`
-  background-color: var(--background-color);
+export const ArticleDetailMain = styled(Plate.Main)`
   padding: 10px 20px;
-  box-shadow: var(--box-shadow);
-  border-radius: 10px;
+  width: 75%;
 `;
 
 export const AboutArticle = styled.div`
@@ -26,13 +25,8 @@ export const AboutArticle = styled.div`
 `;
 
 export const ToolItem = styled.div`
-  background-color: var(--background-color);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
   padding: 15px;
-  margin-bottom: 20px;
   font-size: 15px;
-  box-shadow: var(--box-shadow);
   .catalogue {
     font-size: 18px;
   }

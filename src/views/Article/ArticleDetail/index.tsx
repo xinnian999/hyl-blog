@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react";
-import { Space, Skeleton, Tag } from "antd";
+import { Space, Tag } from "antd";
 import { Icon, Plate, Anchor } from "@/components";
 import { useParams } from "react-router-dom";
 import { time } from "hyl-utils";
@@ -100,30 +100,21 @@ function ArticleDetail() {
   );
 
   return (
-    <Plate
-      title={title}
-      bg="bg18.jpg"
-      autograph={articleInfo}
-      id="articleDetail"
-    >
-      <Plate.List>
-        <ArticleDetailMain>
-          <Skeleton loading={!content} paragraph={{ rows: 30 }}>
-            <Markdown content={content} ref={mdRef} />
-          </Skeleton>
-          <Comment
-            articleId={params.id as string}
-            title="评论区"
-            btnName="提交评论"
-          />
-        </ArticleDetailMain>
-      </Plate.List>
+    <Plate title={title} bg="bg18.jpg" autograph={articleInfo}>
+      <ArticleDetailMain>
+        <Markdown content={content} ref={mdRef} />
+        <Comment
+          articleId={params.id as string}
+          title="评论区"
+          btnName="提交评论"
+        />
+      </ArticleDetailMain>
 
       <Plate.Toolbar>
         <ToolItem title="本章目录" icon={<UnorderedListOutlined />}>
           <Anchor
             targetOffset={targetOffset}
-            style={{ maxHeight: "30vh" }}
+            style={{ maxHeight: "40vh" }}
             anchorData={anchorList}
           />
         </ToolItem>

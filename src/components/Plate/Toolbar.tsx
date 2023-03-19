@@ -1,15 +1,28 @@
 import { Drawer } from "@/components";
 import { Affix } from "antd";
-import { ToolbarWrapper, ToolbarFlag } from "./styled";
+import { ReactNode } from "react";
+import { ToolbarWrapper, ToolbarItem, ToolbarFlag } from "./styled";
 
 const Toolbar = ({ children }: DomProps) => {
+  console.log(children);
+
+  const el = Array.isArray(children) ? (
+    <div>
+      {(children as ReactNode[]).map((item) => {
+        return <ToolbarItem>{item}</ToolbarItem>;
+      })}
+    </div>
+  ) : (
+    <ToolbarItem>{children}</ToolbarItem>
+  );
+
   return (
     <>
       <ToolbarWrapper>
-        <Affix offsetTop={80}>{children}</Affix>
+        <Affix offsetTop={80}>{el}</Affix>
       </ToolbarWrapper>
       <Drawer placement="right" Flag={ToolbarFlag}>
-        {children}
+        {el}
       </Drawer>
     </>
   );

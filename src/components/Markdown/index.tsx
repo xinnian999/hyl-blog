@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { forwardRef, memo } from "react";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -8,6 +7,7 @@ import rehypeRaw from "rehype-raw";
 import { CopyOutlined, LinkOutlined } from "@ant-design/icons";
 import { copy } from "hyl-utils";
 import "./style.scss";
+import { Skeleton } from "antd";
 
 const components = {
   code({ node, inline, className, children, ...props }) {
@@ -62,21 +62,23 @@ const MarkDetail = (props, ref) => {
   const { content } = props;
 
   return (
-    <div
-      style={{
-        overflow: "hidden",
-        position: "relative",
-      }}
-      ref={ref}
-    >
-      <ReactMarkdown
-        components={components}
-        children={content}
-        rehypePlugins={[rehypeRaw]}
-        remarkPlugins={[remarkGfm]}
-        className="ReactMarkdown"
-      />
-    </div>
+    <Skeleton loading={!content} paragraph={{ rows: 30 }}>
+      <div
+        style={{
+          overflow: "hidden",
+          position: "relative",
+        }}
+        ref={ref}
+      >
+        <ReactMarkdown
+          components={components as any}
+          children={content}
+          rehypePlugins={[rehypeRaw]}
+          remarkPlugins={[remarkGfm]}
+          className="ReactMarkdown"
+        />
+      </div>
+    </Skeleton>
   );
 };
 

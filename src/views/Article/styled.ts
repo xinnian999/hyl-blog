@@ -1,4 +1,11 @@
+import { Plate } from "@/components";
 import styled from "styled-components";
+
+export const ArticleMain = styled(Plate.Main)`
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+`;
 
 export const ArticleSkeleton = styled.div`
   display: flex;
@@ -13,21 +20,15 @@ export const ArticleSkeleton = styled.div`
   }
 `;
 
-export const ArticleToolbar = styled.div`
-  box-shadow: var(--box-shadow);
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: var(--background-color);
-
+export const ArticleCategory = styled.div`
   .search {
     padding: 10px;
     background-color: gray;
   }
 
-  .category {
+  .categoryList {
     padding-top: 20px;
-    border: 1px solid var(--border-color);
-    &-item {
+    li {
       position: relative;
       height: 40px;
       line-height: 39px;
@@ -41,7 +42,7 @@ export const ArticleToolbar = styled.div`
       }
     }
 
-    .categoryActive {
+    .active {
       background-color: var(--highlight-background-color);
 
       &::after {

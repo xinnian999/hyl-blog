@@ -4,7 +4,7 @@ import "./style.scss";
 export default function Demo() {
   return (
     <Plate title={"demo"}>
-      <Plate.List>
+      <Plate.Main>
         <h1>32523523</h1>
         <h1>32523523</h1>
         <h1>32523523</h1>
@@ -48,7 +48,7 @@ export default function Demo() {
         <h1>32523523</h1>
         <h1>32523523</h1>
         <h1>32523523</h1>
-      </Plate.List>
+      </Plate.Main>
 
       <Plate.Toolbar>
         <h2>32523523</h2>
