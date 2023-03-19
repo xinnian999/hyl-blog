@@ -1,6 +1,7 @@
-import { useRedux } from "@/hooks";
+import { useMount, useRedux } from "@/hooks";
 import Toolbar from "./Toolbar";
 import { PlateBanner, PlateContent, Main } from "./styled";
+import textCustom from "./textCustom";
 
 interface PlateProps extends DomProps {
   title: string;
@@ -13,13 +14,20 @@ function Plate(props: PlateProps) {
 
   const { store } = useRedux();
 
+  useMount(() => {
+    textCustom();
+  });
+
   return (
     <>
       <PlateBanner dark={store.dark} bg={bg}>
         <div className="bg"></div>
         <div className="info">
           <h2>{title}</h2>
-          <div className="autograph">{autograph} </div>
+          <div className="autograph">
+            <span className="autograph-text">{autograph}</span>
+            <span className="autograph-cursor">__</span>
+          </div>
         </div>
       </PlateBanner>
 

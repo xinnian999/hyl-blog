@@ -110,7 +110,7 @@ function Article() {
   return (
     <Plate
       title="文章"
-      autograph="人是要整活的——没活了，可不就是死了么？"
+      autograph="人是要整活的——没活了，可不就是死了么 "
       bg="bg18.jpg"
     >
       <ArticleMain>{articleList}</ArticleMain>

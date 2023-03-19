@@ -1,5 +1,7 @@
+import { throttle } from "hyl-utils";
+
 const canvasBg = (bg) => {
-  var ele = document.querySelector("#backgroundImg");
+  var ele = document.querySelector("#background");
   var ele_canvas = document.querySelector("#canvasBg");
   if (ele_canvas) {
     ele.removeChild(ele_canvas);
@@ -115,4 +117,4 @@ const canvasBg = (bg) => {
   animation();
 };
 
-export default canvasBg;
+export default throttle(canvasBg, 500);

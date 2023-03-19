@@ -38,7 +38,7 @@ function Footer() {
   return (
     <FooterWrapper>
       <span className="AllRights">
-        ©2021-2022 by <a href="https://motion.ant.design">心 念</a> All Rights
+        ©2021-2023 by <a href="https://motion.ant.design">心 念</a> All Rights
         Reserved
       </span>
       <a

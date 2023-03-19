@@ -3,5 +3,4 @@ export { default as clearLogin } from "./clearLogin";
 export { default as changeBlogTitle } from "./changeBlogTitle";
 export { default as getDecode } from "./getDecode";
 export { default as batchCopyDom } from "./batchCopyDom";
-export { default as flexible } from "./flexible";
 export { default as adaptation } from "./adaptation";

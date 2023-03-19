@@ -6,7 +6,7 @@ import {
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { cookie, removeDom, imgPrestrain, url } from "hyl-utils";
-import { useGetData, useMount, useRedux } from "@/hooks";
+import { useGetData, useMount, useRedux, useWindowSize } from "@/hooks";
 import { prestrainImage } from "@/config";
 import { changeBlogTitle } from "@/utils";
 import starBg from "./widgets/Background/starBg";
@@ -17,6 +17,8 @@ function Provider({ children }) {
   const location = useLocation();
 
   const { dispatchAll } = useRedux();
+
+  const { width } = useWindowSize();
 
   useMount(() => {
     imgPrestrain(prestrainImage);
@@ -65,6 +67,21 @@ function Provider({ children }) {
       starBg(bg);
     }
   }, [store.theme]);
+
+  // 主题监听
+  useEffect(() => {
+    if (store.dark) {
+      starBg(store.theme.bg);
+    }
+    const htmlEl = window.document.documentElement;
+    const width = htmlEl.getBoundingClientRect().width;
+
+    if (width < globalConfig.rootValue * 10) {
+      htmlEl.style.fontSize = `${width / 10}px`;
+    } else {
+      htmlEl.style.fontSize = `${globalConfig.rootValue}px`;
+    }
+  }, [width]);
 
   return (
     <AntdProvider

@@ -3,6 +3,7 @@ declare const globalConfig: {
   iconfont: string;
   title: string;
   description: string;
+  rootValue: number;
 };
 
 declare const $;

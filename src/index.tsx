@@ -3,9 +3,6 @@ import { notification } from "antd";
 import "animate.css";
 import "@/style/global.scss";
 import App from "./App";
-import { flexible } from "@/utils";
-
-flexible();
 
 notification.config({
   placement: "topRight",

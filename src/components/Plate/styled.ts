@@ -37,7 +37,20 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     .autograph {
       font-size: 20px;
       text-shadow: 0px 0px 10px black;
-      padding: 0 20px;
+      &-cursor {
+        animation: shanxian 2000ms infinite;
+      }
+      @keyframes shanxian {
+        from {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
     }
   }
 `;
@@ -85,7 +98,7 @@ export const ToolbarFlag = styled.div`
   top: 30%;
   background-color: var(--highlight-background-color);
   box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
+  border: 1px solid #999;
   border-radius: 10px 0 0 10px;
   overflow: hidden;
   font-size: 25px;
@@ -99,5 +112,4 @@ export const ToolbarFlag = styled.div`
 `;
 
 adaptation(PlateBanner);
-// adaptation(PlateBannerInfo);
-// adaptation(ToolbarFlag);
+adaptation(ToolbarFlag);
