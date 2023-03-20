@@ -114,7 +114,7 @@ function Article() {
       bg="bg18.jpg"
     >
       <ArticleMain>{articleList}</ArticleMain>
-      <Plate.Toolbar>
+      <Plate.Toolbar style={{ width: "20%" }}>
         <ArticleCategory>
           <div className="search">
             <Search

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { adaptation } from "@/utils";
 
 const FooterWrapper = styled.footer`
   text-align: center;
@@ -31,8 +30,6 @@ const FooterWrapper = styled.footer`
     }
   }
 `;
-
-adaptation(FooterWrapper);
 
 function Footer() {
   return (

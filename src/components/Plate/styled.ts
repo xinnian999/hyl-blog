@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { adaptation } from "@/utils";
+import { r } from "@/utils";
 
 interface PlateBannerProps {
   bg: string;
@@ -8,7 +8,7 @@ interface PlateBannerProps {
 
 export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
-  height: 600px;
+  height: ${r`600px`};
   .bg {
     height: 100%;
     background-size: cover;
@@ -29,13 +29,13 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     z-index: 9;
     h2 {
       font-weight: 500;
-      font-size: 40px;
+      font-size: ${r`40px`};
       margin-bottom: 20px;
       letter-spacing: 5px;
       text-shadow: 0px 0px 10px black;
     }
     .autograph {
-      font-size: 20px;
+      font-size: ${r`20px`};
       text-shadow: 0px 0px 10px black;
       &-cursor {
         animation: shanxian 2000ms infinite;
@@ -101,7 +101,7 @@ export const ToolbarFlag = styled.div`
   border: 1px solid #999;
   border-radius: 10px 0 0 10px;
   overflow: hidden;
-  font-size: 25px;
+  font-size: ${r`25px`};
   padding: 5px 10px;
   cursor: pointer;
   z-index: 999;
@@ -110,6 +110,3 @@ export const ToolbarFlag = styled.div`
     display: block;
   }
 `;
-
-adaptation(PlateBanner);
-adaptation(ToolbarFlag);

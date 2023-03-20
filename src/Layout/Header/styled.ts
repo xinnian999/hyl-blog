@@ -1,4 +1,4 @@
-import { adaptation } from "@/utils";
+import { r } from "@/utils";
 import styled from "styled-components";
 
 type HeaderWrapperProps = {
@@ -11,7 +11,7 @@ export const HeaderWrapper = styled.header<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) =>
     props.scrollTop > 1 ? "#2f4154" : "transparent"};
-  line-height: ${(props) => (props.scrollTop > 1 ? "50px" : "60px")};
+  line-height: ${(props) => (props.scrollTop > 1 ? r`50px` : r`60px`)};
   display: ${(props) => (props.pathname === "/home" ? "none" : "block")};
   z-index: 10;
   text-align: center;
@@ -38,7 +38,7 @@ export const HeaderWrapper = styled.header<HeaderWrapperProps>`
 
 export const Logo = styled.span`
   font-family: "汉仪霹雳体简";
-  font-size: 30px;
+  font-size: ${r`30px`};
   cursor: pointer;
   margin-right: auto;
   color: #fff;
@@ -111,7 +111,3 @@ export const NavWrapper = styled.ul`
     }
   }
 `;
-
-adaptation(HeaderWrapper);
-adaptation(Logo);
-adaptation(NavWrapper);

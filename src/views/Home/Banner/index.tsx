@@ -7,7 +7,6 @@ import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
 import textCustom from "./textCustom";
 import "./style.scss";
 import { classnames } from "hyl-utils";
-import { VideoButton } from "@/components";
 
 export default function Banner() {
   const navigate = useNavigate();
@@ -35,13 +34,12 @@ export default function Banner() {
         <p className="bannerContent-autograph text2  animate__animated animate__zoomIn">
           {globalConfig.description}
         </p>
-        {/* <button
+        <button
           className="bannerContent-Button  animate__animated animate__zoomIn"
           onClick={() => navigate("/article")}
         >
           Enter Blog
-        </button> */}
-        <VideoButton onClick={() => navigate("/article")} />
+        </button>
 
         <TweenOne
           animation={{

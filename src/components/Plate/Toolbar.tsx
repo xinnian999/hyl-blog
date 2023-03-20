@@ -3,7 +3,7 @@ import { Affix } from "antd";
 import { ReactNode } from "react";
 import { ToolbarWrapper, ToolbarItem, ToolbarFlag } from "./styled";
 
-const Toolbar = ({ children }: DomProps) => {
+const Toolbar = ({ children, style }: DomProps) => {
   const el = Array.isArray(children) ? (
     <div>
       {(children as ReactNode[]).map((item) => {
@@ -16,7 +16,7 @@ const Toolbar = ({ children }: DomProps) => {
 
   return (
     <>
-      <ToolbarWrapper>
+      <ToolbarWrapper style={style}>
         <Affix offsetTop={80}>{el}</Affix>
       </ToolbarWrapper>
       <Drawer placement="right" Flag={ToolbarFlag}>
