@@ -21,23 +21,14 @@ function ChatGpt() {
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
       ajax({
-        method: "post",
-        url: "https://api.openai.com/v1/completions",
-        data: {
-          model: "text-davinci-003",
-          prompt: newMessage,
-          max_tokens: 4000,
-        },
-        headers: {
-          Authorization:
-            "Bearer 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",
-        },
+        method: "get",
+        url: `/gpt?content=${newMessage}`,
         timeout: 500000,
       }).then((res) => {
         setMessages([
           ...messages,
           { text: newMessage },
-          { text: res.response.choices[0].text },
+          { text: res.response.content },
         ]);
       });
 
