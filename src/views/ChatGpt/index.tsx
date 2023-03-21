@@ -20,10 +20,20 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
+      // const content = [...messages, { text: newMessage }].reduce(
+      //   (str, item, i) => {
+      //     return str + item.text;
+      //   },
+      //   ""
+      // );
+
       ajax({
-        method: "get",
-        url: `/gpt?content=${newMessage}`,
+        method: "post",
+        url: `/gpt`,
         timeout: 500000,
+        data: {
+          content: newMessage,
+        },
       }).then((res) => {
         setMessages([
           ...messages,
