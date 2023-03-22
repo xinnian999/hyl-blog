@@ -28,16 +28,24 @@ function ChatGpt() {
       top: scrollHeight - clientHeight,
       behavior: "smooth", // 平滑滚动
     });
-  }, messages);
+  }, [messages]);
 
   const handleMessageSend = (): void => {
+    let content = [...messages, { text: newMessage }].reduce((str, item) => {
+      return str + item.text;
+    }, "");
+    if (content.length > 3800) {
+      content = content.substr(-3800);
+    }
+    console.log(content.length);
+
     if (newMessage.trim()) {
       ajax({
         method: "post",
         url: `/gpt`,
         timeout: 500000,
         data: {
-          content: newMessage,
+          content,
         },
       }).then((res) => {
         setMessages([
