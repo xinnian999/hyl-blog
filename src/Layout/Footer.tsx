@@ -1,37 +1,40 @@
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-const FooterWrapper = styled.footer`
-  text-align: center;
-  padding: 10px 0;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  color: #999;
-  a {
-    color: var(--ant-primary-color);
-  }
+function Footer() {
+  const { pathname } = useLocation();
 
-  .AllRights {
-    display: block;
-  }
-
-  .beianNumber {
-    margin-right: 15px;
-    img {
-      vertical-align: middle;
-      margin-right: 5px;
+  const FooterWrapper = styled.footer`
+    text-align: center;
+    padding: 10px 0;
+    position: ${pathname === "/home" ? "absolute" : "static"};
+    bottom: 0;
+    width: 100%;
+    color: #999;
+    a {
+      color: var(--ant-primary-color);
     }
-  }
 
-  @media screen and (max-width: 600px) {
-    .icp,
-    .beianNumber {
+    .AllRights {
       display: block;
     }
-  }
-`;
 
-function Footer() {
+    .beianNumber {
+      margin-right: 15px;
+      img {
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+    }
+
+    @media screen and (max-width: 600px) {
+      .icp,
+      .beianNumber {
+        display: block;
+      }
+    }
+  `;
+
   return (
     <FooterWrapper>
       <span className="AllRights">

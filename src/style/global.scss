@@ -26,10 +26,15 @@ a {
   text-decoration: none;
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: auto !important;
+  // height: auto !important;
   background-color: #374140 !important;
   position: relative;
   overflow-x: hidden;

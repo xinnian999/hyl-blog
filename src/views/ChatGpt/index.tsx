@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Plate } from "@/components";
+import React, { useEffect, useState } from "react";
+import { Plate, Markdown } from "@/components";
 import {
   ChatWindowWrapper,
   MessagesWrapper,
   MessageBubble,
   InputWrapper,
   InputField,
-  SendButton,
 } from "./styled";
 import { ajax } from "hyl-utils";
+import { Button, Input } from "antd";
 
 interface Message {
   text: string;
@@ -18,15 +18,20 @@ function ChatGpt() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
 
+  useEffect(() => {
+    const element = document.getElementById("MessagesWrapper")!;
+    const scrollHeight = element.scrollHeight;
+    const clientHeight = element.clientHeight;
+
+    element.style.transition = "scroll 500ms ease-in-out"; // 添加过渡效果
+    element.scrollTo({
+      top: scrollHeight - clientHeight,
+      behavior: "smooth", // 平滑滚动
+    });
+  }, messages);
+
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      // const content = [...messages, { text: newMessage }].reduce(
-      //   (str, item, i) => {
-      //     return str + item.text;
-      //   },
-      //   ""
-      // );
-
       ajax({
         method: "post",
         url: `/gpt`,
@@ -42,8 +47,15 @@ function ChatGpt() {
         ]);
       });
 
-      setMessages([...messages, { text: newMessage }, { text: "ai思索中..." }]);
       setNewMessage("");
+      setMessages([...messages, { text: newMessage }]);
+      setTimeout(() => {
+        setMessages([
+          ...messages,
+          { text: newMessage },
+          { text: "ai思索中..." },
+        ]);
+      }, 700);
     }
   };
 
@@ -59,22 +71,24 @@ function ChatGpt() {
     <Plate title="ChatGPT" autograph="最新人工智能 ~ 在线体验">
       <Plate.Main style={{ width: "1000px" }}>
         <ChatWindowWrapper>
-          <MessagesWrapper>
+          <MessagesWrapper id="MessagesWrapper">
             {messages.map((message, index) => (
               <MessageBubble key={index} isUserMessage={index % 2 === 0}>
-                {message.text}
+                <Markdown content={message.text}></Markdown>
               </MessageBubble>
             ))}
           </MessagesWrapper>
           <InputWrapper>
-            <InputField
+            <Input
               type="text"
               value={newMessage}
               onChange={(event) => setNewMessage(event.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Type a message"
+              placeholder="你想对Ai说什么？"
             />
-            <SendButton onClick={handleMessageSend}>Send</SendButton>
+            <Button type="primary" onClick={handleMessageSend}>
+              发送
+            </Button>
           </InputWrapper>
         </ChatWindowWrapper>
       </Plate.Main>

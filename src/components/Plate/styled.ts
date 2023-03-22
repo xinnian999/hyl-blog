@@ -60,7 +60,6 @@ export const PlateContent = styled.div`
   margin: 0 auto;
   position: relative;
   top: -50px;
-  padding-bottom: 50px;
   display: flex;
   @media screen and (max-width: 800px) {
     margin: 0 20px;
@@ -73,6 +72,7 @@ export const Main = styled.div`
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
   flex: 1;
+  overflow: hidden;
 `;
 
 export const ToolbarWrapper = styled.div`

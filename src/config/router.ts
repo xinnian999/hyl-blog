@@ -66,12 +66,7 @@ const route: routeItem[] = [
       },
     ],
   },
-  {
-    title: "ChatGpt",
-    path: "/chatgpt",
-    icon: "icon-wenzhang1",
-    component: lazy(() => import("@/views/ChatGpt")),
-  },
+
   {
     title: "作品",
     path: "/resource",
@@ -92,6 +87,12 @@ const route: routeItem[] = [
         component: lazy(() => import("@/views/Resource/Collection")),
       },
     ],
+  },
+  {
+    title: "ChatGpt",
+    path: "/chatgpt",
+    icon: "icon-jiqiren",
+    component: lazy(() => import("@/views/ChatGpt")),
   },
   {
     title: "关于",

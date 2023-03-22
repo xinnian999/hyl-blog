@@ -7,19 +7,20 @@ export const ChatWindowWrapper = styled.div`
 `;
 
 export const MessagesWrapper = styled.div`
-  flex: 1;
+  /* flex: 1; */
   overflow-y: scroll;
   padding: 20px;
+  max-height: 70vh;
 `;
 
-export const MessageBubble = styled.pre<{ isUserMessage: boolean }>`
+export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
   display: block;
-  max-width: 70%;
+  max-width: 80%;
   margin-bottom: 10px;
   padding: 10px 15px;
   border-radius: 15px;
   background-color: ${({ isUserMessage }) =>
-    isUserMessage ? "#00c2ff" : "#e6e6e6"};
+    isUserMessage ? "var(--ant-primary-color)" : "#e6e6e6"};
   color: ${({ isUserMessage }) => (isUserMessage ? "#fff" : "#000")};
   align-self: ${({ isUserMessage }) =>
     isUserMessage ? "flex-end" : "flex-start"};
@@ -43,11 +44,11 @@ export const InputField = styled.input`
   border-radius: 5px;
 `;
 
-export const SendButton = styled.button`
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  background-color: #00c2ff;
-  color: #fff;
-  font-size: 16px;
-`;
+// export const SendButton = styled.button`
+//   border: none;
+//   padding: 10px 15px;
+//   border-radius: 5px;
+//   background-color: #00c2ff;
+//   color: #fff;
+//   font-size: 16px;
+// `;
