@@ -5,19 +5,17 @@ import {
   MessagesWrapper,
   MessageBubble,
   InputWrapper,
-  InputField,
 } from "./styled";
 import { ajax } from "hyl-utils";
 import { Button, Input } from "antd";
 
 interface Message {
-  text: string;
-  id?: string;
+  content: string;
+  role: string;
 }
 
 function ChatGpt() {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [messagesData, setMessagesData] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
 
   useEffect(() => {
@@ -37,59 +35,29 @@ function ChatGpt() {
   }, [messages]);
 
   const handleMessageSend = (): void => {
-    // let content = [...messagesData, { text: newMessage }].reduce(
-    //   (str, item, index) => {
-    //     // if (index % 2 === 0) return str + `(You:${item.text}\n)`;
-    //     return str + item.text;
-    //   },
-    //   ""
-    // );
-    // if (content.length > 3800) {
-    //   content = content.substr(-3800);
-    // }
-    // console.log(content.length);
-
     if (newMessage.trim()) {
       ajax({
         method: "post",
         url: `/gpt`,
         timeout: 500000,
         data: {
-          content: newMessage,
-          id: messages.length ? messages[messages.length - 1].id : "",
+          messages: [...messages, { content: newMessage, role: "user" }],
         },
-      })
-        .then((res) => {
-          const { content, id } = res.response;
-          setMessages([
-            ...messages,
-            { text: newMessage },
-            { text: content, id },
-          ]);
-
-          setMessagesData([
-            ...messagesData,
-            { text: newMessage },
-            { text: content },
-          ]);
-        })
-        .catch(() => {
-          setMessages([
-            ...messages,
-            { text: newMessage },
-            { text: "对不起，ai网络故障，请重新提问" },
-          ]);
-
-          setMessagesData([]);
-        });
+      }).then((res) => {
+        setMessages([
+          ...messages,
+          { content: newMessage, role: "user" },
+          res.response.data,
+        ]);
+      });
 
       setNewMessage("");
-      setMessages([...messages, { text: newMessage }]);
+      setMessages([...messages, { content: newMessage, role: "user" }]);
       setTimeout(() => {
         setMessages([
           ...messages,
-          { text: newMessage },
-          { text: "ai思索中..." },
+          { content: newMessage, role: "user" },
+          { content: "ai思索中...", role: "assistant" },
         ]);
       }, 700);
     }
@@ -110,7 +78,7 @@ function ChatGpt() {
           <MessagesWrapper id="MessagesWrapper">
             {messages.map((message, index) => (
               <MessageBubble key={index} isUserMessage={index % 2 === 0}>
-                <Markdown content={message.text}></Markdown>
+                <Markdown content={message.content}></Markdown>
               </MessageBubble>
             ))}
           </MessagesWrapper>
