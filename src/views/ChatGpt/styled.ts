@@ -1,13 +1,13 @@
+import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const ChatWindowWrapper = styled.div`
+export const ChatWindowWrapper = styled(Plate.Main)`
   display: flex;
   flex-direction: column;
   height: 100%;
 `;
 
 export const MessagesWrapper = styled.div`
-  /* flex: 1; */
   overflow-y: scroll;
   padding: 20px;
   max-height: 70vh;
@@ -15,18 +15,41 @@ export const MessagesWrapper = styled.div`
 
 export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
   display: block;
-  max-width: 80%;
+  padding-left: 55px;
+  position: relative;
   margin-bottom: 10px;
-  padding: 10px 15px;
-  border-radius: 15px;
-  background-color: ${({ isUserMessage }) =>
-    isUserMessage ? "var(--ant-primary-color)" : "#e6e6e6"};
-  color: ${({ isUserMessage }) => (isUserMessage ? "#fff" : "#000")};
-  align-self: ${({ isUserMessage }) =>
-    isUserMessage ? "flex-end" : "flex-start"};
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
-  border: 1px solid #ccc;
-  overflow: auto;
+  .content {
+    display: inline-block;
+    max-width: 80%;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    background-color: ${({ isUserMessage }) =>
+      isUserMessage ? "var(--ant-primary-color)" : "#e6e6e6"};
+    color: ${({ isUserMessage }) => (isUserMessage ? "#fff" : "#000")};
+    align-self: ${({ isUserMessage }) =>
+      isUserMessage ? "flex-end" : "flex-start"};
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    position: relative;
+    ::before {
+      position: absolute;
+      left: -19px;
+      top: 6px;
+      height: 0;
+      width: 0;
+      content: "";
+      border: 10px solid rgba(255, 255, 255, 0);
+      border-top: 6px solid rgba(255, 255, 255, 0);
+      border-bottom: 6px solid rgba(255, 255, 255, 0);
+      border-right-color: ${({ isUserMessage }) =>
+        isUserMessage ? "var(--ant-primary-color)" : "#e6e6e6"};
+    }
+  }
+  .avatar {
+    position: absolute;
+    left: 0;
+    border: 1px solid #eee;
+  }
 `;
 
 export const InputWrapper = styled.div`
@@ -43,12 +66,3 @@ export const InputField = styled.input`
   margin-right: 10px;
   border-radius: 5px;
 `;
-
-// export const SendButton = styled.button`
-//   border: none;
-//   padding: 10px 15px;
-//   border-radius: 5px;
-//   background-color: #00c2ff;
-//   color: #fff;
-//   font-size: 16px;
-// `;
