@@ -16,24 +16,33 @@ interface Message {
 
 function ChatGpt() {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [messagesData, setMessagesData] = useState<Message[]>([]);
   const [newMessage, setNewMessage] = useState<string>("");
 
   useEffect(() => {
-    const element = document.getElementById("MessagesWrapper")!;
-    const scrollHeight = element.scrollHeight;
-    const clientHeight = element.clientHeight;
+    const MessagesDom = document.getElementById("MessagesWrapper")!;
+    const InputDom = document.getElementById("MessagesInput")!;
 
-    element.style.transition = "scroll 500ms ease-in-out"; // 添加过渡效果
-    element.scrollTo({
-      top: scrollHeight - clientHeight,
+    MessagesDom.style.transition = "scroll 500ms ease-in-out"; // 添加过渡效果
+    MessagesDom.scrollTo({
+      top: MessagesDom.scrollHeight - MessagesDom.clientHeight,
       behavior: "smooth", // 平滑滚动
     });
+
+    const rect = InputDom.getBoundingClientRect();
+    if (rect.top < 0 || rect.bottom > window.innerHeight) {
+      InputDom.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   const handleMessageSend = (): void => {
-    let content = [...messages, { text: newMessage }].reduce((str, item) => {
-      return str + item.text;
-    }, "");
+    let content = [...messagesData, { text: newMessage }].reduce(
+      (str, item, index) => {
+        // if (index % 2 === 0) return str + `(You:${item.text}\n)`;
+        return str + item.text;
+      },
+      ""
+    );
     if (content.length > 3800) {
       content = content.substr(-3800);
     }
@@ -47,13 +56,29 @@ function ChatGpt() {
         data: {
           content,
         },
-      }).then((res) => {
-        setMessages([
-          ...messages,
-          { text: newMessage },
-          { text: res.response.content },
-        ]);
-      });
+      })
+        .then((res) => {
+          setMessages([
+            ...messages,
+            { text: newMessage },
+            { text: res.response.content },
+          ]);
+
+          setMessagesData([
+            ...messagesData,
+            { text: newMessage },
+            { text: res.response.content },
+          ]);
+        })
+        .catch(() => {
+          setMessages([
+            ...messages,
+            { text: newMessage },
+            { text: "对不起，ai网络故障，请重新提问" },
+          ]);
+
+          setMessagesData([]);
+        });
 
       setNewMessage("");
       setMessages([...messages, { text: newMessage }]);
@@ -86,7 +111,7 @@ function ChatGpt() {
               </MessageBubble>
             ))}
           </MessagesWrapper>
-          <InputWrapper>
+          <InputWrapper id="MessagesInput">
             <Input
               type="text"
               value={newMessage}
