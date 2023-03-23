@@ -73,7 +73,7 @@ function ChatGpt() {
 
   return (
     <Plate title="ChatGPT" autograph="最新人工智能 ~ 在线体验">
-      <Plate.Main style={{ width: "1000px" }}>
+      <Plate.Main>
         <ChatWindowWrapper>
           <MessagesWrapper id="MessagesWrapper">
             {messages.map((message, index) => (
