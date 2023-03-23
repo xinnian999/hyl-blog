@@ -12,6 +12,7 @@ import { Button, Input } from "antd";
 
 interface Message {
   text: string;
+  id?: string;
 }
 
 function ChatGpt() {
@@ -36,17 +37,17 @@ function ChatGpt() {
   }, [messages]);
 
   const handleMessageSend = (): void => {
-    let content = [...messagesData, { text: newMessage }].reduce(
-      (str, item, index) => {
-        // if (index % 2 === 0) return str + `(You:${item.text}\n)`;
-        return str + item.text;
-      },
-      ""
-    );
-    if (content.length > 3800) {
-      content = content.substr(-3800);
-    }
-    console.log(content.length);
+    // let content = [...messagesData, { text: newMessage }].reduce(
+    //   (str, item, index) => {
+    //     // if (index % 2 === 0) return str + `(You:${item.text}\n)`;
+    //     return str + item.text;
+    //   },
+    //   ""
+    // );
+    // if (content.length > 3800) {
+    //   content = content.substr(-3800);
+    // }
+    // console.log(content.length);
 
     if (newMessage.trim()) {
       ajax({
@@ -54,20 +55,22 @@ function ChatGpt() {
         url: `/gpt`,
         timeout: 500000,
         data: {
-          content,
+          content: newMessage,
+          id: messages.length ? messages[messages.length - 1].id : "",
         },
       })
         .then((res) => {
+          const { content, id } = res.response;
           setMessages([
             ...messages,
             { text: newMessage },
-            { text: res.response.content },
+            { text: content, id },
           ]);
 
           setMessagesData([
             ...messagesData,
             { text: newMessage },
-            { text: res.response.content },
+            { text: content },
           ]);
         })
         .catch(() => {
