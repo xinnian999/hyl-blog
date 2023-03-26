@@ -31,6 +31,13 @@ const route: routeItem[] = [
         component: lazy(() => import("@/views/Journal/Say")),
       },
       {
+        title: "作品",
+        index: true,
+        path: "works",
+        icon: "icon-ziyuan1",
+        component: lazy(() => import("@/views/Resource/Works")),
+      },
+      {
         title: "归档",
         path: "file",
         icon: "icon-guidang",
@@ -63,28 +70,6 @@ const route: routeItem[] = [
         path: "link",
         icon: "icon-lianjie",
         component: lazy(() => import("@/views/Friend/Link")),
-      },
-    ],
-  },
-
-  {
-    title: "作品",
-    path: "/resource",
-    icon: "icon-ziyuan1",
-    component: lazy(() => import("@/views/Resource")),
-    children: [
-      {
-        title: "个人作品",
-        index: true,
-        path: "works",
-        icon: "icon-zuopin",
-        component: lazy(() => import("@/views/Resource/Works")),
-      },
-      {
-        title: "珍藏",
-        path: "collection",
-        icon: "icon-aixin_shixin",
-        component: lazy(() => import("@/views/Resource/Collection")),
       },
     ],
   },

@@ -7,6 +7,7 @@ const clearLogin = () => {
     if (res) {
       store.dispatch({ type: "CHANGE_LOGIN_STATE", payload: false });
       cookie.remove("blog_token");
+      cookie.remove("vip_token");
     }
   });
 };

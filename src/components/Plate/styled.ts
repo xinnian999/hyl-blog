@@ -72,7 +72,6 @@ export const Main = styled.div`
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
   flex: 1;
-  overflow: hidden;
 `;
 
 export const ToolbarWrapper = styled.div`

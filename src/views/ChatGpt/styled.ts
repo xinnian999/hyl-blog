@@ -5,6 +5,7 @@ export const ChatWindowWrapper = styled(Plate.Main)`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow: hidden;
 `;
 
 export const MessagesWrapper = styled.div`
@@ -56,7 +57,7 @@ export const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 10px;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
 `;
 
 export const InputField = styled.input`
