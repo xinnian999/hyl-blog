@@ -1,11 +1,14 @@
-#FloatButton {
+import styled from "styled-components";
+import { Space } from "antd";
+
+export const FloatButtonWrapper = styled(Space)`
   position: fixed;
   right: 15px;
   bottom: 20px;
   color: chocolate;
-}
+`;
 
-.setModal {
+export const SetModalWrapper = styled.ul`
   position: relative;
   padding-top: 25px;
   li {
@@ -37,4 +40,4 @@
     margin: 0 auto;
     margin-top: 20px;
   }
-}
+`;

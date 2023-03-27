@@ -1,5 +1,6 @@
 import { useRedux } from "@/hooks";
 import { Switch, Button, ModalFuncProps } from "antd";
+import { SetModalWrapper } from "./styled";
 
 const theme = [
   { bg: 217, color: "#1890ff" },
@@ -13,7 +14,7 @@ const Set = () => {
   const { autoplay } = store;
 
   return (
-    <ul className="setModal">
+    <SetModalWrapper>
       <li>
         <h4>播放背景音乐：</h4>
         <Switch
@@ -55,7 +56,7 @@ const Set = () => {
           进入网站后台管理
         </Button>
       </li>
-    </ul>
+    </SetModalWrapper>
   );
 };
 

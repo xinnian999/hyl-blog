@@ -1,9 +1,9 @@
-import { Button, Space, App, Tooltip } from "antd";
+import { Button, App, Tooltip } from "antd";
 import { SettingOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
 import { useRedux, useScroll } from "@/hooks";
 import setModalConfig from "./setModal";
-import "./style.scss";
 import { Icon } from "@/components";
+import { FloatButtonWrapper } from "./styled";
 
 function FloatButton() {
   const { top } = useScroll();
@@ -44,7 +44,7 @@ function FloatButton() {
   ];
 
   return (
-    <Space id="FloatButton" direction="vertical">
+    <FloatButtonWrapper direction="vertical">
       {action.map(({ icon, color, message, onclick }) => {
         if (top > 1) {
           return (
@@ -62,7 +62,7 @@ function FloatButton() {
         }
         return null;
       })}
-    </Space>
+    </FloatButtonWrapper>
   );
 }
 
