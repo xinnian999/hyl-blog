@@ -1,9 +1,9 @@
 import { Timeline } from "antd";
 import { classnames, time } from "hyl-utils";
 import { OverPack } from "rc-scroll-anim";
-import { Bubble, Icon, Image, Plate } from "@/components";
+import { Icon, Image, Plate } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
-import { JournalWrapper } from "./styled";
+import { JournalWrapper, Bubble } from "./styled";
 
 type Data = {
   content: string;

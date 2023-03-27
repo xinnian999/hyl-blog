@@ -1,4 +1,5 @@
 import { Plate } from "@/components";
+import { r } from "@/utils";
 import styled from "styled-components";
 
 export const LinkWrapper = styled(Plate.Main)`
@@ -64,4 +65,11 @@ export const LinkWrapper = styled(Plate.Main)`
       }
     }
   }
+`;
+
+export const Title = styled.h2`
+  margin: ${r`15px`} 0;
+  padding-left: ${r`20px`};
+  border-left: 5px solid var(--ant-primary-color);
+  font-weight: 700;
 `;

@@ -1,5 +1,6 @@
 import { Plate } from "@/components";
 import styled from "styled-components";
+import { r } from "@/utils";
 
 export const AboutWrapper = styled(Plate.Main)`
   padding: 15px;
@@ -46,4 +47,23 @@ export const AboutWrapper = styled(Plate.Main)`
       }
     }
   }
+`;
+
+export const Info = styled.div`
+  padding: ${r`30px`};
+  background-color: var(--highlight-background-color);
+  line-height: ${r`35px`};
+  overflow: auto;
+`;
+
+export const Section = styled.span`
+  display: block;
+  text-indent: 2em;
+`;
+
+export const Title = styled.h2`
+  margin: ${r`15px`} 0;
+  padding-left: ${r`20px`};
+  border-left: 5px solid var(--ant-primary-color);
+  font-weight: 700;
 `;

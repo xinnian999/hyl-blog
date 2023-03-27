@@ -1,11 +1,11 @@
 import { time } from "hyl-utils";
 import { List, Typography, Divider } from "antd";
-import { Title, Plate } from "@/components";
+import { Plate } from "@/components";
 import { useGetData } from "@/hooks";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import React from "react";
-import { FileWrapper } from "./styled";
+import { FileWrapper, Title } from "./styled";
 
 type Data = {
   createTime: string;

@@ -3,7 +3,7 @@ import { Select } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { request } from "@/utils";
 import { debounce } from "hyl-utils";
-import "./style.scss";
+import { SearchBar } from "./styled";
 
 class SearchInput extends PureComponent<any> {
   state = {
@@ -49,7 +49,7 @@ class SearchInput extends PureComponent<any> {
     });
 
     return (
-      <div className="searchBar">
+      <SearchBar>
         <Select
           showSearch
           value={value}
@@ -65,7 +65,7 @@ class SearchInput extends PureComponent<any> {
         <div className="searchBtn" onClick={this.onSearch}>
           <SearchOutlined />
         </div>
-      </div>
+      </SearchBar>
     );
   }
 }

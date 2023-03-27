@@ -2,7 +2,7 @@ import Icon from "@/components/Icon";
 import { Tag, Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
 import { TimeBar, Image } from "@/components";
-import "./style.scss";
+import { ArticleCardWrapper } from "./styled";
 
 function ArticleCard(props: ArticleCardProps) {
   const {
@@ -25,8 +25,8 @@ function ArticleCard(props: ArticleCardProps) {
 
   return (
     <Skeleton loading={loading}>
-      <div
-        className="ArticleCard  animate__animated animate__zoomIn"
+      <ArticleCardWrapper
+        className="animate__animated animate__zoomIn"
         onClick={() => history(`/article/${id}`)}
         key={id}
       >
@@ -60,7 +60,7 @@ function ArticleCard(props: ArticleCardProps) {
             </div>
           </div>
         </div>
-      </div>
+      </ArticleCardWrapper>
     </Skeleton>
   );
 }

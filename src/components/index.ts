@@ -1,5 +1,3 @@
-export { Bubble, Title, Tag, Info, Section } from "./StyleComponent";
-
 export { default as Anchor } from "./Anchor";
 export { default as Drawer } from "./Drawer";
 export { default as Error } from "./Error";

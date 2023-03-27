@@ -1,9 +1,9 @@
-import { Timeline, Tag as AntdTag, Card } from "antd";
+import { Timeline, Card, Tag } from "antd";
 import { time } from "hyl-utils";
 import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
-import { Title, Tag, Info, Section, Icon, Plate } from "@/components";
+import { Icon, Plate } from "@/components";
 import { useMount, useSetState, useGetData } from "@/hooks";
-import { AboutWrapper } from "./styled";
+import { AboutWrapper, Title, Info, Section } from "./styled";
 
 type updateLogData = {
   content: string;
@@ -109,9 +109,9 @@ const About = () => {
           <Timeline>
             {updateLog.map(({ content, createTime }) => (
               <Timeline.Item key={createTime}>
-                <AntdTag className="time">
+                <Tag className="time">
                   {time.parse(createTime, "YYYY-MM-DD")}
-                </AntdTag>
+                </Tag>
                 <div className="content">{content}</div>
               </Timeline.Item>
             ))}

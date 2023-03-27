@@ -3,9 +3,9 @@ import type { TabsProps } from "antd";
 import { Prism } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { Plate, Title, Copy } from "@/components";
+import { Plate, Copy } from "@/components";
 import { useGetData } from "@/hooks";
-import { LinkWrapper } from "./styled";
+import { LinkWrapper, Title } from "./styled";
 
 type Data = {
   name: string;

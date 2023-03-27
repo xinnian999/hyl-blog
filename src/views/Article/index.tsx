@@ -5,7 +5,7 @@ import ReactScroll from "react-infinite-scroll-component";
 import { useGetData } from "@/hooks";
 import { Plate } from "@/components";
 import { batchCopyDom } from "@/utils";
-import Search from "./Search/index";
+import Search from "./Search";
 import ArticleCard from "./ArticleCard";
 import { ArticleMain, ArticleSkeleton, ArticleCategory } from "./styled";
 

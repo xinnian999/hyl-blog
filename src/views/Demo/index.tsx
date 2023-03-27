@@ -1,7 +1,6 @@
 import { Plate } from "@/components";
 import { useMount } from "@/hooks";
 import { ajax } from "hyl-utils";
-import "./style.scss";
 import { DemoMain, VideoButton } from "./styled";
 
 export default function Demo() {
