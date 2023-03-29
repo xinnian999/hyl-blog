@@ -19,6 +19,7 @@ function Header() {
     ajax.get(
       "/weather/v3/weather/weatherInfo?key=1848b6f63d2bffe815674d808310bb54&city=110000"
     );
+    ajax.get("/weather/v3/ip?key=1848b6f63d2bffe815674d808310bb54");
   });
 
   return (
