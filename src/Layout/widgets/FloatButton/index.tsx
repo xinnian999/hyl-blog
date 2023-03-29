@@ -1,6 +1,6 @@
 import { App, Tooltip } from "antd";
 import { SettingOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
-import { useRedux, useScroll } from "@/hooks";
+import { useRedux, useScroll, useWindowSize } from "@/hooks";
 import setModalConfig from "./setModal";
 import { Icon } from "@/components";
 import { FloatButtonWrapper } from "./styled";
@@ -10,6 +10,8 @@ function FloatButton() {
   const { top } = useScroll();
 
   const navigate = useNavigate();
+
+  const windowSize = useWindowSize();
 
   const { modal } = App.useApp();
 
@@ -63,7 +65,7 @@ function FloatButton() {
   ];
 
   return (
-    <FloatButtonWrapper direction="vertical">
+    <FloatButtonWrapper direction="vertical" windowWidth={windowSize.width}>
       {action.map(({ icon, color, message, onclick }) => {
         return (
           <Tooltip title={message} placement="left" key={message}>

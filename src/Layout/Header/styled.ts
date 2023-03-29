@@ -2,7 +2,6 @@ import { r } from "@/utils";
 import styled from "styled-components";
 
 type HeaderWrapperProps = {
-  pathname: string;
   scrollTop: number;
 };
 
@@ -11,8 +10,8 @@ export const HeaderWrapper = styled.header<HeaderWrapperProps>`
   width: 100%;
   background-color: ${(props) =>
     props.scrollTop > 1 ? "#2f4154" : "transparent"};
+  height: ${(props) => (props.scrollTop > 1 ? r`50px` : r`60px`)};
   line-height: ${(props) => (props.scrollTop > 1 ? r`50px` : r`60px`)};
-  display: ${(props) => (props.pathname === "/home" ? "none" : "block")};
   z-index: 11;
   text-align: center;
   backdrop-filter: blur(3px);
@@ -40,7 +39,6 @@ export const Logo = styled.span`
   font-family: "汉仪霹雳体简";
   font-size: ${r`30px`};
   cursor: pointer;
-  margin-right: auto;
   color: #fff;
   @media screen and (max-width: 800px) {
     margin: 0 auto;
@@ -48,12 +46,16 @@ export const Logo = styled.span`
   }
 `;
 
+export const WeatherWrapper = styled.div`
+  color: #fff;
+  margin-left: 20px;
+  font-size: 13px;
+`;
+
 export const NavWrapper = styled.ul`
   display: inline-flex;
   margin-right: 15px;
-  @media screen and (max-width: 800px) {
-    display: none;
-  }
+  margin-left: auto;
 
   .navItem {
     position: relative;

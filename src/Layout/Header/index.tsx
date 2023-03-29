@@ -1,33 +1,27 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useMount, useScroll } from "@/hooks";
+import { useNavigate } from "react-router-dom";
+import { useScroll, useWindowSize } from "@/hooks";
 import Login from "./Login";
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
 import { HeaderWrapper, Logo } from "./styled";
-import { ajax } from "hyl-utils";
+import Weather from "./Weather";
 
 function Header() {
   const navigate = useNavigate();
 
-  const location = useLocation();
+  const windowSize = useWindowSize();
 
   const { top } = useScroll();
 
   const goHome = () => navigate("/home");
 
-  useMount(() => {
-    ajax.get(
-      "/weather/v3/weather/weatherInfo?key=1848b6f63d2bffe815674d808310bb54&city=110000"
-    );
-    ajax.get("/weather/v3/ip?key=1848b6f63d2bffe815674d808310bb54");
-  });
-
   return (
-    <HeaderWrapper scrollTop={top} pathname={location.pathname}>
+    <HeaderWrapper scrollTop={top}>
       <div className="main">
         <MobileNav />
         <Logo onClick={goHome}>{globalConfig.title}</Logo>
-        <Nav />
+        {windowSize.width > 800 && <Weather />}
+        {windowSize.width > 800 && <Nav />}
         <Login />
       </div>
     </HeaderWrapper>

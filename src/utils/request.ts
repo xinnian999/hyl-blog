@@ -14,6 +14,7 @@ request.interceptors = {
   beforeRequest(config) {
     config.csrfHeaderName = "X-CSRF-TOKEN";
     config.csrfCookieName = "csrf_token";
+    // config.headers={}
     return config;
   },
   errorRequest(err) {
