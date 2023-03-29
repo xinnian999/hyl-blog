@@ -10,7 +10,7 @@ import { ajax } from "hyl-utils";
 import { Avatar, Button, Input } from "antd";
 import aiImg from "@/assets/img/avatar/ai.jpg";
 import { UserOutlined } from "@ant-design/icons";
-import { useRedux } from "@/hooks";
+import { useMount, useRedux } from "@/hooks";
 
 interface Message {
   content: string;
@@ -23,6 +23,10 @@ function ChatGpt() {
   const { store } = useRedux();
 
   const { loginState, userInfo } = store;
+
+  useMount(() => {
+    document.title = `ChatGpt · ${globalConfig.title}`;
+  });
 
   useEffect(() => {
     const MessagesDom = document.getElementById("MessagesWrapper")!;

@@ -8,7 +8,7 @@ body{
     --border-color:#fff;
     --highlight-background-color:var(--ant-primary-1);
     --plate-text-color:rgba(255,255,255);
-    --box-shadow: 0 15px 35px rgb(50 50 93 / 10%);
+    --box-shadow: -5px 3px 10px 0px rgb(5 5 5 / 15%);
 
     --home-background-color:#fff;
     --homeFoot-background-color:#011425;

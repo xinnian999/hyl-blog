@@ -1,18 +1,37 @@
-import { Button, App, Tooltip } from "antd";
+import { App, Tooltip } from "antd";
 import { SettingOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
 import { useRedux, useScroll } from "@/hooks";
 import setModalConfig from "./setModal";
 import { Icon } from "@/components";
 import { FloatButtonWrapper } from "./styled";
+import { useNavigate } from "react-router-dom";
 
 function FloatButton() {
   const { top } = useScroll();
+
+  const navigate = useNavigate();
 
   const { modal } = App.useApp();
 
   const { store, dispatch } = useRedux();
 
   const action = [
+    {
+      icon: <Icon type="icon-shouye1" />,
+      color: "chocolate",
+      message: "首页",
+      onclick: () => {
+        navigate("/home");
+      },
+    },
+    {
+      icon: <Icon type="icon-jiqiren" />,
+      color: "chocolate",
+      message: "ChatGpt",
+      onclick: () => {
+        navigate("/chatgpt");
+      },
+    },
     {
       icon: <SettingOutlined />,
       color: "chocolate",
@@ -30,7 +49,7 @@ function FloatButton() {
       },
     },
     {
-      icon: <VerticalAlignTopOutlined />,
+      icon: top > 200 ? <VerticalAlignTopOutlined /> : null,
       color: "",
       message: "回顶部",
       onclick: () => {
@@ -46,21 +65,13 @@ function FloatButton() {
   return (
     <FloatButtonWrapper direction="vertical">
       {action.map(({ icon, color, message, onclick }) => {
-        if (top > 1) {
-          return (
-            <Tooltip title={message} placement="left" key={message}>
-              <Button
-                type="primary"
-                icon={icon}
-                size="large"
-                onClick={onclick}
-                style={{ background: color }}
-                className="animate__animated  animate__lightSpeedInRight"
-              />
-            </Tooltip>
-          );
-        }
-        return null;
+        return (
+          <Tooltip title={message} placement="left" key={message}>
+            <div className="item" onClick={onclick}>
+              {icon}
+            </div>
+          </Tooltip>
+        );
       })}
     </FloatButtonWrapper>
   );

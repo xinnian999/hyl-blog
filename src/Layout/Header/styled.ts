@@ -13,7 +13,7 @@ export const HeaderWrapper = styled.header<HeaderWrapperProps>`
     props.scrollTop > 1 ? "#2f4154" : "transparent"};
   line-height: ${(props) => (props.scrollTop > 1 ? r`50px` : r`60px`)};
   display: ${(props) => (props.pathname === "/home" ? "none" : "block")};
-  z-index: 10;
+  z-index: 11;
   text-align: center;
   backdrop-filter: blur(3px);
   transition: 0.5s all;
@@ -91,6 +91,7 @@ export const NavWrapper = styled.ul`
       background-color: #2f4154;
       box-shadow: 0 4px 7px 0 rgb(0 0 0 / 50%);
       overflow: hidden;
+      z-index: 99999;
       height: 0;
       opacity: 0;
       position: absolute;

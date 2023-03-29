@@ -1,4 +1,3 @@
-import { throttle } from "hyl-utils";
 
 const canvasBg = (bg) => {
   var ele = document.querySelector("#background");
@@ -117,4 +116,4 @@ const canvasBg = (bg) => {
   animation();
 };
 
-export default throttle(canvasBg, 500);
+export default canvasBg;

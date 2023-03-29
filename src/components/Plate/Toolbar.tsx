@@ -17,7 +17,9 @@ const Toolbar = ({ children, style }: DomProps) => {
   return (
     <>
       <ToolbarWrapper style={style}>
-        <Affix offsetTop={80}>{el}</Affix>
+        <Affix style={{ zIndex: 0 }} offsetTop={80}>
+          {el}
+        </Affix>
       </ToolbarWrapper>
       <Drawer placement="right" Flag={ToolbarFlag}>
         {el}

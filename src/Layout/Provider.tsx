@@ -1,24 +1,30 @@
 import { ConfigProvider as AntdProvider, App as AntdApp, theme } from "antd";
 import {
   legacyLogicalPropertiesTransformer,
-  StyleProvider,
+  StyleProvider as AntdStyleProvider,
 } from "@ant-design/cssinjs";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { cookie, removeDom, imgPrestrain, url } from "hyl-utils";
-import { useGetData, useMount, useRedux, useWindowSize } from "@/hooks";
+import {
+  useGetData,
+  useMount,
+  useRedux,
+  useScroll,
+  useWindowSize,
+} from "@/hooks";
 import { prestrainImage } from "@/config";
 import { changeBlogTitle } from "@/utils";
 import starBg from "./widgets/Background/starBg";
 
 function Provider({ children }) {
-  const { store } = useRedux();
-
   const location = useLocation();
 
-  const { dispatchAll } = useRedux();
+  const { dispatchAll, store } = useRedux();
 
   const { width } = useWindowSize();
+
+  const { top } = useScroll();
 
   useMount(() => {
     imgPrestrain(prestrainImage);
@@ -68,11 +74,8 @@ function Provider({ children }) {
     }
   }, [store.theme]);
 
-  // 主题监听
+  // 窗口监听
   useEffect(() => {
-    if (store.dark) {
-      starBg(store.theme.bg);
-    }
     const htmlEl = window.document.documentElement;
     const width = htmlEl.getBoundingClientRect().width;
 
@@ -81,7 +84,27 @@ function Provider({ children }) {
     } else {
       htmlEl.style.fontSize = `${globalConfig.rootValue}px`;
     }
+
+    // if (store.dark) {
+    //   starBg(store.theme.bg);
+    // }
   }, [width]);
+
+  // 页面滚动监听
+  useEffect(() => {
+    const lrcEl = document.querySelector(".aplayer-lrc") as HTMLElement;
+
+    if (lrcEl) {
+      if (
+        top + document.documentElement.clientHeight >=
+        document.documentElement.scrollHeight
+      ) {
+        lrcEl.style.display = "none";
+      } else {
+        lrcEl.style.display = "block";
+      }
+    }
+  }, [top]);
 
   return (
     <AntdProvider
@@ -94,12 +117,12 @@ function Provider({ children }) {
       }}
     >
       <AntdApp>
-        <StyleProvider
+        <AntdStyleProvider
           hashPriority="high"
           transformers={[legacyLogicalPropertiesTransformer]}
         >
           {children}
-        </StyleProvider>
+        </AntdStyleProvider>
       </AntdApp>
     </AntdProvider>
   );

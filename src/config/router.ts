@@ -2,7 +2,6 @@ import { lazy } from "react";
 
 const route: routeItem[] = [
   {
-    title: "首页",
     path: "/home",
     icon: "icon-shouye1",
     component: lazy(() => import("@/views/Home")),
@@ -74,7 +73,6 @@ const route: routeItem[] = [
     ],
   },
   {
-    title: "ChatGpt",
     path: "/chatgpt",
     icon: "icon-jiqiren",
     component: lazy(() => import("@/views/ChatGpt")),
