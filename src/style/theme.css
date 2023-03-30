@@ -6,7 +6,7 @@ body{
 #light {
     --background-color:#fff;
     --border-color:#fff;
-    --highlight-background-color:var(--ant-primary-1);
+    --highlight-background-color:var(--ant-primary-2);
     --plate-text-color:rgba(255,255,255);
     --box-shadow: -5px 3px 10px 0px rgb(5 5 5 / 15%);
 

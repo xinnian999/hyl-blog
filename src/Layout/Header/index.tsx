@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import MobileNav from "./MobileNav";
 import { HeaderWrapper, Logo } from "./styled";
 import Weather from "./Weather";
+import Search from "./Search";
 
 function Header() {
   const navigate = useNavigate();
@@ -18,10 +19,11 @@ function Header() {
   return (
     <HeaderWrapper scrollTop={top}>
       <div className="main">
-        <MobileNav />
+        {windowSize.width < 800 && <MobileNav />}
         <Logo onClick={goHome}>{globalConfig.title}</Logo>
         {windowSize.width > 800 && <Weather />}
         {windowSize.width > 800 && <Nav />}
+        <Search />
         <Login />
       </div>
     </HeaderWrapper>

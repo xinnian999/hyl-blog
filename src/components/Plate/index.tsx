@@ -25,8 +25,14 @@ function Plate(props: PlateProps) {
         <div className="info">
           <h2>{title}</h2>
           <div className="autograph">
-            <span className="autograph-text">{autograph}</span>
-            <span className="autograph-cursor">__</span>
+            {typeof autograph === "string" ? (
+              <>
+                <span className="autograph-text">{autograph}</span>
+                <span className="autograph-cursor">__</span>
+              </>
+            ) : (
+              autograph
+            )}
           </div>
         </div>
       </PlateBanner>

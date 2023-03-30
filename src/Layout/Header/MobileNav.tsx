@@ -7,16 +7,11 @@ import { memo } from "react";
 import styled from "styled-components";
 
 const MobileNavFlag = styled.div`
-  display: none;
   padding: 0 15px;
   font-size: 18px;
   color: #fff;
   a {
     color: inherit;
-  }
-  @media screen and (max-width: 800px) {
-    display: inline-block;
-    float: left;
   }
 `;
 

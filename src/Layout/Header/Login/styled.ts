@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const LoginWrapper = styled.div`
   display: inline-block;
   @media screen and (max-width: 800px) {
-    margin-right: 20px;
+    margin-right: 15px;
   }
 `;
 

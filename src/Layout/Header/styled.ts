@@ -42,7 +42,6 @@ export const Logo = styled.span`
   color: #fff;
   @media screen and (max-width: 800px) {
     margin: 0 auto;
-    float: none;
   }
 `;
 
@@ -54,7 +53,6 @@ export const WeatherWrapper = styled.div`
 
 export const NavWrapper = styled.ul`
   display: inline-flex;
-  margin-right: 15px;
   margin-left: auto;
 
   .navItem {
@@ -111,6 +109,18 @@ export const NavWrapper = styled.ul`
           display: block;
         }
       }
+    }
+  }
+`;
+
+export const SearchWrapper = styled.div`
+  font-size: 20px;
+  margin: 0 20px;
+  .icon {
+    cursor: pointer;
+    color: #fff;
+    &:hover {
+      color: var(--ant-primary-4);
     }
   }
 `;

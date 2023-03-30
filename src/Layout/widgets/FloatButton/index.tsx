@@ -65,7 +65,7 @@ function FloatButton() {
   ];
 
   return (
-    <FloatButtonWrapper direction="vertical" windowWidth={windowSize.width}>
+    <FloatButtonWrapper direction="vertical" window={windowSize}>
       {action.map(({ icon, color, message, onclick }) => {
         return (
           <Tooltip title={message} placement="left" key={message}>

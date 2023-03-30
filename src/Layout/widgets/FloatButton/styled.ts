@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { Space } from "antd";
 
-type FloatButtonWrapperProps = { windowWidth: number };
+type FloatButtonWrapperProps = { window: any };
 
 export const FloatButtonWrapper = styled(Space)<FloatButtonWrapperProps>`
   position: fixed;
-  right: ${(props) => (props.windowWidth > 800 ? "10px;" : 0)};
+  right: ${(props) => (props.window.width > 800 ? "10px;" : 0)};
   top: 50%;
   transform: translateY(-50%);
   padding: 5px 0;
