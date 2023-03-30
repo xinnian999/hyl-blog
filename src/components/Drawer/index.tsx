@@ -1,35 +1,27 @@
-import { Drawer as AntdDrawer } from "antd";
+import { Drawer as AntdDrawer, DrawerProps as AntdDrawerProps } from "antd";
 import { useBoolean } from "@/hooks";
-import { MenuOutlined } from "@ant-design/icons";
 import { memo } from "react";
 
-interface DrawerProps extends DomProps {
-  title?: string;
-  placement: any;
+interface DrawerProps extends AntdDrawerProps {
   Flag: any;
 }
 
 function Drawer(props: DrawerProps) {
-  const { children, className, id, title, placement, Flag } = props;
+  const { Flag, ...antdDrawerProps } = props;
 
   const [open, on, off] = useBoolean(false);
 
   return (
     <>
-      <Flag onClick={on}>
-        <MenuOutlined />
-      </Flag>
+      <Flag onClick={on} />
       <AntdDrawer
-        title={title}
-        placement={placement}
         onClose={off}
         width="60%"
         open={open}
         destroyOnClose
         getContainer={() => document.querySelector("#main")!}
-      >
-        {children}
-      </AntdDrawer>
+        {...antdDrawerProps}
+      />
     </>
   );
 }

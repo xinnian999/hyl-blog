@@ -1,17 +1,15 @@
 import { r } from "@/utils";
 import styled from "styled-components";
 
-type HeaderWrapperProps = {
-  scrollTop: number;
-};
-
-export const HeaderWrapper = styled.header<HeaderWrapperProps>`
+export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
   background-color: ${(props) =>
-    props.scrollTop > 1 ? "#2f4154" : "transparent"};
-  height: ${(props) => (props.scrollTop > 1 ? r`50px` : r`60px`)};
-  line-height: ${(props) => (props.scrollTop > 1 ? r`50px` : r`60px`)};
+    props.theme.scrollTop > 1 ? "#2f4154" : "transparent"};
+  height: ${(props) => {
+    return props.theme.scrollTop > 1 ? r`50px` : r`60px`;
+  }};
+  line-height: ${(props) => (props.theme.scrollTop > 1 ? r`50px` : r`60px`)};
   z-index: 11;
   text-align: center;
   backdrop-filter: blur(3px);
@@ -109,18 +107,6 @@ export const NavWrapper = styled.ul`
           display: block;
         }
       }
-    }
-  }
-`;
-
-export const SearchWrapper = styled.div`
-  font-size: 20px;
-  margin: 0 20px;
-  .icon {
-    cursor: pointer;
-    color: #fff;
-    &:hover {
-      color: var(--ant-primary-4);
     }
   }
 `;

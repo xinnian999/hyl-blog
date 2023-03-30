@@ -5,14 +5,12 @@ import { Icon, Drawer } from "@/components";
 import { NavLink, useLocation } from "react-router-dom";
 import { memo } from "react";
 import styled from "styled-components";
+import { MenuOutlined } from "@ant-design/icons";
 
-const MobileNavFlag = styled.div`
+const MobileNavFlag = styled(MenuOutlined)`
   padding: 0 15px;
   font-size: 18px;
   color: #fff;
-  a {
-    color: inherit;
-  }
 `;
 
 type MenuItem = Required<MenuProps>["items"][number];

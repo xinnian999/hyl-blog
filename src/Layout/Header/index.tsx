@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useScroll, useWindowSize } from "@/hooks";
+import { useWindowSize } from "@/hooks";
 import Login from "./Login";
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
@@ -12,18 +12,16 @@ function Header() {
 
   const windowSize = useWindowSize();
 
-  const { top } = useScroll();
-
   const goHome = () => navigate("/home");
 
   return (
-    <HeaderWrapper scrollTop={top}>
+    <HeaderWrapper>
       <div className="main">
         {windowSize.width < 800 && <MobileNav />}
         <Logo onClick={goHome}>{globalConfig.title}</Logo>
         {windowSize.width > 800 && <Weather />}
         {windowSize.width > 800 && <Nav />}
-        <Search />
+        {windowSize.width > 800 && <Search />}
         <Login />
       </div>
     </HeaderWrapper>

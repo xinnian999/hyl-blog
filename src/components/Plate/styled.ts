@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { r } from "@/utils";
+import { MenuOutlined } from "@ant-design/icons";
 
 interface PlateBannerProps {
   bg: string;
@@ -91,7 +92,7 @@ export const ToolbarItem = styled.div`
   overflow: hidden;
 `;
 
-export const ToolbarFlag = styled.div`
+export const ToolbarFlag = styled(MenuOutlined)`
   position: fixed;
   right: 0;
   top: 30%;
