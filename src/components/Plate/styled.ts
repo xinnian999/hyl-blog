@@ -79,9 +79,6 @@ export const ToolbarWrapper = styled.div`
   width: 25%;
   margin-left: 25px;
   position: relative;
-  @media screen and (max-width: 800px) {
-    display: none;
-  }
 `;
 
 export const ToolbarItem = styled.div`
@@ -105,8 +102,4 @@ export const ToolbarFlag = styled(MenuOutlined)`
   padding: 5px 10px;
   cursor: pointer;
   z-index: 999;
-  display: none;
-  @media screen and (max-width: 800px) {
-    display: block;
-  }
 `;

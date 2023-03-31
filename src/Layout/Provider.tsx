@@ -137,6 +137,7 @@ function Provider({ children }) {
     location,
     isMoblie: width < 800,
     scrollTop: top,
+    isDark: store.dark,
   };
 
   return (

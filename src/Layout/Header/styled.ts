@@ -4,12 +4,10 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
-  background-color: ${(props) =>
-    props.theme.scrollTop > 1 ? "#2f4154" : "transparent"};
-  height: ${(props) => {
-    return props.theme.scrollTop > 1 ? r`50px` : r`60px`;
-  }};
-  line-height: ${(props) => (props.theme.scrollTop > 1 ? r`50px` : r`60px`)};
+  background-color: ${({ theme }) =>
+    theme.scrollTop > 1 ? "#2f4154" : "transparent"};
+  height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
+  line-height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
   z-index: 11;
   text-align: center;
   backdrop-filter: blur(3px);

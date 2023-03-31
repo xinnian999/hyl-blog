@@ -86,12 +86,12 @@
 
       $this.text()
         ? setTimeout(function () {
-            animate($this, options.effect, complete);
+          animate($this, options.effect, complete);
 
-            if (i + 1 === $chars.length) {
-              $(".autograph-cursor").css("animation-play-state", "");
-            }
-          }, delay)
+          if (i + 1 === $chars.length) {
+            $(".autograph-cursor").css("animation-play-state", "");
+          }
+        }, delay)
         : complete();
     });
   }
@@ -210,29 +210,5 @@
         data.setOptions.call(data, options);
       }
     });
-  };
-
-  $.fn.textillate.defaults = {
-    selector: ".texts",
-    loop: false,
-    minDisplayTime: 2000,
-    initialDelay: 0,
-    in: {
-      effect: "fadeInLeftBig",
-      delayScale: 1.5,
-      delay: 50,
-      sync: false,
-      shuffle: false,
-    },
-    out: {
-      effect: "hinge",
-      delayScale: 1.5,
-      delay: 50,
-      sync: false,
-      shuffle: false,
-    },
-    autoStart: true,
-    inEffects: [],
-    outEffects: ["hinge"],
   };
 })();
