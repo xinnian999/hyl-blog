@@ -19,7 +19,7 @@ import {
   useScroll,
   useWindowSize,
 } from "@/hooks";
-import { prestrainImage } from "@/config";
+import { prestrainImage, ReactContext } from "@/config";
 import { changeBlogTitle } from "@/utils";
 import starBg from "./widgets/Background/starBg";
 
@@ -141,24 +141,28 @@ function Provider({ children }) {
   };
 
   return (
-    <AntdProvider
-      theme={{
-        token: {
-          colorPrimary: store.theme.color,
-          fontFamily: "font",
-        },
-        algorithm: store.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
-      }}
-    >
-      <AntdApp>
-        <AntdStyleProvider
-          hashPriority="high"
-          transformers={[legacyLogicalPropertiesTransformer]}
-        >
-          <StyledProvider theme={styledGlobalProps}>{children}</StyledProvider>
-        </AntdStyleProvider>
-      </AntdApp>
-    </AntdProvider>
+    <ReactContext.Provider value={{ top, width }}>
+      <AntdProvider
+        theme={{
+          token: {
+            colorPrimary: store.theme.color,
+            fontFamily: "font",
+          },
+          algorithm: store.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        }}
+      >
+        <AntdApp>
+          <AntdStyleProvider
+            hashPriority="high"
+            transformers={[legacyLogicalPropertiesTransformer]}
+          >
+            <StyledProvider theme={styledGlobalProps}>
+              {children}
+            </StyledProvider>
+          </AntdStyleProvider>
+        </AntdApp>
+      </AntdProvider>
+    </ReactContext.Provider>
   );
 }
 
