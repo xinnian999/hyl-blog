@@ -1,9 +1,9 @@
 import { Drawer } from "@/components";
-import { useBoolean, useGetData } from "@/hooks";
+import { useBoolean, useMount } from "@/hooks";
 import { RightOutlined } from "@ant-design/icons";
-import { Input, List, Tag } from "antd";
+import { Input, List } from "antd";
 import { request } from "@/utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchWrapper, SearchFlag, SearchMain, ListItem } from "./styled";
 
 const hotTag = [
@@ -52,10 +52,19 @@ const enumResult = (item) => {
 function Search() {
   const [value, setValue] = useState("");
   const [result, setResult] = useState<any[]>([]);
+  const [historyTag, setHistoryTag] = useState<string[]>([]);
   const [isSearch, on, off] = useBoolean(false);
+
+  useMount(() => {
+    const historySearch = localStorage.getItem("historyTag");
+    if (historySearch) setHistoryTag(JSON.parse(historySearch));
+  });
 
   const onSearch = (val: string, e?: any) => {
     if (val) {
+      const history = [...historyTag, val];
+      localStorage.setItem("historyTag", JSON.stringify(history));
+      setHistoryTag(history);
       request.get(`/all/search`, { q: val }).then((res) => {
         on();
 
