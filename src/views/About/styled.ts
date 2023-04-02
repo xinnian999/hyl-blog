@@ -51,7 +51,7 @@ export const AboutWrapper = styled(Plate.Main)`
 
 export const Info = styled.div`
   padding: ${r`30px`};
-  background-color: var(--highlight-background-color);
+  background-color: ${({ theme }) => (theme.isDark ? "#555" : "#eee")};
   line-height: ${r`35px`};
   overflow: auto;
 `;

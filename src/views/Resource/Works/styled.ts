@@ -25,6 +25,7 @@ export const WorkWrapper = styled(Plate.Main)`
       font-weight: bold;
       padding-bottom: 5px;
       letter-spacing: 5px;
+      text-shadow: 0px 0px 5px #fff;
     }
 
     hr {
@@ -37,6 +38,7 @@ export const WorkWrapper = styled(Plate.Main)`
     .autograph {
       display: none;
       font-size: 25px;
+      text-shadow: 0px 0px 5px #fff;
       font-weight: bold;
     }
 
@@ -48,10 +50,10 @@ export const WorkWrapper = styled(Plate.Main)`
       hr {
         display: block;
       }
-      .autograph,
+      /* .autograph,
       .title {
         text-shadow: 1px 1px #fff;
-      }
+      } */
       &::before {
         display: block;
       }

@@ -1,4 +1,5 @@
 import { Icon } from "@/components";
+import { List } from "antd";
 import styled from "styled-components";
 
 export const SearchWrapper = styled.div`
@@ -44,5 +45,12 @@ export const SearchMain = styled.div`
         margin-right: auto;
       }
     }
+  }
+`;
+
+export const ListItem = styled(List.Item)`
+  cursor: pointer;
+  &:hover {
+    background-color: var(--highlight-background-color);
   }
 `;

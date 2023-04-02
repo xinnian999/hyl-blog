@@ -1,11 +1,10 @@
 import { Drawer } from "@/components";
-import { useGetData } from "@/hooks";
+import { useBoolean, useGetData } from "@/hooks";
+import { RightOutlined } from "@ant-design/icons";
+import { Input, List, Tag } from "antd";
 import { request } from "@/utils";
-import { LeftOutlined, RightOutlined } from "@ant-design/icons";
-import { Input, Select, Table, List } from "antd";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { SearchWrapper, SearchFlag, SearchMain } from "./styled";
+import { SearchWrapper, SearchFlag, SearchMain, ListItem } from "./styled";
 
 const hotTag = [
   "react",
@@ -24,28 +23,47 @@ const hotTag = [
 
 const historyTag = ["useContext", "javascript", "性能优化"];
 
-const categoryInfo = [{ key: "article", filterKey: "title", column: [] }];
+const enumResult = (item) => {
+  let r = { name: "", link: "" };
+  switch (item.tag) {
+    case "article":
+      r.name = "文章";
+      r.link = `/article/${item.id}`;
+      break;
+    case "note":
+      r.name = "笔记";
+      r.link = `/journal/note`;
+      break;
+    case "work":
+      r.name = "个人作品";
+      r.link = item.link;
+      break;
+    case "link":
+      r.name = "友情链接";
+      r.link = item.link;
+      break;
+    default:
+      break;
+  }
+
+  return r;
+};
 
 function Search() {
-  const [key, setKey] = useState("article");
   const [value, setValue] = useState("");
-  const [result, run] = useGetData(`/${key}/query`, { manual: true });
+  const [result, setResult] = useState<any[]>([]);
+  const [isSearch, on, off] = useBoolean(false);
 
-  const navigate = useNavigate();
+  const onSearch = (val: string, e?: any) => {
+    if (val) {
+      request.get(`/all/search`, { q: val }).then((res) => {
+        on();
 
-  const selectBefore = (
-    <Select defaultValue="article" onChange={(key) => setKey(key)}>
-      <Select.Option value="article">文章</Select.Option>
-      <Select.Option value="resource">作品</Select.Option>
-    </Select>
-  );
-  const onSearch = (value: string) => {
-    // request
-    //   .get(`/${key}/query`, { filters: { title: value } })
-    //   .then((res: responseType) => {
-    //     console.log(res);
-    //   });
-    run({ data: { filters: { title: value } } });
+        setResult(res);
+      });
+    } else {
+      off();
+    }
   };
 
   return (
@@ -59,7 +77,6 @@ function Search() {
         <SearchMain>
           <div className="block">
             <Input.Search
-              addonBefore={selectBefore}
               placeholder="请输入搜索字段，支持模糊查询"
               allowClear
               onSearch={onSearch}
@@ -67,20 +84,19 @@ function Search() {
               onChange={(val) => setValue(val.target.value)}
             />
           </div>
-          {result.length ? (
+          {isSearch ? (
             <div className="block">
               <List
                 dataSource={result}
-                style={{ height: "250px", overflow: "auto" }}
+                style={{ height: "300px", overflow: "auto" }}
+                locale={{ emptyText: "哦！没有搜索结果" }}
                 renderItem={(item) => (
-                  <List.Item
+                  <ListItem
                     actions={[<RightOutlined />]}
-                    onClick={() =>
-                      (window.location.href = `/${key}/${item.id}`)
-                    }
+                    onClick={() => window.open(enumResult(item).link, "_self")}
                   >
-                    {item.title}
-                  </List.Item>
+                    【{enumResult(item).name}】 {item.title || item.name}
+                  </ListItem>
                 )}
               />
             </div>

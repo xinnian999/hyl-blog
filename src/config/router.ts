@@ -73,6 +73,7 @@ const route: routeItem[] = [
     ],
   },
   {
+    title: "ChatGpt",
     path: "/chatgpt",
     icon: "icon-jiqiren",
     component: lazy(() => import("@/views/ChatGpt")),
