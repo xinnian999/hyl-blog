@@ -11,6 +11,7 @@ import { Avatar, Button, Input } from "antd";
 import aiImg from "@/assets/img/avatar/ai.jpg";
 import { UserOutlined } from "@ant-design/icons";
 import { useMount, useRedux } from "@/hooks";
+import axios from "axios";
 
 interface Message {
   content: string;
@@ -45,19 +46,23 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      ajax({
+      axios({
         method: "post",
         url: `/gpt`,
-        timeout: 500000,
+        responseType: "stream",
         data: {
           messages: [...messages, { content: newMessage, role: "user" }],
         },
       }).then((res) => {
-        setMessages([
-          ...messages,
-          { content: newMessage, role: "user" },
-          res.response.data,
-        ]);
+        // setMessages([
+        //   ...messages,
+        //   { content: newMessage, role: "user" },
+        //   res.response.data,
+        // ]);
+        res.data.on("data", function (chunk) {
+          // 处理每个数据块
+          console.log(chunk.toString());
+        });
       });
 
       setNewMessage("");
