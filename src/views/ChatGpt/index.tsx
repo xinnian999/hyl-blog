@@ -6,7 +6,6 @@ import {
   MessageBubble,
   InputWrapper,
 } from "./styled";
-import { ajax } from "hyl-utils";
 import { Avatar, Button, Input } from "antd";
 import aiImg from "@/assets/img/avatar/ai.jpg";
 import { UserOutlined } from "@ant-design/icons";
@@ -46,23 +45,56 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      axios({
-        method: "post",
-        url: `/gpt`,
-        responseType: "stream",
-        data: {
-          messages: [...messages, { content: newMessage, role: "user" }],
+      // axios({
+      //   method: "post",
+      //   url: `/gpt/chatgpt2`,
+      //   responseType: "stream",
+      //   data: {
+      //     messages: [...messages, { content: newMessage, role: "user" }],
+      //   },
+      // }).then((res) => {
+      //   // setMessages([
+      //   //   ...messages,
+      //   //   { content: newMessage, role: "user" },
+      //   //   res.data.data,
+      //   // ]);
+      //   // res.data.on("data", function (chunk) {
+      //   //   // 处理每个数据块
+      //   //   console.log(chunk.toString());
+      //   // });
+
+      //   console.log(res.data);
+      // });
+      let texts = "";
+      fetch("/gpt/chatgpt2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      }).then((res) => {
-        // setMessages([
-        //   ...messages,
-        //   { content: newMessage, role: "user" },
-        //   res.response.data,
-        // ]);
-        res.data.on("data", function (chunk) {
-          // 处理每个数据块
-          console.log(chunk.toString());
-        });
+        body: JSON.stringify({
+          messages: [...messages, { content: newMessage, role: "user" }],
+        }),
+      }).then(async (response) => {
+        //获取UTF8的解码
+        const encode = new TextDecoder("utf-8");
+        //获取body的reader
+        const reader = response.body!.getReader();
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            break;
+          }
+          // 解码内容
+          const text = encode.decode(value);
+          const jsonString = text.slice(
+            text.indexOf("{"),
+            text.lastIndexOf("}") + 1
+          );
+          // const data = JSON.parse(jsonString);
+          // const content = data.choices[0].delta.content;
+          console.log(jsonString);
+        }
       });
 
       setNewMessage("");
