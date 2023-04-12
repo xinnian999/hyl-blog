@@ -45,57 +45,60 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      // axios({
-      //   method: "post",
-      //   url: `/gpt/chatgpt2`,
-      //   responseType: "stream",
-      //   data: {
-      //     messages: [...messages, { content: newMessage, role: "user" }],
-      //   },
-      // }).then((res) => {
-      //   // setMessages([
-      //   //   ...messages,
-      //   //   { content: newMessage, role: "user" },
-      //   //   res.data.data,
-      //   // ]);
-      //   // res.data.on("data", function (chunk) {
-      //   //   // 处理每个数据块
-      //   //   console.log(chunk.toString());
-      //   // });
-
-      //   console.log(res.data);
-      // });
-      let texts = "";
-      fetch("/gpt/chatgpt2", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      axios({
+        method: "post",
+        url: `/gpt/chatgpt`,
+        data: {
           messages: [...messages, { content: newMessage, role: "user" }],
-        }),
-      }).then(async (response) => {
-        //获取UTF8的解码
-        const encode = new TextDecoder("utf-8");
-        //获取body的reader
-        const reader = response.body!.getReader();
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) {
-            break;
-          }
-          // 解码内容
-          const text = encode.decode(value);
-          const jsonString = text.slice(
-            text.indexOf("{"),
-            text.lastIndexOf("}") + 1
-          );
-          // const data = JSON.parse(jsonString);
-          // const content = data.choices[0].delta.content;
-          console.log(jsonString);
-        }
+        },
+      }).then((res) => {
+        setMessages([
+          ...messages,
+          { content: newMessage, role: "user" },
+          res.data.data,
+        ]);
       });
+
+      // let texts = "";
+      // fetch("/gpt/chatgpt2", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     messages: [...messages, { content: newMessage, role: "user" }],
+      //   }),
+      // }).then(async (response) => {
+      //   //获取UTF8的解码
+      //   const encode = new TextDecoder("utf-8");
+      //   //获取body的reader
+      //   const reader = response.body!.getReader();
+      //   let texts = "";
+      //   while (true) {
+      //     const { done, value } = await reader.read();
+      //     if (done) {
+      //       break;
+      //     }
+      //     // 解码内容
+      //     const text = encode.decode(value);
+
+      //     const pattern = /"content":"([^"]+)"/g;
+
+      //     let match;
+
+      //     while ((match = pattern.exec(text))) {
+      //       const content = match[1];
+      //       texts += content;
+      //       console.log(content, texts, messages);
+
+      //       setMessages([
+      //         ...messages,
+      //         { content: newMessage, role: "user" },
+      //         { content: texts, role: "assistant" },
+      //       ]);
+      //     }
+      //   }
+      // });
 
       setNewMessage("");
       setMessages([...messages, { content: newMessage, role: "user" }]);

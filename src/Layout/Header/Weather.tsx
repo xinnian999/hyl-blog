@@ -4,7 +4,7 @@ import { WeatherWrapper } from "./styled";
 function Weather() {
   const [data] = useGetData("/all/getWeather");
 
-  if (data.length) {
+  if (data?.length) {
     const { province, temperature, weather } = data[0];
     return (
       <WeatherWrapper>
