@@ -45,59 +45,18 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      axios({
-        method: "post",
-        url: `/gpt/chatgpt`,
-        data: {
-          messages: [...messages, { content: newMessage, role: "user" }],
-        },
-      }).then((res) => {
-        setMessages([
-          ...messages,
-          { content: newMessage, role: "user" },
-          res.data.data,
-        ]);
-      });
-
-      // let texts = "";
-      // fetch("/gpt/chatgpt2", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
+      // axios({
+      //   method: "post",
+      //   url: `/gpt/chatgpt`,
+      //   data: {
       //     messages: [...messages, { content: newMessage, role: "user" }],
-      //   }),
-      // }).then(async (response) => {
-      //   //获取UTF8的解码
-      //   const encode = new TextDecoder("utf-8");
-      //   //获取body的reader
-      //   const reader = response.body!.getReader();
-      //   let texts = "";
-      //   while (true) {
-      //     const { done, value } = await reader.read();
-      //     if (done) {
-      //       break;
-      //     }
-      //     // 解码内容
-      //     const text = encode.decode(value);
-
-      //     const pattern = /"content":"([^"]+)"/g;
-
-      //     let match;
-
-      //     while ((match = pattern.exec(text))) {
-      //       const content = match[1];
-      //       texts += content;
-      //       console.log(content, texts, messages);
-
-      //       setMessages([
-      //         ...messages,
-      //         { content: newMessage, role: "user" },
-      //         { content: texts, role: "assistant" },
-      //       ]);
-      //     }
-      //   }
+      //   },
+      // }).then((res) => {
+      //   setMessages([
+      //     ...messages,
+      //     { content: newMessage, role: "user" },
+      //     res.data.data,
+      //   ]);
       // });
 
       setNewMessage("");
@@ -109,8 +68,49 @@ function ChatGpt() {
           { content: "ai思索中...", role: "assistant" },
         ]);
       }, 700);
+
+      let texts = "";
+      fetch("/gpt/chatgpt2", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [...messages, { content: newMessage, role: "user" }],
+        }),
+      }).then(async (response) => {
+        //获取UTF8的解码
+        const encode = new TextDecoder("utf-8");
+        //获取body的reader
+        const reader = response.body!.getReader();
+        let texts = "";
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) {
+            break;
+          }
+          // 解码内容
+          const text = encode.decode(value);
+
+          const pattern = /"content":"([^"]+)"/g;
+
+          let match;
+
+          while ((match = pattern.exec(text))) {
+            const content = match[1];
+            texts += content;
+
+            setMessages([
+              ...messages,
+              { content: newMessage, role: "user" },
+              { content: texts, role: "assistant" },
+            ]);
+          }
+        }
+      });
     }
   };
+  console.log(messages);
 
   const handleKeyPress = (
     event: React.KeyboardEvent<HTMLInputElement>
