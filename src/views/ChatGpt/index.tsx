@@ -92,25 +92,25 @@ function ChatGpt() {
           // 解码内容
           const text = encode.decode(value);
 
-          const pattern = /"content":"([^"]+)"/g;
+          const regex = /{[\s\S]*?\]}/g;
+          const matches = text.match(regex);
+          matches?.forEach((item) => {
+            const c = JSON.parse(item);
 
-          let match;
+            if (c.choices[0].delta.content) {
+              texts += c.choices[0].delta.content;
 
-          while ((match = pattern.exec(text))) {
-            const content = match[1];
-            texts += content;
-
-            setMessages([
-              ...messages,
-              { content: newMessage, role: "user" },
-              { content: texts, role: "assistant" },
-            ]);
-          }
+              setMessages([
+                ...messages,
+                { content: newMessage, role: "user" },
+                { content: texts, role: "assistant" },
+              ]);
+            }
+          });
         }
       });
     }
   };
-  console.log(messages);
 
   const handleKeyPress = (
     event: React.KeyboardEvent<HTMLInputElement>
