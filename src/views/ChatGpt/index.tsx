@@ -91,22 +91,30 @@ function ChatGpt() {
           }
           // 解码内容
           const text = encode.decode(value);
+          console.log(text);
 
-          const regex = /{[\s\S]*?\]}/g;
-          const matches = text.match(regex);
-          matches?.forEach((item) => {
-            const c = JSON.parse(item);
+          // const regex = /{[\s\S]*?\]}/g;
+          // const matches = text.match(regex);
+          text
+            .split("data: ")
+            .filter((item) => item)
+            .forEach((item) => {
+              try {
+                const c = JSON.parse(item);
 
-            if (c.choices[0].delta.content) {
-              texts += c.choices[0].delta.content;
+                if (c.choices[0].delta.content) {
+                  texts += c.choices[0].delta.content;
+                }
 
-              setMessages([
-                ...messages,
-                { content: newMessage, role: "user" },
-                { content: texts, role: "assistant" },
-              ]);
-            }
-          });
+                setMessages([
+                  ...messages,
+                  { content: newMessage, role: "user" },
+                  { content: texts, role: "assistant" },
+                ]);
+              } catch (e) {
+                console.log([e, item, text]);
+              }
+            });
         }
       });
     }
