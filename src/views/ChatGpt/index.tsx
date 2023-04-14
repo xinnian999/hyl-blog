@@ -69,7 +69,6 @@ function ChatGpt() {
         ]);
       }, 700);
 
-      let texts = "";
       fetch("/gpt/chatgpt2", {
         method: "POST",
         headers: {
@@ -83,6 +82,7 @@ function ChatGpt() {
         const encode = new TextDecoder("utf-8");
         //获取body的reader
         const reader = response.body!.getReader();
+
         let texts = "";
         while (true) {
           const { done, value } = await reader.read();
@@ -91,30 +91,31 @@ function ChatGpt() {
           }
           // 解码内容
           const text = encode.decode(value);
-          console.log(text);
+          //拼接总消息json字符串
+          texts += text;
+          //切成消息数组，并过滤掉空数据
+          const datas = texts.split("data: ").filter((item) => item);
 
-          // const regex = /{[\s\S]*?\]}/g;
-          // const matches = text.match(regex);
-          text
-            .split("data: ")
-            .filter((item) => item)
-            .forEach((item) => {
-              try {
-                const c = JSON.parse(item);
+          let contents = "";
 
-                if (c.choices[0].delta.content) {
-                  texts += c.choices[0].delta.content;
-                }
+          // 遍历消息
+          datas.forEach((item) => {
+            try {
+              const c = JSON.parse(item);
 
-                setMessages([
-                  ...messages,
-                  { content: newMessage, role: "user" },
-                  { content: texts, role: "assistant" },
-                ]);
-              } catch (e) {
-                console.log([e, item, text]);
+              if (c.choices[0].delta.content) {
+                contents += c.choices[0].delta.content;
               }
-            });
+            } catch (e) {
+              // console.log([e, item, text, texts]);
+            }
+          });
+
+          setMessages([
+            ...messages,
+            { content: newMessage, role: "user" },
+            { content: contents, role: "assistant" },
+          ]);
         }
       });
     }

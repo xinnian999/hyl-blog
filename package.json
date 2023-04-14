@@ -112,7 +112,8 @@
     "rules": {
       "react/jsx-no-undef": 0,
       "react-hooks/exhaustive-deps": 0,
-      "jsx-a11y/alt-text": 0
+      "jsx-a11y/alt-text": 0,
+      "no-loop-func": 0
     },
     "globals": {
       "wx": true,

@@ -32,6 +32,7 @@ export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
       isUserMessage ? "flex-end" : "flex-start"};
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
     position: relative;
+    overflow-x: auto;
     ::before {
       position: absolute;
       left: -19px;
