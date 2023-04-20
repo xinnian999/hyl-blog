@@ -10,7 +10,6 @@ import { Avatar, Button, Input } from "antd";
 import aiImg from "@/assets/img/avatar/ai.jpg";
 import { UserOutlined } from "@ant-design/icons";
 import { useMount, useRedux } from "@/hooks";
-import axios from "axios";
 
 interface Message {
   content: string;
@@ -45,20 +44,6 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      // axios({
-      //   method: "post",
-      //   url: `/gpt/chatgpt`,
-      //   data: {
-      //     messages: [...messages, { content: newMessage, role: "user" }],
-      //   },
-      // }).then((res) => {
-      //   setMessages([
-      //     ...messages,
-      //     { content: newMessage, role: "user" },
-      //     res.data.data,
-      //   ]);
-      // });
-
       setNewMessage("");
       setMessages([...messages, { content: newMessage, role: "user" }]);
       setTimeout(() => {
@@ -69,7 +54,7 @@ function ChatGpt() {
         ]);
       }, 700);
 
-      fetch("/gpt/chatgpt2", {
+      fetch("/api/all/chatgpt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
