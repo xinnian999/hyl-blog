@@ -11,7 +11,7 @@ import { Skeleton } from "antd";
 
 const components = {
   code({ node, inline, className, children, ...props }) {
-    const match = /language-(\w+)/.exec(className || "");
+    const match = /language-(\w+)/.exec(className || "language-javascript");
     return !inline && match ? (
       <div className="copy-content">
         <button className="copy" onClick={() => copy(node.children[0].value)}>

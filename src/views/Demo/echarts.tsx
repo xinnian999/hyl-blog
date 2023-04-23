@@ -5,64 +5,38 @@ export default function Echarts() {
   const [chartType, setChartType] = useState("bar"); // 初始化为柱状图
 
   const barOption = {
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "shadow",
-      },
+    xAxis: {
+      data: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J"],
     },
-    legend: {
-      data: ["用量", "余量"],
-    },
-    xAxis: [
-      {
-        type: "category",
-        data: ["CPU", "CPU超分"],
-      },
-    ],
-    yAxis: [
-      {
-        type: "value",
-        name: "核",
-      },
-    ],
+    yAxis: {},
     series: [
       {
-        name: "余量",
         type: "bar",
-        stack: "CPU",
-        barWidth: 100,
-        label: {
-          show: true,
+        data: [5, 2, 4, 9, 8, 6, 1, 10, 3, 7],
+        // 将数据按照从大到小排序
+        encode: {
+          x: "data",
+          y: "value",
         },
-        data: [95000, 87000],
-      },
-      {
-        name: "用量",
-        type: "bar",
-        stack: "CPU",
-        barWidth: 100,
+        seriesLayoutBy: "row",
         itemStyle: {
-          normal: {
-            color: "rgba(180, 180, 180, 0.8)",
+          color: "#f44336",
+        },
+        emphasis: {
+          itemStyle: {
+            color: "#c62828",
           },
         },
-        label: {
-          show: false,
-        },
-        data: [24000, 20000],
-      },
-      {
-        name: "总量",
-        type: "custom",
-        renderItem() {
-          return {
-            type: "rect",
-          };
-        },
-        data: [100000, 90000],
       },
     ],
+    // 对数据进行排序
+    dataset: {
+      sort: {
+        // 按照第一列数据从大到小排序
+        ascend: false,
+        dim: 0,
+      },
+    },
   };
 
   const pieOption = {

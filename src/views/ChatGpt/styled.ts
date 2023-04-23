@@ -11,7 +11,7 @@ export const ChatWindowWrapper = styled(Plate.Main)`
 export const MessagesWrapper = styled.div`
   overflow-y: scroll;
   padding: 20px;
-  max-height: 70vh;
+  max-height: 80vh;
 `;
 
 export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
@@ -46,6 +46,10 @@ export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
       border-right-color: ${({ isUserMessage }) =>
         isUserMessage ? "var(--ant-primary-color)" : "#e6e6e6"};
     }
+
+    .userContent {
+      white-space: pre-wrap;
+    }
   }
   .avatar {
     position: absolute;
@@ -55,10 +59,13 @@ export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
 `;
 
 export const InputWrapper = styled.div`
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
   padding: 10px;
-  /* background-color: #f7f7f7; */
+  text-align: right;
+  .sendBtn {
+    margin-top: 10px;
+  }
 `;
 
 export const InputField = styled.input`
