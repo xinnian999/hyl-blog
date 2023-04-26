@@ -4,10 +4,10 @@
   "private": true,
   "homepage": "/",
   "scripts": {
-    "dev": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
-    "deploy": "yarn build && node ./config/cdn/playUpload.js && node ./config/deploy.js"
+    "dev": "node build/scripts/start.js",
+    "build": "node build/scripts/build.js",
+    "test": "node build/scripts/test.js",
+    "deploy": "yarn build && node ./build/cdn/playUpload.js && node ./build/deploy.js"
   },
   "dependencies": {
     "@ant-design/cssinjs": "^1.5.6",
@@ -154,9 +154,9 @@
     ],
     "testEnvironment": "jsdom",
     "transform": {
-      "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+      "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/build/jest/babelTransform.js",
+      "^.+\\.css$": "<rootDir>/build/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/build/jest/fileTransform.js"
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",

@@ -11,7 +11,7 @@ const bucket = "hylcdn-1305519392";
 const region = "ap-beijing";
 
 // 需要上传的文件夹地址
-const filePath = path.resolve("build/");
+const filePath = path.resolve("dist/");
 
 const uploadFile = (pathItem) => {
   cos.putObject(
