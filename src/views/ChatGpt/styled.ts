@@ -11,7 +11,7 @@ export const ChatWindowWrapper = styled(Plate.Main)`
 export const MessagesWrapper = styled.div`
   overflow-y: scroll;
   padding: 20px;
-  max-height: 80vh;
+  height: 70vh;
 `;
 
 export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
@@ -59,12 +59,11 @@ export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
 `;
 
 export const InputWrapper = styled.div`
-  /* display: flex;
-  align-items: center; */
   padding: 10px;
   text-align: right;
   .sendBtn {
     margin-top: 10px;
+    margin-left: 10px;
   }
 `;
 

@@ -40,7 +40,6 @@ const route: routeItem[] = [
         title: "归档",
         path: "file",
         icon: "icon-guidang",
-
         component: lazy(() => import("@/views/Journal/File/index")),
       },
       {

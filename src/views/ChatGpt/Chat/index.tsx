@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
@@ -14,6 +14,8 @@ const tip = `
   我是一种由OpenAI训练的大型语言模型。我的原理是基于Transformer架构，通过预训练大量文本数据来学习如何生成人类可读的文本，然后通过接受输入并生成输出来实现对话。\n
   我的用途非常广泛，可以用于自然语言处理（NLP）任务，如对话生成、问答系统、文本生成、写代码等。
 `;
+
+const controller = new AbortController();
 
 function ChatGpt() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -48,6 +50,7 @@ function ChatGpt() {
         headers: {
           "Content-Type": "application/json",
         },
+        signal: controller.signal,
         body: JSON.stringify({
           messages: [...messages, { content: newMessage, role: "user" }],
         }),
@@ -93,23 +96,49 @@ function ChatGpt() {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13 && e.ctrlKey) {
+      return setNewMessage(newMessage + "\n");
+    }
+    if (e.keyCode === 13) {
+      return handleMessageSend();
+    }
+  };
+
   return (
     <>
       <MessagesWrapper id="MessagesWrapper">
         <Bubble isUser={false} content={tip} />
         {messages.map((message, index) => (
-          <Bubble isUser={index % 2 === 0} content={message.content} />
+          <Bubble
+            key={message.content}
+            isUser={index % 2 === 0}
+            content={message.content}
+          />
         ))}
       </MessagesWrapper>
 
       <InputWrapper>
         <Input.TextArea
           value={newMessage}
+          disabled={disabled}
           onChange={(event) => setNewMessage(event.target.value)}
-          placeholder="你想对Ai说什么？"
+          placeholder="你想对Ai说什么？（支持回车发送，ctrl+回车换行）"
           autoSize={{ minRows: 4, maxRows: 999 }}
-          // onPressEnter={handleMessageSend}
+          onKeyDown={handleKeyDown}
         />
+        {/* {disabled && (
+          <Button
+            className="sendBtn"
+            type="primary"
+            onClick={() => {
+              controller.abort();
+              off();
+            }}
+          >
+            终止
+          </Button>
+        )} */}
         <Button
           className="sendBtn"
           type="primary"
