@@ -10,18 +10,6 @@
 
 ![图片已失效](https://cdn.hyl999.co/public/image/1677815362749.png)
 
-## 目录解构
-
-| 目录       | 描述               |
-| ---------- | ------------------ |
-| assets     | 静态目录           |
-| components | 公共组件           |
-| hooks      | 自定义 react-hooks |
-| Layout     | 博客布局           |
-| style      | 公共样式           |
-| utils      | 公共工具函数       |
-| views      | 所有路由模块       |
-
 ## 运行项目
 
 克隆代码后，运行以下命令:
@@ -41,6 +29,20 @@
 ### `npm run deploy`
 
 部署代码
+
+## 目录结构
+
+| 目录       | 描述                     |
+| ---------- | ------------------------ |
+| assets     | 静态目录                 |
+| components | 公共组件                 |
+| config     | router、store 等配置文件 |
+| hooks      | 自定义 hooks             |
+| Layout     | 博客布局                 |
+| style      | 公共样式                 |
+| types      | 全局 typescript 类型定义 |
+| utils      | 公共工具函数             |
+| views      | 所有路由模块             |
 
 ## 实现功能
 
@@ -106,20 +108,6 @@ http 访问自动跳转 https
 - 文章，日志等使用了下拉加载
 - 文章搜索防抖，下拉监听使用节流
 - 网站首次加载有 loading 效果，而不是白屏
-
-## 目录结构
-
-| 目录       | 描述                     |
-| ---------- | ------------------------ |
-| assets     | 静态目录                 |
-| components | 公共组件                 |
-| config     | router、store 等配置文件 |
-| hooks      | 自定义 hooks             |
-| Layout     | 博客布局                 |
-| style      | 公共样式                 |
-| types      | 全局 typescript 类型定义 |
-| utils      | 公共工具函数             |
-| views      | 所有路由模块             |
 
 ## 特别说明
 
