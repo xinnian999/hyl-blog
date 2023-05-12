@@ -18,23 +18,20 @@ function FloatButton() {
   const action = [
     {
       icon: <Icon type="icon-shouye1" />,
-      color: "chocolate",
       message: "首页",
       onclick: () => {
         navigate("/home");
       },
     },
-    {
-      icon: <Icon type="icon-jiqiren" />,
-      color: "chocolate",
-      message: "ChatGpt",
-      onclick: () => {
-        navigate("/chatgpt");
-      },
-    },
+    // {
+    //   icon: <Icon type="icon-jiqiren" />,
+    //   message: "ChatGpt",
+    //   onclick: () => {
+    //     navigate("/chatgpt");
+    //   },
+    // },
     {
       icon: <SettingOutlined />,
-      color: "chocolate",
       message: "网站设置",
       onclick: () => {
         modal.confirm(setModalConfig);
@@ -42,7 +39,6 @@ function FloatButton() {
     },
     {
       icon: <Icon type={store.dark ? "icon-moon-fill" : "icon-sun_fill"} />,
-      color: "#558897",
       message: store.dark ? "开灯" : "关灯",
       onclick: () => {
         dispatch({ type: "CHANGE_DARK", payload: !store.dark });
@@ -50,7 +46,6 @@ function FloatButton() {
     },
     {
       icon: top > 200 ? <VerticalAlignTopOutlined /> : null,
-      color: "",
       message: "回顶部",
       onclick: () => {
         const anchorListEl = document.querySelector("body");
@@ -64,7 +59,7 @@ function FloatButton() {
 
   return (
     <FloatButtonWrapper direction="vertical">
-      {action.map(({ icon, color, message, onclick }) => {
+      {action.map(({ icon, message, onclick }) => {
         return (
           <Tooltip title={message} placement="left" key={message}>
             <div className="item" onClick={onclick}>

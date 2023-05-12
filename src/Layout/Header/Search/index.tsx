@@ -21,8 +21,6 @@ const hotTag = [
   "nginx",
 ];
 
-const historyTag = ["useContext", "javascript", "性能优化"];
-
 const enumResult = (item) => {
   let r = { name: "", link: "" };
   switch (item.tag) {
@@ -32,7 +30,7 @@ const enumResult = (item) => {
       break;
     case "note":
       r.name = "笔记";
-      r.link = `/journal/note`;
+      r.link = `/journal/note?id=${item.id}`;
       break;
     case "work":
       r.name = "个人作品";
