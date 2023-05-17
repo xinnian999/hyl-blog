@@ -3,8 +3,8 @@ import { clearLogin } from "@/utils";
 import { useRedux } from "@/hooks";
 import { memo } from "react";
 import { Popover } from "@/components";
-import { UserWrapper } from "../styled";
-import Item from "../Item";
+import { UserWrapper } from "./styled";
+import Item from "./Item";
 
 function Login() {
   const { store, dispatch } = useRedux();

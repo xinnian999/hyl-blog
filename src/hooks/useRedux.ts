@@ -9,7 +9,7 @@ type useReduxResult = {
 };
 
 const useRedux = (): useReduxResult => {
-  const store = useSelector((state: isStore) => state);
+  const store = useSelector((state: any) => state);
   const dispatch = useDispatch();
 
   const batchDispatch: batchDispatch = (dispatchData) => {
