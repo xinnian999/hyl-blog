@@ -1,10 +1,11 @@
+import { Space } from "antd";
 import styled from "styled-components";
 
 export const LoginWrapper = styled.div`
-  display: inline-block;
-  @media screen and (max-width: 800px) {
-    margin-right: 15px;
-  }
+  color: #fff;
+  line-height: 0;
+  padding: 10px;
+  width: 200px;
 `;
 
 export const ToolLoginBar = styled.div`

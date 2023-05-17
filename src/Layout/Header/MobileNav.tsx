@@ -42,7 +42,7 @@ function MobileNav() {
     });
 
   return (
-    <Drawer Flag={MobileNavFlag} title="导航菜单" placement="left">
+    <Drawer flag={<MobileNavFlag />} title="导航菜单" placement="left">
       <Menu
         defaultSelectedKeys={[localtion.pathname]}
         defaultOpenKeys={["/" + localtion.pathname.split("/")[1]]}

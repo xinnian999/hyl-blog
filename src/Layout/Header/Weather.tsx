@@ -1,5 +1,11 @@
 import { useGetData } from "@/hooks";
-import { WeatherWrapper } from "./styled";
+import styled from "styled-components";
+
+const WeatherWrapper = styled.div`
+  color: #fff;
+  margin-left: 20px;
+  font-size: 13px;
+`;
 
 function Weather() {
   const [data] = useGetData("/all/getWeather");

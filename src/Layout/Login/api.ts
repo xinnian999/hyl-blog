@@ -13,3 +13,11 @@ export const registerApi = (params) => {
   };
   return request.post("/user/register", data);
 };
+
+export const getWxQrCodeApi = () => {
+  return request.get("/qq/getWxQrCode");
+};
+
+export const getLoginStatusApi = () => {
+  return request.get("/qq/getLoginStatus");
+};

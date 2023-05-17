@@ -25,7 +25,7 @@ const Toolbar = ({ children, style }: DomProps) => {
           </Affix>
         </ToolbarWrapper>
       ) : (
-        <Drawer placement="right" Flag={ToolbarFlag}>
+        <Drawer placement="right" flag={<ToolbarFlag />}>
           {el}
         </Drawer>
       )}

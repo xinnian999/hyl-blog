@@ -2,7 +2,7 @@ import { notification } from "antd";
 import { cookie, ajax } from "hyl-utils";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import { store } from "@/config/store";
+import { store } from "@/store";
 
 const request = ajax.create({
   baseURL: "/api",

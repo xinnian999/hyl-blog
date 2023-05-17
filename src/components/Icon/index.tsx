@@ -3,6 +3,7 @@ import { createFromIconfontCN } from "@ant-design/icons";
 interface isProps {
   type: string;
   className?: string;
+  onClick?: () => void;
   [key: string]: any;
 }
 

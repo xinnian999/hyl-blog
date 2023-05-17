@@ -1,29 +1,5 @@
-import { Icon } from "@/components";
 import { List } from "antd";
 import styled from "styled-components";
-
-export const SearchWrapper = styled.div`
-  margin: 0 20px;
-  transition: 0.5s all;
-  line-height: ${({ theme }) => (theme.scrollTop > 1 ? "55px" : "65px")};
-  .icon {
-    cursor: pointer;
-    color: #fff;
-    font-size: 20px;
-    &:hover {
-      color: var(--ant-primary-4);
-    }
-  }
-`;
-
-export const SearchFlag = styled(Icon)`
-  cursor: pointer;
-  color: #fff;
-  font-size: 20px;
-  &:hover {
-    color: var(--ant-primary-4);
-  }
-`;
 
 export const SearchMain = styled.div`
   width: 650px;

@@ -41,12 +41,6 @@ export const Logo = styled.span`
   }
 `;
 
-export const WeatherWrapper = styled.div`
-  color: #fff;
-  margin-left: 20px;
-  font-size: 13px;
-`;
-
 export const NavWrapper = styled.ul`
   display: inline-flex;
   margin-left: auto;
@@ -74,37 +68,6 @@ export const NavWrapper = styled.ul`
 
     &:hover .down {
       transform: rotate(180deg);
-    }
-
-    &:hover .twoNav {
-      opacity: 1;
-      top: 50px;
-      height: auto;
-    }
-
-    .twoNav {
-      width: 100px;
-      background-color: #2f4154;
-      box-shadow: 0 4px 7px 0 rgb(0 0 0 / 50%);
-      overflow: hidden;
-      z-index: 99999;
-      height: 0;
-      opacity: 0;
-      position: absolute;
-      left: 0;
-      top: 60px;
-      border-radius: 10px;
-      transition: 0.5s opacity;
-
-      li {
-        padding: 0;
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.2);
-        }
-        a {
-          display: block;
-        }
-      }
     }
   }
 `;

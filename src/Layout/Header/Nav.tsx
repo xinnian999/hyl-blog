@@ -1,4 +1,4 @@
-import { Icon } from "@/components";
+import { Icon, Popover } from "@/components";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { memo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
@@ -12,36 +12,40 @@ function NavItem(props: routeItem) {
   const location = useLocation();
 
   return (
-    <li className="navItem">
-      <NavLink
-        to={
-          children
-            ? `${path}/${children.find((item) => item.index)!.path}`
-            : path
-        }
-        className={classnames("navItem-main", {
-          active: location.pathname.includes(path),
-        })}
-      >
-        {icon && <Icon type={icon} />}
-        <span className="nav-title">{title}</span>
-        {children && <CaretDownOutlined className="down" />}
-      </NavLink>
-
-      {children && (
-        <ul className="twoNav">
-          {children.map((item) => {
-            return (
-              <li key={item.title}>
-                <NavLink to={`${path}/${item.path}`}>
-                  {item.icon && <Icon type={item.icon} />} {item.title}
-                </NavLink>
-              </li>
-            );
+    <Popover
+      content={
+        children && (
+          <ul>
+            {children.map((item) => {
+              return (
+                <li key={item.title}>
+                  <NavLink to={`${path}/${item.path}`}>
+                    {item.icon && <Icon type={item.icon} />} {item.title}
+                  </NavLink>
+                </li>
+              );
+            })}
+          </ul>
+        )
+      }
+    >
+      <li className="navItem">
+        <NavLink
+          to={
+            children
+              ? `${path}/${children.find((item) => item.index)!.path}`
+              : path
+          }
+          className={classnames("navItem-main", {
+            active: location.pathname.includes(path),
           })}
-        </ul>
-      )}
-    </li>
+        >
+          {icon && <Icon type={icon} />}
+          <span className="nav-title">{title}</span>
+          {children && <CaretDownOutlined className="down" />}
+        </NavLink>
+      </li>
+    </Popover>
   );
 }
 

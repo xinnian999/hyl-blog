@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { useWindowSize } from "@/hooks";
-import Login from "./Login";
 import Nav from "./Nav";
 import MobileNav from "./MobileNav";
 import { HeaderWrapper, Logo } from "./styled";
 import Weather from "./Weather";
-import Search from "./Search";
+import MoreItems from "../Header/MoreItems";
 
 function Header() {
   const navigate = useNavigate();
@@ -21,8 +20,7 @@ function Header() {
         <Logo onClick={goHome}>{globalConfig.title}</Logo>
         {windowSize.width > 800 && <Weather />}
         {windowSize.width > 800 && <Nav />}
-        {windowSize.width > 800 && <Search />}
-        <Login />
+        <MoreItems />
       </div>
     </HeaderWrapper>
   );

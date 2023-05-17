@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Main from "./Main";
 import { Music, FloatButton, Background } from "./widgets";
 import { useLocation } from "react-router-dom";
+import Login from "./Login";
 
 function Layout() {
   const { pathname } = useLocation();
@@ -13,6 +14,7 @@ function Layout() {
       <Main />
       <Footer />
       <Background />
+      <Login />
       <Music />
       {pathname !== "/home" && <FloatButton />}
     </Provider>

@@ -33,7 +33,7 @@ notification.config({
 function Provider({ children }) {
   const location = useLocation();
 
-  const { dispatchAll, store } = useRedux();
+  const { batchDispatch, store } = useRedux();
 
   const { width } = useWindowSize();
 
@@ -67,7 +67,7 @@ function Provider({ children }) {
     manual: !url.getParams().getUserInfo,
     progress: false,
     onSuccess(res) {
-      dispatchAll([
+      batchDispatch([
         {
           type: "CHANGE_LOGIN_STATE",
           payload: true,

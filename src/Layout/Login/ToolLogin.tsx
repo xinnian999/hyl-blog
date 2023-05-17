@@ -1,8 +1,9 @@
-import { useRedux, useGetData } from "@/hooks";
-import { request } from "@/utils";
-import { Divider, message } from "antd";
+import { useRedux } from "@/hooks";
+import { Divider } from "antd";
 import { cookie } from "hyl-utils";
 import { ToolLoginBar } from "./styled";
+import context from "./context";
+import { useContext } from "react";
 
 const qqLogin = () => {
   window.open(
@@ -13,36 +14,16 @@ const qqLogin = () => {
   );
 };
 
-export default function ToolLogin({ setState }) {
-  const { dispatchAll } = useRedux();
+export default function ToolLogin() {
+  const { dispatch } = useRedux();
 
-  const [, runGetWx] = useGetData("/qq/getWxQrCode", {
-    manual: true,
-    progress: false,
-    onSuccess: (res: any) => {
-      setState({ wxLoginQr: res.data.qrUrl });
-      const timer = setInterval(() => {
-        request.get("/qq/getLoginStatus").then((res) => {
-          if (res.username) {
-            clearInterval(timer);
-            dispatchAll([
-              {
-                type: "CHANGE_LOGIN_STATE",
-                payload: true,
-              },
-              {
-                type: "CHANGE_USER_INFO",
-                payload: res,
-              },
-              { type: "CHANGE_LOGIN_MODAL", payload: false },
-            ]);
-            setState({ wxLogin: false, wxLoginQr: "" });
-            return message.success("登录成功");
-          }
-        });
-      }, 1000);
-    },
-  });
+  const { setType } = useContext(context);
+
+  const wxLogin = () => {
+    dispatch({ type: "CHANGE_LOGIN_MODAL", payload: true });
+
+    setType("wx");
+  };
 
   return (
     <>
@@ -68,10 +49,7 @@ export default function ToolLogin({ setState }) {
           viewBox="0 0 24 24"
           width="40"
           height="40"
-          onClick={() => {
-            setState({ wxLogin: true });
-            runGetWx();
-          }}
+          onClick={wxLogin}
         >
           <path
             d="M2.224 21.667s4.24-1.825 4.788-2.056C15.029 23.141 22 17.714 22 11.898 22 6.984 17.523 3 12 3S2 6.984 2 11.898c0 1.86.64 3.585 1.737 5.013-.274.833-1.513 4.756-1.513 4.756zm5.943-9.707c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272zm7.583 0c.69 0 1.25-.569 1.25-1.271a1.26 1.26 0 0 0-1.25-1.271c-.69 0-1.25.569-1.25 1.27 0 .703.56 1.272 1.25 1.272z"
