@@ -3,7 +3,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
 import Layout from "@/Layout";
 import { Error } from "@/components";
-import { store, persistor } from "@/config";
+import { store, persistor } from "@/store";
 
 function App() {
   return (

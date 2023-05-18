@@ -1,5 +1,5 @@
 import { Menu } from "antd";
-import { router } from "@/config";
+import router from "@/router";
 import type { MenuProps } from "antd";
 import { Icon, Drawer } from "@/components";
 import { NavLink, useLocation } from "react-router-dom";

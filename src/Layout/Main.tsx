@@ -1,6 +1,6 @@
 import { Fragment, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import { router } from "@/config";
+import router from "@/router";
 import { Loading, Redirect } from "@/components";
 
 function Main() {

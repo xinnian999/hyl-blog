@@ -1,4 +1,3 @@
-/*******************配置组件自定义颜色(入口css)******************/
 body{
     --heart-width:1200px;
 }
@@ -9,7 +8,6 @@ body{
     --highlight-background-color:var(--ant-primary-2);
     --plate-text-color:rgba(255,255,255);
     --box-shadow: -5px 3px 10px 0px rgb(5 5 5 / 15%);
-
     --home-background-color:#fff;
     --homeFoot-background-color:#011425;
 }

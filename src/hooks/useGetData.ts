@@ -3,6 +3,12 @@ import Nprogress from "nprogress";
 import { request } from "@/utils";
 import useMount from "./useMount";
 
+type responseType = {
+  data: any[];
+  status: number;
+  total: number;
+};
+
 type toolConfig = {
   data?: object;
   manual?: boolean;

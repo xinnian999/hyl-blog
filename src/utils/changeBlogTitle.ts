@@ -1,4 +1,4 @@
-import { router } from "@/config";
+import router from "@/router";
 
 const changeBlogTitle = (path?: string, title?: string) => {
   if (path === "/home") return (document.title = `${globalConfig.title}`);

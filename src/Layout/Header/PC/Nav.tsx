@@ -2,8 +2,8 @@ import { Icon, Popover } from "@/components";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { memo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { NavWrapper } from "./styled";
-import { router } from "@/config";
+import { NavWrapper } from "../styled";
+import router from "@/router";
 import { classnames } from "hyl-utils";
 
 function NavItem(props: routeItem) {

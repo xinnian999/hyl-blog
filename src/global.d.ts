@@ -1,3 +1,7 @@
+module "aplayer";
+module "rc-scroll-anim";
+module "react-highlight-words";
+
 declare const globalConfig: {
   remoteStaticUrl: string;
   iconfont: string;
@@ -7,12 +11,6 @@ declare const globalConfig: {
 };
 
 declare const $;
-
-type responseType = {
-  data: any[];
-  status: number;
-  total: number;
-};
 
 interface Item {
   id: number;
@@ -26,4 +24,16 @@ interface DomProps {
   style?: React.CSSProperties;
   children?: React.ReactNode;
   onClick?: () => void;
+}
+
+interface routeItem {
+  title?: string;
+  path: string;
+  icon?: string;
+  component: React.LazyExoticComponent<() => JSX.Element>;
+  children?: routeItemChildren[];
+}
+
+interface routeItemChildren extends Omit<routeItem, "children"> {
+  index?: boolean;
 }
