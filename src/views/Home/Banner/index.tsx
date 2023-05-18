@@ -41,7 +41,7 @@ export default function Banner() {
           Enter Blog
         </button>
 
-        <TweenOne
+        {/* <TweenOne
           animation={{
             y: "-=20",
             yoyo: true,
@@ -53,10 +53,10 @@ export default function Banner() {
           onClick={goNext}
         >
           <DownOutlined />
-        </TweenOne>
+        </TweenOne> */}
       </div>
 
-      <div className="fast-nav-btn" onClick={toggle}>
+      {/* <div className="fast-nav-btn" onClick={toggle}>
         {visible ? <CloseOutlined /> : <MenuOutlined />}
       </div>
 
@@ -70,7 +70,7 @@ export default function Banner() {
           <li onClick={() => navigate("/journal/note")}>笔记</li>
           <li onClick={() => navigate("/about")}>关于</li>
         </ul>
-      )}
+      )} */}
     </div>
   );
 }

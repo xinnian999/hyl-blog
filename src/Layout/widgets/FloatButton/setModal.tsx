@@ -2,16 +2,19 @@ import { useRedux } from "@/hooks";
 import { Switch, Button, ModalFuncProps } from "antd";
 import { SetModalWrapper } from "./styled";
 
-const theme = [
+const themeData = [
   { bg: 217, color: "#1890ff" },
   { bg: 125, color: "#25b864" },
   { bg: 0, color: "#d6324d" },
 ];
 
 const Set = () => {
-  const { store, dispatch } = useRedux();
-
-  const { autoplay } = store;
+  const {
+    store: {
+      globalStore: { theme, autoplay },
+    },
+    dispatch,
+  } = useRedux();
 
   return (
     <SetModalWrapper>
@@ -28,7 +31,7 @@ const Set = () => {
       </li>
       <li>
         <h4>主题颜色：</h4>
-        {theme.map((item) => {
+        {themeData.map((item) => {
           return (
             <div
               key={item.color}
@@ -41,7 +44,7 @@ const Set = () => {
                 })
               }
             >
-              {item.color === store.theme.color && "✔️"}
+              {item.color === theme.color && "✔️"}
             </div>
           );
         })}

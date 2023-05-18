@@ -13,7 +13,11 @@ import { useRedux } from "@/hooks";
 function SentenceContent() {
   const [visible, setVisible] = useState(true);
 
-  const { store } = useRedux();
+  const {
+    store: {
+      globalStore: { dark },
+    },
+  } = useRedux();
 
   const [{ name, content }, setSentence] = useState({
     name: "",
@@ -36,7 +40,7 @@ function SentenceContent() {
             const imgEl = document.querySelector(
               ".SentenceContent"
             ) as HTMLElement;
-            if (store.dark) {
+            if (dark) {
               imgEl.style.backgroundImage = "";
             } else {
               imgEl.style.backgroundImage = `url(${globalConfig.remoteStaticUrl}/image/${data[0].picture})`;
@@ -48,7 +52,7 @@ function SentenceContent() {
 
   useEffect(() => {
     querySentence();
-  }, [store.dark]);
+  }, [dark]);
 
   return (
     <SentenceContentWapper className="SentenceContent">

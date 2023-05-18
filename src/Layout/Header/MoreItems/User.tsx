@@ -7,9 +7,14 @@ import { UserWrapper } from "./styled";
 import Item from "./Item";
 
 function Login() {
-  const { store, dispatch } = useRedux();
-  const { loginState } = store;
-  const { username, headPicture } = store.userInfo;
+  const {
+    store: {
+      loginStore: { userInfo, loginState },
+    },
+    dispatch,
+  } = useRedux();
+
+  const { username, headPicture } = userInfo;
 
   const onLogin = () =>
     dispatch({

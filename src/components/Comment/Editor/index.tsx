@@ -32,9 +32,12 @@ export default function Editor({
     loading: false,
   });
 
-  const { store, dispatch } = useRedux();
-
-  const { userInfo } = store;
+  const {
+    store: {
+      loginStore: { userInfo },
+    },
+    dispatch,
+  } = useRedux();
 
   const inputRef = useRef(null);
   const emailInputRef: any = useRef(null);

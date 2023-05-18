@@ -5,9 +5,14 @@ import { useRedux } from "@/hooks";
 import ToolLogin from "./ToolLogin";
 
 function LoginModal() {
-  const { store, batchDispatch } = useRedux();
+  const {
+    store: {
+      loginStore: { userInfo },
+    },
+    batchDispatch,
+  } = useRedux();
 
-  const { username } = store.userInfo;
+  const { username } = userInfo;
 
   const onLoginUser = (data) => {
     loginApi(data).then((res) => {

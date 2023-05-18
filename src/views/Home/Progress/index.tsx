@@ -3,7 +3,12 @@ import { Progress as AntdProgress } from "antd";
 import "./style.scss";
 
 export default function Progress() {
-  const { store } = useRedux();
+  const {
+    store: {
+      globalStore: { theme },
+    },
+  } = useRedux();
+
   return (
     <div className="progress-container">
       <div className="progress">
@@ -12,7 +17,7 @@ export default function Progress() {
           <div className="gress">
             <AntdProgress
               percent={parseInt((new Date().getHours() / 24) * 100 + "")}
-              strokeColor={store.theme.color}
+              strokeColor={theme.color}
             />
           </div>
         </div>
@@ -21,7 +26,7 @@ export default function Progress() {
           <div className="gress">
             <AntdProgress
               percent={parseInt((new Date().getDay() / 7) * 100 + "")}
-              strokeColor={store.theme.color}
+              strokeColor={theme.color}
             />
           </div>
         </div>
@@ -30,7 +35,7 @@ export default function Progress() {
           <div className="gress">
             <AntdProgress
               percent={parseInt((new Date().getDate() / 30) * 100 + "")}
-              strokeColor={store.theme.color}
+              strokeColor={theme.color}
             />
           </div>
         </div>
@@ -39,7 +44,7 @@ export default function Progress() {
           <div className="gress">
             <AntdProgress
               percent={parseInt(((new Date().getMonth() + 1) / 12) * 100 + "")}
-              strokeColor={store.theme.color}
+              strokeColor={theme.color}
             />
           </div>
         </div>

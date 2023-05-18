@@ -11,7 +11,11 @@ interface ReplyProps {
 const Reply = (props: ReplyProps) => {
   const { commentItem, refresh, replyData } = props;
 
-  const { store } = useRedux();
+  const {
+    store: {
+      loginStore: { loginState },
+    },
+  } = useRedux();
 
   const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
     visible: false,
@@ -64,7 +68,7 @@ const Reply = (props: ReplyProps) => {
               />
             </div>
           ))}
-        {visible && store.loginState && (
+        {visible && loginState && (
           <div className="replyEditor">
             <Editor
               btnName={`回复 ${replyName}`}

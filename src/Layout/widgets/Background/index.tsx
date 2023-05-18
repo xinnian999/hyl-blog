@@ -24,25 +24,29 @@ export const BackgroundWrapper = styled.div`
 `;
 
 function Lantern() {
-  const { store } = useRedux();
+  const {
+    store: {
+      globalStore: { dark, theme },
+    },
+  } = useRedux();
 
   useEffect(() => {
     const body = document.querySelector("body")!;
-    if (store.dark) {
+    if (dark) {
       body.id = "dark";
-      starBg(store.theme.bg);
+      starBg(theme.bg);
     } else {
       body.id = "light";
 
       const bg: any = document.querySelector("#canvasBg")!;
       bg.style.display = "none";
     }
-  }, [store.dark]);
+  }, [dark]);
 
   return (
     <BackgroundWrapper id="background">
       <canvas id="canvasBg"></canvas>
-      {!store.dark && <PmRibbon clickChangeDom={document} />}
+      {!dark && <PmRibbon clickChangeDom={document} />}
     </BackgroundWrapper>
   );
 }

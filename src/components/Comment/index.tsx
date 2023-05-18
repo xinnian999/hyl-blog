@@ -22,7 +22,12 @@ function Comment(props: CommentProps) {
     },
   });
 
-  const { store, dispatch } = useRedux();
+  const {
+    store: {
+      loginStore: { loginState },
+    },
+    dispatch,
+  } = useRedux();
 
   const currentCommentData = commentData.filter((item) => !item.reply_id);
 
@@ -39,7 +44,7 @@ function Comment(props: CommentProps) {
   return (
     <div id="comment" className={className}>
       {title && <Divider>{title}</Divider>}
-      {store.loginState ? (
+      {loginState ? (
         <Editor btnName={btnName} articleId={articleId} refresh={run} />
       ) : (
         <Alert

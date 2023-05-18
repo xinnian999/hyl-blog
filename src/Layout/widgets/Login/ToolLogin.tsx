@@ -2,8 +2,6 @@ import { useRedux } from "@/hooks";
 import { Divider } from "antd";
 import { cookie } from "hyl-utils";
 import { ToolLoginBar } from "./styled";
-import context from "./context";
-import { useContext } from "react";
 
 const qqLogin = () => {
   window.open(
@@ -15,14 +13,13 @@ const qqLogin = () => {
 };
 
 export default function ToolLogin() {
-  const { dispatch } = useRedux();
-
-  const { setType } = useContext(context);
+  const { batchDispatch } = useRedux();
 
   const wxLogin = () => {
-    dispatch({ type: "CHANGE_LOGIN_MODAL", payload: true });
-
-    setType("wx");
+    batchDispatch([
+      { type: "CHANGE_LOGIN_MODAL", payload: true },
+      { type: "CHANGE_LOGIN_TYPE", payload: "wx" },
+    ]);
   };
 
   return (

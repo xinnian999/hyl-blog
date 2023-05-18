@@ -1,7 +1,7 @@
 import {
   ConfigProvider as AntdProvider,
   App as AntdApp,
-  theme,
+  theme as antTheme,
   notification,
 } from "antd";
 import {
@@ -33,7 +33,12 @@ notification.config({
 function Provider({ children }) {
   const location = useLocation();
 
-  const { batchDispatch, store } = useRedux();
+  const {
+    store: {
+      globalStore: { dark, theme },
+    },
+    batchDispatch,
+  } = useRedux();
 
   const { width } = useWindowSize();
 
@@ -90,16 +95,16 @@ function Provider({ children }) {
 
   // 主题监听
   useEffect(() => {
-    const { color, bg } = store.theme;
+    const { color, bg } = theme;
     AntdProvider.config({
       theme: {
         primaryColor: color,
       },
     });
-    if (store.dark) {
+    if (dark) {
       starBg(bg);
     }
-  }, [store.theme]);
+  }, [theme]);
 
   // 窗口监听
   useEffect(() => {
@@ -112,8 +117,8 @@ function Provider({ children }) {
       htmlEl.style.fontSize = `${globalConfig.rootValue}px`;
     }
 
-    // if (store.dark) {
-    //   starBg(store.theme.bg);
+    // if (dark) {
+    //   starBg(theme.bg);
     // }
   }, [width]);
 
@@ -137,7 +142,7 @@ function Provider({ children }) {
     location,
     isMoblie: width < 800,
     scrollTop: top,
-    isDark: store.dark,
+    isDark: dark,
   };
 
   return (
@@ -145,10 +150,10 @@ function Provider({ children }) {
       <AntdProvider
         theme={{
           token: {
-            colorPrimary: store.theme.color,
+            colorPrimary: theme.color,
             fontFamily: "font",
           },
-          algorithm: store.dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+          algorithm: dark ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
         }}
       >
         <AntdApp>

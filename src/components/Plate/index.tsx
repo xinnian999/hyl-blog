@@ -12,7 +12,11 @@ interface PlateProps extends DomProps {
 function Plate(props: PlateProps) {
   const { title = "标题", autograph = "", bg = "bg1.webp", children } = props;
 
-  const { store } = useRedux();
+  const {
+    store: {
+      globalStore: { dark },
+    },
+  } = useRedux();
 
   useMount(() => {
     textCustom();
@@ -20,7 +24,7 @@ function Plate(props: PlateProps) {
 
   return (
     <>
-      <PlateBanner dark={store.dark} bg={bg}>
+      <PlateBanner dark={dark} bg={bg}>
         <div className="bg"></div>
         <div className="info">
           <h2>{title}</h2>

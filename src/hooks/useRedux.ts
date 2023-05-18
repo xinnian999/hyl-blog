@@ -1,16 +1,20 @@
 import { useSelector, useDispatch } from "react-redux";
 
-type batchDispatch = (dispatchData: { type: string; payload: any }[]) => void;
+type dispatchAction = { type: dispatchTypes; payload: any };
+
+type dispatchFn = (action: dispatchAction) => void;
+
+type batchDispatch = (dispatchData: dispatchAction[]) => void;
 
 type useReduxResult = {
-  store: isStore;
-  dispatch: (props: object) => void;
+  store: storeTypes;
+  dispatch: (action: dispatchAction) => void;
   batchDispatch: batchDispatch;
 };
 
 const useRedux = (): useReduxResult => {
-  const store = useSelector((state: any) => state);
-  const dispatch = useDispatch();
+  const store = useSelector((state: storeTypes) => state);
+  const dispatch = useDispatch<dispatchFn>();
 
   const batchDispatch: batchDispatch = (dispatchData) => {
     dispatchData.forEach((item) => {

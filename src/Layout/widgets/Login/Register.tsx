@@ -2,9 +2,7 @@ import { Button, Form, Input, message, Alert, Upload } from "antd";
 import { getRandom } from "hyl-utils";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { registerApi } from "./api";
-import { useSetState } from "@/hooks";
-import context from "./context";
-import { useContext } from "react";
+import { useRedux, useSetState } from "@/hooks";
 
 const avatar = [
   "img_1.jpeg",
@@ -21,7 +19,7 @@ function LoginModal() {
     loading: false,
   });
 
-  const { setType } = useContext(context);
+  const { dispatch } = useRedux();
 
   const randomAvatar = () => {
     const random = getRandom(0, 5);
@@ -41,7 +39,7 @@ function LoginModal() {
       }).then((res) => {
         if (res.status === 0) {
           message.success("注册成功");
-          setType("login");
+          dispatch({ type: "CHANGE_LOGIN_TYPE", payload: "login" });
         }
         if (res.status === 1) {
           message.warning("用户名已存在");

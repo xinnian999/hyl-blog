@@ -6,7 +6,11 @@ import { memo } from "react";
 import "./style.scss";
 
 function CommentCard({ avatar, author, datetime, content, children, reply }) {
-  const { store } = useRedux();
+  const {
+    store: {
+      loginStore: { loginState },
+    },
+  } = useRedux();
 
   return (
     <div id="commentCard">
@@ -22,7 +26,7 @@ function CommentCard({ avatar, author, datetime, content, children, reply }) {
             {time.parseFrom(datetime)}
           </div>
 
-          {store.loginState && (
+          {loginState && (
             <span className="commentCard-head-replyBtn" onClick={reply}>
               <Icon type="icon-shuoshuo" /> 回复
             </span>

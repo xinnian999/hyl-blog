@@ -2,16 +2,13 @@ import { Spin, message } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { useMount, useRedux } from "@/hooks";
 import { WxLoginWrapper } from "./styled";
-import context from "./context";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { getLoginStatusApi, getWxQrCodeApi } from "./api";
 
 function WechatLogin() {
   const [QrCode, setQrCode] = useState("");
 
-  const { batchDispatch } = useRedux();
-
-  const { setType } = useContext(context);
+  const { batchDispatch, dispatch } = useRedux();
 
   useMount(() => {
     getWxQrCodeApi().then((res) => {
@@ -22,17 +19,11 @@ function WechatLogin() {
           if (res.username) {
             clearInterval(timer);
             batchDispatch([
-              {
-                type: "CHANGE_LOGIN_STATE",
-                payload: true,
-              },
-              {
-                type: "CHANGE_USER_INFO",
-                payload: res,
-              },
+              { type: "CHANGE_LOGIN_STATE", payload: true },
+              { type: "CHANGE_USER_INFO", payload: res },
               { type: "CHANGE_LOGIN_MODAL", payload: false },
+              { type: "CHANGE_LOGIN_TYPE", payload: "login" },
             ]);
-            setType("login");
             setQrCode("");
             return message.success("登录成功");
           }
@@ -46,7 +37,9 @@ function WechatLogin() {
       <div className="wxHeader">
         <LeftOutlined
           className="wxHeader-back"
-          onClick={() => setType("login")}
+          onClick={() =>
+            dispatch({ type: "CHANGE_LOGIN_TYPE", payload: "login" })
+          }
         />
 
         <h2>请使用微信扫码登陆</h2>

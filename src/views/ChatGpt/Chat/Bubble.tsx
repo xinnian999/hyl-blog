@@ -6,9 +6,12 @@ import { useRedux } from "@/hooks";
 import { MessageBubble } from "../styled";
 
 function Bubble({ isUser, content }) {
-  const { store } = useRedux();
+  const {
+    store: { loginStore },
+  } = useRedux();
 
-  const { loginState, userInfo } = store;
+  const { loginState, userInfo } = loginStore;
+
   return (
     <MessageBubble isUserMessage={isUser}>
       {isUser ? (

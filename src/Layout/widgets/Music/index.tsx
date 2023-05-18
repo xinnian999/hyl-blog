@@ -5,7 +5,11 @@ import "./style.scss";
 import { useEffect } from "react";
 
 function Music() {
-  const { store } = useRedux();
+  const {
+    store: {
+      globalStore: { dark, autoplay },
+    },
+  } = useRedux();
 
   useGetData("/music/query", {
     progress: false,
@@ -20,7 +24,7 @@ function Music() {
         audio: data,
         fixed: true,
         listFolded: true,
-        autoplay: store.autoplay,
+        autoplay,
         preload: "auto",
         loop: "all",
         order: "random",
@@ -33,12 +37,12 @@ function Music() {
   useEffect(() => {
     const music = document.getElementById("aplayer");
 
-    if (store.dark) {
+    if (dark) {
       music?.classList.add("aplayerDark");
     } else {
       music?.classList.remove("aplayerDark");
     }
-  }, [store.dark]);
+  }, [dark]);
 
   return <div id="aplayer"></div>;
 }

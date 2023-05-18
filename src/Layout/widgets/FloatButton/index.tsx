@@ -13,7 +13,12 @@ function FloatButton() {
 
   const { modal } = App.useApp();
 
-  const { store, dispatch } = useRedux();
+  const {
+    store: {
+      globalStore: { dark },
+    },
+    dispatch,
+  } = useRedux();
 
   const action = [
     {
@@ -23,13 +28,6 @@ function FloatButton() {
         navigate("/home");
       },
     },
-    // {
-    //   icon: <Icon type="icon-jiqiren" />,
-    //   message: "ChatGpt",
-    //   onclick: () => {
-    //     navigate("/chatgpt");
-    //   },
-    // },
     {
       icon: <SettingOutlined />,
       message: "网站设置",
@@ -38,10 +36,10 @@ function FloatButton() {
       },
     },
     {
-      icon: <Icon type={store.dark ? "icon-moon-fill" : "icon-sun_fill"} />,
-      message: store.dark ? "开灯" : "关灯",
+      icon: <Icon type={dark ? "icon-moon-fill" : "icon-sun_fill"} />,
+      message: dark ? "开灯" : "关灯",
       onclick: () => {
-        dispatch({ type: "CHANGE_DARK", payload: !store.dark });
+        dispatch({ type: "CHANGE_DARK", payload: !dark });
       },
     },
     {

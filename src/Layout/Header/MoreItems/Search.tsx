@@ -1,11 +1,41 @@
 import { Drawer } from "@/components";
 import { useBoolean, useMount } from "@/hooks";
 import { RightOutlined } from "@ant-design/icons";
+import styled from "styled-components";
 import { Input, List } from "antd";
 import { request } from "@/utils";
 import { useState } from "react";
-import { SearchMain, ListItem } from "./styled";
-import Item from "../Item";
+import Item from "./Item";
+
+const SearchMain = styled.div`
+  width: 650px;
+  margin: 0 auto;
+  .block {
+    padding: 10px;
+  }
+  .hot {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+    .hotItem {
+      padding: 5px;
+      background-color: var(--highlight-background-color);
+      border-radius: 5px;
+      margin: 0 10px 10px 0;
+      &:last-child {
+        margin-right: auto;
+      }
+    }
+  }
+`;
+
+const ListItem = styled(List.Item)`
+  cursor: pointer;
+  &:hover {
+    background-color: var(--highlight-background-color);
+  }
+`;
 
 const hotTag = [
   "react",
