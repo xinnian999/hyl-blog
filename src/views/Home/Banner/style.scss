@@ -22,6 +22,8 @@
       //   #ccffff 0px -1px 2px, #ccffff -1px 0px 2px;
       font-size: 40px;
       font-family: "汉仪霹雳体简";
+      animation: zoomIn;
+      animation-duration: 1s;
     }
 
     &-autograph {
@@ -29,6 +31,8 @@
       font-size: 18px;
       letter-spacing: 10px;
       margin: 15px 0;
+      animation: zoomIn;
+      animation-duration: 1s;
     }
 
     &-Button {
@@ -42,6 +46,8 @@
       box-shadow: 6px 0px 0px #00e6f6;
       outline: transparent;
       position: relative;
+      animation: zoomIn;
+      animation-duration: 1s;
       &::after {
         --slice-0: inset(50% 50% 50% 50%);
         --slice-1: inset(80% -6px 0 0);

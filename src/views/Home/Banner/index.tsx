@@ -28,14 +28,12 @@ export default function Banner() {
     <div className="homeBanner" ref={drawerRef}>
       <Canvas />
       <div className="bannerContent">
-        <p className="bannerContent-title text1 animate__animated animate__zoomIn">
-          {globalConfig.title}
-        </p>
-        <p className="bannerContent-autograph text2  animate__animated animate__zoomIn">
+        <p className="bannerContent-title text1 ">{globalConfig.title}</p>
+        <p className="bannerContent-autograph text2  ">
           {globalConfig.description}
         </p>
         <button
-          className="bannerContent-Button  animate__animated animate__zoomIn"
+          className="bannerContent-Button  "
           onClick={() => navigate("/article")}
         >
           Enter Blog

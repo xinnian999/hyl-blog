@@ -70,4 +70,13 @@ export const NavWrapper = styled.ul`
       transform: rotate(180deg);
     }
   }
+
+  .twoNavItem {
+    a {
+      display: block;
+    }
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
 `;

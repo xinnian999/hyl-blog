@@ -29,6 +29,8 @@ export const ArticleCardWrapper = styled.div`
   border-radius: 15px;
   box-shadow: var(--box-shadow);
   overflow: hidden;
+  animation: zoomIn;
+  animation-duration: 1s;
   .topping {
     position: absolute;
     height: 20px;

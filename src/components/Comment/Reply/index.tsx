@@ -45,7 +45,7 @@ const Reply = (props: ReplyProps) => {
   );
 
   return (
-    <div className="replyItem animate__animated animate__zoomIn">
+    <div className="replyItem">
       <CommentCard
         {...commentItem}
         author={author(commentItem)}

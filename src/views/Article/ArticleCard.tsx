@@ -25,11 +25,7 @@ function ArticleCard(props: ArticleCardProps) {
 
   return (
     <Skeleton loading={loading}>
-      <ArticleCardWrapper
-        className="animate__animated animate__zoomIn"
-        onClick={() => history(`/article/${id}`)}
-        key={id}
-      >
+      <ArticleCardWrapper onClick={() => history(`/article/${id}`)} key={id}>
         {topping === 1 && <div className="topping">置顶</div>}
         <div className="time">
           <TimeBar time={createTime} />

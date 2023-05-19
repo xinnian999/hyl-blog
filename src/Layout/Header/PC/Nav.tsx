@@ -18,7 +18,7 @@ function NavItem(props: routeItem) {
           <ul>
             {children.map((item) => {
               return (
-                <li key={item.title}>
+                <li key={item.title} className="twoNavItem">
                   <NavLink to={`${path}/${item.path}`}>
                     {item.icon && <Icon type={item.icon} />} {item.title}
                   </NavLink>
