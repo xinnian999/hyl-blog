@@ -1,7 +1,7 @@
 import { useBoolean } from "@/hooks";
 import { Modal } from "antd";
 import Copy from "../Copy";
-import Icon from "../Icon";
+import Icon from "../Basic/Icon";
 import "./style.scss";
 
 export default function Preview({ children, title }) {

@@ -4,7 +4,7 @@ import { IconFlag } from "./styled";
 type ItemProps = {
   type: string;
   tip?: string;
-  onClick?: Function;
+  onClick?: () => void;
 };
 
 const Item = ({ type, tip, onClick }: ItemProps) => (

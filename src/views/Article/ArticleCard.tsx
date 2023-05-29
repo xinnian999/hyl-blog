@@ -1,4 +1,4 @@
-import Icon from "@/components/Icon";
+import Icon from "@/components/Basic/Icon";
 import { Tag, Skeleton } from "antd";
 import { useNavigate } from "react-router-dom";
 import { TimeBar, Image } from "@/components";
