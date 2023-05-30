@@ -1,7 +1,6 @@
 import { Timeline } from "antd";
 import { classnames, time } from "hyl-utils";
-import { OverPack } from "rc-scroll-anim";
-import { Icon, Image, Plate } from "@/components";
+import { Icon, LazyImage, Plate, LazyBox } from "@/components";
 import { useWindowSize, useGetData } from "@/hooks";
 import { JournalWrapper, Bubble } from "./styled";
 
@@ -51,18 +50,12 @@ const Say = () => {
               }
               key={content}
             >
-              <OverPack playScale={0} targetId="container" always={false}>
-                <Bubble
-                  type={width > 800 ? (index % 2 === 0 ? 0 : 1) : 0}
-                  className={classnames(
-                    "animate__animated",
-                    "animate__jackInTheBox"
-                  )}
-                >
+              <LazyBox animation="jackInTheBox">
+                <Bubble type={width > 800 ? (index % 2 === 0 ? 0 : 1) : 0}>
                   <div className="content">{content}</div>
                   <br />
                   {picture && (
-                    <Image
+                    <LazyImage
                       src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
                     />
                   )}
@@ -72,7 +65,7 @@ const Say = () => {
                     </div>
                   )}
                 </Bubble>
-              </OverPack>
+              </LazyBox>
             </Timeline.Item>
           ))}
         </Timeline>

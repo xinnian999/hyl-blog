@@ -1,14 +1,31 @@
 import { useBoolean } from "@/hooks";
 import { Modal } from "antd";
-import Copy from "../Copy";
 import Icon from "../Basic/Icon";
-import "./style.scss";
+import styled from "styled-components";
 
-export default function Preview({ children, title }) {
+const PreviewWrapper = styled.div`
+  position: relative;
+  .preview {
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 12px;
+    padding: 2px 8px;
+    cursor: pointer;
+    font-size: 15px;
+  }
+`;
+
+interface PreviewProps {
+  children: React.ReactNode;
+  title: string;
+}
+
+const Preview: React.FC<PreviewProps> = ({ children, title }) => {
   const [visible, on, off] = useBoolean(false);
 
   return (
-    <div className="preview-container">
+    <PreviewWrapper>
       <button className="preview" onClick={on}>
         <Icon type="icon-fangda" />
       </button>
@@ -22,8 +39,10 @@ export default function Preview({ children, title }) {
         footer={[]}
         centered
       >
-        <Copy content={children.props.children}>{children}</Copy>
+        {children}
       </Modal>
-    </div>
+    </PreviewWrapper>
   );
-}
+};
+
+export default Preview;

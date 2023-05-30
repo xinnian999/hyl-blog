@@ -1,7 +1,7 @@
 import Icon from "@/components/Basic/Icon";
-import { Tag, Skeleton } from "antd";
+import { Tag, Image } from "antd";
 import { useNavigate } from "react-router-dom";
-import { TimeBar, Image } from "@/components";
+import { TimeBar, LazyBox } from "@/components";
 import { ArticleCardWrapper } from "./styled";
 
 function ArticleCard(props: ArticleCardProps) {
@@ -15,16 +15,13 @@ function ArticleCard(props: ArticleCardProps) {
     introduce,
     picture,
     topping,
-    loading,
     type,
   } = props;
 
   const history = useNavigate();
 
-  const image = `${globalConfig.remoteStaticUrl}/image/${picture}`;
-
   return (
-    <Skeleton loading={loading}>
+    <LazyBox height="300px" animation="zoomIn">
       <ArticleCardWrapper onClick={() => history(`/article/${id}`)} key={id}>
         {topping === 1 && <div className="topping">置顶</div>}
         <div className="time">
@@ -35,7 +32,12 @@ function ArticleCard(props: ArticleCardProps) {
         </div>
         <div className="content">
           <div className="img-box" onClick={(e) => e.stopPropagation()}>
-            <Image src={image} />
+            <Image
+              src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
+              alt="图片加载失败了😭"
+              height="100%"
+              width="100%"
+            />
           </div>
           <div className="content-box">{introduce || "暂无简介..."}</div>
         </div>
@@ -57,7 +59,7 @@ function ArticleCard(props: ArticleCardProps) {
           </div>
         </div>
       </ArticleCardWrapper>
-    </Skeleton>
+    </LazyBox>
   );
 }
 

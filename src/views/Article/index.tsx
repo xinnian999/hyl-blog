@@ -74,7 +74,7 @@ function Article() {
     }
 
     return (
-      <Space style={{ width: "100%" }} direction="vertical" size={20}>
+      <Space style={{ width: "100%" }} size={20} direction="vertical">
         {batchCopyDom(
           () => (
             <ArticleSkeleton>

@@ -2,7 +2,7 @@ import { Skeleton } from "antd";
 import { InsertRowAboveOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
 import { useGetData } from "@/hooks";
-import { Image, Plate } from "@/components";
+import { LazyImage, Plate } from "@/components";
 import { CollectionWrapper } from "./styled";
 
 type Data = {
@@ -28,7 +28,9 @@ export default function Collection() {
         >
           <Skeleton loading={loading}>
             <div className="image">
-              <Image src={`${globalConfig.remoteStaticUrl}/image/${picture}`} />
+              <LazyImage
+                src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
+              />
             </div>
 
             <div className="title">{title}</div>

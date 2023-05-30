@@ -17,7 +17,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     opacity: ${(props) => (props.dark ? "0.7" : "1")};
     background-image: ${(props) =>
       `url(${require(`@/assets/img/bg/${
-        props.dark ? "bg8.jpg" : props.bg
+        props.dark ? "bg8.jpg" : "bg15.jpg"
       }`)})`};
   }
   .info {
