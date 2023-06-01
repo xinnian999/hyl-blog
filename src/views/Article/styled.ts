@@ -7,21 +7,18 @@ export const ArticleMain = styled(Plate.Main)`
   border: none;
 `;
 
-export const ArticleSkeleton = styled.div`
+export const ArticleContainer = styled.div`
   display: flex;
-  height: 220px;
-  background-color: var(--background-color);
-  padding: 15px;
-  border-radius: 10px;
-  .image {
-    width: 250px !important;
-    height: 100% !important;
-    margin-right: 10px;
+  position: relative;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .item {
+    width: 32%;
+    margin-bottom: 20px;
   }
 `;
 
 export const ArticleCardWrapper = styled.div`
-  padding: 25px;
   background-color: var(--background-color);
   position: relative;
   transition: 0.7s all;
@@ -29,8 +26,13 @@ export const ArticleCardWrapper = styled.div`
   border-radius: 15px;
   box-shadow: var(--box-shadow);
   overflow: hidden;
-  /* animation: zoomIn;
-  animation-duration: 1s; */
+  &:hover .introduce {
+    color: var(--ant-primary-color);
+  }
+  &:hover .image {
+    transform: scale(1.2);
+  }
+
   .topping {
     position: absolute;
     height: 20px;
@@ -42,141 +44,60 @@ export const ArticleCardWrapper = styled.div`
     transform: rotate(-45deg);
     left: -18px;
     top: 9px;
-  }
-
-  .time {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-
-  .title {
-    width: calc(100% - 90px);
-    font-size: 22px;
-    font-weight: bold;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #e8e9e7;
-
-    span {
-      font-size: 16px;
-      font-weight: 400;
-      display: inline-block;
-      color: #2ea7e0;
-    }
-  }
-
-  .content {
-    margin: 20px 0 0 0;
-    line-height: 28px;
-    position: relative;
-    min-height: 200px;
-    border-bottom: 1px solid #e8e9e7;
-    display: flex;
-    @media screen and (max-width: 800px) {
-      display: block;
-
-      .content-box {
-        margin: 0 !important;
-      }
-
-      .img-box {
-        width: 90%;
-      }
-    }
-    .img-box {
-      width: 300px;
-      height: 180px;
-      border: var(--border-color);
-      overflow: hidden;
-      z-index: 2;
-    }
-
-    .content-box {
-      overflow: hidden;
-      margin-left: 20px;
-      flex: 1;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      /* 限制在一个块元素显示的文本的行数 */
-      -webkit-line-clamp: 2;
-      /* 设置或检索伸缩盒对象的子元素的排列方式 */
-      -webkit-box-orient: vertical;
-    }
-  }
-
-  .toolbar {
-    margin-top: 15px;
-
-    .record {
-      float: right;
-      display: flex;
-
-      .reply {
-        margin-right: 10px;
-      }
-    }
+    z-index: 5;
   }
 
   &:hover {
     cursor: pointer;
-    background-color: var(--highlight-background-color);
   }
 `;
 
-export const ArticleCategory = styled.div`
-  .search {
-    padding: 10px;
-    background-color: gray;
-  }
-
-  .categoryList {
-    padding-top: 20px;
-    li {
-      position: relative;
-      height: 40px;
-      line-height: 39px;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 2px;
-      padding: 0 20px;
-      cursor: pointer;
-      &:hover {
-        background-color: var(--highlight-background-color);
-      }
-    }
-
-    .active {
-      background-color: var(--highlight-background-color);
-
-      &::after {
-        content: "";
-        height: 100%;
-        width: 5px;
-        background-color: #555;
-        position: absolute;
-        right: -1px;
-        top: 0;
-      }
-    }
-  }
-`;
-
-export const SearchBar = styled.div`
-  display: flex;
+export const ArticleCardImage = styled.div`
+  height: 220px;
+  width: 100%;
+  border: var(--border-color);
+  overflow: hidden;
+  z-index: 2;
   position: relative;
-  .searchBtn {
-    position: absolute;
-    right: 0;
-    height: 100%;
-    width: 35px;
-    background-color: var(--ant-primary-color);
-    text-align: center;
-    line-height: 30px;
-    color: #fff;
-    font-size: 15px;
-    cursor: pointer;
-  }
-  .searchInput {
+  color: #fff;
+  text-shadow: 0px 0px 10px black;
+  font-size: 25px;
+  display: grid;
+  place-items: end start;
+  background-color: #222;
+  .image {
     width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    transition: 0.5s all;
   }
+  .title {
+    position: absolute;
+    bottom: 0;
+    left: 25px;
+  }
+`;
+
+export const ArticleCardMain = styled.div`
+  padding: 15px;
+
+  .introduce {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* 控制显示的行数 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 66px;
+    transition: 0.5s all;
+  }
+
+  .more {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+  }
+`;
+
+export const ArticleCardFooter = styled.div`
+  padding: 10px 15px;
+  border-top: 1px solid #eaeaea;
 `;

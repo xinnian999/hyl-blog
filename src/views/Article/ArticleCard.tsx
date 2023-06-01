@@ -1,8 +1,14 @@
 import Icon from "@/components/Basic/Icon";
-import { Tag, Image } from "antd";
+import { Tag, Space } from "antd";
 import { useNavigate } from "react-router-dom";
-import { TimeBar, LazyBox } from "@/components";
-import { ArticleCardWrapper } from "./styled";
+import { IconText, LazyBox } from "@/components";
+import {
+  ArticleCardWrapper,
+  ArticleCardFooter,
+  ArticleCardImage,
+  ArticleCardMain,
+} from "./styled";
+import { time } from "hyl-utils";
 
 function ArticleCard(props: ArticleCardProps) {
   const {
@@ -16,48 +22,49 @@ function ArticleCard(props: ArticleCardProps) {
     picture,
     topping,
     type,
+    content,
   } = props;
 
   const history = useNavigate();
 
   return (
-    <LazyBox height="300px" animation="zoomIn">
+    <LazyBox height="500px" animation="zoomIn">
       <ArticleCardWrapper onClick={() => history(`/article/${id}`)} key={id}>
         {topping === 1 && <div className="topping">置顶</div>}
-        <div className="time">
-          <TimeBar time={createTime} />
-        </div>
-        <div className="title">
-          <span>【{type === 1 ? "原创" : "转载"}】</span> {title}
-        </div>
-        <div className="content">
-          <div className="img-box" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
-              alt="图片加载失败了😭"
-              height="100%"
-              width="100%"
-            />
+
+        <ArticleCardImage>
+          <img
+            className="image"
+            src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
+          />
+          <p className="title"> {title}</p>
+        </ArticleCardImage>
+
+        <ArticleCardMain>
+          <div className="introduce">{content}</div>
+          <div className="more">
+            <IconText icon="icon-shijian" size={16}>
+              {" "}
+              {time.parse(createTime, "YYYY-MM-DD")}
+            </IconText>
+            <Space>
+              <IconText icon="icon-chakan" size={16}>
+                {comments}
+              </IconText>
+              <IconText icon="icon-changyonghuifu" size={16}>
+                {visits}
+              </IconText>
+            </Space>
           </div>
-          <div className="content-box">{introduce || "暂无简介..."}</div>
-        </div>
-        <div className="toolbar">
+        </ArticleCardMain>
+
+        <ArticleCardFooter>
           {category.split(",").map((item: string) => (
             <Tag icon={<Icon type="icon-biaoqian2" />} color="pink" key={item}>
               {item}
             </Tag>
           ))}
-          <div className="record">
-            <div className="reply">
-              <Icon type="icon-huifu" style={{ fontSize: "20px" }} />
-              <span>{comments || "0"}</span>
-            </div>
-            <div className="see">
-              <Icon type="icon-chakan" style={{ fontSize: "20px" }} />
-              <span>{visits}</span>
-            </div>
-          </div>
-        </div>
+        </ArticleCardFooter>
       </ArticleCardWrapper>
     </LazyBox>
   );

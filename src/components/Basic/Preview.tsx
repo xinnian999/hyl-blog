@@ -1,6 +1,6 @@
 import { useBoolean } from "@/hooks";
 import { Modal } from "antd";
-import Icon from "../Basic/Icon";
+import Icon from "./Icon";
 import styled from "styled-components";
 
 const PreviewWrapper = styled.div`
