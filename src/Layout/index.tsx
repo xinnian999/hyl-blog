@@ -1,15 +1,13 @@
-import Header from "./Header";
-import Provider from "./Provider";
-import Footer from "./Footer";
-import Main from "./Main";
-import { Music, FloatButton, Background, Login } from "./widgets";
 import { useLocation } from "react-router-dom";
-import { Modal } from "antd";
+import Provider from "./Provider";
+import { Header, Main, Footer } from "./root";
+import { Music, FloatButton, Background } from "./widgets";
+import { Login } from "./floatTier";
 
 function Layout() {
-  const { pathname } = useLocation();
+  const localtion = useLocation();
 
-  const isRoot = pathname === "/";
+  const isRoot = localtion.pathname === "/";
 
   return (
     <Provider>

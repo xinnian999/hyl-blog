@@ -1,8 +1,8 @@
-import { Drawer, Icon } from "@/components";
+import { Icon } from "@/components";
 import { useBoolean, useMount } from "@/hooks";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
-import { Input, List } from "antd";
+import { Input, List, Drawer } from "antd";
 import { request } from "@/utils";
 import { useState } from "react";
 
@@ -104,75 +104,72 @@ function Search() {
   };
 
   return (
-    <Drawer
-      placement="top"
-      title="全站搜索"
-      flag={<Icon type="icon-Magnifier" />}
-      height="60%"
-    >
-      <SearchMain>
-        <div className="block">
-          <Input.Search
-            placeholder="请输入搜索字段，支持模糊查询"
-            allowClear
-            onSearch={onSearch}
-            value={value}
-            onChange={(val) => setValue(val.target.value)}
-          />
-        </div>
-        {isSearch ? (
+    <>
+      <Drawer placement="top" title="全站搜索" height="60%">
+        <SearchMain>
           <div className="block">
-            <List
-              dataSource={result}
-              style={{ height: "300px", overflow: "auto" }}
-              locale={{ emptyText: "哦！没有搜索结果" }}
-              renderItem={(item) => (
-                <ListItem
-                  actions={[<RightOutlined />]}
-                  onClick={() => window.open(enumResult(item).link, "_self")}
-                >
-                  【{enumResult(item).name}】 {item.title || item.name}
-                </ListItem>
-              )}
+            <Input.Search
+              placeholder="请输入搜索字段，支持模糊查询"
+              allowClear
+              onSearch={onSearch}
+              value={value}
+              onChange={(val) => setValue(val.target.value)}
             />
           </div>
-        ) : (
-          <>
+          {isSearch ? (
             <div className="block">
-              <p>热门搜索</p>
-              <div className="hot">
-                {hotTag.map((item) => {
-                  return (
-                    <span
-                      key={item}
-                      className="hotItem"
-                      onClick={() => {
-                        setValue(item);
-                        onSearch(item);
-                      }}
-                    >
-                      {item}
-                    </span>
-                  );
-                })}
-              </div>
+              <List
+                dataSource={result}
+                style={{ height: "300px", overflow: "auto" }}
+                locale={{ emptyText: "哦！没有搜索结果" }}
+                renderItem={(item) => (
+                  <ListItem
+                    actions={[<RightOutlined />]}
+                    onClick={() => window.open(enumResult(item).link, "_self")}
+                  >
+                    【{enumResult(item).name}】 {item.title || item.name}
+                  </ListItem>
+                )}
+              />
             </div>
-            <div className="block">
-              <p>历史搜索</p>
-              <div className="hot">
-                {historyTag.map((item) => {
-                  return (
-                    <span key={item} className="hotItem">
-                      {item}
-                    </span>
-                  );
-                })}
+          ) : (
+            <>
+              <div className="block">
+                <p>热门搜索</p>
+                <div className="hot">
+                  {hotTag.map((item) => {
+                    return (
+                      <span
+                        key={item}
+                        className="hotItem"
+                        onClick={() => {
+                          setValue(item);
+                          onSearch(item);
+                        }}
+                      >
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </>
-        )}
-      </SearchMain>
-    </Drawer>
+              <div className="block">
+                <p>历史搜索</p>
+                <div className="hot">
+                  {historyTag.map((item) => {
+                    return (
+                      <span key={item} className="hotItem">
+                        {item}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            </>
+          )}
+        </SearchMain>
+      </Drawer>
+    </>
   );
 }
 
