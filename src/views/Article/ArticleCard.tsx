@@ -48,10 +48,10 @@ function ArticleCard(props: ArticleCardProps) {
               {time.parse(createTime, "YYYY-MM-DD")}
             </IconText>
             <Space>
-              <IconText icon="icon-chakan" size={16}>
+              <IconText icon="icon-changyonghuifu" size={16}>
                 {comments}
               </IconText>
-              <IconText icon="icon-changyonghuifu" size={16}>
+              <IconText icon="icon-chakan" size={16}>
                 {visits}
               </IconText>
             </Space>

@@ -46,7 +46,7 @@ function Lantern() {
   return (
     <BackgroundWrapper id="background">
       <canvas id="canvasBg"></canvas>
-      {!dark && <PmRibbon clickChangeDom={document} />}
+      {/* {!dark && <PmRibbon clickChangeDom={document} />} */}
     </BackgroundWrapper>
   );
 }

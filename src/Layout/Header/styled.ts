@@ -16,7 +16,7 @@ export const HeaderWrapper = styled.header`
   a {
     color: #fff;
     &:hover {
-      color: var(--ant-primary-4);
+      background-color: var(--ant-primary-color);
     }
   }
 
@@ -27,7 +27,7 @@ export const HeaderWrapper = styled.header`
   }
 
   .active {
-    color: var(--ant-primary-color);
+    background-color: var(--ant-primary-color);
   }
 `;
 
@@ -47,10 +47,11 @@ export const NavWrapper = styled.ul`
 
   .navItem {
     position: relative;
-
+    margin-right: 10px;
     &-main {
-      display: block;
-      padding: 0 10px;
+      /* display: block; */
+      padding: 5px;
+      border-radius: 10px;
       position: relative;
       font-size: 15px;
       font-weight: bold;
@@ -78,5 +79,17 @@ export const NavWrapper = styled.ul`
     &:hover {
       background-color: rgba(255, 255, 255, 0.2);
     }
+  }
+`;
+
+export const UserWrapper = styled.div`
+  margin-left: 15px;
+`;
+
+export const UserInfoWrapper = styled.ul`
+  padding: 15px 0;
+  li {
+    line-height: 30px;
+    color: #fff;
   }
 `;

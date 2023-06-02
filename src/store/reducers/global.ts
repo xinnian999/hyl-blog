@@ -16,6 +16,7 @@ const globalReducer = (
       return { ...state, setModal: payload };
     case "CHANGE_DARK":
       return { ...state, dark: payload };
+
     default:
       return state;
   }

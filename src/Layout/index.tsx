@@ -4,19 +4,22 @@ import Footer from "./Footer";
 import Main from "./Main";
 import { Music, FloatButton, Background, Login } from "./widgets";
 import { useLocation } from "react-router-dom";
+import { Modal } from "antd";
 
 function Layout() {
   const { pathname } = useLocation();
 
+  const isRoot = pathname === "/";
+
   return (
     <Provider>
-      {pathname !== "/home" && <Header />}
+      {!isRoot && <Header />}
       <Main />
-      {pathname !== "/home" && <Footer />}
+      {!isRoot && <Footer />}
       <Background />
       <Login />
       <Music />
-      {pathname !== "/home" && <FloatButton />}
+      <FloatButton />
     </Provider>
   );
 }

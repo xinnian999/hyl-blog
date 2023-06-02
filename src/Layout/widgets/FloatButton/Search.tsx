@@ -1,11 +1,10 @@
-import { Drawer } from "@/components";
+import { Drawer, Icon } from "@/components";
 import { useBoolean, useMount } from "@/hooks";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { Input, List } from "antd";
 import { request } from "@/utils";
 import { useState } from "react";
-import Item from "./Item";
 
 const SearchMain = styled.div`
   width: 650px;
@@ -108,7 +107,7 @@ function Search() {
     <Drawer
       placement="top"
       title="全站搜索"
-      flag={<Item type="icon-Magnifier" tip="全站搜索" />}
+      flag={<Icon type="icon-Magnifier" />}
       height="60%"
     >
       <SearchMain>

@@ -3,7 +3,8 @@ import { Space } from "antd";
 
 export const FloatButtonWrapper = styled(Space)`
   position: fixed;
-  right: ${({ theme }) => (theme.isMoblie ? 0 : "10px")};
+  /* right: ${({ theme }) => (theme.isMoblie ? 0 : "10px")}; */
+  right: 0;
   top: 50%;
   transform: translateY(-50%);
   padding: 5px 0;

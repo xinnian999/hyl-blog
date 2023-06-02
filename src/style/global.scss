@@ -38,7 +38,7 @@ body {
   background-color: #374140 !important;
   position: relative;
   overflow-x: hidden;
-  overflow-y: overlay;
+  // overflow-y: overlay;
 }
 
 #root {
@@ -88,7 +88,7 @@ p {
   width: 10px;
   /*高宽分别对应横竖滚动条的尺寸*/
   background-color: #fff;
-  position: fixed;
+  // position: fixed;
 }
 
 ::-webkit-scrollbar-track {
