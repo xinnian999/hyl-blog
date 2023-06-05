@@ -25,6 +25,7 @@ function Plate(props: PlateProps) {
   return (
     <>
       <PlateBanner dark={dark} bg={bg}>
+        {/* <canvas id="demo-canvas"></canvas> */}
         <div className="bg"></div>
         <div className="info">
           <h2>{title}</h2>

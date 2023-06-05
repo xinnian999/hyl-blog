@@ -38,7 +38,7 @@ function Main() {
     <main id="main">
       <Routes>
         {renderRoutes(router)}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Redirect to={globalConfig.homePage} />} />
         <Route path="*" element={<Redirect to="/404" />} />
       </Routes>
     </main>

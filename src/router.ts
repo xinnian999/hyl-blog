@@ -2,16 +2,17 @@ import { lazy } from "react";
 
 const route: routeItem[] = [
   {
-    path: "/",
+    title: "主页",
+    path: globalConfig.homePage,
     icon: "icon-shouye1",
-    component: lazy(() => import("@/views/Home")),
-  },
-  {
-    title: "文章",
-    path: "/article",
-    icon: "icon-wenzhang1",
     component: lazy(() => import("@/views/Article")),
   },
+  // {
+  //   title: "文章",
+  //   path: "/article",
+  //   icon: "icon-wenzhang1",
+  //   component: lazy(() => import("@/views/Article")),
+  // },
   {
     path: "/article/:id",
     component: lazy(() => import("@/views/Article/ArticleDetail")),

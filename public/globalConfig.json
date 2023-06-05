@@ -9,5 +9,6 @@
     { "path": "/weather", "url": "https://restapi.amap.com" }
   ],
   "view": [],
-  "rootValue": 54
+  "rootValue": 54,
+  "homePage": "/"
 }

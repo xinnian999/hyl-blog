@@ -37,7 +37,7 @@ function NavItem(props: routeItem) {
               : path
           }
           className={classnames("navItem-main", {
-            active: location.pathname.includes(path),
+            active: path === "/" ? false : location.pathname.includes(path),
           })}
         >
           {icon && <Icon type={icon} />}

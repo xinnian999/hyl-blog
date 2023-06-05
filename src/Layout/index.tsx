@@ -1,19 +1,14 @@
-import { useLocation } from "react-router-dom";
 import Provider from "./Provider";
 import { Header, Main, Footer } from "./root";
 import { Music, FloatButton, Background } from "./widgets";
 import FloatTier from "./floatTier";
 
 function Layout() {
-  const localtion = useLocation();
-
-  const isRoot = localtion.pathname === "/";
-
   return (
     <Provider>
-      {!isRoot && <Header />}
+      <Header />
       <Main />
-      {!isRoot && <Footer />}
+      <Footer />
       <Background />
       <Music />
       <FloatButton />

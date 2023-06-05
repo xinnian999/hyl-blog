@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { Divider, Spin } from "antd";
 import ReactScroll from "react-infinite-scroll-component";
-import { useGetData } from "@/hooks";
+import { useGetData, useMount } from "@/hooks";
 import { Plate } from "@/components";
 import ArticleCard from "./ArticleCard";
 import { ArticleMain, ArticleContainer } from "./styled";
@@ -57,9 +57,9 @@ function Article() {
 
   return (
     <Plate
-      title="文章"
+      title="constantly thinking of"
       autograph="人是要整活的——没活了，可不就是死了么 "
-      bg="bg18.jpg"
+      bg="bg19.jpg"
     >
       <ArticleMain>
         <ReactScroll {...reactScrollProps}>

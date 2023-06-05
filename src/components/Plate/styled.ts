@@ -9,7 +9,7 @@ interface PlateBannerProps {
 
 export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
-  height: ${r`600px`};
+  height: 100vh;
   .bg {
     height: 100%;
     background-size: cover;
@@ -17,7 +17,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     opacity: ${(props) => (props.dark ? "0.7" : "1")};
     background-image: ${(props) =>
       `url(${require(`@/assets/img/bg/${
-        props.dark ? "bg8.jpg" : "bg15.jpg"
+        props.dark ? "bg8.jpg" : "bg24.jpg"
       }`)})`};
   }
   .info {
@@ -30,7 +30,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     z-index: 9;
     h2 {
       font-weight: 500;
-      font-size: ${r`40px`};
+      font-size: ${r`50px`};
       margin-bottom: 20px;
       letter-spacing: 5px;
       text-shadow: 0px 0px 10px black;
@@ -60,7 +60,7 @@ export const PlateContent = styled.div`
   max-width: var(--heart-width);
   margin: 0 auto;
   position: relative;
-  top: -50px;
+  top: 50px;
   display: flex;
   @media screen and (max-width: 800px) {
     margin: 0 20px;
