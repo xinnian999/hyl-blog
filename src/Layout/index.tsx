@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 import Provider from "./Provider";
 import { Header, Main, Footer } from "./root";
 import { Music, FloatButton, Background } from "./widgets";
-import { Login } from "./floatTier";
+import FloatTier from "./floatTier";
 
 function Layout() {
   const localtion = useLocation();
@@ -15,9 +15,9 @@ function Layout() {
       <Main />
       {!isRoot && <Footer />}
       <Background />
-      <Login />
       <Music />
       <FloatButton />
+      <FloatTier />
     </Provider>
   );
 }

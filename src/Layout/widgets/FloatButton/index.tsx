@@ -1,7 +1,6 @@
 import { App, Tooltip } from "antd";
 import { SettingOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
 import { useRedux, useScroll } from "@/hooks";
-import setModalConfig from "./setModal";
 import { Icon } from "@/components";
 import { FloatButtonWrapper } from "./styled";
 import { useNavigate } from "react-router-dom";
@@ -10,8 +9,6 @@ function FloatButton() {
   const { top } = useScroll();
 
   const navigate = useNavigate();
-
-  const { modal } = App.useApp();
 
   const {
     store: {
@@ -32,7 +29,7 @@ function FloatButton() {
       icon: <SettingOutlined />,
       message: "网站设置",
       onclick: () => {
-        modal.confirm(setModalConfig);
+        dispatch({ type: "CHANGE_SET_MODAL", payload: true });
       },
     },
     {

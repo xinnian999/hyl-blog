@@ -7,7 +7,7 @@ import reducers from "./reducers";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["loginModal"], //设置某个reducer数据不持久化，
+  blacklist: ["loginModal", "setModal"], //设置某个reducer数据不持久化，
 };
 
 const myPersistReducer = persistReducer(persistConfig, reducers);
