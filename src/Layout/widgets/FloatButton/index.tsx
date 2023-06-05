@@ -8,21 +8,19 @@ import { useNavigate } from "react-router-dom";
 function FloatButton() {
   const { top } = useScroll();
 
-  const navigate = useNavigate();
-
   const {
     store: {
-      globalStore: { dark },
+      setStore: { dark },
     },
     dispatch,
   } = useRedux();
 
   const action = [
     {
-      icon: <Icon type="icon-shouye1" />,
-      message: "首页",
+      icon: <Icon type="icon-Magnifier" />,
+      message: "全站搜索",
       onclick: () => {
-        navigate("/home");
+        dispatch({ type: "CHANGE_SEARCH_DRAWER", payload: true });
       },
     },
     {

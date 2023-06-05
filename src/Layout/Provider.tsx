@@ -35,7 +35,7 @@ function Provider({ children }) {
 
   const {
     store: {
-      globalStore: { dark, theme },
+      setStore: { dark, theme },
     },
     batchDispatch,
   } = useRedux();

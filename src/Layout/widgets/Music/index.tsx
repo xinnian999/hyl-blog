@@ -7,7 +7,7 @@ import { useEffect } from "react";
 function Music() {
   const {
     store: {
-      globalStore: { dark, autoplay },
+      setStore: { dark, autoplay },
     },
   } = useRedux();
 

@@ -11,7 +11,7 @@ const themeData = [
 const SetModal: React.FC = () => {
   const {
     store: {
-      globalStore: { theme, autoplay, setModal },
+      setStore: { theme, autoplay, setModal },
     },
     dispatch,
   } = useRedux();

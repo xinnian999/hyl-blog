@@ -5,7 +5,7 @@ import "./style.scss";
 export default function Progress() {
   const {
     store: {
-      globalStore: { theme },
+      setStore: { theme },
     },
   } = useRedux();
 

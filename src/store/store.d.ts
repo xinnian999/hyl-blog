@@ -6,7 +6,8 @@ type dispatchTypes =
   | "CHANGE_THEME"
   | "CHANGE_AUTOPLAY"
   | "CHANGE_SET_MODAL"
-  | "CHANGE_DARK";
+  | "CHANGE_DARK"
+  | "CHANGE_SEARCH_DRAWER";
 
 type loginReducerStateTypes = {
   loginState: boolean;
@@ -25,9 +26,10 @@ type globalReducerStateTypes = {
   autoplay: boolean | undefined;
   setModal: boolean;
   dark: boolean;
+  searchDrawer: boolean;
 };
 
 interface storeTypes {
   loginStore: loginReducerStateTypes;
-  globalStore: globalReducerStateTypes;
+  setStore: globalReducerStateTypes;
 }

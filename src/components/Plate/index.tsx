@@ -14,7 +14,7 @@ function Plate(props: PlateProps) {
 
   const {
     store: {
-      globalStore: { dark },
+      setStore: { dark },
     },
   } = useRedux();
 

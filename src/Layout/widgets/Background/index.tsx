@@ -26,7 +26,7 @@ export const BackgroundWrapper = styled.div`
 function Lantern() {
   const {
     store: {
-      globalStore: { dark, theme },
+      setStore: { dark, theme },
     },
   } = useRedux();
 

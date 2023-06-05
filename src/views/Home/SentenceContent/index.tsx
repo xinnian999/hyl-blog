@@ -15,7 +15,7 @@ function SentenceContent() {
 
   const {
     store: {
-      globalStore: { dark },
+      setStore: { dark },
     },
   } = useRedux();
 

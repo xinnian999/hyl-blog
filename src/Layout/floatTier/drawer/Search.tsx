@@ -1,5 +1,4 @@
-import { Icon } from "@/components";
-import { useBoolean, useMount } from "@/hooks";
+import { useBoolean, useMount, useRedux } from "@/hooks";
 import { RightOutlined } from "@ant-design/icons";
 import styled from "styled-components";
 import { Input, List, Drawer } from "antd";
@@ -83,6 +82,13 @@ function Search() {
   const [historyTag, setHistoryTag] = useState<string[]>([]);
   const [isSearch, on, off] = useBoolean(false);
 
+  const {
+    store: {
+      setStore: { searchDrawer },
+    },
+    dispatch,
+  } = useRedux();
+
   useMount(() => {
     const historySearch = localStorage.getItem("historyTag");
     if (historySearch) setHistoryTag(JSON.parse(historySearch));
@@ -104,7 +110,13 @@ function Search() {
   };
 
   return (
-    <Drawer placement="top" title="全站搜索" height="60%">
+    <Drawer
+      placement="top"
+      title="全站搜索"
+      height="60%"
+      open={searchDrawer}
+      onClose={() => dispatch({ type: "CHANGE_SEARCH_DRAWER", payload: false })}
+    >
       <SearchMain>
         <div className="block">
           <Input.Search

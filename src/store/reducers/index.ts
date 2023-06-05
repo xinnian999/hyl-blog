@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
-import globalSetting from "./globalSetting";
+import set from "./set";
 import login from "./login";
 
 export default combineReducers({
   loginStore: login,
-  globalStore: globalSetting,
+  setStore: set,
 });
