@@ -2,7 +2,6 @@ import { Fragment, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 import router from "@/router";
 import { Loading, Redirect } from "@/components";
-import Home from "@/views/Home";
 
 function Main() {
   const renderRoutes = (menu: any) =>

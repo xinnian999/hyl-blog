@@ -5,7 +5,7 @@ const route: routeItem[] = [
     title: "主页",
     path: globalConfig.homePage,
     icon: "icon-shouye1",
-    component: lazy(() => import("@/views/Article")),
+    component: lazy(() => import("@/views/Home")),
   },
   // {
   //   title: "文章",
@@ -15,7 +15,7 @@ const route: routeItem[] = [
   // },
   {
     path: "/article/:id",
-    component: lazy(() => import("@/views/Article/ArticleDetail")),
+    component: lazy(() => import("@/views/Home/ArticleDetail")),
   },
   {
     title: "日志",

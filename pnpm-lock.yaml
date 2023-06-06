@@ -73,6 +73,7 @@ specifiers:
   react-dev-utils: ^12.0.1
   react-dom: ^18.2.0
   react-emotor: ^1.1.0
+  react-fast-marquee: ^1.6.0
   react-highlight-words: ^0.20.0
   react-infinite-scroll-component: ^6.1.0
   react-markdown: ^8.0.3
@@ -170,6 +171,7 @@ dependencies:
   react-dev-utils: 12.0.1_f3a4zrasoaotz7gdk64fcmlkrm
   react-dom: 18.2.0_react@18.2.0
   react-emotor: 1.2.0
+  react-fast-marquee: 1.6.0_biqbaboplfbrettd7655fr4n2y
   react-highlight-words: 0.20.0_react@18.2.0
   react-infinite-scroll-component: 6.1.0_react@18.2.0
   react-markdown: 8.0.5_pmekkgnqduwlme35zpnqhenc34
@@ -10563,6 +10565,16 @@ packages:
 
   /react-error-overlay/6.0.11:
     resolution: {integrity: sha512-/6UZ2qgEyH2aqzYZgQPxEnz33NJ2gNsnHA2o5+o4wW9bLM/JYQitNP9xPhsXwC08hMMovfGe/8retsdDsczPRg==}
+    dev: false
+
+  /react-fast-marquee/1.6.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-jtuwT9SNjrqxnE7lGZ8mTL1I8Q4+9G4aBta2p+y2Pa3SjR17QROblwrLICyM8rbjQFHgHawTHcaH9HvoVO2NOA==}
+    peerDependencies:
+      react: '>= 16.8.0 || 18.0.0'
+      react-dom: '>= 16.8.0 || 18.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /react-highlight-words/0.20.0_react@18.2.0:

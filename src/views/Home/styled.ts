@@ -1,11 +1,6 @@
-import { Plate } from "@/components";
+import { r } from "@/utils";
+import { Alert } from "antd";
 import styled from "styled-components";
-
-export const ArticleMain = styled(Plate.Main)`
-  background-color: transparent;
-  box-shadow: none;
-  border: none;
-`;
 
 export const ArticleContainer = styled.div`
   display: flex;
@@ -100,4 +95,97 @@ export const ArticleCardMain = styled.div`
 export const ArticleCardFooter = styled.div`
   padding: 10px 15px;
   border-top: 1px solid #eaeaea;
+`;
+
+export const BannerTextWrapper = styled.div`
+  margin-top: 80px;
+  .autograph {
+    font-size: ${r`25px`};
+    text-shadow: 0px 0px 10px black;
+    &-cursor {
+      animation: shanxian 2000ms infinite;
+    }
+    @keyframes shanxian {
+      from {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  .play {
+    margin-top: 100px;
+
+    .main {
+      width: 300px;
+      display: flex;
+      margin: 0 auto;
+      justify-content: space-between;
+      .btn {
+        padding: 0 25px;
+        height: 45px;
+        /* line-height: 45px; */
+        border-radius: 30px;
+        .ico {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+`;
+
+export const AlertBanner = styled(Alert)`
+  border-radius: 15px !important;
+  margin-bottom: 20px !important;
+`;
+
+export const HomeWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const HomeMain = styled.div`
+  width: 73%;
+`;
+
+export const HomeSide = styled.div`
+  width: 25%;
+
+  .item {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 10px;
+  }
+
+  .avatar {
+    padding: 20px 0;
+    text-align: center;
+  }
+
+  .self {
+    p {
+      text-align: center;
+      font-size: 16px;
+    }
+  }
+
+  .links {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 15px;
+    li {
+      border: 1px solid #999;
+      width: 45px;
+      height: 45px;
+      border-radius: 10px;
+      font-size: 30px;
+      text-align: center;
+      line-height: 45px;
+    }
+  }
 `;

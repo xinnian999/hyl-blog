@@ -99,6 +99,7 @@
   var Textillate = function (element, options) {
     var base = this,
       $element = $(element);
+    $(".autograph").css("opacity", 1);
 
     base.init = function () {
       base.$texts = $element.find(options.selector);

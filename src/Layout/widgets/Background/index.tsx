@@ -1,6 +1,5 @@
 import { useRedux } from "@/hooks";
 import { useEffect } from "react";
-import PmRibbon from "pm-ribbon";
 import starBg from "./starBg";
 import styled from "styled-components";
 
@@ -11,7 +10,8 @@ export const BackgroundWrapper = styled.div`
   top: 0;
   z-index: -1;
   background-color: #eaeaea;
-  background-size: cover;
+  /* background-size: cover; */
+  background-image: url(${require("@/assets/img/bg/bg0.webp")});
 
   canvas {
     width: 100%;

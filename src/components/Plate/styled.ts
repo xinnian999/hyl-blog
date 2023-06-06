@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { r } from "@/utils";
 import { MenuOutlined } from "@ant-design/icons";
+import TweenOne from "rc-tween-one";
 
 interface PlateBannerProps {
   bg: string;
@@ -19,6 +20,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
       `url(${require(`@/assets/img/bg/${
         props.dark ? "bg8.jpg" : "bg24.jpg"
       }`)})`};
+    background-attachment: fixed;
   }
   .info {
     color: var(--plate-text-color);
@@ -26,7 +28,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     width: 100%;
     position: absolute;
     top: 50%;
-    transform: translateY(-70%);
+    transform: translateY(-50%);
     z-index: 9;
     h2 {
       font-weight: 500;
@@ -34,24 +36,6 @@ export const PlateBanner = styled.div<PlateBannerProps>`
       margin-bottom: 20px;
       letter-spacing: 5px;
       text-shadow: 0px 0px 10px black;
-    }
-    .autograph {
-      font-size: ${r`20px`};
-      text-shadow: 0px 0px 10px black;
-      &-cursor {
-        animation: shanxian 2000ms infinite;
-      }
-      @keyframes shanxian {
-        from {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
     }
   }
 `;
@@ -61,7 +45,8 @@ export const PlateContent = styled.div`
   margin: 0 auto;
   position: relative;
   top: 50px;
-  display: flex;
+  /* display: flex; */
+  padding-bottom: 100px;
   @media screen and (max-width: 800px) {
     margin: 0 20px;
   }
@@ -72,7 +57,7 @@ export const Main = styled.div`
   border-radius: 15px;
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
-  flex: 1;
+  /* flex: 1; */
 `;
 
 export const ToolbarWrapper = styled.div`
@@ -102,4 +87,22 @@ export const ToolbarFlag = styled(MenuOutlined)`
   padding: 5px 10px;
   cursor: pointer;
   z-index: 999;
+`;
+
+export const DownIcon = styled(TweenOne)`
+  bottom: 20px;
+  font-size: 24px;
+  position: absolute;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  left: 50%;
+  margin-left: -27px;
+  path {
+    font-weight: bold;
+  }
+  &:hover {
+    background-color: var(--ant-primary-color);
+  }
 `;

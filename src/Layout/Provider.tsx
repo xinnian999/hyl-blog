@@ -155,14 +155,12 @@ function Provider({ children }) {
         algorithm: dark ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
       }}
     >
-      <AntdApp>
-        <AntdStyleProvider
-          hashPriority="high"
-          transformers={[legacyLogicalPropertiesTransformer]}
-        >
-          <StyledProvider theme={styledGlobalProps}>{children}</StyledProvider>
-        </AntdStyleProvider>
-      </AntdApp>
+      <AntdStyleProvider
+        hashPriority="high"
+        transformers={[legacyLogicalPropertiesTransformer]}
+      >
+        <StyledProvider theme={styledGlobalProps}>{children}</StyledProvider>
+      </AntdStyleProvider>
     </AntdProvider>
   );
 }

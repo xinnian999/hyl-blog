@@ -5,12 +5,12 @@ export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
   background-color: ${({ theme }) =>
-    theme.scrollTop > 1 ? "#2f4154" : "transparent"};
-  height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
-  line-height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
+    theme.scrollTop > 200 ? "#2f4154" : "transparent"};
+  height: ${({ theme }) => (theme.scrollTop > 200 ? r`50px` : r`60px`)};
+  line-height: ${({ theme }) => (theme.scrollTop > 200 ? r`50px` : r`60px`)};
   z-index: 11;
   text-align: center;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(5px);
   transition: 0.5s all;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
   a {
