@@ -23,7 +23,7 @@ function BannerText() {
   }, [exp]);
 
   const goNext = () => {
-    const goElement = document.querySelector(".ArticleContainer");
+    const goElement = document.querySelector(".notice");
     goElement?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   return (

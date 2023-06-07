@@ -4,8 +4,10 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
-  background-color: ${({ theme }) =>
-    theme.scrollTop > 200 ? "#2f4154" : "transparent"};
+  background: ${({ theme }) =>
+    theme.scrollTop > 200
+      ? "linear-gradient(208deg,#4584ff 0,#4584ff 11%,#ff7676 100%)"
+      : "transparent"};
   height: ${({ theme }) => (theme.scrollTop > 200 ? r`50px` : r`60px`)};
   line-height: ${({ theme }) => (theme.scrollTop > 200 ? r`50px` : r`60px`)};
   z-index: 11;

@@ -1,7 +1,7 @@
 import Icon from "@/components/Basic/Icon";
 import { Tag, Space } from "antd";
 import { useNavigate } from "react-router-dom";
-import { IconText, LazyBox } from "@/components";
+import { IconText } from "@/components";
 import {
   ArticleCardWrapper,
   ArticleCardFooter,
@@ -18,11 +18,8 @@ function ArticleCard(props: ArticleCardProps) {
     visits,
     category,
     createTime,
-    introduce,
     picture,
     topping,
-    type,
-    content,
   } = props;
 
   const history = useNavigate();
@@ -36,15 +33,14 @@ function ArticleCard(props: ArticleCardProps) {
           className="image"
           src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
         />
-        <p className="title"> {title}</p>
       </ArticleCardImage>
 
       <ArticleCardMain>
-        <div className="introduce">{content}</div>
+        <div className="title">{title}</div>
         <div className="more">
           <IconText icon="icon-shijian" size={16}>
             {" "}
-            {time.parse(createTime, "YYYY-MM-DD")}
+            {time.parseFrom(createTime)}
           </IconText>
           <Space>
             <IconText icon="icon-changyonghuifu" size={16}>
