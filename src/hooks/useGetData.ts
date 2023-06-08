@@ -67,10 +67,11 @@ function useGetData<T = any>(
 
     try {
       const res = await request.get(url, config.data);
-
-      const newData = config.cache ? data.concat(res.data) : res.data;
-      setResult(newData);
-      setData(newData);
+      if (res.data) {
+        const newData = config.cache ? data.concat(res.data) : res.data;
+        setResult(newData);
+        setData(newData);
+      }
 
       //调用成功的回调函数
       config.onSuccess(res);

@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Button, Divider, Spin } from "antd";
 import { useBoolean, useGetData, useSetState } from "@/hooks";
 import ArticleCard from "./ArticleCard";
@@ -18,7 +17,7 @@ function Main() {
     cache: true,
     data: {
       pageNum: state.pageNum,
-      pageSize: 9,
+      pageSize: 12,
       filters: { publish: 1 },
       orderBys: "topping desc,id desc",
     },
@@ -31,28 +30,6 @@ function Main() {
     },
   });
 
-  // const reactScrollProps = {
-  //   scrollThreshold: 0.98,
-  //   dataLength: articleData.length,
-  //   next: () => {
-  //     runQueryArticle({
-  //       cache: true,
-  //     });
-  //   },
-
-  //   hasMore: articleData.length < current.total,
-  //   loader: (
-  //     <Divider plain className="article-footer">
-  //       <Spin />
-  //     </Divider>
-  //   ),
-  //   endMessage: (
-  // <Divider plain className="article-footer">
-  //   没有更多文章了 ---- 🤐
-  // </Divider>
-  //   ),
-  // };
-
   const queryArticle = () => {
     on();
     run();
@@ -62,8 +39,8 @@ function Main() {
     <HomeMainWrapper>
       <ArticleWrapper>
         {articleData.map((item) => (
-          <div className="item">
-            <ArticleCard {...item} key={item.id} />
+          <div className="item" key={item.id}>
+            <ArticleCard {...item} />
           </div>
         ))}
         <Divider plain className="article-footer">

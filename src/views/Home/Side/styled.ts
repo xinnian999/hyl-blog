@@ -3,14 +3,6 @@ import styled from "styled-components";
 export const HomeSideWrapper = styled.div`
   width: 25%;
 
-  .item {
-    background-color: #fff;
-    border-radius: 15px;
-    padding: 10px;
-    margin-bottom: 20px;
-    box-shadow: var(--box-shadow);
-  }
-
   .avatar {
     padding: 20px 0;
     text-align: center;
@@ -35,6 +27,11 @@ export const HomeSideWrapper = styled.div`
       font-size: 30px;
       text-align: center;
       line-height: 45px;
+      cursor: pointer;
+      &:hover {
+        color: #fff;
+        background-color: var(--ant-primary-color);
+      }
     }
   }
 
@@ -87,4 +84,17 @@ export const HomeSideWrapper = styled.div`
     text-align: center;
     font-weight: bold;
   }
+`;
+
+export const SideItem = styled.div`
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: var(--box-shadow);
+`;
+
+export const LinkImage = styled.img`
+  height: 200px;
+  width: 200px;
 `;

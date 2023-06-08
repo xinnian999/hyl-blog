@@ -4,15 +4,18 @@ import BannerText from "./BannerText";
 import Marquee from "react-fast-marquee";
 import Main from "./Main";
 import Side from "./Side";
+import { useGetData } from "@/hooks";
 
 function Home() {
+  const [data] = useGetData("/mood/query");
+
   return (
     <Plate bannerText={<BannerText />}>
       <Notice
         banner
         message={
           <Marquee pauseOnHover gradient={false}>
-            chatgpt暂时关闭，后续再重新开启
+            {data[0]?.content}
           </Marquee>
         }
         className="notice"

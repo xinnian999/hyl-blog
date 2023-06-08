@@ -1,11 +1,11 @@
-import { Avatar, Affix } from "antd";
+import { Avatar, Affix, Tooltip } from "antd";
 import {
   QqOutlined,
   WechatOutlined,
   GithubOutlined,
   WeiboOutlined,
 } from "@ant-design/icons";
-import { HomeSideWrapper } from "./styled";
+import { HomeSideWrapper, LinkImage, SideItem } from "./styled";
 import { useGetData } from "@/hooks";
 import { time } from "hyl-utils";
 
@@ -19,6 +19,27 @@ const days = [
   "星期六",
 ];
 
+const myLinks = [
+  {
+    icon: <QqOutlined />,
+    tip: <LinkImage src={require("@/assets/img/about/qqQrCode.png")} />,
+  },
+  {
+    icon: <WechatOutlined />,
+    tip: <LinkImage src={require("@/assets/img/about/weixin.jpg")} />,
+  },
+  {
+    icon: <GithubOutlined />,
+    tip: "https://github.com/xinnian999",
+    onClick: () => window.open("https://github.com/xinnian999"),
+  },
+  {
+    icon: <WeiboOutlined />,
+    tip: "https://weibo.com/mind251314",
+    onClick: () => window.open("https://weibo.com/mind251314"),
+  },
+];
+
 function Side() {
   const [tag] = useGetData("/category/query", {
     data: { orderBys: "count desc" },
@@ -26,9 +47,11 @@ function Side() {
 
   const [weather] = useGetData("/all/getWeather");
 
+  const [counts] = useGetData("/all/counts");
+
   return (
     <HomeSideWrapper>
-      <div className="item">
+      <SideItem>
         <div className="avatar">
           <Avatar size={100} src={require("@/assets/img/avatar/favicon.ico")} />
         </div>
@@ -39,54 +62,39 @@ function Side() {
         </div>
 
         <ul className="links">
-          <li>
-            <QqOutlined />
-          </li>
-          <li>
-            <WechatOutlined />
-          </li>
-          <li>
-            <GithubOutlined />
-          </li>
-          <li>
-            <WeiboOutlined />
-          </li>
+          {myLinks.map(({ icon, tip, onClick }) => (
+            <li onClick={onClick}>
+              <Tooltip overlay={tip}>
+                <div>{icon}</div>
+              </Tooltip>
+            </li>
+          ))}
         </ul>
-      </div>
+      </SideItem>
 
-      <div className="item">
+      <SideItem>
         <ul className="statistics">
-          <li>
-            <p>文章</p>
-            <h3>56</h3>
-          </li>
-          <li>
-            <p>作品</p>
-            <h3>60</h3>
-          </li>
-          <li>
-            <p>用户</p>
-            <h3>25</h3>
-          </li>
-          <li>
-            <p>总访问量</p>
-            <h3>16855</h3>
-          </li>
+          {counts.map((item) => (
+            <li>
+              <p>{item.name}</p>
+              <h3>{item.count}</h3>
+            </li>
+          ))}
         </ul>
-      </div>
+      </SideItem>
 
-      <div className="item">
+      <SideItem>
         <ul className="date">
           <li>今日</li>
           <li>{time.parse(new Date(), "YYYY年MM月DD日")}</li>
           <li>{days[new Date().getDay()]}</li>
 
-          {weather.length && (
+          {weather.length ? (
             <li>
               {weather[0].province} {weather[0].temperature}°C{" "}
               {weather[0].weather}
             </li>
-          )}
+          ) : null}
         </ul>
         <img
           className="gif"
@@ -98,20 +106,20 @@ function Side() {
             ? `再坚持${5 - new Date().getDay()}天就到周末啦！`
             : "周末啦嗨起来(｡･∀･)ﾉﾞ"}
         </p>
-      </div>
+      </SideItem>
 
       <Affix offsetTop={80}>
-        <div className="item">
+        <SideItem>
           <ul className="tags">
             {tag.map((item) => {
               return (
-                <li className="tag">
+                <li className="tag" key={item.name}>
                   {item.name} <span className="count">{item.count}</span>
                 </li>
               );
             })}
           </ul>
-        </div>
+        </SideItem>
       </Affix>
     </HomeSideWrapper>
   );
