@@ -5,6 +5,10 @@ import { request } from "@/utils";
 import textCustom from "./textCustom";
 import { BannerTextWrapper } from "./styled";
 import { Icon } from "@/components";
+import { Fc3DBtn } from "fancy-components";
+import { GithubOutlined } from "@ant-design/icons";
+
+new Fc3DBtn();
 
 function BannerText() {
   const [exp, setExp] = useState("");
@@ -35,22 +39,17 @@ function BannerText() {
       </div>
       <div className="play">
         <div className="main">
-          <Button
-            icon={<Icon className="ico" type="icon-jiantou_yemian_xiangxia" />}
-            type="primary"
-            className="btn"
-            onClick={goNext}
-          >
+          <fc-3d-btn className="btn" onClick={goNext}>
+            <Icon className="ico" type="icon-jiantou_yemian_xiangxia" />{" "}
             开始阅读
-          </Button>
-          <Button
-            type="primary"
-            icon={<Icon className="ico" type="icon-github" />}
+          </fc-3d-btn>
+          <fc-3d-btn
             className="btn"
             onClick={() => window.open("https://github.com/xinnian999")}
           >
-            github
-          </Button>
+            <GithubOutlined />
+            &nbsp;github
+          </fc-3d-btn>
         </div>
       </div>
     </BannerTextWrapper>

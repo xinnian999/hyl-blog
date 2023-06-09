@@ -16,6 +16,7 @@ function Plate(props: PlateProps) {
     bannerText = null,
     bg = "bg1.webp",
     children,
+    autograph,
   } = props;
 
   const {
@@ -25,7 +26,7 @@ function Plate(props: PlateProps) {
   } = useRedux();
 
   useMount(() => {
-    bubbles();
+    // bubbles();
   });
 
   return (
@@ -34,7 +35,14 @@ function Plate(props: PlateProps) {
         <div className="bg">
           <canvas id="demo-canvas" />
         </div>
-        <div className="info">{bannerText || <h2>{title}</h2>}</div>
+        <div className="info">
+          {bannerText || (
+            <>
+              <h2>{title}</h2>
+              <div className="autograph">{autograph}</div>
+            </>
+          )}
+        </div>
       </PlateBanner>
 
       <PlateContent>{children}</PlateContent>

@@ -1,9 +1,19 @@
-import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const ArticleDetailMain = styled(Plate.Main)`
+export const ArticleDetailWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const Main = styled.div`
+  border-radius: 10px;
   padding: 10px 20px;
   width: 75%;
+  background-color: #fff;
+`;
+
+export const Toolbar = styled.div`
+  width: 23%;
 `;
 
 export const AboutArticle = styled.div`
@@ -27,6 +37,9 @@ export const AboutArticle = styled.div`
 export const ToolItem = styled.div`
   padding: 15px;
   font-size: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-bottom: 25px;
   .catalogue {
     font-size: 18px;
   }

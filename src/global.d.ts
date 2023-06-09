@@ -18,6 +18,15 @@ declare const globalConfig: {
 
 declare const $;
 
+declare namespace JSX {
+  interface IntrinsicElements {
+    "fc-3d-btn": React.DetailedHTMLProps<
+      React.ButtonHTMLAttributes<HTMLButtonElement>,
+      HTMLButtonElement
+    >;
+  }
+}
+
 interface Item {
   id: number;
   createTime: string;

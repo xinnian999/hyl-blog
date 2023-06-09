@@ -42,6 +42,7 @@ specifiers:
   eslint: ^8.3.0
   eslint-config-react-app: ^7.0.1
   eslint-webpack-plugin: ^3.1.1
+  fancy-components: ^0.0.23
   file-loader: ^6.2.0
   fs-extra: ^10.0.0
   html-webpack-plugin: ^5.5.0
@@ -94,6 +95,7 @@ specifiers:
   source-map-loader: ^3.0.0
   style-loader: ^3.3.1
   styled-components: ^5.3.6
+  swiper: ^9.3.2
   tailwindcss: ^3.0.2
   terser-webpack-plugin: ^5.2.5
   typescript: ^4.7.4
@@ -141,6 +143,7 @@ dependencies:
   eslint: 8.34.0
   eslint-config-react-app: 7.0.1_gq4pfhc3jf4wx5nunjnxdbauza
   eslint-webpack-plugin: 3.2.0_tuobyd7hv2iyslumy6tj4ngzsq
+  fancy-components: 0.0.23
   file-loader: 6.2.0_webpack@5.75.0
   fs-extra: 10.1.0
   html-webpack-plugin: 5.5.0_webpack@5.75.0
@@ -191,6 +194,7 @@ dependencies:
   source-map-loader: 3.0.2_webpack@5.75.0
   style-loader: 3.3.1_webpack@5.75.0
   styled-components: 5.3.6_biqbaboplfbrettd7655fr4n2y
+  swiper: 9.3.2
   tailwindcss: 3.2.7_postcss@8.4.21
   terser-webpack-plugin: 5.3.6_webpack@5.75.0
   typescript: 4.9.5
@@ -5751,6 +5755,10 @@ packages:
   /extsprintf/1.3.0:
     resolution: {integrity: sha512-11Ndz7Nv+mvAC1j0ktTa7fAb0vLyGGX+rMHNBYQviQDGU0Hw7lhctJANqbPhu9nV9/izT/IntTgZ7Im/9LJs9g==}
     engines: {'0': node >=0.6.0}
+    dev: false
+
+  /fancy-components/0.0.23:
+    resolution: {integrity: sha512-b+EzFswi2DqrvYEFOlfMT1XGv4UgkJ4rz8/XJ0V5xyV4djLATlmFFA+9OG+/brxeMR8WXZBE1a6J3g1/ExUpfA==}
     dev: false
 
   /fast-deep-equal/3.1.3:
@@ -11492,6 +11500,10 @@ packages:
       tweetnacl: 0.14.5
     dev: false
 
+  /ssr-window/4.0.2:
+    resolution: {integrity: sha512-ISv/Ch+ig7SOtw7G2+qkwfVASzazUnvlDTwypdLoPoySv+6MqlOV10VwPSE6EWkGjhW50lUmghPmpYZXMu/+AQ==}
+    dev: false
+
   /stable/0.1.8:
     resolution: {integrity: sha512-ji9qxRnOVfcuLDySj9qzhGSEFVobyt1kIOSkj1qZzYLzq7Tos/oUUWvotUPQLlrsidqsK6tBH89Bc9kL5zHA6w==}
     deprecated: 'Modern JS already guarantees Array#sort() is a stable sort, so this library is deprecated. See the compatibility table on MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#browser_compatibility'
@@ -11823,6 +11835,13 @@ packages:
 
   /svgpath/2.6.0:
     resolution: {integrity: sha512-OIWR6bKzXvdXYyO4DK/UWa1VA1JeKq8E+0ug2DG98Y/vOmMpfZNj+TIG988HjfYSqtcy/hFOtZq/n/j5GSESNg==}
+    dev: false
+
+  /swiper/9.3.2:
+    resolution: {integrity: sha512-Kj9Z4kXRmJR3YT/Wj+XLWj8P6IcRt+WG38uL8M3/Wny7+6sV0TlP9vnE1X+Co9c7VzNooojWGnFa+Wf/9+CUMA==}
+    engines: {node: '>= 4.7.0'}
+    dependencies:
+      ssr-window: 4.0.2
     dev: false
 
   /symbol-tree/3.2.4:

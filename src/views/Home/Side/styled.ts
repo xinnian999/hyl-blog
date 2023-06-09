@@ -65,7 +65,11 @@ export const HomeSideWrapper = styled.div`
       .count {
         font-size: 12px;
         vertical-align: top;
-        color: #363636;
+        &:hover {
+          cursor: pointer;
+
+          color: #fff;
+        }
       }
     }
   }

@@ -37,6 +37,9 @@ export const PlateBanner = styled.div<PlateBannerProps>`
       letter-spacing: 5px;
       text-shadow: 0px 0px 10px black;
     }
+    .autograph {
+      font-size: 22px;
+    }
   }
 `;
 

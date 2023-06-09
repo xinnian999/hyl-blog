@@ -4,6 +4,10 @@ import styled from "styled-components";
 
 export const BannerTextWrapper = styled.div`
   margin-top: 80px;
+  fc-3d-btn {
+    --color: var(--ant-primary-color);
+    --height: 45px;
+  }
   .autograph {
     font-size: ${r`25px`};
     text-shadow: 0px 0px 10px black;

@@ -1,7 +1,13 @@
 import { Button, Divider, Spin } from "antd";
 import { useBoolean, useGetData, useSetState } from "@/hooks";
 import ArticleCard from "./ArticleCard";
-import { HomeMainWrapper, ArticleWrapper } from "./styled";
+import { HomeMainWrapper, ArticleWrapper, SwiperWrapper } from "./styled";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import { useNavigate } from "react-router-dom";
 
 function Main() {
   const [state, setState] = useSetState({
@@ -9,6 +15,8 @@ function Main() {
     category: "all",
     total: 10,
   });
+
+  const navigate = useNavigate();
 
   const [loading, on, off] = useBoolean(true);
 
@@ -30,6 +38,16 @@ function Main() {
     },
   });
 
+  const [hotArticleData] = useGetData<articleItem>("/article/query", {
+    progress: false,
+    data: {
+      pageNum: 1,
+      pageSize: 5,
+      filters: { publish: 1 },
+      orderBys: "visits desc",
+    },
+  });
+
   const queryArticle = () => {
     on();
     run();
@@ -37,6 +55,27 @@ function Main() {
 
   return (
     <HomeMainWrapper>
+      <SwiperWrapper
+        pagination={{ clickable: true, type: "bullets" }}
+        navigation
+        modules={[Navigation, Pagination, Scrollbar, A11y]}
+        spaceBetween={50}
+        slidesPerView={1}
+      >
+        {hotArticleData.map((item) => {
+          return (
+            <SwiperSlide
+              className="SwiperSlide"
+              onClick={() => navigate(`/article/${item.id}`)}
+            >
+              <div className="title">{item.title}</div>
+              <img
+                src={`${globalConfig.remoteStaticUrl}/image/${item.picture}`}
+              />
+            </SwiperSlide>
+          );
+        })}
+      </SwiperWrapper>
       <ArticleWrapper>
         {articleData.map((item) => (
           <div className="item" key={item.id}>
@@ -47,7 +86,9 @@ function Main() {
           {loading ? (
             <Spin />
           ) : articleData.length < state.total ? (
-            <Button onClick={queryArticle}>点击加载更多</Button>
+            <div className="loadMore" onClick={queryArticle}>
+              点击加载更多
+            </div>
           ) : (
             <Divider plain className="article-footer">
               没有更多文章了 ---- 🤐
