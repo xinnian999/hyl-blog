@@ -35,7 +35,9 @@ export const PlateBanner = styled.div<PlateBannerProps>`
       font-size: ${r`50px`};
       margin-bottom: 20px;
       letter-spacing: 5px;
-      text-shadow: 0px 0px 10px black;
+      /* text-shadow: 0px 0px 10px black; */
+      color: #eee;
+      text-shadow: 3px 3px 0 var(--ant-primary-8);
     }
     .autograph {
       font-size: 22px;
