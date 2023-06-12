@@ -26,7 +26,7 @@ function Plate(props: PlateProps) {
   } = useRedux();
 
   useMount(() => {
-    // bubbles();
+    bubbles();
   });
 
   return (

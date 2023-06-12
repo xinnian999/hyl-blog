@@ -1,3 +1,4 @@
+import CommentCard from "@/components/Comment/CommentCard";
 import styled from "styled-components";
 
 export const HomeSideWrapper = styled.div`
@@ -101,4 +102,20 @@ export const SideItem = styled.div`
 export const LinkImage = styled.img`
   height: 200px;
   width: 200px;
+`;
+
+export const CommentItem = styled(CommentCard)`
+  padding-top: 0 !important;
+  font-size: 13px;
+
+  .commentCard-content {
+    overflow: hidden;
+    font-size: 13px;
+  }
+`;
+
+export const LookMore = styled.div`
+  text-align: right;
+  font-size: 13px;
+  padding: 0 20px;
 `;

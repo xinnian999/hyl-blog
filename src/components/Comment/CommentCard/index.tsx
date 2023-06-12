@@ -5,7 +5,25 @@ import { time, httpTohttps } from "hyl-utils";
 import { memo } from "react";
 import "./style.scss";
 
-function CommentCard({ avatar, author, datetime, content, children, reply }) {
+interface CommentCardProps {
+  avatar: string;
+  author: React.ReactNode;
+  datetime: string;
+  content: string;
+  children?: React.ReactNode;
+  className?: string;
+  reply?: () => void;
+}
+
+const CommentCard: React.FC<CommentCardProps> = ({
+  avatar,
+  author,
+  datetime,
+  content,
+  children,
+  reply,
+  className,
+}) => {
   const {
     store: {
       loginStore: { loginState },
@@ -13,7 +31,7 @@ function CommentCard({ avatar, author, datetime, content, children, reply }) {
   } = useRedux();
 
   return (
-    <div id="commentCard">
+    <div id="commentCard" className={className}>
       <Avatar
         className="commentCard-avatar"
         src={httpTohttps(avatar)}
@@ -38,6 +56,6 @@ function CommentCard({ avatar, author, datetime, content, children, reply }) {
       </div>
     </div>
   );
-}
+};
 
 export default memo(CommentCard);

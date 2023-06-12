@@ -5,7 +5,13 @@ import {
   GithubOutlined,
   WeiboOutlined,
 } from "@ant-design/icons";
-import { HomeSideWrapper, LinkImage, SideItem } from "./styled";
+import {
+  CommentItem,
+  HomeSideWrapper,
+  LinkImage,
+  LookMore,
+  SideItem,
+} from "./styled";
 import { useGetData } from "@/hooks";
 import { time } from "hyl-utils";
 
@@ -48,6 +54,13 @@ function Side() {
   const [weather] = useGetData("/all/getWeather");
 
   const [counts] = useGetData("/all/counts");
+
+  const [commentData] = useGetData<CommentData>("/comment/query", {
+    data: {
+      filters: { article_id: 99999 },
+      orderBys: "id desc",
+    },
+  });
 
   return (
     <HomeSideWrapper>
@@ -107,7 +120,18 @@ function Side() {
             : "周末啦嗨起来(｡･∀･)ﾉﾞ"}
         </p>
       </SideItem>
-
+      <SideItem>
+        <br />
+        {commentData
+          .filter((item) => !item.reply_id)
+          .slice(0, 5)
+          .map((item) => {
+            return <CommentItem {...item} />;
+          })}
+        <LookMore>
+          <a href="/friend/message">查看更多{">>"}</a>{" "}
+        </LookMore>
+      </SideItem>
       <Affix offsetTop={80}>
         <SideItem>
           <ul className="tags">

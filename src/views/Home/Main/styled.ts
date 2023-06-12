@@ -168,6 +168,44 @@ export const ArticleCardFooter = styled.div`
 export const SwiperWrapper = styled(Swiper)`
   margin-bottom: 20px;
   border-radius: 15px;
+  height: 400px;
+
+  .swiper-pagination {
+    bottom: 0 !important;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+  }
+  .bullet {
+    width: 15px;
+    height: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-left: 10px;
+    background: rgba(255, 255, 255, 0.4);
+    display: inline-block;
+    border-radius: 50%;
+    vertical-align: middle;
+  }
+  .bullet-active {
+    background-color: #fff;
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    box-sizing: content-box;
+  }
+  .swiper-button-prev {
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 40px;
+    left: 0;
+    transform: translateY(-50%);
+  }
+
+  .swiper-button-next {
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 40px;
+    right: 0;
+    transform: translateY(-50%);
+  }
+
   .SwiperSlide {
     width: 100%;
     position: relative;
@@ -183,6 +221,6 @@ export const SwiperWrapper = styled(Swiper)`
   }
   img {
     width: 100%;
-    height: 400px;
+    height: 100%;
   }
 `;
