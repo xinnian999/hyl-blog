@@ -5,9 +5,9 @@ import "./style.scss";
 
 const ErrorBlock = ({ errorInfo }) => {
   const handleReload = () => {
-    window.history.go(-1);
     localStorage.clear();
-    window.location.reload();
+
+    window.open("/");
   };
   return (
     <Alert
@@ -17,7 +17,7 @@ const ErrorBlock = ({ errorInfo }) => {
       type="error"
       action={
         <Button type="primary" onClick={handleReload}>
-          回到上一页面
+          尝试解决错误
         </Button>
       }
     />

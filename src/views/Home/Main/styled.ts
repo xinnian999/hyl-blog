@@ -184,26 +184,27 @@ export const SwiperWrapper = styled(Swiper)`
     display: inline-block;
     border-radius: 50%;
     vertical-align: middle;
+    cursor: pointer;
   }
   .bullet-active {
     background-color: #fff;
     border: 5px solid rgba(0, 0, 0, 0.5);
     box-sizing: content-box;
   }
-  .swiper-button-prev {
-    height: 80px;
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 40px;
-    left: 0;
-    transform: translateY(-50%);
-  }
-
+  .swiper-button-prev,
   .swiper-button-next {
     height: 80px;
     background-color: rgba(0, 0, 0, 0.2);
     width: 40px;
-    right: 0;
     transform: translateY(-50%);
+    color: var(--ant-primary-color);
+  }
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  .swiper-button-next {
+    right: 0;
   }
 
   .SwiperSlide {
