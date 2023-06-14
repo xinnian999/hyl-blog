@@ -47,6 +47,7 @@ function Main() {
           <SwiperSlide
             className="SwiperSlide"
             onClick={() => navigate(`/article/${item.id}`)}
+            key={item.id}
           >
             <div className="title">{item.title}</div>
             <img

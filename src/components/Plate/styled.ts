@@ -21,6 +21,9 @@ export const PlateBanner = styled.div<PlateBannerProps>`
         props.dark ? "bg8.jpg" : "bg24.jpg"
       }`)})`};
     background-attachment: fixed;
+    canvas {
+      backface-visibility: hidden;
+    }
   }
   .info {
     color: var(--plate-text-color);

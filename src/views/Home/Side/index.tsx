@@ -27,19 +27,23 @@ const days = [
 
 const myLinks = [
   {
+    key: "qq",
     icon: <QqOutlined />,
     tip: <LinkImage src={require("@/assets/img/about/qqQrCode.png")} />,
   },
   {
+    key: "wx",
     icon: <WechatOutlined />,
     tip: <LinkImage src={require("@/assets/img/about/weixin.jpg")} />,
   },
   {
+    key: "github",
     icon: <GithubOutlined />,
     tip: "https://github.com/xinnian999",
     onClick: () => window.open("https://github.com/xinnian999"),
   },
   {
+    key: "weibo",
     icon: <WeiboOutlined />,
     tip: "https://weibo.com/mind251314",
     onClick: () => window.open("https://weibo.com/mind251314"),
@@ -75,8 +79,8 @@ function Side() {
         </div>
 
         <ul className="links">
-          {myLinks.map(({ icon, tip, onClick }) => (
-            <li onClick={onClick}>
+          {myLinks.map(({ icon, tip, onClick, key }) => (
+            <li onClick={onClick} key={key}>
               <Tooltip overlay={tip}>
                 <div>{icon}</div>
               </Tooltip>
@@ -88,7 +92,7 @@ function Side() {
       <SideItem>
         <ul className="statistics">
           {counts.map((item) => (
-            <li>
+            <li key={item.name}>
               <p>{item.name}</p>
               <h3>{item.count}</h3>
             </li>
@@ -126,7 +130,7 @@ function Side() {
           .filter((item) => !item.reply_id)
           .slice(0, 5)
           .map((item) => {
-            return <CommentItem {...item} />;
+            return <CommentItem key={item.id} {...item} />;
           })}
         <LookMore>
           <a href="/friend/message">查看更多{">>"}</a>{" "}
