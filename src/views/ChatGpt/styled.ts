@@ -3,9 +3,28 @@ import styled from "styled-components";
 
 export const ChatWindowWrapper = styled(Plate.Main)`
   display: flex;
-  flex-direction: column;
   height: 100%;
-  overflow: hidden;
+`;
+
+export const HistoryList = styled.div`
+  width: 30%;
+  background-color: #001529;
+  text-align: center;
+  padding-top: 20px;
+  .menu {
+    max-height: calc(70vh + 40px);
+    margin-top: 20px;
+    text-align: left;
+    overflow: auto;
+    .delete {
+      margin-left: 50px;
+      vertical-align: middle;
+      font-size: 18px !important;
+      &:hover {
+        color: var(--ant-primary-8);
+      }
+    }
+  }
 `;
 
 export const MessagesWrapper = styled.div`

@@ -10,7 +10,7 @@ function Bubble({ isUser, content }) {
     store: { loginStore },
   } = useRedux();
 
-  const { loginState, userInfo } = loginStore;
+  // const { loginState, userInfo } = loginStore;
 
   return (
     <MessageBubble isUserMessage={isUser}>
@@ -19,7 +19,7 @@ function Bubble({ isUser, content }) {
           icon={<UserOutlined />}
           className="avatar"
           size="large"
-          src={loginState ? userInfo.headPicture : ""}
+          // src={loginState ? userInfo.headPicture : ""}
         />
       ) : (
         <Avatar src={aiImg} className="avatar" size="large" />

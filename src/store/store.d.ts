@@ -7,7 +7,11 @@ type dispatchTypes =
   | "CHANGE_AUTOPLAY"
   | "CHANGE_SET_MODAL"
   | "CHANGE_DARK"
-  | "CHANGE_SEARCH_DRAWER";
+  | "CHANGE_SEARCH_DRAWER"
+  | "CHANGE_MESSAGES"
+  | "ADD_MESSAGES"
+  | "DELETE_MESSAGES"
+  | "CHANGE_MESSAGES_CURRENT";
 
 type loginReducerStateTypes = {
   loginState: boolean;
@@ -29,7 +33,24 @@ type globalReducerStateTypes = {
   searchDrawer: boolean;
 };
 
+type messagesItem = {
+  content: string;
+  role: "user" | "assistant";
+};
+
+type messagesGroup = {
+  time: string;
+  messages: messagesItem[];
+  current: boolean;
+  id: number;
+};
+
+type chatgptReducerStateTypes = {
+  allMessages: messagesGroup[];
+};
+
 interface storeTypes {
   loginStore: loginReducerStateTypes;
   setStore: globalReducerStateTypes;
+  chatgptStore: chatgptReducerStateTypes;
 }

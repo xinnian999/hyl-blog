@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 
-type dispatchAction = { type: dispatchTypes; payload: any };
+type dispatchAction = { type: dispatchTypes; payload?: any };
 
 type dispatchFn = (action: dispatchAction) => void;
 

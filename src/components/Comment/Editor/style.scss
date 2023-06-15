@@ -54,7 +54,9 @@
   flex-wrap: wrap;
   z-index: 9999;
 
-  width: 273px;
+  width: 280px;
+  height: 300px;
+  overflow: auto;
   li {
     padding: 5px;
     border: 1px solid #eee;

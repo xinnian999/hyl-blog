@@ -3,11 +3,8 @@ import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
 import { useBoolean } from "@/hooks";
-
-interface Message {
-  content: string;
-  role: "user" | "assistant";
-}
+import { sendApi } from "./api";
+import { useDispatch, useSelector } from "react-redux";
 
 const tip = `
   您好，我是chatgpt。\n
@@ -18,7 +15,13 @@ const tip = `
 const controller = new AbortController();
 
 function ChatGpt() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const messages = useSelector(
+    (state: storeTypes) =>
+      state.chatgptStore.allMessages.find((item) => item.current)!.messages
+  );
+
+  const dispatch = useDispatch();
+
   const [newMessage, setNewMessage] = useState<string>("");
 
   const [disabled, on, off] = useBoolean(false);
@@ -36,24 +39,23 @@ function ChatGpt() {
     if (newMessage.trim()) {
       on();
       setNewMessage("");
-      setMessages([...messages, { content: newMessage, role: "user" }]);
+      dispatch({
+        type: "CHANGE_MESSAGES",
+        payload: [...messages, { content: newMessage, role: "user" }],
+      });
       setTimeout(() => {
-        setMessages([
-          ...messages,
-          { content: newMessage, role: "user" },
-          { content: "ai思索中...", role: "assistant" },
-        ]);
+        dispatch({
+          type: "CHANGE_MESSAGES",
+          payload: [
+            ...messages,
+            { content: newMessage, role: "user" },
+            { content: "ai思索中...", role: "assistant" },
+          ],
+        });
       }, 700);
 
-      fetch("/api/all/chatgpt", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        signal: controller.signal,
-        body: JSON.stringify({
-          messages: [...messages, { content: newMessage, role: "user" }],
-        }),
+      sendApi({
+        messages: [...messages, { content: newMessage, role: "user" }],
       }).then(async (response) => {
         //获取UTF8的解码
         const encode = new TextDecoder("utf-8");
@@ -86,11 +88,14 @@ function ChatGpt() {
             }
           });
 
-          setMessages([
-            ...messages,
-            { content: newMessage, role: "user" },
-            { content: contents, role: "assistant" },
-          ]);
+          dispatch({
+            type: "CHANGE_MESSAGES",
+            payload: [
+              ...messages,
+              { content: newMessage, role: "user" },
+              { content: contents, role: "assistant" },
+            ],
+          });
         }
       });
     }
@@ -106,7 +111,7 @@ function ChatGpt() {
   };
 
   return (
-    <>
+    <div>
       <MessagesWrapper id="MessagesWrapper">
         <Bubble isUser={false} content={tip} />
         {messages.map((message, index) => (
@@ -148,7 +153,7 @@ function ChatGpt() {
           发送
         </Button>
       </InputWrapper>
-    </>
+    </div>
   );
 }
 

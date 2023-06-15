@@ -7,7 +7,7 @@ const ErrorBlock = ({ errorInfo }) => {
   const handleReload = () => {
     localStorage.clear();
 
-    window.open("/");
+    window.location.reload();
   };
   return (
     <Alert
