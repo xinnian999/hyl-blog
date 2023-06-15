@@ -1,7 +1,7 @@
 const globalReducer = (
   state: globalReducerStateTypes = {
     theme: { bg: 0, color: "#d6324d" },
-    autoplay: true,
+    autoplay: false,
     setModal: false,
     dark: false,
     searchDrawer: false,

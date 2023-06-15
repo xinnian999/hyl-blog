@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
-import { useBoolean } from "@/hooks";
+import { useRedux } from "@/hooks";
 import { sendApi } from "./api";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const tip = `
   您好，我是chatgpt。\n
@@ -20,11 +20,15 @@ function ChatGpt() {
       state.chatgptStore.allMessages.find((item) => item.current)!.messages
   );
 
-  const dispatch = useDispatch();
+  const {
+    store: {
+      chatgptStore: { disabled },
+    },
+    dispatch,
+    batchDispatch,
+  } = useRedux();
 
   const [newMessage, setNewMessage] = useState<string>("");
-
-  const [disabled, on, off] = useBoolean(false);
 
   useEffect(() => {
     const MessagesDom = document.getElementById("MessagesWrapper")!;
@@ -37,12 +41,18 @@ function ChatGpt() {
 
   const handleMessageSend = (): void => {
     if (newMessage.trim()) {
-      on();
+      batchDispatch([
+        {
+          type: "CHANGE_DISABLED",
+          payload: true,
+        },
+        {
+          type: "CHANGE_MESSAGES",
+          payload: [...messages, { content: newMessage, role: "user" }],
+        },
+      ]);
       setNewMessage("");
-      dispatch({
-        type: "CHANGE_MESSAGES",
-        payload: [...messages, { content: newMessage, role: "user" }],
-      });
+
       setTimeout(() => {
         dispatch({
           type: "CHANGE_MESSAGES",
@@ -66,7 +76,12 @@ function ChatGpt() {
         while (true) {
           const { done, value } = await reader.read();
           if (done) {
-            off();
+            batchDispatch([
+              {
+                type: "CHANGE_DISABLED",
+                payload: false,
+              },
+            ]);
             break;
           }
           // 解码内容
@@ -138,7 +153,12 @@ function ChatGpt() {
             type="primary"
             onClick={() => {
               controller.abort();
-              off();
+              batchDispatch([
+                {
+                  type: "CHANGE_DISABLED",
+                  payload: false,
+                },
+              ]);
             }}
           >
             终止

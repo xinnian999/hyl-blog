@@ -15,17 +15,16 @@ function Main() {
 
   const swiperRef: any = useRef(null);
 
-  const [hotArticleData] = useGetData<articleItem>("/article/query", {
+  const [data] = useGetData<articleItem>("/article/query", {
     progress: false,
     data: {
       pageNum: 1,
       pageSize: 5,
-      filters: { publish: 1 },
-      orderBys: "visits desc",
+      filters: { publishBanner: 1 },
     },
   });
 
-  return hotArticleData.length ? (
+  return data.length ? (
     <SwiperWrapper
       pagination={{
         clickable: true,
@@ -42,7 +41,7 @@ function Main() {
       ref={swiperRef}
       loop
     >
-      {hotArticleData.map((item) => {
+      {data.map((item) => {
         return (
           <SwiperSlide
             className="SwiperSlide"

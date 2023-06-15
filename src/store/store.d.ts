@@ -11,7 +11,8 @@ type dispatchTypes =
   | "CHANGE_MESSAGES"
   | "ADD_MESSAGES"
   | "DELETE_MESSAGES"
-  | "CHANGE_MESSAGES_CURRENT";
+  | "CHANGE_MESSAGES_CURRENT"
+  | "CHANGE_DISABLED";
 
 type loginReducerStateTypes = {
   loginState: boolean;
@@ -42,11 +43,12 @@ type messagesGroup = {
   time: string;
   messages: messagesItem[];
   current: boolean;
-  id: number;
+  key: string;
 };
 
 type chatgptReducerStateTypes = {
   allMessages: messagesGroup[];
+  disabled: boolean;
 };
 
 interface storeTypes {

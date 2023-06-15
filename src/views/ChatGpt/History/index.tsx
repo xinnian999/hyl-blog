@@ -26,13 +26,13 @@ function History() {
               onClick={(e) => {
                 e.stopPropagation();
 
-                dispatch({ type: "DELETE_MESSAGES", payload: item.time });
+                dispatch({ type: "DELETE_MESSAGES", payload: item.key });
               }}
               type="icon-shanchu"
             />
           </div>
         ),
-        key: item.time,
+        key: item.key,
         icon: <Icon type="icon-changyonghuifu" size={16} />,
       } as MenuItem)
   );
@@ -56,7 +56,7 @@ function History() {
         mode="inline"
         theme="dark"
         items={items}
-        selectedKeys={[allMessages.find((item) => item.current)?.time || ""]}
+        selectedKeys={[allMessages.find((item) => item.current)?.key || ""]}
       />
       {/* <ul>
         {allMessages.map((item) => (
