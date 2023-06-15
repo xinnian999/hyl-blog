@@ -4,6 +4,7 @@ import styled from "styled-components";
 export const ChatWindowWrapper = styled(Plate.Main)`
   display: flex;
   height: 100%;
+  overflow: hidden;
 `;
 
 export const HistoryList = styled.div`
