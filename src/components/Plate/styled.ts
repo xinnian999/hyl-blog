@@ -65,6 +65,7 @@ export const Main = styled.div`
   border-radius: 15px;
   box-shadow: var(--box-shadow);
   border: 1px solid var(--border-color);
+  overflow: hidden;
   /* flex: 1; */
 `;
 

@@ -12,7 +12,8 @@ type dispatchTypes =
   | "ADD_MESSAGES"
   | "DELETE_MESSAGES"
   | "CHANGE_MESSAGES_CURRENT"
-  | "CHANGE_DISABLED";
+  | "CHANGE_DISABLED"
+  | "CHANGE_CONTROLLER";
 
 type loginReducerStateTypes = {
   loginState: boolean;
@@ -49,6 +50,7 @@ type messagesGroup = {
 type chatgptReducerStateTypes = {
   allMessages: messagesGroup[];
   disabled: boolean;
+  controller: AbortController;
 };
 
 interface storeTypes {

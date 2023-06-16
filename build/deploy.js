@@ -17,7 +17,7 @@ const deploy = () =>
 
     const loading = ora("正在部署至 " + server.host);
     loading.start();
-    scpClient.scp("dist/", server, (err) => {
+    scpClient.scp("dist/index.html", server, (err) => {
       loading.stop();
 
       if (err) {

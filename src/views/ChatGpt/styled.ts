@@ -1,10 +1,7 @@
-import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const ChatWindowWrapper = styled(Plate.Main)`
+export const ChatWindowWrapper = styled.div`
   display: flex;
-  height: 100%;
-  overflow: hidden;
 `;
 
 export const HistoryList = styled.div`

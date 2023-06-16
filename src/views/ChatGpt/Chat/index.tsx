@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
-import { useRedux } from "@/hooks";
+import { useBoolean, useMount, useRedux } from "@/hooks";
 import { sendApi } from "./api";
 import { useSelector } from "react-redux";
 
@@ -12,8 +12,6 @@ const tip = `
   我的用途非常广泛，可以用于自然语言处理（NLP）任务，如对话生成、问答系统、文本生成、写代码等。
 `;
 
-const controller = new AbortController();
-
 function ChatGpt() {
   const messages = useSelector(
     (state: storeTypes) =>
@@ -22,7 +20,7 @@ function ChatGpt() {
 
   const {
     store: {
-      chatgptStore: { disabled },
+      chatgptStore: { disabled, controller },
     },
     dispatch,
     batchDispatch,
@@ -30,8 +28,16 @@ function ChatGpt() {
 
   const [newMessage, setNewMessage] = useState<string>("");
 
+  const wrapperRef = useRef(null);
+
+  const [visible, on] = useBoolean(false);
+
+  useMount(() => {
+    on();
+  });
+
   useEffect(() => {
-    const MessagesDom = document.getElementById("MessagesWrapper")!;
+    const MessagesDom: any = wrapperRef.current!;
 
     MessagesDom.scrollTo({
       top: MessagesDom.scrollHeight - MessagesDom.clientHeight,
@@ -40,11 +46,17 @@ function ChatGpt() {
   }, [messages]);
 
   const handleMessageSend = (): void => {
+    const newController = new AbortController();
+
     if (newMessage.trim()) {
       batchDispatch([
         {
           type: "CHANGE_DISABLED",
           payload: true,
+        },
+        {
+          type: "CHANGE_CONTROLLER",
+          payload: newController,
         },
         {
           type: "CHANGE_MESSAGES",
@@ -64,9 +76,12 @@ function ChatGpt() {
         });
       }, 700);
 
-      sendApi({
-        messages: [...messages, { content: newMessage, role: "user" }],
-      }).then(async (response) => {
+      sendApi(
+        {
+          messages: [...messages, { content: newMessage, role: "user" }],
+        },
+        newController
+      ).then(async (response) => {
         //获取UTF8的解码
         const encode = new TextDecoder("utf-8");
         //获取body的reader
@@ -127,15 +142,16 @@ function ChatGpt() {
 
   return (
     <div>
-      <MessagesWrapper id="MessagesWrapper">
+      <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
-        {messages.map((message, index) => (
-          <Bubble
-            key={message.content}
-            isUser={index % 2 === 0}
-            content={message.content}
-          />
-        ))}
+        {visible &&
+          messages.map((message, index) => (
+            <Bubble
+              key={message.content + index}
+              isUser={index % 2 === 0}
+              content={message.content}
+            />
+          ))}
       </MessagesWrapper>
 
       <InputWrapper>
@@ -147,7 +163,7 @@ function ChatGpt() {
           autoSize={{ minRows: 4, maxRows: 999 }}
           onKeyDown={handleKeyDown}
         />
-        {/* {disabled && (
+        {disabled && (
           <Button
             className="sendBtn"
             type="primary"
@@ -163,7 +179,7 @@ function ChatGpt() {
           >
             终止
           </Button>
-        )} */}
+        )}
         <Button
           className="sendBtn"
           type="primary"

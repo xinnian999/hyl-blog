@@ -10,6 +10,7 @@ const defaultState: chatgptReducerStateTypes = {
     },
   ],
   disabled: false,
+  controller: new AbortController(),
 };
 
 const chatgptReducer = (state = defaultState, { type, payload }) => {
@@ -38,11 +39,18 @@ const chatgptReducer = (state = defaultState, { type, payload }) => {
         current: false,
       })),
     ];
-
+    if (state.disabled) {
+      state.controller.abort();
+      return { ...state, allMessages: newMessages, disabled: false };
+    }
     return { ...state, allMessages: newMessages };
   }
 
-  if (type === "DELETE_MESSAGES" && state.allMessages.length > 1) {
+  if (
+    type === "DELETE_MESSAGES" &&
+    state.allMessages.length > 1 &&
+    !state.disabled
+  ) {
     const newMessages = state.allMessages.filter(
       (item) => item.key !== payload
     );
@@ -63,7 +71,10 @@ const chatgptReducer = (state = defaultState, { type, payload }) => {
     }));
 
     const sort = changeCurrent.sort((a, b) => Number(b.key) - Number(a.key));
-
+    if (state.disabled) {
+      state.controller.abort();
+      return { ...state, allMessages: sort, disabled: false };
+    }
     return {
       ...state,
       allMessages: sort,
@@ -74,6 +85,13 @@ const chatgptReducer = (state = defaultState, { type, payload }) => {
     return {
       ...state,
       disabled: payload,
+    };
+  }
+
+  if (type === "CHANGE_CONTROLLER") {
+    return {
+      ...state,
+      controller: payload,
     };
   }
 
