@@ -1,5 +1,5 @@
 import { useRedux } from "@/hooks";
-import { HistoryList } from "../styled";
+import { HistoryList, Label } from "../styled";
 import { Button, Menu, MenuProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { Icon } from "@/components";
@@ -19,18 +19,35 @@ function History() {
     (item) =>
       ({
         label: (
-          <div>
+          <Label>
             {item.time}
-            <Icon
-              className="delete"
-              onClick={(e) => {
-                e.stopPropagation();
-
-                dispatch({ type: "DELETE_MESSAGES", payload: item.key });
-              }}
-              type="icon-shanchu"
-            />
-          </div>
+            <div className="action">
+              <Icon
+                className="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch({ type: "DELETE_MESSAGES", payload: item.key });
+                }}
+                type="icon-zhongmingming"
+              />
+              <Icon
+                className="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch({ type: "DELETE_MESSAGES", payload: item.key });
+                }}
+                type="icon-zhiding_o"
+              />
+              <Icon
+                className="icon"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  dispatch({ type: "DELETE_MESSAGES", payload: item.key });
+                }}
+                type="icon-shanchu"
+              />
+            </div>
+          </Label>
         ),
         key: item.key,
         icon: <Icon type="icon-changyonghuifu" size={16} />,

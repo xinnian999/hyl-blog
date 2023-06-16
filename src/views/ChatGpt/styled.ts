@@ -14,13 +14,30 @@ export const HistoryList = styled.div`
     margin-top: 20px;
     text-align: left;
     overflow: auto;
-    .delete {
-      margin-left: 50px;
-      vertical-align: middle;
-      font-size: 18px !important;
-      &:hover {
-        color: var(--ant-primary-8);
-      }
+    .ant-menu-item {
+      padding-inline: 0;
+    }
+  }
+`;
+
+export const Label = styled.div`
+  position: relative;
+  &:hover .action {
+    display: block;
+  }
+  .action {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 0 20px;
+    display: none;
+  }
+  .icon {
+    vertical-align: middle;
+    font-size: 18px !important;
+    &:hover {
+      color: var(--ant-primary-color);
     }
   }
 `;
