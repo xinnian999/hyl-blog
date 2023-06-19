@@ -13,7 +13,8 @@ type dispatchTypes =
   | "DELETE_MESSAGES"
   | "CHANGE_MESSAGES_CURRENT"
   | "CHANGE_DISABLED"
-  | "CHANGE_CONTROLLER";
+  | "CHANGE_CONTROLLER"
+  | "CHANGE_NAME";
 
 type loginReducerStateTypes = {
   loginState: boolean;

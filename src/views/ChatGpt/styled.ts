@@ -20,7 +20,7 @@ export const HistoryList = styled.div`
   }
 `;
 
-export const Label = styled.div`
+export const LabelWrapper = styled.div`
   position: relative;
   &:hover .action {
     display: block;

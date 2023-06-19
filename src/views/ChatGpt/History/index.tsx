@@ -1,9 +1,9 @@
 import { useRedux } from "@/hooks";
-import { HistoryList, Label } from "../styled";
+import { HistoryList, HistoryWrapper } from "./styled";
 import { Button, Menu, MenuProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { Icon } from "@/components";
 import { memo } from "react";
+import Label from "./Label";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -18,39 +18,9 @@ function History() {
   const items = allMessages.map(
     (item) =>
       ({
-        label: (
-          <Label>
-            {item.time}
-            <div className="action">
-              <Icon
-                className="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch({ type: "DELETE_MESSAGES", payload: item.key });
-                }}
-                type="icon-zhongmingming"
-              />
-              <Icon
-                className="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch({ type: "DELETE_MESSAGES", payload: item.key });
-                }}
-                type="icon-zhiding_o"
-              />
-              <Icon
-                className="icon"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  dispatch({ type: "DELETE_MESSAGES", payload: item.key });
-                }}
-                type="icon-shanchu"
-              />
-            </div>
-          </Label>
-        ),
+        label: <Label item={item} />,
         key: item.key,
-        icon: <Icon type="icon-changyonghuifu" size={16} />,
+        // icon: <Icon type="icon-changyonghuifu" size={16} />,
       } as MenuItem)
   );
 
@@ -63,24 +33,25 @@ function History() {
   };
 
   return (
-    <HistoryList>
+    <HistoryWrapper>
       <Button icon={<PlusOutlined />} onClick={onAdd}>
         新建会话
       </Button>
-      <Menu
+      {/* <Menu
         onClick={messageChange}
         className="menu"
         mode="inline"
         theme="dark"
         items={items}
         selectedKeys={[allMessages.find((item) => item.current)?.key || ""]}
-      />
-      {/* <ul>
-        {allMessages.map((item) => (
-          <li>{item.time}</li>
-        ))}
-      </ul> */}
-    </HistoryList>
+      /> */}
+
+      <HistoryList>
+        {allMessages.map((item) => {
+          return <Label item={item} />;
+        })}
+      </HistoryList>
+    </HistoryWrapper>
   );
 }
 

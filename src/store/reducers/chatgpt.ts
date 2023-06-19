@@ -81,6 +81,17 @@ const chatgptReducer = (state = defaultState, { type, payload }) => {
     };
   }
 
+  if (type === "CHANGE_NAME") {
+    const newMessages = [...state.allMessages];
+    newMessages.forEach((item) => {
+      if (item.key === payload.key) {
+        item.time = payload.name;
+      }
+    });
+
+    return { ...state, allMessages: newMessages };
+  }
+
   if (type === "CHANGE_DISABLED") {
     return {
       ...state,
