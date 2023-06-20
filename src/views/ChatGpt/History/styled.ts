@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HistoryWrapper = styled.div`
-  width: 30%;
+  width: 280px;
   background-color: #001529;
   text-align: center;
   padding-top: 20px;
@@ -10,33 +10,55 @@ export const HistoryWrapper = styled.div`
 export const HistoryList = styled.ul`
   background-color: #001529;
   text-align: left;
-  padding-top: 20px;
+  padding: 20px 10px 0;
   color: #fff;
 `;
 
 export const LabelWrapper = styled.li<{ active: boolean }>`
   position: relative;
   line-height: 40px;
-  padding: 0 15px;
   cursor: pointer;
+  display: flex;
+  border-radius: 10px;
+  padding: 0 10px;
+  margin-bottom: 5px;
   background-color: ${(props) =>
     props.active ? "var(--ant-primary-color)" : "transparent"};
-  &:hover .action {
-    display: block;
+
+  .name {
+    flex: 1;
+    overflow: hidden;
+    margin: 0 10px;
+    margin-right: 0;
+    white-space: nowrap;
+    position: relative;
+    .zhao {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 30px;
+      height: 100%;
+
+      background-image: linear-gradient(
+        to left,
+        var(--ant-primary-color),
+        transparent
+      );
+    }
   }
   .action {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0 20px;
-    display: none;
+    width: 60px;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: 1px;
+    color: #eee;
   }
-  .icon {
-    vertical-align: middle;
+  .ico {
+    /* vertical-align: middle; */
     font-size: 18px !important;
     &:hover {
-      color: var(--ant-primary-color);
+      color: var(--ant-primary-4);
     }
   }
 `;

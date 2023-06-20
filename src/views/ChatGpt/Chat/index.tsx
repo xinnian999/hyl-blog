@@ -15,7 +15,8 @@ const tip = `
 function ChatGpt() {
   const messages = useSelector(
     (state: storeTypes) =>
-      state.chatgptStore.allMessages.find((item) => item.current)!.messages
+      state.chatgptStore.allMessages.find((item) => item.current)?.messages ||
+      []
   );
 
   const {
@@ -32,17 +33,24 @@ function ChatGpt() {
 
   const [visible, on] = useBoolean(false);
 
-  useMount(() => {
-    on();
-  });
-
-  useEffect(() => {
+  const goEnd = () => {
     const MessagesDom: any = wrapperRef.current!;
 
     MessagesDom.scrollTo({
       top: MessagesDom.scrollHeight - MessagesDom.clientHeight,
       behavior: "smooth", // 平滑滚动
     });
+  };
+
+  useMount(() => {
+    on();
+    setTimeout(() => {
+      goEnd();
+    }, 500);
+  });
+
+  useEffect(() => {
+    goEnd();
   }, [messages]);
 
   const handleMessageSend = (): void => {
@@ -141,7 +149,7 @@ function ChatGpt() {
   };
 
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
         {visible &&

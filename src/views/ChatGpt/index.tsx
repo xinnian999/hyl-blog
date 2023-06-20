@@ -8,7 +8,6 @@ function ChatGpt() {
   useMount(() => {
     document.title = `ChatGpt · ${globalConfig.title}`;
   });
-  console.log("ChatGpt");
 
   return (
     <Plate title="ChatGPT" autograph="最新人工智能 ~ 在线体验">

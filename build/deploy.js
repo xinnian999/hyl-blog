@@ -5,6 +5,7 @@ const readline = require("readline").createInterface({
   output: process.stdout,
 });
 
+
 const deploy = () =>
   readline.question(`请输入服务器密码：`, (name) => {
     const server = {
@@ -17,10 +18,11 @@ const deploy = () =>
 
     const loading = ora("正在部署至 " + server.host);
     loading.start();
-    scpClient.scp("dist/index.html", server, (err) => {
+    scpClient.scp("dist/", server, (err) => {
       loading.stop();
 
       if (err) {
+        console.log(err);
         console.log("密码错误,请重新输入");
         deploy();
       } else {

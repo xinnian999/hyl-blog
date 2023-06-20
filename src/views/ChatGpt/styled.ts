@@ -4,44 +4,6 @@ export const ChatWindowWrapper = styled.div`
   display: flex;
 `;
 
-export const HistoryList = styled.div`
-  width: 30%;
-  background-color: #001529;
-  text-align: center;
-  padding-top: 20px;
-  .menu {
-    max-height: calc(70vh + 40px);
-    margin-top: 20px;
-    text-align: left;
-    overflow: auto;
-    .ant-menu-item {
-      padding-inline: 0;
-    }
-  }
-`;
-
-export const LabelWrapper = styled.div`
-  position: relative;
-  &:hover .action {
-    display: block;
-  }
-  .action {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 0 20px;
-    display: none;
-  }
-  .icon {
-    vertical-align: middle;
-    font-size: 18px !important;
-    &:hover {
-      color: var(--ant-primary-color);
-    }
-  }
-`;
-
 export const MessagesWrapper = styled.div`
   overflow-y: scroll;
   padding: 20px;

@@ -54,10 +54,10 @@ const chatgptReducer = (state = defaultState, { type, payload }) => {
     const newMessages = state.allMessages.filter(
       (item) => item.key !== payload
     );
+
     if (newMessages.every((item) => !item.current)) {
       newMessages[0].current = true;
     }
-
     return {
       ...state,
       allMessages: newMessages,
@@ -88,6 +88,16 @@ const chatgptReducer = (state = defaultState, { type, payload }) => {
         item.time = payload.name;
       }
     });
+
+    return { ...state, allMessages: newMessages };
+  }
+
+  if (type === "CHANGE_TOP") {
+    const newMessages = state.allMessages.filter(
+      (item) => item.key !== payload.key
+    );
+    payload.key = String(Number(newMessages[0].key) + 1);
+    newMessages.unshift(payload);
 
     return { ...state, allMessages: newMessages };
   }
