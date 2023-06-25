@@ -7,7 +7,7 @@ export const ChatWindowWrapper = styled.div`
 export const MessagesWrapper = styled.div`
   overflow-y: scroll;
   padding: 20px;
-  height: 70vh;
+  height: 60vh;
 `;
 
 export const MessageBubble = styled.div<{ isUserMessage: boolean }>`

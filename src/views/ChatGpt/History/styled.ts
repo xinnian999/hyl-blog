@@ -5,6 +5,12 @@ export const HistoryWrapper = styled.div`
   background-color: #001529;
   text-align: center;
   padding-top: 20px;
+  position: relative;
+  .refresh {
+    position: absolute;
+    right: 10px;
+    top: 25px;
+  }
 `;
 
 export const HistoryList = styled.ul`
@@ -12,6 +18,9 @@ export const HistoryList = styled.ul`
   text-align: left;
   padding: 20px 10px 0;
   color: #fff;
+  height: 68vh;
+  overflow: auto;
+  margin-top: 15px;
 `;
 
 export const LabelWrapper = styled.li<{ active: boolean }>`
