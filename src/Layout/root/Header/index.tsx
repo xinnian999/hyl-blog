@@ -14,12 +14,10 @@ function Header() {
 
   return (
     <HeaderWrapper>
-      <div className="main">
-        {width < 800 && <MobileNav />}
-        <Logo onClick={goHome}>{globalConfig.title}</Logo>
-        {width > 800 && <Nav />}
-        <User />
-      </div>
+      {width < 800 && <MobileNav />}
+      <Logo onClick={goHome}>{globalConfig.title}</Logo>
+      {width > 800 && <Nav />}
+      <User />
     </HeaderWrapper>
   );
 }

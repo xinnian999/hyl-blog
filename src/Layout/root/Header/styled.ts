@@ -21,12 +21,13 @@ export const HeaderWrapper = styled.header`
       background-color: var(--ant-primary-color);
     }
   }
-
-  .main {
+  display: flex;
+  padding: 0 30px;
+  /* .main {
     max-width: var(--heart-width);
     margin: 0 auto;
     display: flex;
-  }
+  } */
 
   .active {
     background-color: var(--ant-primary-color);
