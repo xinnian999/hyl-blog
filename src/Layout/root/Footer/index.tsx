@@ -1,43 +1,12 @@
 import { useLocation } from "react-router-dom";
-import styled from "styled-components";
-
-const FooterWrapper = styled.footer<{ pathname: string }>`
-  text-align: center;
-  padding: 10px 0;
-  position: ${(props) => (props.pathname === "/home" ? "absolute" : "static")};
-  bottom: 0;
-  width: 100%;
-  color: #999;
-  a {
-    color: var(--ant-primary-color);
-  }
-
-  .AllRights {
-    display: block;
-  }
-
-  .beianNumber {
-    margin-right: 15px;
-    img {
-      vertical-align: middle;
-      margin-right: 5px;
-    }
-  }
-
-  @media screen and (max-width: 600px) {
-    .icp,
-    .beianNumber {
-      display: block;
-    }
-  }
-`;
+import { FooterWrapper, Info } from "./styled";
 
 function Footer() {
   const { pathname } = useLocation();
 
   return (
     <FooterWrapper pathname={pathname}>
-      <span className="AllRights">
+      {/* <span className="AllRights">
         ©2021-2023 by <a href="https://motion.ant.design">心 念</a> All Rights
         Reserved
       </span>
@@ -50,7 +19,16 @@ function Footer() {
       </a>
       <a href="https://beian.miit.gov.cn/" className="icp">
         京ICP备2021033841号-2
-      </a>
+      </a> */}
+      <div className="main">
+        <Info>
+          <h2>{globalConfig.title}</h2>
+          <div className="shortName">constantly thinking of</div>
+          <div className="introduce">
+            心念个人站点，记录生活的瞬间，分享学习的心得以及日常工作学习中遇到的问题和处理的方法。以网站建设、Linux、网站优化、程序代码、读书笔记、博客心得、心情随笔、佳文分享、个人兴趣爱好内容为主。
+          </div>
+        </Info>
+      </div>
     </FooterWrapper>
   );
 }
