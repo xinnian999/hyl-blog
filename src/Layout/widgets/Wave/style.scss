@@ -1,0 +1,32 @@
+.marquee-box {
+  overflow: hidden;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.marquee {
+  width: 8000%;
+  height: 40px;
+}
+.wave-list-box {
+  float: left;
+}
+.wave-list-box ul {
+  float: left;
+  height: 40px;
+  overflow: hidden;
+  zoom: 1;
+}
+.wave-list-box ul li {
+  height: 40px;
+  width: 100%;
+  float: left;
+  line-height: 30px;
+  list-style: none;
+}
+.wave-box {
+  position: relative;
+  height: 40px;
+  background: #fff;
+}
