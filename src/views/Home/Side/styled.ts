@@ -50,27 +50,21 @@ export const HomeSideWrapper = styled.div`
   }
 
   .tags {
-    /* display: flex; */
+    padding-top: 15px;
+    .count {
+      font-size: 12px;
+      margin-right: 5px;
+    }
     .tag {
       display: inline-block;
       margin-right: 15px;
       margin-bottom: 15px;
-      padding: 5px;
-      font-size: 16px;
+      font-size: 15px;
       &:hover {
         cursor: pointer;
         background-color: var(--ant-primary-color);
         border-radius: 5px;
         color: #fff;
-      }
-      .count {
-        font-size: 12px;
-        vertical-align: top;
-        &:hover {
-          cursor: pointer;
-
-          color: #fff;
-        }
       }
     }
   }
@@ -117,5 +111,5 @@ export const CommentItem = styled(CommentCard)`
 export const LookMore = styled.div`
   text-align: right;
   font-size: 13px;
-  padding: 0 20px;
+  cursor: pointer;
 `;

@@ -1,9 +1,94 @@
 import { useLocation } from "react-router-dom";
-import { FooterLogo, FooterWrapper, Info, QrCode } from "./styled";
+import { Bottom, FooterLogo, FooterWrapper, Info, QrCode, Top } from "./styled";
 import { Tag } from "antd";
 import { useState } from "react";
 import { useGetData, useMount } from "@/hooks";
 import { time } from "hyl-utils";
+
+const topData = [
+  {
+    title: "推荐",
+    children: [
+      {
+        title: "博客魔改",
+      },
+      {
+        title: "听听音乐",
+      },
+      {
+        title: "玩个游戏",
+      },
+      {
+        title: "个人笔记",
+      },
+    ],
+  },
+  {
+    title: "生活",
+    children: [
+      {
+        title: "日常哔哔",
+      },
+      {
+        title: "视频剪辑",
+      },
+      {
+        title: "年度影集",
+      },
+      {
+        title: "音乐列表",
+      },
+    ],
+  },
+  {
+    title: "网站",
+    children: [
+      {
+        title: "留言信箱",
+      },
+      {
+        title: "博客打赏",
+      },
+      {
+        title: "博客统计",
+      },
+      {
+        title: "更新日志",
+      },
+    ],
+  },
+  {
+    title: "导航",
+    children: [
+      {
+        title: "个人主页",
+      },
+      {
+        title: "友情链接",
+      },
+      {
+        title: "朋友圈",
+      },
+      {
+        title: "个人作品",
+      },
+    ],
+  },
+  {
+    title: "协议",
+    children: [
+      {
+        title: "隐私协议",
+      },
+      {
+        title: "版权协议",
+      },
+      {
+        title: "说明",
+      },
+    ],
+  },
+];
 
 function Footer() {
   const { pathname } = useLocation();
@@ -30,8 +115,24 @@ function Footer() {
   });
 
   return (
-    <FooterWrapper pathname={pathname}>
-      <div className="main">
+    <FooterWrapper pathname={pathname} id="Footer">
+      <Top>
+        {topData.map(({ title, children }) => {
+          return (
+            <li>
+              <h3>{title}</h3>
+              <ul>
+                {children.map((item) => (
+                  <li>
+                    <span className="item">{item.title}</span>{" "}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          );
+        })}
+      </Top>
+      <Bottom>
         <FooterLogo>
           <h2>{globalConfig.title}</h2>
           <div className="shortName">constantly thinking of</div>
@@ -42,7 +143,7 @@ function Footer() {
         <Info>
           <li>
             总访问量：
-            <Tag>{counts.find((item) => item.key === "visits")?.count}</Tag>
+            {counts.find((item) => item.key === "visits")?.count}
           </li>
 
           <li>
@@ -76,7 +177,7 @@ function Footer() {
             <p>微信</p>
           </li>
         </QrCode>
-      </div>
+      </Bottom>
     </FooterWrapper>
   );
 }

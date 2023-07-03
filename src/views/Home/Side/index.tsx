@@ -1,9 +1,10 @@
-import { Avatar, Affix, Tooltip } from "antd";
+import { Avatar, Tag, Tooltip } from "antd";
 import {
   QqOutlined,
   WechatOutlined,
   GithubOutlined,
   WeiboOutlined,
+  MoreOutlined,
 } from "@ant-design/icons";
 import {
   CommentItem,
@@ -14,6 +15,8 @@ import {
 } from "./styled";
 import { useGetData } from "@/hooks";
 import { time } from "hyl-utils";
+import Tags from "./Tags";
+import { useNavigate } from "react-router-dom";
 
 const days = [
   "星期天",
@@ -51,10 +54,6 @@ const myLinks = [
 ];
 
 function Side() {
-  const [tag] = useGetData("/category/query", {
-    data: { orderBys: "count desc" },
-  });
-
   const [weather] = useGetData("/all/getWeather");
 
   const [counts] = useGetData("/all/counts");
@@ -65,6 +64,8 @@ function Side() {
       orderBys: "id desc",
     },
   });
+
+  const navigate = useNavigate();
 
   return (
     <HomeSideWrapper>
@@ -133,22 +134,17 @@ function Side() {
             return <CommentItem key={item.id} {...item} />;
           })}
         <LookMore>
-          <a href="/friend/message">查看更多{">>"}</a>{" "}
+          <Tag
+            color="blue"
+            bordered={false}
+            onClick={() => navigate("/friend/message")}
+          >
+            {"> "}查看更多
+          </Tag>
         </LookMore>
       </SideItem>
-      <Affix offsetTop={80}>
-        <SideItem>
-          <ul className="tags">
-            {tag.map((item) => {
-              return (
-                <li className="tag" key={item.name}>
-                  {item.name} <span className="count">{item.count}</span>
-                </li>
-              );
-            })}
-          </ul>
-        </SideItem>
-      </Affix>
+
+      <Tags />
     </HomeSideWrapper>
   );
 }

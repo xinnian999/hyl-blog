@@ -18,7 +18,7 @@ function Main() {
     cache: true,
     data: {
       pageNum: state.pageNum,
-      pageSize: 12,
+      pageSize: 18,
       filters: { publish: 1 },
       orderBys: "topping desc,id desc",
     },

@@ -11,15 +11,6 @@ function Home() {
 
   return (
     <Plate bannerText={<BannerText />}>
-      <Notice
-        banner
-        message={
-          <Marquee pauseOnHover gradient={false}>
-            {data[0]?.content}
-          </Marquee>
-        }
-        className="notice"
-      />
       <HomeMain>
         <Main />
         <Side />

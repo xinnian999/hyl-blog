@@ -19,12 +19,30 @@ export const FooterWrapper = styled.footer<{ pathname: string }>`
       margin-right: 5px;
     }
   }
+`;
 
-  .main {
-    width: var(--heart-width);
-    margin: 0 auto;
-    display: flex;
+export const Top = styled.ul`
+  width: var(--heart-width);
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 70px;
+  line-height: 40px;
+  text-align: center;
+  > li {
+    flex: 1;
+    .item {
+      cursor: pointer;
+      &:hover {
+        color: var(--ant-primary-color);
+      }
+    }
   }
+`;
+
+export const Bottom = styled.div`
+  width: var(--heart-width);
+  margin: 0 auto;
+  display: flex;
 `;
 
 export const FooterLogo = styled.div`
