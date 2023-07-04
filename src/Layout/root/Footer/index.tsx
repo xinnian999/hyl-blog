@@ -106,8 +106,7 @@ function Footer() {
 
   useMount(() => {
     const t = setInterval(
-      () =>
-        setOnTime(time.duration("2022/6/1 10:00", new Date().toUTCString())),
+      () => setOnTime(time.duration("2022/6/1 10:00")),
       1000
     );
 

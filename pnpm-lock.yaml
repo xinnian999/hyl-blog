@@ -132,8 +132,8 @@ dependencies:
     specifier: ^2.0.4
     version: 2.0.4
   hyl-utils:
-    specifier: ^1.3.61
-    version: 1.3.61
+    specifier: ^1.3.62
+    version: 1.3.62
   identity-obj-proxy:
     specifier: ^3.0.0
     version: 3.0.0
@@ -6680,8 +6680,8 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: false
 
-  /hyl-utils@1.3.61:
-    resolution: {integrity: sha512-AMb6xDgvJcRi2eBYQaMQe2EVFTDZ8amCw8eldNtBCy3Cd1zfqQGjgVwQEbCKFBWjDUDozqhx8nPOQjBecEKWDA==}
+  /hyl-utils@1.3.62:
+    resolution: {integrity: sha512-dWYyHNQLkNMyVzWt1sgF9lv6k2Jo852AOrfmu5Esk4Wotupt7+Ee1A50Qp3NQmyN8AiO5oE5QnfX3X8UAIcKig==}
     dev: false
 
   /iconv-lite@0.4.24:
