@@ -30,6 +30,7 @@ function ChatGpt() {
   const [newMessage, setNewMessage] = useState<string>("");
 
   const wrapperRef = useRef(null);
+  const testRef = useRef("test");
 
   const [visible, on] = useBoolean(false);
 
@@ -200,5 +201,6 @@ function ChatGpt() {
     </div>
   );
 }
+console.log(<ChatGpt />);
 
 export default ChatGpt;

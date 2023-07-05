@@ -15,19 +15,9 @@ export const HeaderWrapper = styled.header`
   backdrop-filter: blur(5px);
   transition: 0.5s all;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
-  a {
-    color: #fff;
-    &:hover {
-      background-color: var(--ant-primary-color);
-    }
-  }
+
   display: flex;
   padding: 0 30px;
-  /* .main {
-    max-width: var(--heart-width);
-    margin: 0 auto;
-    display: flex;
-  } */
 
   .active {
     background-color: var(--ant-primary-color);
@@ -51,6 +41,12 @@ export const NavWrapper = styled.ul`
   .navItem {
     position: relative;
     margin-right: 10px;
+    a {
+      color: #fff;
+      &:hover {
+        background-color: var(--ant-primary-color);
+      }
+    }
     &-main {
       /* display: block; */
       padding: 5px;
@@ -76,11 +72,20 @@ export const NavWrapper = styled.ul`
   }
 
   .twoNavItem {
+    font-weight: bold;
     a {
       display: block;
+      color: #555;
+      transition: text-align 1s ease;
+      &:hover {
+        color: var(--ant-primary-color);
+        text-align: center;
+      }
     }
-    &:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+
+    .active {
+      color: var(--ant-primary-color);
+      background-color: transparent;
     }
   }
 `;

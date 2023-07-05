@@ -11,11 +11,16 @@ export const PopoverFlag = styled.div`
 
   .content {
     min-width: 100px;
-    background-color: #2f4154;
+    font-size: 15px;
+    text-align: left;
+    line-height: 40px;
+    padding: 5px 15px;
     box-shadow: 0 0 10px rgb(0 0 0 / 30%);
     overflow: hidden;
     z-index: 99999;
     display: none;
+    background-color: #fff;
+
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
