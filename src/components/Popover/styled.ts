@@ -10,7 +10,7 @@ export const PopoverFlag = styled.div`
   }
 
   .content {
-    min-width: 100px;
+    /* min-width: 100px; */
     font-size: 15px;
     text-align: left;
     line-height: 40px;
@@ -22,8 +22,7 @@ export const PopoverFlag = styled.div`
     background-color: #fff;
 
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    right: 0;
     top: 60px;
     border-radius: 10px;
     transition: 0.5s opacity;
@@ -33,12 +32,12 @@ export const PopoverFlag = styled.div`
     @keyframes fadeInUp {
       from {
         opacity: 0;
-        transform: translate3d(-50%, 15px, 0);
+        transform: translate3d(0, 15px, 0);
       }
 
       to {
         opacity: 1;
-        transform: translate3d(-50%, 0, 0);
+        transform: translate3d(0, 0, 0);
       }
     }
   }

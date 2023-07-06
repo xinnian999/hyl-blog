@@ -6,7 +6,7 @@ interface PopoverProps extends DomProps {
 
 const Popover: React.FC<PopoverProps> = ({ children, content }) => {
   return (
-    <PopoverFlag>
+    <PopoverFlag className="PopoverFlag">
       {children}
       <div className="content">{content}</div>
     </PopoverFlag>

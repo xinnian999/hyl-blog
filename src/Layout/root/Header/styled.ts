@@ -48,7 +48,6 @@ export const NavWrapper = styled.ul`
       }
     }
     &-main {
-      /* display: block; */
       padding: 5px;
       border-radius: 10px;
       position: relative;
@@ -70,22 +69,32 @@ export const NavWrapper = styled.ul`
       transform: rotate(180deg);
     }
   }
+  .towNav {
+    /* width: 40vh; */
+    height: 18vh;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    flex-direction: column;
+    .twoNavItem {
+      font-weight: bold;
+      /* width: 80px; */
+      a {
+        display: block;
+        color: #555;
+        transition: 0.5s all;
 
-  .twoNavItem {
-    font-weight: bold;
-    a {
-      display: block;
-      color: #555;
-      transition: text-align 1s ease;
-      &:hover {
-        color: var(--ant-primary-color);
-        text-align: center;
+        &:hover {
+          color: var(--ant-primary-color);
+          transform: translateX(5px);
+        }
       }
     }
 
     .active {
-      color: var(--ant-primary-color);
+      color: var(--ant-primary-color) !important;
       background-color: transparent;
+      transform: translateX(10px);
     }
   }
 `;

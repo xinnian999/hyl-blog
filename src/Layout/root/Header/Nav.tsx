@@ -15,7 +15,7 @@ function NavItem(props: routeItem) {
     <Popover
       content={
         children && (
-          <ul>
+          <ul className="towNav">
             {children.map((item) => {
               return (
                 <li key={item.title} className="twoNavItem">
