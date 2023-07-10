@@ -24,7 +24,7 @@ const route: routeItem[] = [
     icon: "icon-houtaiweihurizhi",
     children: [
       {
-        title: "说说",
+        title: "日常哔哔",
         path: "say",
         index: true,
         icon: "icon-shuoshuo",

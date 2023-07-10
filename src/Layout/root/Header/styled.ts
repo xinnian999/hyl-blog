@@ -34,70 +34,7 @@ export const Logo = styled.span`
   }
 `;
 
-export const NavWrapper = styled.ul`
-  display: inline-flex;
-  margin-left: auto;
 
-  .navItem {
-    position: relative;
-    margin-right: 10px;
-    a {
-      color: #fff;
-      &:hover {
-        background-color: var(--ant-primary-color);
-      }
-    }
-    &-main {
-      padding: 5px;
-      border-radius: 10px;
-      position: relative;
-      font-size: 15px;
-      font-weight: bold;
-      text-align: center;
-
-      .nav-title {
-        padding: 0 5px;
-      }
-
-      .down {
-        display: inline-block;
-        transition: 0.5s transform;
-      }
-    }
-
-    &:hover .down {
-      transform: rotate(180deg);
-    }
-  }
-  .towNav {
-    /* width: 40vh; */
-    height: 18vh;
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
-    flex-direction: column;
-    .twoNavItem {
-      font-weight: bold;
-      /* width: 80px; */
-      a {
-        display: block;
-        color: #555;
-        transition: 0.5s all;
-
-        &:hover {
-          color: var(--ant-primary-color);
-          transform: translateX(5px);
-        }
-      }
-    }
-
-    .active {
-      color: var(--ant-primary-color) !important;
-      background-color: transparent;
-      transform: translateX(10px);
-    }
-  }
-`;
 
 export const UserWrapper = styled.div`
   margin-left: 15px;

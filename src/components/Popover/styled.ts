@@ -10,7 +10,7 @@ export const PopoverFlag = styled.div`
   }
 
   .content {
-    /* min-width: 100px; */
+    min-width: 100px;
     font-size: 15px;
     text-align: left;
     line-height: 40px;
@@ -18,7 +18,7 @@ export const PopoverFlag = styled.div`
     box-shadow: 0 0 10px rgb(0 0 0 / 30%);
     overflow: hidden;
     z-index: 99999;
-    display: none;
+    /* display: none; */
     background-color: #fff;
 
     position: absolute;
