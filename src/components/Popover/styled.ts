@@ -18,7 +18,7 @@ export const PopoverFlag = styled.div`
     box-shadow: 0 0 10px rgb(0 0 0 / 30%);
     overflow: hidden;
     z-index: 99999;
-    /* display: none; */
+    display: none;
     background-color: #fff;
 
     position: absolute;
