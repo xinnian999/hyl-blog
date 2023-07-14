@@ -61,7 +61,6 @@ const NavWrapper = styled.ul`
     .active {
       color: var(--ant-primary-color) !important;
       background-color: transparent;
-      transform: translateX(5px);
     }
   }
 `;
@@ -75,17 +74,20 @@ function NavItem(props: routeItem) {
     <Popover
       content={
         children && (
-          <ul className="towNav">
-            {children.map((item) => {
-              return (
-                <li key={item.title} className="twoNavItem">
-                  <NavLink to={`${path}/${item.path}`}>
-                    {item.icon && <Icon type={item.icon} />} {item.title}
-                  </NavLink>
-                </li>
-              );
-            })}
-          </ul>
+          <>
+            <header>{title}</header>
+            <ul className="towNav">
+              {children.map((item) => {
+                return (
+                  <li key={item.title} className="twoNavItem">
+                    <NavLink to={`${path}/${item.path}`}>
+                      {item.icon && <Icon type={item.icon} />} {item.title}
+                    </NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </>
         )
       }
     >
