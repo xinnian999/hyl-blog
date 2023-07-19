@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 const NavWrapper = styled.ul`
   display: inline-flex;
-  margin-left: auto;
+  /* margin-left: auto; */
 
   .navItem {
     position: relative;
