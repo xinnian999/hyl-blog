@@ -81,12 +81,15 @@ function BannerText() {
   }, [exp]);
 
   const goNext = () => {
-    const goElement = document.querySelector("#homeMain");
-    goElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById("homeMain");
+    window.scrollTo({
+      top: el!.offsetTop - 70,
+      behavior: "smooth",
+    });
   };
   return (
     <BannerTextWrapper>
-      <h2>constantly thinking of</h2>
+      <h2>constantly thinking of</h2>{" "}
       <div className="autograph" style={{ opacity: 0 }}>
         <span className="autograph-text">{exp}</span>
         <span className="autograph-cursor">__</span>
