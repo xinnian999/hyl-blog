@@ -100,7 +100,7 @@ function ArticleDetail() {
   );
 
   return (
-    <Plate title={title} bg="bg18.jpg" autograph={articleInfo}>
+    <Plate title={title} bg="bg18.jpg">
       <ArticleDetailWrapper>
         <Main>
           <Markdown content={content} ref={mdRef} />

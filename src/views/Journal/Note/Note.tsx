@@ -16,11 +16,7 @@ export default function Note() {
   const [data] = useGetData<Data>("/note/query");
 
   return (
-    <Plate
-      title="笔记"
-      autograph="哪里有天才，我是把别人喝咖啡的工夫都用在了工作上了。"
-      bg="bg16.jpg"
-    >
+    <Plate title="笔记" bg="bg16.jpg">
       <NoteWrapper>
         {data.map(({ title, content, id }) => {
           return (

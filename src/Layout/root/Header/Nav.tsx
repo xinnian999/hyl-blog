@@ -14,9 +14,10 @@ const NavWrapper = styled.ul`
     position: relative;
     margin-right: 10px;
     a {
-      color: #fff;
+      color: ${({ theme }) => (theme.scrollTop > 1 ? "#555" : "#fff")};
       &:hover {
         background-color: var(--ant-primary-color);
+        color: #fff;
       }
     }
     &-main {
@@ -42,7 +43,7 @@ const NavWrapper = styled.ul`
     }
   }
   .towNav {
-    text-align: center;
+    /* text-align: center; */
     white-space: nowrap;
     .twoNavItem {
       font-weight: bold;

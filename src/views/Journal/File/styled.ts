@@ -2,7 +2,7 @@ import { Plate } from "@/components";
 import { r } from "@/utils";
 import styled from "styled-components";
 
-export const FileWrapper = styled(Plate.Main)`
+export const FileWrapper = styled.div`
   .fileTitle {
     font-weight: bold;
     font-size: 25px;

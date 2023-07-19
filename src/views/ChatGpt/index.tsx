@@ -10,15 +10,13 @@ function ChatGpt() {
   });
 
   return (
-    <Plate title="ChatGPT" autograph="最新人工智能 ~ 在线体验">
-      <Plate.Main>
-        <Preview width="100vw" btnPosition={{ x: 3, y: 3 }}>
-          <ChatWindowWrapper>
-            <History />
-            <Chat />
-          </ChatWindowWrapper>
-        </Preview>
-      </Plate.Main>
+    <Plate title="chatgpt">
+      <Preview width="100vw" btnPosition={{ x: 3, y: 3 }}>
+        <ChatWindowWrapper>
+          <History />
+          <Chat />
+        </ChatWindowWrapper>
+      </Preview>
     </Plate>
   );
 }

@@ -114,15 +114,15 @@ function Footer() {
   });
 
   return (
-    <FooterWrapper pathname={pathname} id="Footer">
+    <FooterWrapper pathname={pathname} id="Footer" className="footer">
       <Top>
         {topData.map(({ title, children }) => {
           return (
-            <li>
+            <li key={title}>
               <h3>{title}</h3>
               <ul>
                 {children.map((item) => (
-                  <li>
+                  <li key={item.title}>
                     <span className="item">{item.title}</span>{" "}
                   </li>
                 ))}

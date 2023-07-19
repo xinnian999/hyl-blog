@@ -4,47 +4,33 @@ import { MenuOutlined } from "@ant-design/icons";
 import TweenOne from "rc-tween-one";
 
 interface PlateBannerProps {
-  bg: string;
-  dark: boolean;
+  bg?: string;
 }
 
 export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
-  height: 100vh;
+  height: 450px;
   .bg {
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: ${(props) => (props.dark ? "0.7" : "1")};
+    opacity: ${(props) => (props.theme.isDark ? "0.7" : "1")};
     background-image: ${(props) =>
       `url(${require(`@/assets/img/bg/${
-        props.dark ? "bg8.jpg" : "bg24.jpg"
+        props.theme.dark ? "bg8.jpg" : "bg24.jpg"
       }`)})`};
-    background-attachment: fixed;
-    canvas {
-      backface-visibility: hidden;
-    }
   }
-  .info {
-    color: var(--plate-text-color);
-    text-align: center;
-    width: 100%;
+
+  h2 {
     position: absolute;
+    left: 50%;
     top: 50%;
-    transform: translateY(-50%);
-    z-index: 9;
-    h2 {
-      font-weight: 500;
-      font-size: ${r`50px`};
-      margin-bottom: 20px;
-      letter-spacing: 5px;
-      /* text-shadow: 0px 0px 10px black; */
-      color: #eee;
-      text-shadow: 3px 3px 0 var(--ant-primary-8);
-    }
-    .autograph {
-      font-size: 22px;
-    }
+    transform: translate(-50%, -50%);
+    font-weight: 500;
+    font-size: 45px;
+    letter-spacing: 5px;
+    color: #eee;
+    text-shadow: 3px 3px 0 var(--ant-primary-8);
   }
 `;
 
@@ -52,21 +38,15 @@ export const PlateContent = styled.div`
   max-width: var(--heart-width);
   margin: 0 auto;
   position: relative;
-  top: 50px;
-  /* display: flex; */
-  padding-bottom: 100px;
+  top: -60px;
+  background-color: var(--background-color);
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
   @media screen and (max-width: 800px) {
     margin: 0 20px;
   }
-`;
-
-export const Main = styled.div`
-  background-color: var(--background-color);
-  border-radius: 15px;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
-  overflow: hidden;
-  /* flex: 1; */
 `;
 
 export const ToolbarWrapper = styled.div`

@@ -40,7 +40,7 @@ function File() {
   }, [data]);
 
   return (
-    <Plate title="归档" autograph="穷且益坚，不坠青云之志。">
+    <Plate title="归档">
       <FileWrapper>
         <Title>
           居然用了

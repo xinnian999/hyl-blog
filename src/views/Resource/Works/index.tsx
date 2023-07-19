@@ -38,11 +38,7 @@ export default function Works() {
   );
 
   return (
-    <Plate
-      title="个人作品"
-      autograph="你知道太阳为什么是太阳吗？因为它从不在乎别人的目光"
-      bg="bg15.jpg"
-    >
+    <Plate title="个人作品" bg="bg15.jpg">
       <WorkWrapper>{renderItem}</WorkWrapper>
     </Plate>
   );

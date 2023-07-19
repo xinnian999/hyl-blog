@@ -70,12 +70,7 @@ export default function Link() {
 
   return (
     <>
-      <Plate
-        title="友情链接"
-        autograph="我们都像小孩，胡闹是因为依赖；礼貌，是因为是陌生。"
-        bg="bg12.png"
-        id="Link"
-      >
+      <Plate title="友情链接" bg="bg12.png">
         <LinkWrapper>
           <div className="explain">
             <Title>链接申请说明</Title>

@@ -46,10 +46,7 @@ export default function Collection() {
   );
 
   return (
-    <Plate
-      title="珍藏"
-      autograph="I like you,but just like you.我喜欢你，仅仅如此，喜欢而已"
-    >
+    <Plate title="珍藏">
       <CollectionWrapper>{renderItem}</CollectionWrapper>
     </Plate>
   );

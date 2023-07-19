@@ -38,7 +38,7 @@ body {
   background-color: #374140 !important;
   position: relative;
   overflow-x: hidden;
-  // overflow-y: overlay;
+  overflow-y: overlay;
 }
 
 #root {
@@ -53,6 +53,13 @@ body {
 
 #main {
   min-height: 100vh;
+  margin-bottom: 50px;
+}
+
+.center {
+  max-width: var(--heart-width);
+  margin: 0 auto;
+  position: relative;
 }
 
 .box-shadow {

@@ -1,23 +1,21 @@
-import { PlateContent, Main } from "./styled";
-import Banner from "./Banner";
+import { PlateContent, PlateBanner } from "./styled";
 
-interface PlateProps extends DomProps {
+interface PlateProps {
   title?: string;
-  autograph?: React.ReactNode;
   bg?: string;
-  bannerText?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-function Plate(props: PlateProps) {
+const Plate: React.FC<PlateProps> = ({ title, children }) => {
   return (
     <>
-      <Banner {...props}></Banner>
-
-      <PlateContent>{props.children}</PlateContent>
+      <PlateBanner>
+        <div className="bg" />
+        <h2>{title}</h2>
+      </PlateBanner>
+      <PlateContent>{children}</PlateContent>
     </>
   );
-}
-
-Plate.Main = Main;
+};
 
 export default Plate;

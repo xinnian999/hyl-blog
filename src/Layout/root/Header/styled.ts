@@ -4,12 +4,9 @@ import styled from "styled-components";
 export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
-  background: ${({ theme }) =>
-    theme.scrollTop > 200
-      ? "linear-gradient(208deg,#4584ff 0,#4584ff 11%,#ff7676 100%)"
-      : "transparent"};
-  height: ${({ theme }) => (theme.scrollTop > 200 ? r`50px` : r`60px`)};
-  line-height: ${({ theme }) => (theme.scrollTop > 200 ? r`50px` : r`60px`)};
+  background: ${({ theme }) => (theme.scrollTop > 1 ? "#fff" : "transparent")};
+  height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
+  line-height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
   z-index: 11;
   text-align: center;
   backdrop-filter: blur(5px);
@@ -21,20 +18,23 @@ export const HeaderWrapper = styled.header`
 
   .active {
     background-color: var(--ant-primary-color);
+    color: #fff !important;
   }
 `;
 
 export const Logo = styled.span`
   font-family: "汉仪霹雳体简";
   font-size: ${r`30px`};
+
   cursor: pointer;
-  color: #fff;
+  color: ${({ theme }) =>
+    theme.scrollTop > 1
+      ? "#555;  "
+      : "#fff;    text-shadow: 3px 3px 0 var(--ant-primary-8);"};
   @media screen and (max-width: 800px) {
     margin: 0 auto;
   }
 `;
-
-
 
 export const UserWrapper = styled.div`
   margin-left: 15px;

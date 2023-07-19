@@ -1,7 +1,7 @@
 import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const NoteWrapper = styled(Plate.Main)`
+export const NoteWrapper = styled.div`
   overflow: hidden;
   padding: 10px;
 

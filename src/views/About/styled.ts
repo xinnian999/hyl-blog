@@ -2,8 +2,7 @@ import { Plate } from "@/components";
 import styled from "styled-components";
 import { r } from "@/utils";
 
-export const AboutWrapper = styled(Plate.Main)`
-  padding: 15px;
+export const AboutWrapper = styled.div`
   a {
     color: var(--ant-primary-color);
   }

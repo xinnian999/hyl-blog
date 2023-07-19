@@ -1,7 +1,7 @@
 import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const JournalWrapper = styled(Plate.Main)`
+export const JournalWrapper = styled.div`
   padding: 60px 40px;
 
   .ant-timeline-item-tail {

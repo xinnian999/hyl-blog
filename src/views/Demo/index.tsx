@@ -1,13 +1,14 @@
 import { Plate } from "@/components";
-import { DemoMain } from "./styled";
-import Echarts from "./echarts";
+import { Button } from "antd";
 
 export default function Demo() {
+  const goNext = () => {
+    const goElement = document.querySelector("#Footer");
+    goElement?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   return (
-    <Plate title={"demo"}>
-      <DemoMain>
-        <Echarts />
-      </DemoMain>
+    <Plate title="demo">
+      <Button onClick={goNext}>test</Button>
     </Plate>
   );
 }

@@ -33,7 +33,7 @@ const About = () => {
   });
 
   return (
-    <Plate title="关于" autograph="越努力，越幸运" bg="bg14.jpg">
+    <Plate title="关于">
       <AboutWrapper>
         <Title>关于我</Title>
         <Info>

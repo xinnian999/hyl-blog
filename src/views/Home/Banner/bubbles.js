@@ -1,12 +1,12 @@
-let tit
 
-const bubbles = (canvas, title) => {
+
+const bubbles = (canvas, run) => {
     const width = window.innerWidth
     const height = window.innerHeight
     const ctx = canvas.getContext('2d');
     const circles = [];
 
-    tit = title
+
     canvas.width = width;
     canvas.height = height;
 
@@ -46,17 +46,18 @@ const bubbles = (canvas, title) => {
     }
 
 
-    const animate = () => {
-        if (tit !== title) return
-        ctx.clearRect(0, 0, width, height);
-        for (let i in circles) {
-            circles[i].draw();
-        }
-        requestAnimationFrame(animate);
 
-    }
 
-    animate()
+    return setInterval(() => {
+        console.log(999);
+        requestAnimationFrame(() => {
+            ctx.clearRect(0, 0, width, height);
+            for (let i in circles) {
+                circles[i].draw();
+            }
+        })
+    }, 20)
+
 }
 
 export default bubbles

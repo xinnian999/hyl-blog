@@ -17,11 +17,7 @@ const Say = () => {
   const { width } = useWindowSize();
 
   return (
-    <Plate
-      title="说说"
-      autograph="不必慌张，活好当下，来日方长；不必失望，人间值得，未来可期。"
-      bg="bg13.jpg"
-    >
+    <Plate title="说说" bg="bg13.jpg">
       <JournalWrapper>
         <Timeline
           mode={width > 800 ? "alternate" : "left"}

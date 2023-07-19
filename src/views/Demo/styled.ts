@@ -1,7 +1,7 @@
 import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const DemoMain = styled(Plate.Main)`
+export const DemoMain = styled.div`
   text-align: center;
 `;
 
