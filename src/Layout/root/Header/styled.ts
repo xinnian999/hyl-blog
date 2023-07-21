@@ -5,8 +5,11 @@ export const HeaderWrapper = styled.header`
   position: fixed;
   width: 100%;
   background: ${({ theme }) => (theme.scrollTop > 1 ? "#fff" : "transparent")};
-  height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
-  line-height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)};
+  /* height: ${({ theme }) => (theme.scrollTop > 1 ? r`50px` : r`60px`)}; */
+  /* line-height: ${({ theme }) =>
+    theme.scrollTop > 1 ? r`50px` : r`60px`}; */
+  height: 60px;
+  line-height: 60px;
   z-index: 11;
   text-align: center;
   backdrop-filter: blur(5px);
