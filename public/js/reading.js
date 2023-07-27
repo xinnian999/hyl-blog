@@ -1,10 +1,8 @@
-var globalConfig;
-
-const res = $.ajax({
-  url: "/globalConfig.json",
+$.ajax({
+  url: "/config.yaml",
   type: "GET",
-  dataType: "json",
   async: false,
+  success(res) {
+    window.globalConfig = jsyaml.load(res);
+  },
 });
-
-globalConfig = JSON.parse(res.responseText);

@@ -87,6 +87,12 @@ const hasJsxRuntime = (() => {
   }
 })();
 
+// 注入全局配置
+const yaml = require('js-yaml');
+
+global.config = yaml.load(fs.readFileSync('./config.yaml', 'utf8'));
+
+
 // This is the production and development configuration.
 // It is focused on developer experience, fast rebuilds, and a minimal bundle.
 module.exports = function (webpackEnv) {
@@ -618,6 +624,9 @@ module.exports = function (webpackEnv) {
           {
             inject: true,
             template: paths.appHtml,
+            templateParameters: {
+              globalConfig: config
+            },
             files: {
               js: [],
               css: [

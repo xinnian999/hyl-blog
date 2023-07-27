@@ -1,0 +1,11 @@
+remoteStaticUrl: "https://cdn.hyl999.co/public"
+iconfont: "//at.alicdn.com/t/c/font_2900696_eub3nitmous.js"
+title: "心念の空间站"
+description: "犹一心一意，念念不忘"
+homePage: "/"
+rootValue: 54
+proxy:
+  [
+    { path: "/api", url: "https://www.hyl999.co:7777" },
+    { path: "/cdn", url: "https://cdn.hyl999.co/public" },
+  ]

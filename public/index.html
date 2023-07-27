@@ -14,6 +14,7 @@
 
   <body id="light">
     <noscript>javascript 执行失败 ！</noscript>
+    <!-- <div><%= globalConfig.title %></div> -->
 
     <div id="loading-box">
       <div class="loading">
@@ -29,7 +30,10 @@
     <script src="%PUBLIC_URL%/js/jquery.lettering.js"></script>
     <script src="%PUBLIC_URL%/js/jquery.textillate.js"></script>
     <script src="%PUBLIC_URL%/js/textillateBanner.js"></script>
-    <script src="%PUBLIC_URL%/js/reading.js"></script>
+
+    <script>
+      var globalConfig = JSON.parse(`<%= JSON.stringify(globalConfig) %>`);
+    </script>
 
     <div id="root"></div>
   </body>

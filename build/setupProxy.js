@@ -1,5 +1,4 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
-const config = require("../public/globalConfig.json");
 
 module.exports = function (app) {
   config.proxy.forEach(({ path, url }) => {

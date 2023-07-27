@@ -58,6 +58,7 @@
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "js-md5": "^0.7.3",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lib-flexible": "^0.3.2",
     "mini-css-extract-plugin": "^2.4.5",
