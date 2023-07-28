@@ -5,6 +5,7 @@ import Bubble from "./Bubble";
 import { useBoolean, useMount, useRedux } from "@/hooks";
 import { sendApi } from "./api";
 import { useSelector } from "react-redux";
+import { url } from "hyl-utils";
 
 const tip = `
   您好，我是chatgpt。\n
@@ -19,6 +20,8 @@ function ChatGpt() {
       []
   );
 
+  const [defaultMsg, setDefaultMsg] = useState("");
+
   const {
     store: {
       chatgptStore: { disabled, controller },
@@ -30,7 +33,6 @@ function ChatGpt() {
   const [newMessage, setNewMessage] = useState<string>("");
 
   const wrapperRef = useRef(null);
-  const testRef = useRef("test");
 
   const [visible, on] = useBoolean(false);
 
@@ -45,19 +47,30 @@ function ChatGpt() {
 
   useMount(() => {
     on();
+
+    const params = url.getParams();
+    if (params.q) {
+      dispatch({ type: "ADD_MESSAGES" });
+      setNewMessage(params.q);
+      setDefaultMsg(params.q);
+    }
     setTimeout(() => {
       goEnd();
     }, 500);
   });
 
   useEffect(() => {
+    handleMessageSend(defaultMsg);
+  }, [defaultMsg]);
+
+  useEffect(() => {
     goEnd();
   }, [messages]);
 
-  const handleMessageSend = (): void => {
+  const handleMessageSend = (msg = newMessage): void => {
     const newController = new AbortController();
 
-    if (newMessage.trim()) {
+    if (msg.trim()) {
       batchDispatch([
         {
           type: "CHANGE_DISABLED",
@@ -69,7 +82,7 @@ function ChatGpt() {
         },
         {
           type: "CHANGE_MESSAGES",
-          payload: [...messages, { content: newMessage, role: "user" }],
+          payload: [...messages, { content: msg, role: "user" }],
         },
       ]);
       setNewMessage("");
@@ -79,7 +92,7 @@ function ChatGpt() {
           type: "CHANGE_MESSAGES",
           payload: [
             ...messages,
-            { content: newMessage, role: "user" },
+            { content: msg, role: "user" },
             { content: "ai思索中...", role: "assistant" },
           ],
         });
@@ -87,7 +100,7 @@ function ChatGpt() {
 
       sendApi(
         {
-          messages: [...messages, { content: newMessage, role: "user" }],
+          messages: [...messages, { content: msg, role: "user" }],
         },
         newController
       ).then(async (response) => {
@@ -131,7 +144,7 @@ function ChatGpt() {
             type: "CHANGE_MESSAGES",
             payload: [
               ...messages,
-              { content: newMessage, role: "user" },
+              { content: msg, role: "user" },
               { content: contents, role: "assistant" },
             ],
           });
@@ -193,7 +206,7 @@ function ChatGpt() {
           className="sendBtn"
           type="primary"
           disabled={disabled}
-          onClick={handleMessageSend}
+          onClick={() => handleMessageSend}
         >
           发送
         </Button>

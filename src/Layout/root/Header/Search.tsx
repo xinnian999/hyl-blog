@@ -1,6 +1,7 @@
 import { Icon } from "@/components";
 import { Input, Button } from "antd";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const SearchWrapper = styled.div<{ inputWidth: number }>`
@@ -31,22 +32,45 @@ const SearchWrapper = styled.div<{ inputWidth: number }>`
 
 function Search() {
   const [inputWidth, setInputWidth] = useState(150);
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
 
+  const onBlur = () => {
+    if (value) return;
+    setInputWidth(150);
+  };
+  const goSearch = () => {
+    if (!value) return;
+    navigate(`/search?q=${value}`);
+  };
+
+  const goGPT = () => {
+    if (!value) return;
+    navigate(`/resource/chatgpt?q=${value}`);
+  };
   return (
     <SearchWrapper inputWidth={inputWidth}>
       <div className="main">
-        {inputWidth > 150 && <Button type="link">问gpt</Button>}
+        {inputWidth > 150 && (
+          <Button type="link" onClick={goGPT}>
+            发给gpt
+          </Button>
+        )}
         <Input
           allowClear
           onFocus={() => setInputWidth(250)}
-          onBlur={() => setInputWidth(150)}
+          onBlur={onBlur}
           className="input"
           placeholder="输入关键字搜索"
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          onPressEnter={goSearch}
         />
         <Button
           ghost
           className="onSearchBtn"
           icon={<Icon type="icon-Magnifier" />}
+          onClick={goSearch}
         ></Button>
       </div>
     </SearchWrapper>

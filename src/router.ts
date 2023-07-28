@@ -7,12 +7,10 @@ const route: routeItem[] = [
     icon: "icon-shouye1",
     component: lazy(() => import("@/views/Home")),
   },
-  // {
-  //   title: "文章",
-  //   path: "/article",
-  //   icon: "icon-wenzhang1",
-  //   component: lazy(() => import("@/views/Article")),
-  // },
+  {
+    path: "/search",
+    component: lazy(() => import("@/views/Search")),
+  },
   {
     path: "/article/:id",
     component: lazy(() => import("@/views/Home/ArticleDetail")),
