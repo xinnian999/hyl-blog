@@ -1,14 +1,20 @@
-import { Plate } from "@/components";
 import { Button } from "antd";
+import { Plate } from "@/components";
+import store from "@/globalStore";
 
-export default function Demo() {
-  const goNext = () => {
-    const goElement = document.querySelector("#Footer");
-    goElement?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
+const Demo = () => {
   return (
     <Plate title="demo">
-      <Button onClick={goNext}>test</Button>
+      <Button
+        onClick={() => {
+          store.count++;
+          console.log(store.count);
+        }}
+      >
+        {store.count}
+      </Button>
     </Plate>
   );
-}
+};
+
+export default Demo;
