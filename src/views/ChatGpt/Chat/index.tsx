@@ -2,10 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
-import { useBoolean, useMount, useRedux } from "@/hooks";
+import { useBoolean, useMount } from "@/hooks";
 import { sendApi } from "./api";
-import { useSelector } from "react-redux";
-import { url } from "hyl-utils";
+import useStore from "../store";
 
 const tip = `
   您好，我是chatgpt。\n
@@ -14,21 +13,13 @@ const tip = `
 `;
 
 function ChatGpt() {
-  const messages = useSelector(
-    (state: storeTypes) =>
-      state.chatgptStore.allMessages.find((item) => item.current)?.messages ||
-      []
+  const messages = useStore(
+    (state) => state.allMessages.find((item) => item.current)?.messages || []
   );
+  const { setAllMessages, setController, setDisabled, disabled, controller } =
+    useStore();
 
   const [defaultMsg, setDefaultMsg] = useState("");
-
-  const {
-    store: {
-      chatgptStore: { disabled, controller },
-    },
-    dispatch,
-    batchDispatch,
-  } = useRedux();
 
   const [newMessage, setNewMessage] = useState<string>("");
 
@@ -48,15 +39,15 @@ function ChatGpt() {
   useMount(() => {
     on();
 
-    const params = url.getParams();
-    if (params.q) {
-      dispatch({ type: "ADD_MESSAGES" });
-      setNewMessage(params.q);
-      setDefaultMsg(params.q);
-    }
-    setTimeout(() => {
-      goEnd();
-    }, 500);
+    // const params = url.getParams();
+    // if (params.q) {
+    //   dispatch({ type: "ADD_MESSAGES" });
+    //   setNewMessage(params.q);
+    //   setDefaultMsg(params.q);
+    // }
+    // setTimeout(() => {
+    //   goEnd();
+    // }, 500);
   });
 
   useEffect(() => {
@@ -71,31 +62,18 @@ function ChatGpt() {
     const newController = new AbortController();
 
     if (msg.trim()) {
-      batchDispatch([
-        {
-          type: "CHANGE_DISABLED",
-          payload: true,
-        },
-        {
-          type: "CHANGE_CONTROLLER",
-          payload: newController,
-        },
-        {
-          type: "CHANGE_MESSAGES",
-          payload: [...messages, { content: msg, role: "user" }],
-        },
-      ]);
+      setDisabled(true);
+      setAllMessages([...messages, { content: msg, role: "user" }]);
+      setController(newController);
+
       setNewMessage("");
 
       setTimeout(() => {
-        dispatch({
-          type: "CHANGE_MESSAGES",
-          payload: [
-            ...messages,
-            { content: msg, role: "user" },
-            { content: "ai思索中...", role: "assistant" },
-          ],
-        });
+        setAllMessages([
+          ...messages,
+          { content: msg, role: "user" },
+          { content: "ai思索中...", role: "assistant" },
+        ]);
       }, 700);
 
       sendApi(
@@ -110,15 +88,12 @@ function ChatGpt() {
         const reader = response.body!.getReader();
 
         let contents = "";
+
         while (true) {
           const { done, value } = await reader.read();
+
           if (done) {
-            batchDispatch([
-              {
-                type: "CHANGE_DISABLED",
-                payload: false,
-              },
-            ]);
+            setDisabled(false);
             break;
           }
           // 解码内容
@@ -140,14 +115,11 @@ function ChatGpt() {
             }
           });
 
-          dispatch({
-            type: "CHANGE_MESSAGES",
-            payload: [
-              ...messages,
-              { content: msg, role: "user" },
-              { content: contents, role: "assistant" },
-            ],
-          });
+          setAllMessages([
+            ...messages,
+            { content: msg, role: "user" },
+            { content: contents, role: "assistant" },
+          ]);
         }
       });
     }
@@ -191,12 +163,7 @@ function ChatGpt() {
             type="primary"
             onClick={() => {
               controller.abort();
-              batchDispatch([
-                {
-                  type: "CHANGE_DISABLED",
-                  payload: false,
-                },
-              ]);
+              setDisabled(false);
             }}
           >
             终止

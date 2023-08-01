@@ -1,6 +1,6 @@
 import { Button } from "antd";
 import { Plate } from "@/components";
-import useStore from "./store";
+import useStore from "@/globalStore";
 
 const Demo = () => {
   const store = useStore();
