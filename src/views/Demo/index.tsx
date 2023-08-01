@@ -1,18 +1,13 @@
 import { Button } from "antd";
 import { Plate } from "@/components";
-import store from "@/globalStore";
+import useStore from "./store";
 
 const Demo = () => {
+  const store = useStore();
+
   return (
     <Plate title="demo">
-      <Button
-        onClick={() => {
-          store.count++;
-          console.log(store.count);
-        }}
-      >
-        {store.count}
-      </Button>
+      <Button onClick={store.addCount}>{store.count}</Button>
     </Plate>
   );
 };
