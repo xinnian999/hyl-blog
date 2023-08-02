@@ -1,12 +1,15 @@
-import { useBoolean, useRedux } from "@/hooks";
+import { useBoolean } from "@/hooks";
 import { LabelWrapper } from "./styled";
 import { Icon } from "@/components";
 import { memo, useRef, useState } from "react";
 import { Input, InputRef } from "antd";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
+import useStore from "../store";
 
-function HistoryLabel({ item, index }) {
-  const { dispatch } = useRedux();
+function HistoryLabel({ id, current, time }) {
+  console.log(id, current, time);
+
+  const { deleteMessages, updateAllMessages } = useStore();
 
   const [editName, on, off] = useBoolean(false);
 
@@ -14,22 +17,19 @@ function HistoryLabel({ item, index }) {
 
   const inputRef = useRef<InputRef>(null);
 
-  const onSave = () => {
+  const onSaveName = () => {
     if (value) {
-      dispatch({
-        type: "CHANGE_NAME",
-        payload: { key: item.key, name: value },
-      });
+      updateAllMessages((item) => ({
+        time: item.id === id ? value : item.time,
+      }));
       off();
     }
   };
 
   return (
     <LabelWrapper
-      onClick={() =>
-        dispatch({ type: "CHANGE_MESSAGES_CURRENT", payload: item.key })
-      }
-      active={item.current}
+      onClick={() => updateAllMessages((msg) => ({ current: msg.id === id }))}
+      active={current}
     >
       <div className="icon">
         <Icon type="icon-changyonghuifu" size={16} />
@@ -40,19 +40,19 @@ function HistoryLabel({ item, index }) {
             ref={inputRef}
             value={value}
             onChange={(e) => setValue(e.target.value)}
-            onPressEnter={onSave}
+            onPressEnter={onSaveName}
           />
         ) : (
-          <span>{item.time}</span>
+          <span>{time}</span>
         )}
-        {item.current && !editName && <div className="zhao"></div>}
+        {current && !editName && <div className="zhao"></div>}
       </div>
-      {item.current && (
+      {current && (
         <ul className="action">
           {editName ? (
             <>
               <li>
-                <CheckOutlined className="ico" onClick={onSave} />
+                <CheckOutlined className="ico" onClick={onSaveName} />
               </li>
               <li>
                 <CloseOutlined
@@ -73,7 +73,7 @@ function HistoryLabel({ item, index }) {
                     e.stopPropagation();
                     on();
 
-                    setValue(item.time);
+                    setValue(time);
                     setTimeout(() => {
                       inputRef.current!.focus({
                         cursor: "end",
@@ -88,7 +88,7 @@ function HistoryLabel({ item, index }) {
                   className="ico"
                   onClick={(e) => {
                     e.stopPropagation();
-                    dispatch({ type: "CHANGE_TOP", payload: item });
+                    updateAllMessages((msg) => ({ top: msg.id === id }));
                   }}
                   type="icon-zhiding_o"
                 />
@@ -98,7 +98,7 @@ function HistoryLabel({ item, index }) {
                   className="ico"
                   onClick={(e) => {
                     e.stopPropagation();
-                    dispatch({ type: "DELETE_MESSAGES", payload: item.key });
+                    deleteMessages(id);
                   }}
                   type="icon-shanchu"
                 />

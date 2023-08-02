@@ -5,6 +5,7 @@ import Bubble from "./Bubble";
 import { useBoolean, useMount } from "@/hooks";
 import { sendApi } from "./api";
 import useStore from "../store";
+import { url } from "hyl-utils";
 
 const tip = `
   您好，我是chatgpt。\n
@@ -14,18 +15,28 @@ const tip = `
 
 function ChatGpt() {
   const messages = useStore(
-    (state) => state.allMessages.find((item) => item.current)?.messages || []
+    (state) => state.allMessages.find((item) => item.current)!.messages
   );
-  const { setAllMessages, setController, setDisabled, disabled, controller } =
-    useStore();
-
-  const [defaultMsg, setDefaultMsg] = useState("");
-
-  const [newMessage, setNewMessage] = useState<string>("");
+  const {
+    value,
+    disabled,
+    controller,
+    setValue,
+    updateAllMessages,
+    setController,
+    setDisabled,
+    createMessages,
+  } = useStore();
 
   const wrapperRef = useRef(null);
 
   const [visible, on] = useBoolean(false);
+
+  const setMessages = (msg) => {
+    updateAllMessages((item) => ({
+      messages: item.current ? msg : item.messages,
+    }));
+  };
 
   const goEnd = () => {
     const MessagesDom: any = wrapperRef.current!;
@@ -39,37 +50,33 @@ function ChatGpt() {
   useMount(() => {
     on();
 
-    // const params = url.getParams();
-    // if (params.q) {
-    //   dispatch({ type: "ADD_MESSAGES" });
-    //   setNewMessage(params.q);
-    //   setDefaultMsg(params.q);
-    // }
-    // setTimeout(() => {
-    //   goEnd();
-    // }, 500);
+    const params = url.getParams();
+    if (params.q) {
+      setValue(params.q);
+      createMessages();
+      handleMessageSend(params.q);
+    }
+    setTimeout(() => {
+      goEnd();
+    }, 500);
   });
-
-  useEffect(() => {
-    handleMessageSend(defaultMsg);
-  }, [defaultMsg]);
 
   useEffect(() => {
     goEnd();
   }, [messages]);
 
-  const handleMessageSend = (msg = newMessage): void => {
+  const handleMessageSend = (msg = value): void => {
     const newController = new AbortController();
 
     if (msg.trim()) {
       setDisabled(true);
-      setAllMessages([...messages, { content: msg, role: "user" }]);
+      setMessages([...messages, { content: msg, role: "user" }]);
       setController(newController);
 
-      setNewMessage("");
+      setValue("");
 
       setTimeout(() => {
-        setAllMessages([
+        setMessages([
           ...messages,
           { content: msg, role: "user" },
           { content: "ai思索中...", role: "assistant" },
@@ -115,7 +122,7 @@ function ChatGpt() {
             }
           });
 
-          setAllMessages([
+          setMessages([
             ...messages,
             { content: msg, role: "user" },
             { content: contents, role: "assistant" },
@@ -127,7 +134,7 @@ function ChatGpt() {
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13 && e.ctrlKey) {
-      return setNewMessage(newMessage + "\n");
+      return setValue(value + "\n");
     }
     if (e.keyCode === 13) {
       return handleMessageSend();
@@ -138,21 +145,20 @@ function ChatGpt() {
     <div style={{ flex: 1 }}>
       <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
-        {visible &&
-          messages.map((message, index) => (
-            <Bubble
-              key={message.content + index}
-              isUser={index % 2 === 0}
-              content={message.content}
-            />
-          ))}
+        {messages.map((message, index) => (
+          <Bubble
+            key={message.content + index}
+            isUser={index % 2 === 0}
+            content={message.content}
+          />
+        ))}
       </MessagesWrapper>
 
       <InputWrapper>
         <Input.TextArea
-          value={newMessage}
+          value={value}
           disabled={disabled}
-          onChange={(event) => setNewMessage(event.target.value)}
+          onChange={(event) => setValue(event.target.value)}
           placeholder="你想对Ai说什么？（支持回车发送，ctrl+回车换行）"
           autoSize={{ minRows: 4, maxRows: 999 }}
           onKeyDown={handleKeyDown}

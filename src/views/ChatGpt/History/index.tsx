@@ -6,7 +6,10 @@ import Label from "./Label";
 import useStore from "../store";
 
 function History() {
-  const { allMessages, createMessages } = useStore();
+  const allMessages = useStore((state) =>
+    state.allMessages.sort((msg) => (msg.top ? -1 : 1))
+  );
+  const { createMessages } = useStore();
 
   return (
     <HistoryWrapper>
@@ -28,8 +31,8 @@ function History() {
       </Tooltip>
 
       <HistoryList>
-        {allMessages.map((item, index) => {
-          return <Label item={item} index={index} key={item.key} />;
+        {allMessages.map((item) => {
+          return <Label {...item} />;
         })}
       </HistoryList>
     </HistoryWrapper>
