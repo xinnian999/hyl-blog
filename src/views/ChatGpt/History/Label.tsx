@@ -7,8 +7,6 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import useStore from "../store";
 
 function HistoryLabel({ id, current, time }) {
-  console.log(id, current, time);
-
   const { deleteMessages, updateAllMessages } = useStore();
 
   const [editName, on, off] = useBoolean(false);
