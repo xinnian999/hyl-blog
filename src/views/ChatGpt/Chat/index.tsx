@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
-import { useBoolean, useMount } from "@/hooks";
+import { useMount } from "@/hooks";
 import { sendApi } from "./api";
 import useStore from "../store";
 import { url } from "hyl-utils";
@@ -28,9 +28,9 @@ function ChatGpt() {
     createMessages,
   } = useStore();
 
-  const wrapperRef = useRef(null);
+  const [autoValue, setAutoValue] = useState("");
 
-  const [visible, on] = useBoolean(false);
+  const wrapperRef = useRef(null);
 
   const setMessages = (msg) => {
     updateAllMessages((item) => ({
@@ -48,22 +48,22 @@ function ChatGpt() {
   };
 
   useMount(() => {
-    on();
-
     const params = url.getParams();
     if (params.q) {
-      setValue(params.q);
+      setAutoValue(params.q);
       createMessages();
-      handleMessageSend(params.q);
     }
-    setTimeout(() => {
-      goEnd();
-    }, 500);
   });
 
   useEffect(() => {
     goEnd();
   }, [messages]);
+
+  useEffect(() => {
+    if (autoValue) {
+      handleMessageSend(autoValue);
+    }
+  }, [autoValue]);
 
   const handleMessageSend = (msg = value): void => {
     const newController = new AbortController();
@@ -179,7 +179,7 @@ function ChatGpt() {
           className="sendBtn"
           type="primary"
           disabled={disabled}
-          onClick={() => handleMessageSend}
+          onClick={() => handleMessageSend()}
         >
           发送
         </Button>
