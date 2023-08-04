@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { time, url } from "hyl-utils";
+import { time } from "hyl-utils";
 
 type messagesItem = {
   content: string;
   role: "user" | "assistant";
 };
 
-type messagesGroup = {
+type DialogType = {
   time: string;
   messages: messagesItem[];
   current: boolean;
@@ -16,21 +16,17 @@ type messagesGroup = {
 };
 
 type StoreTypes = {
-  allMessages: messagesGroup[];
+  allMessages: DialogType[];
   value: string;
   disabled: boolean;
   controller: AbortController;
   autoValue: string;
-  setController: (controller: AbortController) => any;
-  setDisabled: (disabled: boolean) => any;
-  setValue: (value: string) => any;
-  setAutoValue: (autoValue: string) => any;
   createMessages: () => void;
   deleteMessages: (id: string) => void;
-  updateAllMessages: (newItem: (item: messagesGroup) => any) => void;
+  updateAllMessages: (newItem: (item: DialogType) => any) => void;
 };
 
-const store = persist<StoreTypes>(
+const store = persist<StoreTypes, [], [], Pick<StoreTypes, "allMessages">>(
   (set) => ({
     //总消息数据
     allMessages: [
@@ -50,11 +46,6 @@ const store = persist<StoreTypes>(
     controller: new AbortController(),
     //自动发送的消息
     autoValue: "",
-
-    setController: (controller) => set({ controller }),
-    setValue: (value) => set({ value }),
-    setDisabled: (disabled) => set({ disabled }),
-    setAutoValue: (autoValue) => set({ autoValue }),
 
     createMessages() {
       set((state) => {
@@ -100,7 +91,10 @@ const store = persist<StoreTypes>(
       });
     },
   }),
-  { name: "chatgpt" }
+  {
+    name: "chatgpt",
+    partialize: (state) => ({ allMessages: state.allMessages }),
+  }
 );
 
 export default create(store);

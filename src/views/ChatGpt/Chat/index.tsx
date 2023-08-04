@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { MessagesWrapper, InputWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
@@ -6,6 +6,8 @@ import { useMount } from "@/hooks";
 import { sendApi } from "./api";
 import useStore from "../store";
 import { url } from "hyl-utils";
+
+const { setState } = useStore;
 
 const tip = `
   您好，我是chatgpt。\n
@@ -21,14 +23,10 @@ function ChatGpt() {
     value,
     disabled,
     controller,
-    setValue,
+    autoValue,
     updateAllMessages,
-    setController,
-    setDisabled,
     createMessages,
   } = useStore();
-
-  const [autoValue, setAutoValue] = useState("");
 
   const wrapperRef = useRef(null);
 
@@ -50,9 +48,11 @@ function ChatGpt() {
   useMount(() => {
     const params = url.getParams();
     if (params.q) {
-      setAutoValue(params.q);
+      setState({ autoValue: params.q });
       createMessages();
     }
+
+    return () => setState({ autoValue: "" });
   });
 
   useEffect(() => {
@@ -69,11 +69,8 @@ function ChatGpt() {
     const newController = new AbortController();
 
     if (msg.trim()) {
-      setDisabled(true);
+      setState({ disabled: true, controller: newController, value: "" });
       setMessages([...messages, { content: msg, role: "user" }]);
-      setController(newController);
-
-      setValue("");
 
       setTimeout(() => {
         setMessages([
@@ -100,7 +97,7 @@ function ChatGpt() {
           const { done, value } = await reader.read();
 
           if (done) {
-            setDisabled(false);
+            setState({ disabled: false });
             break;
           }
           // 解码内容
@@ -134,7 +131,7 @@ function ChatGpt() {
 
   const handleKeyDown = (e) => {
     if (e.keyCode === 13 && e.ctrlKey) {
-      return setValue(value + "\n");
+      setState({ value: value + "\n" });
     }
     if (e.keyCode === 13) {
       return handleMessageSend();
@@ -158,7 +155,7 @@ function ChatGpt() {
         <Input.TextArea
           value={value}
           disabled={disabled}
-          onChange={(event) => setValue(event.target.value)}
+          onChange={(e) => setState({ value: e.target.value })}
           placeholder="你想对Ai说什么？（支持回车发送，ctrl+回车换行）"
           autoSize={{ minRows: 4, maxRows: 999 }}
           onKeyDown={handleKeyDown}
@@ -169,7 +166,7 @@ function ChatGpt() {
             type="primary"
             onClick={() => {
               controller.abort();
-              setDisabled(false);
+              setState({ disabled: false });
             }}
           >
             终止
@@ -187,6 +184,5 @@ function ChatGpt() {
     </div>
   );
 }
-console.log(<ChatGpt />);
 
 export default ChatGpt;
