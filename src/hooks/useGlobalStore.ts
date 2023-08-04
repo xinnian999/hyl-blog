@@ -2,17 +2,16 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 type StoreTypes = {
-  allMessages: any[];
+  theme: "light" | "dark";
 };
 
 const store = persist<StoreTypes>(
   (set) => ({
-    //总消息数据
-    allMessages: [],
-
-    setAllMessages: (allMessages) => set({ allMessages }),
+    theme: "light",
   }),
-  { name: "chatgpt" }
+  {
+    name: "global",
+  }
 );
 
 export default create(store);
