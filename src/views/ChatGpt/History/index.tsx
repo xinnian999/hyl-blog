@@ -6,14 +6,14 @@ import Label from "./Label";
 import useStore from "../store";
 
 function History() {
-  const allMessages = useStore((state) =>
-    state.allMessages.sort((msg) => (msg.top ? -1 : 1))
+  const dialogList = useStore((state) =>
+    state.dialogList.sort((msg) => (msg.top ? -1 : 1))
   );
-  const { createMessages } = useStore();
+  const { createDialog } = useStore();
 
   return (
     <HistoryWrapper>
-      <Button icon={<PlusOutlined />} onClick={createMessages}>
+      <Button icon={<PlusOutlined />} onClick={createDialog}>
         新建会话
       </Button>
 
@@ -31,7 +31,7 @@ function History() {
       </Tooltip>
 
       <HistoryList>
-        {allMessages.map((item) => {
+        {dialogList.map((item) => {
           return <Label {...item} />;
         })}
       </HistoryList>

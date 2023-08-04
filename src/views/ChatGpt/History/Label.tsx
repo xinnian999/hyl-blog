@@ -7,7 +7,7 @@ import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import useStore from "../store";
 
 function HistoryLabel({ id, current, time }) {
-  const { deleteMessages, updateAllMessages } = useStore();
+  const { deleteDialog, updateDialog } = useStore();
 
   const [editName, on, off] = useBoolean(false);
 
@@ -17,7 +17,7 @@ function HistoryLabel({ id, current, time }) {
 
   const onSaveName = () => {
     if (value) {
-      updateAllMessages((item) => ({
+      updateDialog((item) => ({
         time: item.id === id ? value : item.time,
       }));
       off();
@@ -26,7 +26,7 @@ function HistoryLabel({ id, current, time }) {
 
   return (
     <LabelWrapper
-      onClick={() => updateAllMessages((msg) => ({ current: msg.id === id }))}
+      onClick={() => updateDialog((msg) => ({ current: msg.id === id }))}
       active={current}
     >
       <div className="icon">
@@ -86,7 +86,7 @@ function HistoryLabel({ id, current, time }) {
                   className="ico"
                   onClick={(e) => {
                     e.stopPropagation();
-                    updateAllMessages((msg) => ({ top: msg.id === id }));
+                    updateDialog((msg) => ({ top: msg.id === id }));
                   }}
                   type="icon-zhiding_o"
                 />
@@ -96,7 +96,7 @@ function HistoryLabel({ id, current, time }) {
                   className="ico"
                   onClick={(e) => {
                     e.stopPropagation();
-                    deleteMessages(id);
+                    deleteDialog(id);
                   }}
                   type="icon-shanchu"
                 />

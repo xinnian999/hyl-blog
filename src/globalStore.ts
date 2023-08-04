@@ -1,21 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type messagesItem = {
-  content: string;
-  role: "user" | "assistant";
-};
-
-type messagesGroup = {
-  time: string;
-  messages: messagesItem[];
-  current: boolean;
-  id: string;
-  top: boolean;
-};
-
 type StoreTypes = {
-  allMessages: messagesGroup[];
+  allMessages: any[];
 };
 
 const store = persist<StoreTypes>(

@@ -2,34 +2,34 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { time } from "hyl-utils";
 
-type messagesItem = {
+type msgType = {
   content: string;
   role: "user" | "assistant";
 };
 
 type DialogType = {
   time: string;
-  messages: messagesItem[];
+  messages: msgType[];
   current: boolean;
   id: string;
   top: boolean;
 };
 
 type StoreTypes = {
-  allMessages: DialogType[];
+  dialogList: DialogType[];
   value: string;
   disabled: boolean;
   controller: AbortController;
   autoValue: string;
-  createMessages: () => void;
-  deleteMessages: (id: string) => void;
-  updateAllMessages: (newItem: (item: DialogType) => any) => void;
+  createDialog: () => void;
+  deleteDialog: (id: string) => void;
+  updateDialog: (newItem: (item: DialogType) => any) => void;
 };
 
-const store = persist<StoreTypes, [], [], Pick<StoreTypes, "allMessages">>(
+const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
   (set) => ({
-    //总消息数据
-    allMessages: [
+    //对话列表数据
+    dialogList: [
       {
         time: time.parse(new Date()),
         messages: [],
@@ -47,9 +47,9 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "allMessages">>(
     //自动发送的消息
     autoValue: "",
 
-    createMessages() {
+    createDialog() {
       set((state) => {
-        const newMessages = [
+        const newDialog = [
           {
             time: time.parse(new Date()),
             messages: [],
@@ -57,7 +57,7 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "allMessages">>(
             id: Math.random() + "",
             top: true,
           },
-          ...state.allMessages.map((item) => ({
+          ...state.dialogList.map((item) => ({
             ...item,
             current: false,
             top: false,
@@ -65,35 +65,35 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "allMessages">>(
         ];
         if (state.disabled) {
           state.controller.abort();
-          return { allMessages: newMessages, disabled: false };
+          return { dialogList: newDialog, disabled: false };
         }
-        return { allMessages: newMessages };
+        return { dialogList: newDialog };
       });
     },
 
-    updateAllMessages(newItem) {
+    updateDialog(newItem) {
       set((state) => {
-        const newMessages = state.allMessages.map((item) => ({
+        const newDialog = state.dialogList.map((item) => ({
           ...item,
           ...newItem(item),
         }));
-        return { allMessages: newMessages };
+        return { dialogList: newDialog };
       });
     },
 
-    deleteMessages(id) {
+    deleteDialog(id) {
       set((state) => {
-        const newMessages = state.allMessages.filter((item) => item.id !== id);
-        if (newMessages.every((item) => !item.current)) {
-          newMessages[0].current = true;
+        const newDialog = state.dialogList.filter((item) => item.id !== id);
+        if (newDialog.every((item) => !item.current)) {
+          newDialog[0].current = true;
         }
-        return { allMessages: newMessages };
+        return { dialogList: newDialog };
       });
     },
   }),
   {
     name: "chatgpt",
-    partialize: (state) => ({ allMessages: state.allMessages }),
+    partialize: (state) => ({ dialogList: state.dialogList }),
   }
 );
 

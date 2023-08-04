@@ -17,21 +17,15 @@ const tip = `
 
 function ChatGpt() {
   const messages = useStore(
-    (state) => state.allMessages.find((item) => item.current)!.messages
+    (state) => state.dialogList.find((item) => item.current)!.messages
   );
-  const {
-    value,
-    disabled,
-    controller,
-    autoValue,
-    updateAllMessages,
-    createMessages,
-  } = useStore();
+  const { value, disabled, controller, autoValue, updateDialog, createDialog } =
+    useStore();
 
   const wrapperRef = useRef(null);
 
   const setMessages = (msg) => {
-    updateAllMessages((item) => ({
+    updateDialog((item) => ({
       messages: item.current ? msg : item.messages,
     }));
   };
@@ -49,7 +43,7 @@ function ChatGpt() {
     const params = url.getParams();
     if (params.q) {
       setState({ autoValue: params.q });
-      createMessages();
+      createDialog();
     }
 
     return () => setState({ autoValue: "" });
