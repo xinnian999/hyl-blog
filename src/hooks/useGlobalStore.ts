@@ -5,7 +5,7 @@ type StoreTypes = {
   theme: "light" | "dark";
 };
 
-const store = persist<StoreTypes>(
+const globalStore = persist<StoreTypes>(
   (set) => ({
     theme: "light",
   }),
@@ -14,4 +14,4 @@ const store = persist<StoreTypes>(
   }
 );
 
-export default create(store);
+export default create(globalStore);

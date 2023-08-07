@@ -27,7 +27,7 @@ type StoreTypes = {
 };
 
 const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
-  (set) => ({
+  (set, get) => ({
     //对话列表数据
     dialogList: [
       {
@@ -48,47 +48,44 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
     autoValue: "",
 
     createDialog() {
-      set((state) => {
-        const newDialog = [
-          {
-            time: time.parse(new Date()),
-            messages: [],
-            current: true,
-            id: Math.random() + "",
-            top: true,
-          },
-          ...state.dialogList.map((item) => ({
-            ...item,
-            current: false,
-            top: false,
-          })),
-        ];
-        if (state.disabled) {
-          state.controller.abort();
-          return { dialogList: newDialog, disabled: false };
-        }
-        return { dialogList: newDialog };
-      });
+      const { dialogList, controller, disabled } = get();
+
+      const newDialogList = [
+        {
+          time: time.parse(new Date()),
+          messages: [],
+          current: true,
+          id: Math.random() + "",
+          top: true,
+        },
+        ...dialogList.map((item) => ({
+          ...item,
+          current: false,
+          top: false,
+        })),
+      ];
+      if (disabled) {
+        controller.abort();
+        return set({ dialogList: newDialogList, disabled: false });
+      }
+      return set({ dialogList: newDialogList });
     },
 
     updateDialog(newItem) {
-      set((state) => {
-        const newDialog = state.dialogList.map((item) => ({
+      set({
+        dialogList: get().dialogList.map((item) => ({
           ...item,
           ...newItem(item),
-        }));
-        return { dialogList: newDialog };
+        })),
       });
     },
 
     deleteDialog(id) {
-      set((state) => {
-        const newDialog = state.dialogList.filter((item) => item.id !== id);
-        if (newDialog.every((item) => !item.current)) {
-          newDialog[0].current = true;
-        }
-        return { dialogList: newDialog };
-      });
+      const newDialogList = get().dialogList.filter((item) => item.id !== id);
+      if (newDialogList.every((item) => !item.current)) {
+        newDialogList[0].current = true;
+      }
+      set({ dialogList: newDialogList });
     },
   }),
   {

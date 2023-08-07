@@ -23,7 +23,7 @@ function History() {
           icon={<RedoOutlined />}
           className="refresh"
           onClick={() => {
-            localStorage.clear();
+            localStorage.removeItem("chatgpt");
 
             window.location.reload();
           }}
@@ -32,7 +32,7 @@ function History() {
 
       <HistoryList>
         {dialogList.map((item) => {
-          return <Label {...item} />;
+          return <Label key={item.id} {...item} />;
         })}
       </HistoryList>
     </HistoryWrapper>
