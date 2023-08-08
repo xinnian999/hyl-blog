@@ -18,6 +18,7 @@ import {
   useRedux,
   useScroll,
   useWindowSize,
+  useGlobalStore,
 } from "@/hooks";
 import prestrainImage from "@/prestrainImage";
 import { changeBlogTitle } from "@/utils";
@@ -32,6 +33,7 @@ notification.config({
 
 function Provider({ children }) {
   const location = useLocation();
+  // const { theme, setGlobalState } = useGlobalStore();
 
   const {
     store: {

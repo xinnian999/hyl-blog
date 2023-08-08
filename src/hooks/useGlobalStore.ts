@@ -1,17 +1,12 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import useStore from "@/globalStore";
 
-type StoreTypes = {
-  theme: "light" | "dark";
+const useGlobalStore = () => {
+  const store = useStore();
+
+  return {
+    ...store,
+    setGlobalState: useStore.setState,
+  };
 };
 
-const globalStore = persist<StoreTypes>(
-  (set) => ({
-    theme: "light",
-  }),
-  {
-    name: "global",
-  }
-);
-
-export default create(globalStore);
+export default useGlobalStore;
