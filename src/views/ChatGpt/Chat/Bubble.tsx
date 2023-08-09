@@ -2,25 +2,13 @@ import { Avatar } from "antd";
 import { Markdown } from "@/components";
 import aiImg from "@/assets/img/avatar/ai.jpg";
 import { UserOutlined } from "@ant-design/icons";
-import { useRedux } from "@/hooks";
 import { MessageBubble } from "../styled";
 
 function Bubble({ isUser, content }) {
-  const {
-    store: { loginStore },
-  } = useRedux();
-
-  // const { loginState, userInfo } = loginStore;
-
   return (
     <MessageBubble isUserMessage={isUser}>
       {isUser ? (
-        <Avatar
-          icon={<UserOutlined />}
-          className="avatar"
-          size="large"
-          // src={loginState ? userInfo.headPicture : ""}
-        />
+        <Avatar icon={<UserOutlined />} className="avatar" size="large" />
       ) : (
         <Avatar src={aiImg} className="avatar" size="large" />
       )}

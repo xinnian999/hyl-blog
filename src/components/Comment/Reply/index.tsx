@@ -1,5 +1,5 @@
 import CommentCard from "../CommentCard";
-import { useSetState, useRedux } from "@/hooks";
+import { useSetState, useGlobalStore } from "@/hooks";
 import Editor from "../Editor";
 
 interface ReplyProps {
@@ -11,11 +11,7 @@ interface ReplyProps {
 const Reply = (props: ReplyProps) => {
   const { commentItem, refresh, replyData } = props;
 
-  const {
-    store: {
-      loginStore: { loginState },
-    },
-  } = useRedux();
+  const { loginState } = useGlobalStore();
 
   const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
     visible: false,

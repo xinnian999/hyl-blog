@@ -1,6 +1,5 @@
 import {
   ConfigProvider as AntdProvider,
-  App as AntdApp,
   theme as antTheme,
   notification,
 } from "antd";
@@ -15,14 +14,12 @@ import { ThemeProvider as StyledProvider } from "styled-components";
 import {
   useGetData,
   useMount,
-  useRedux,
   useScroll,
   useWindowSize,
   useGlobalStore,
 } from "@/hooks";
 import prestrainImage from "@/prestrainImage";
 import { changeBlogTitle } from "@/utils";
-import starBg from "./widgets/Background/starBg";
 
 notification.config({
   placement: "topRight",
@@ -31,16 +28,23 @@ notification.config({
   rtl: true,
 });
 
+document.addEventListener("copy", () => {
+  var selecter = window.getSelection()?.toString();
+  if (selecter) {
+    return notification.success({
+      message: "阁下，复制成功了！转载要记得标明出处哦～～",
+      style: { top: "80px" },
+    });
+  }
+
+  notification.error({
+    message: "复制失败了，请勾选需要复制的内容哦",
+  });
+});
+
 function Provider({ children }) {
   const location = useLocation();
-  // const { theme, setGlobalState } = useGlobalStore();
-
-  const {
-    store: {
-      setStore: { dark, theme },
-    },
-    batchDispatch,
-  } = useRedux();
+  const { theme, primaryColor, setGlobalState } = useGlobalStore();
 
   const { width } = useWindowSize();
 
@@ -49,20 +53,6 @@ function Provider({ children }) {
   useMount(() => {
     imgPrestrain(prestrainImage);
     removeDom("#loading-box");
-
-    document.addEventListener("copy", () => {
-      var selecter = window.getSelection()?.toString();
-      if (selecter) {
-        return notification.success({
-          message: "阁下，复制成功了！转载要记得标明出处哦～～",
-          style: { top: "80px" },
-        });
-      }
-
-      notification.error({
-        message: "复制失败了，请勾选需要复制的内容哦",
-      });
-    });
   });
 
   useGetData("/all/getCsrfToken", {
@@ -73,18 +63,8 @@ function Provider({ children }) {
   useGetData("/qq/getLoginStatus", {
     manual: !url.getParams().getUserInfo,
     progress: false,
-    onSuccess(res) {
-      batchDispatch([
-        {
-          type: "CHANGE_LOGIN_STATE",
-          payload: true,
-        },
-        {
-          type: "CHANGE_USER_INFO",
-          payload: res,
-        },
-        { type: "CHANGE_LOGIN_MODAL", payload: false },
-      ]);
+    onSuccess(res: any) {
+      setGlobalState({ loginModal: true, userInfo: res, loginState: true });
     },
   });
 
@@ -97,15 +77,11 @@ function Provider({ children }) {
 
   // 主题监听
   useEffect(() => {
-    const { color, bg } = theme;
     AntdProvider.config({
       theme: {
-        primaryColor: color,
+        primaryColor,
       },
     });
-    if (dark) {
-      starBg(bg);
-    }
   }, [theme]);
 
   // 窗口监听
@@ -118,10 +94,6 @@ function Provider({ children }) {
     } else {
       htmlEl.style.fontSize = `${globalConfig.rootValue}px`;
     }
-
-    // if (dark) {
-    //   starBg(theme.bg);
-    // }
   }, [width]);
 
   // 页面滚动监听
@@ -144,17 +116,18 @@ function Provider({ children }) {
     location,
     isMoblie: width < 800,
     scrollTop: top,
-    isDark: dark,
+    isDark: theme === "dark",
   };
 
   return (
     <AntdProvider
       theme={{
         token: {
-          colorPrimary: theme.color,
+          colorPrimary: primaryColor,
           fontFamily: "font",
         },
-        algorithm: dark ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
+        algorithm:
+          theme === "dark" ? antTheme.darkAlgorithm : antTheme.defaultAlgorithm,
       }}
     >
       <AntdStyleProvider

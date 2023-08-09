@@ -1,15 +1,11 @@
 import APlayer from "aplayer";
-import { useGetData, useRedux } from "@/hooks";
+import { useGetData, useGlobalStore } from "@/hooks";
 import "aplayer/dist/APlayer.min.css";
 import "./style.scss";
 import { useEffect } from "react";
 
 function Music() {
-  const {
-    store: {
-      setStore: { dark, autoplay },
-    },
-  } = useRedux();
+  const { theme } = useGlobalStore();
 
   useGetData("/music/query", {
     progress: false,
@@ -24,7 +20,7 @@ function Music() {
         audio: data,
         fixed: true,
         listFolded: true,
-        autoplay,
+        autoplay: false,
         preload: "auto",
         loop: "all",
         order: "random",
@@ -37,12 +33,12 @@ function Music() {
   useEffect(() => {
     const music = document.getElementById("aplayer");
 
-    if (dark) {
+    if (theme === "dark") {
       music?.classList.add("aplayerDark");
     } else {
       music?.classList.remove("aplayerDark");
     }
-  }, [dark]);
+  }, [theme]);
 
   return <div id="aplayer"></div>;
 }

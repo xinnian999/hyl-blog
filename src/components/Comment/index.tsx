@@ -1,5 +1,5 @@
 import { Divider, List, Alert } from "antd";
-import { useGetData, useRedux } from "@/hooks";
+import { useGetData, useGlobalStore } from "@/hooks";
 import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
@@ -22,12 +22,7 @@ function Comment(props: CommentProps) {
     },
   });
 
-  const {
-    store: {
-      loginStore: { loginState },
-    },
-    dispatch,
-  } = useRedux();
+  const { loginState, setGlobalState } = useGlobalStore();
 
   const currentCommentData = commentData.filter((item) => !item.reply_id);
 
@@ -52,9 +47,7 @@ function Comment(props: CommentProps) {
             <>
               <span
                 className="commentLoginBtn"
-                onClick={() =>
-                  dispatch({ type: "CHANGE_LOGIN_MODAL", payload: true })
-                }
+                onClick={() => setGlobalState({ loginModal: true })}
               >
                 登录
               </span>{" "}

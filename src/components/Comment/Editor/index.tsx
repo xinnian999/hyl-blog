@@ -2,7 +2,7 @@ import { Button, Input, message, Modal, Popover, Space, Tooltip } from "antd";
 import { useRef } from "react";
 import { SmileOutlined, UndoOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
-import { useBoolean, useRedux, useSetState } from "@/hooks";
+import { useBoolean, useGlobalStore, useSetState } from "@/hooks";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
 import "./style.scss";
@@ -32,12 +32,7 @@ export default function Editor({
     loading: false,
   });
 
-  const {
-    store: {
-      loginStore: { userInfo },
-    },
-    dispatch,
-  } = useRedux();
+  const { userInfo, setGlobalState } = useGlobalStore();
 
   const inputRef = useRef(null);
   const emailInputRef: any = useRef(null);
@@ -82,10 +77,7 @@ export default function Editor({
       /[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
     if (!emailExp.test(emailValue)) return message.error("邮箱格式不合法");
 
-    dispatch({
-      type: "CHANGE_USER_INFO",
-      payload: { email: emailValue },
-    });
+    setGlobalState({ userInfo: { ...userInfo, email: emailValue } });
     off();
     message.success("绑定邮箱成功");
   };

@@ -1,4 +1,4 @@
-import { useRedux } from "@/hooks";
+import { useGlobalStore } from "@/hooks";
 import { Divider } from "antd";
 import { cookie } from "hyl-utils";
 import { ToolLoginBar } from "./styled";
@@ -13,13 +13,10 @@ const qqLogin = () => {
 };
 
 export default function ToolLogin() {
-  const { batchDispatch } = useRedux();
+  const { setGlobalState } = useGlobalStore();
 
   const wxLogin = () => {
-    batchDispatch([
-      { type: "CHANGE_LOGIN_MODAL", payload: true },
-      { type: "CHANGE_LOGIN_TYPE", payload: "wx" },
-    ]);
+    setGlobalState({ loginModal: true, loginType: "wx" });
   };
 
   return (

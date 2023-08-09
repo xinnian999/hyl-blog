@@ -1,33 +1,27 @@
 import { Button, Form, Input, message } from "antd";
 import { pick } from "hyl-utils";
 import { loginApi } from "./api";
-import { useRedux } from "@/hooks";
+import { useGlobalStore } from "@/hooks";
 import ToolLogin from "./ToolLogin";
 
 function LoginModal() {
-  const {
-    store: {
-      loginStore: { userInfo },
-    },
-    batchDispatch,
-  } = useRedux();
+  const { userInfo, setGlobalState } = useGlobalStore();
 
   const { username } = userInfo;
 
   const onLoginUser = (data) => {
     loginApi(data).then((res) => {
       if (res.status === 0) {
-        batchDispatch([
-          {
-            type: "CHANGE_LOGIN_STATE",
-            payload: true,
-          },
-          {
-            type: "CHANGE_USER_INFO",
-            payload: pick(res.data, ["username", "id", "headPicture", "email"]),
-          },
-          { type: "CHANGE_LOGIN_MODAL", payload: false },
-        ]);
+        setGlobalState({
+          loginModal: true,
+          userInfo: pick(res.data, [
+            "username",
+            "id",
+            "headPicture",
+            "email",
+          ]) as any,
+          loginState: true,
+        });
         message.success(`欢迎您!${username}`);
       } else {
         message.warning("登陆失败");

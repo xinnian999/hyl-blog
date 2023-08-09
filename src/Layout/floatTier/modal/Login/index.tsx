@@ -1,29 +1,27 @@
 import { Modal, Tabs } from "antd";
-import { useRedux } from "@/hooks";
+import { useGlobalStore } from "@/hooks";
 import Login from "./Login";
 import Register from "./Register";
 import WechatLogin from "./WechatLogin";
 
 const LoginModal: React.FC = () => {
-  const {
-    store: {
-      loginStore: { loginModal, loginType },
-    },
-    dispatch,
-  } = useRedux();
-
-  const closeModal = () =>
-    dispatch({ type: "CHANGE_LOGIN_MODAL", payload: false });
-
-  const tabChange = (key: string) =>
-    dispatch({ type: "CHANGE_LOGIN_TYPE", payload: key });
+  const { loginModal, loginType, setGlobalState } = useGlobalStore();
 
   return (
-    <Modal open={loginModal} onCancel={closeModal} footer={null} destroyOnClose>
+    <Modal
+      open={loginModal}
+      onCancel={() => setGlobalState({ loginModal: false })}
+      footer={null}
+      destroyOnClose
+    >
       {loginType === "wx" ? (
         <WechatLogin />
       ) : (
-        <Tabs centered activeKey={loginType} onChange={tabChange}>
+        <Tabs
+          centered
+          activeKey={loginType}
+          onChange={(key: any) => setGlobalState({ loginType: key })}
+        >
           <Tabs.TabPane tab="登陆" key="login">
             <Login />
           </Tabs.TabPane>

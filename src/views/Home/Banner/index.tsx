@@ -1,25 +1,17 @@
 import styled from "styled-components";
-import { useMount, useRedux } from "@/hooks";
+import { useMount } from "@/hooks";
 import bubbles from "./bubbles";
 import { useRef } from "react";
 import BannerText from "./BannerText";
 
-interface WrapperProps {
-  dark: boolean;
-}
-
-const Wrapper = styled.div<WrapperProps>`
+const Wrapper = styled.div`
   position: relative;
   height: 100vh;
   .bg {
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: ${(props) => (props.dark ? "0.7" : "1")};
-    background-image: ${(props) =>
-      `url(${require(`@/assets/img/bg/${
-        props.dark ? "bg8.jpg" : "bg24.jpg"
-      }`)})`};
+    background-image: url(${require(`@/assets/img/bg/bg24.jpg`)});
     background-attachment: fixed;
     canvas {
       backface-visibility: hidden;
@@ -37,12 +29,6 @@ const Wrapper = styled.div<WrapperProps>`
 `;
 
 function Banner() {
-  const {
-    store: {
-      setStore: { dark },
-    },
-  } = useRedux();
-
   const canvasRef = useRef(null);
 
   useMount(() => {
@@ -53,7 +39,7 @@ function Banner() {
   });
 
   return (
-    <Wrapper dark={dark}>
+    <Wrapper>
       <div className="bg">
         <canvas id="demo-canvas" ref={canvasRef} />
       </div>
