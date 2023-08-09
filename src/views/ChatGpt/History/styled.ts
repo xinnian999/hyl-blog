@@ -80,11 +80,3 @@ export const InputWrapper = styled.div`
     margin-left: 10px;
   }
 `;
-
-export const InputField = styled.input`
-  flex: 1;
-  border: none;
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 5px;
-`;

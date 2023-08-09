@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { MessagesWrapper, InputWrapper } from "../styled";
+import { MessagesWrapper, InputWrapper, Main } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
 import { useMount } from "@/hooks";
@@ -133,7 +133,7 @@ function ChatGpt() {
   };
 
   return (
-    <div style={{ flex: 1 }}>
+    <Main>
       <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
         {messages.map((message, index) => (
@@ -175,7 +175,7 @@ function ChatGpt() {
           发送
         </Button>
       </InputWrapper>
-    </div>
+    </Main>
   );
 }
 

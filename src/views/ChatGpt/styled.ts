@@ -4,6 +4,10 @@ export const ChatWindowWrapper = styled.div`
   display: flex;
 `;
 
+export const Main = styled.div`
+  width: calc(100% - 280px);
+`;
+
 export const MessagesWrapper = styled.div`
   overflow-y: scroll;
   padding: 20px;
@@ -61,12 +65,4 @@ export const InputWrapper = styled.div`
     margin-top: 10px;
     margin-left: 10px;
   }
-`;
-
-export const InputField = styled.input`
-  flex: 1;
-  border: none;
-  padding: 10px;
-  margin-right: 10px;
-  border-radius: 5px;
 `;
