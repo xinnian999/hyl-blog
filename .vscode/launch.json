@@ -8,7 +8,7 @@
             "type": "pwa-chrome",
             "request": "launch",
             "name": "针对 localhost 启动 Chrome",
-            "url": "http://localhost:1999",
+            "url": "http://localhost:9999",
             "webRoot": "${workspaceFolder}"
         }
     ]
