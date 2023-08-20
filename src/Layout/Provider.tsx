@@ -96,22 +96,6 @@ function Provider({ children }) {
     }
   }, [width]);
 
-  // 页面滚动监听
-  useEffect(() => {
-    const lrcEl = document.querySelector(".aplayer-lrc") as HTMLElement;
-
-    if (lrcEl) {
-      if (
-        top + document.documentElement.clientHeight >=
-        document.documentElement.scrollHeight
-      ) {
-        lrcEl.style.display = "none";
-      } else {
-        lrcEl.style.display = "block";
-      }
-    }
-  }, [top]);
-
   const styledGlobalProps = {
     location,
     isMoblie: width < 800,
