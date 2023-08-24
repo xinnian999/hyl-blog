@@ -16,7 +16,7 @@ import {
   useMount,
   useScroll,
   useWindowSize,
-  useGlobalStore,
+  useRootStore,
 } from "@/hooks";
 import prestrainImage from "@/prestrainImage";
 import { changeBlogTitle } from "@/utils";
@@ -44,7 +44,7 @@ document.addEventListener("copy", () => {
 
 function Provider({ children }) {
   const location = useLocation();
-  const { theme, primaryColor, setGlobalState } = useGlobalStore();
+  const { theme, primaryColor, setGlobalState } = useRootStore();
 
   const { width } = useWindowSize();
 

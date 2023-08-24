@@ -1,5 +1,5 @@
 import { Icon } from "@/components";
-import { useGlobalStore } from "@/hooks";
+import { useRootStore } from "@/hooks";
 import { Avatar } from "antd";
 import { time, httpTohttps } from "hyl-utils";
 import { memo } from "react";
@@ -24,7 +24,7 @@ const CommentCard: React.FC<CommentCardProps> = ({
   reply,
   className,
 }) => {
-  const { loginState } = useGlobalStore();
+  const { loginState } = useRootStore();
 
   return (
     <div id="commentCard" className={className}>

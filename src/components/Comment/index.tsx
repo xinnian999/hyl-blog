@@ -1,5 +1,5 @@
 import { Divider, List, Alert } from "antd";
-import { useGetData, useGlobalStore } from "@/hooks";
+import { useGetData, useRootStore } from "@/hooks";
 import Reply from "./Reply";
 import Editor from "./Editor";
 import "./style.scss";
@@ -22,7 +22,7 @@ function Comment(props: CommentProps) {
     },
   });
 
-  const { loginState, setGlobalState } = useGlobalStore();
+  const { loginState, setGlobalState } = useRootStore();
 
   const currentCommentData = commentData.filter((item) => !item.reply_id);
 

@@ -2,7 +2,7 @@ import { Button, Input, message, Modal, Popover, Space, Tooltip } from "antd";
 import { useRef } from "react";
 import { SmileOutlined, UndoOutlined } from "@ant-design/icons";
 import { time } from "hyl-utils";
-import { useBoolean, useGlobalStore, useSetState } from "@/hooks";
+import { useBoolean, useRootStore, useSetState } from "@/hooks";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
 import "./style.scss";
@@ -32,7 +32,7 @@ export default function Editor({
     loading: false,
   });
 
-  const { userInfo, setGlobalState } = useGlobalStore();
+  const { userInfo, setGlobalState } = useRootStore();
 
   const inputRef = useRef(null);
   const emailInputRef: any = useRef(null);

@@ -1,11 +1,11 @@
 import { Button, Form, Input, message } from "antd";
 import { pick } from "hyl-utils";
 import { loginApi } from "./api";
-import { useGlobalStore } from "@/hooks";
+import { useRootStore } from "@/hooks";
 import ToolLogin from "./ToolLogin";
 
 function LoginModal() {
-  const { userInfo, setGlobalState } = useGlobalStore();
+  const { userInfo, setGlobalState } = useRootStore();
 
   const { username } = userInfo;
 

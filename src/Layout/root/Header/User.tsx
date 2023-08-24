@@ -1,12 +1,12 @@
 import { Button, Avatar } from "antd";
 import { clearLogin } from "@/utils";
-import { useGlobalStore } from "@/hooks";
+import { useRootStore } from "@/hooks";
 import { memo } from "react";
 import { Icon, Popover } from "@/components";
 import { UserInfoWrapper, UserWrapper } from "./styled";
 
 function Login() {
-  const { loginState, userInfo, setGlobalState } = useGlobalStore();
+  const { loginState, userInfo, setGlobalState } = useRootStore();
 
   const { username, headPicture } = userInfo;
 

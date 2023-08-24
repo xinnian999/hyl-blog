@@ -2,7 +2,7 @@ import { Button, Form, Input, message, Alert, Upload } from "antd";
 import { getRandom } from "hyl-utils";
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
 import { registerApi } from "./api";
-import { useGlobalStore, useSetState } from "@/hooks";
+import { useRootStore, useSetState } from "@/hooks";
 
 const avatar = [
   "img_1.jpeg",
@@ -19,7 +19,7 @@ function LoginModal() {
     loading: false,
   });
 
-  const { setGlobalState } = useGlobalStore();
+  const { setGlobalState } = useRootStore();
 
   const randomAvatar = () => {
     const random = getRandom(0, 5);

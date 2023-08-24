@@ -1,11 +1,11 @@
 import APlayer from "aplayer";
-import { useGetData, useGlobalStore } from "@/hooks";
+import { useGetData, useRootStore } from "@/hooks";
 import "aplayer/dist/APlayer.min.css";
 import "./style.scss";
 import { useEffect } from "react";
 
 function Music() {
-  const { theme } = useGlobalStore();
+  const { theme } = useRootStore();
 
   useGetData("/music/query", {
     progress: false,

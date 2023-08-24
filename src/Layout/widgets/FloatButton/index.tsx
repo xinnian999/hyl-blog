@@ -1,13 +1,13 @@
 import { Tooltip } from "antd";
 import { VerticalAlignTopOutlined } from "@ant-design/icons";
-import { useGlobalStore, useScroll } from "@/hooks";
+import { useRootStore, useScroll } from "@/hooks";
 import { Icon } from "@/components";
 import { FloatButtonWrapper } from "./styled";
 
 function FloatButton() {
   const { top } = useScroll();
 
-  const { theme, setGlobalState } = useGlobalStore();
+  const { theme, setGlobalState } = useRootStore();
 
   const action = [
     {

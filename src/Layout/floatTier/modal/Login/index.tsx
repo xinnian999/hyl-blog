@@ -1,11 +1,11 @@
 import { Modal, Tabs } from "antd";
-import { useGlobalStore } from "@/hooks";
+import { useRootStore } from "@/hooks";
 import Login from "./Login";
 import Register from "./Register";
 import WechatLogin from "./WechatLogin";
 
 const LoginModal: React.FC = () => {
-  const { loginModal, loginType, setGlobalState } = useGlobalStore();
+  const { loginModal, loginType, setGlobalState } = useRootStore();
 
   return (
     <Modal

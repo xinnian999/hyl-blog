@@ -1,6 +1,6 @@
 import { Spin, message } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
-import { useGlobalStore, useMount } from "@/hooks";
+import { useRootStore, useMount } from "@/hooks";
 import { WxLoginWrapper } from "./styled";
 import { useState } from "react";
 import { getLoginStatusApi, getWxQrCodeApi } from "./api";
@@ -8,7 +8,7 @@ import { getLoginStatusApi, getWxQrCodeApi } from "./api";
 function WechatLogin() {
   const [QrCode, setQrCode] = useState("");
 
-  const { setGlobalState } = useGlobalStore();
+  const { setGlobalState } = useRootStore();
 
   useMount(() => {
     getWxQrCodeApi().then((res) => {

@@ -1,4 +1,4 @@
-import { useGlobalStore } from "@/hooks";
+import { useRootStore } from "@/hooks";
 import { Divider } from "antd";
 import { cookie } from "hyl-utils";
 import { ToolLoginBar } from "./styled";
@@ -13,7 +13,7 @@ const qqLogin = () => {
 };
 
 export default function ToolLogin() {
-  const { setGlobalState } = useGlobalStore();
+  const { setGlobalState } = useRootStore();
 
   const wxLogin = () => {
     setGlobalState({ loginModal: true, loginType: "wx" });

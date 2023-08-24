@@ -1,6 +1,6 @@
-import useStore from "@/globalStore";
+import useStore from "./rootStore";
 
-const useGlobalStore = () => {
+const useRootStore = () => {
   const store = useStore();
 
   return {
@@ -9,4 +9,4 @@ const useGlobalStore = () => {
   };
 };
 
-export default useGlobalStore;
+export default useRootStore;

@@ -4,4 +4,4 @@ export { default as useWindowSize } from "./useWindowSize";
 export { default as useMount } from "./useMount";
 export { default as useGetData } from "./useGetData";
 export { default as useBoolean } from "./useBoolean";
-export { default as useGlobalStore } from "./useGlobalStore";
+export { default as useRootStore } from "./useRootStore";
