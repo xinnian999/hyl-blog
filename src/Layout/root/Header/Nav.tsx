@@ -14,7 +14,8 @@ const NavWrapper = styled.ul`
     position: relative;
     margin-right: 10px;
     a {
-      color: ${({ theme }) => (theme.scrollTop > 1 ? "#555" : "#fff")};
+      color: ${({ theme }) =>
+        theme.scrollTop > 1 ? "#555" : "#fff;text-shadow: 0px 0px 10px black;"};
       &:hover {
         background-color: var(--ant-primary-color);
         color: #fff;

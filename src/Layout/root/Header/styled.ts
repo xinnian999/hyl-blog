@@ -30,7 +30,7 @@ export const Logo = styled.span`
   color: ${({ theme }) =>
     theme.scrollTop > 1
       ? "#555;  "
-      : "#fff;    text-shadow: 3px 3px 0 var(--ant-primary-8);"};
+      : "#fff;    text-shadow: 0px 0px 10px black;"};
   @media screen and (max-width: 800px) {
     margin: 0 auto;
   }
