@@ -32,7 +32,7 @@ export default function Editor({
     loading: false,
   });
 
-  const { userInfo, setGlobalState } = useRootStore();
+  const { userInfo, setRootState } = useRootStore();
 
   const inputRef = useRef(null);
   const emailInputRef: any = useRef(null);
@@ -77,7 +77,7 @@ export default function Editor({
       /[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
     if (!emailExp.test(emailValue)) return message.error("邮箱格式不合法");
 
-    setGlobalState({ userInfo: { ...userInfo, email: emailValue } });
+    setRootState({ userInfo: { ...userInfo, email: emailValue } });
     off();
     message.success("绑定邮箱成功");
   };

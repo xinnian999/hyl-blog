@@ -5,15 +5,15 @@ import { useRootStore } from "@/hooks";
 import ToolLogin from "./ToolLogin";
 
 function LoginModal() {
-  const { userInfo, setGlobalState } = useRootStore();
+  const { userInfo, setRootState } = useRootStore();
 
   const { username } = userInfo;
 
   const onLoginUser = (data) => {
     loginApi(data).then((res) => {
       if (res.status === 0) {
-        setGlobalState({
-          loginModal: true,
+        setRootState({
+          loginModal: false,
           userInfo: pick(res.data, [
             "username",
             "id",

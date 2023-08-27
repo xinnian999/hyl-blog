@@ -1,3 +1,4 @@
+import { omit } from "hyl-utils";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -13,9 +14,10 @@ type StoreTypes = {
   loginModal: boolean;
   loginState: boolean;
   loginType: "login" | "register" | "wx";
+  chatGptData: any[];
 };
 
-const store = persist<StoreTypes>(
+const store = persist<StoreTypes, [], [], Omit<StoreTypes, "loginModal">>(
   (set) => ({
     theme: "light",
     primaryColor: "#d6324d",
@@ -23,9 +25,11 @@ const store = persist<StoreTypes>(
     loginModal: false,
     loginState: false,
     loginType: "login",
+    chatGptData: [],
   }),
   {
-    name: "global",
+    name: "root",
+    partialize: (state) => omit(state, ["loginModal"]) as StoreTypes,
   }
 );
 

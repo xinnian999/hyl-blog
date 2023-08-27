@@ -13,10 +13,10 @@ const qqLogin = () => {
 };
 
 export default function ToolLogin() {
-  const { setGlobalState } = useRootStore();
+  const { setRootState } = useRootStore();
 
   const wxLogin = () => {
-    setGlobalState({ loginModal: true, loginType: "wx" });
+    setRootState({ loginModal: true, loginType: "wx" });
   };
 
   return (

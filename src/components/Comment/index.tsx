@@ -22,7 +22,7 @@ function Comment(props: CommentProps) {
     },
   });
 
-  const { loginState, setGlobalState } = useRootStore();
+  const { loginState, setRootState } = useRootStore();
 
   const currentCommentData = commentData.filter((item) => !item.reply_id);
 
@@ -47,7 +47,7 @@ function Comment(props: CommentProps) {
             <>
               <span
                 className="commentLoginBtn"
-                onClick={() => setGlobalState({ loginModal: true })}
+                onClick={() => setRootState({ loginModal: true })}
               >
                 登录
               </span>{" "}

@@ -6,12 +6,12 @@ import { Icon, Popover } from "@/components";
 import { UserInfoWrapper, UserWrapper } from "./styled";
 
 function Login() {
-  const { loginState, userInfo, setGlobalState } = useRootStore();
+  const { loginState, userInfo, setRootState } = useRootStore();
 
   const { username, headPicture } = userInfo;
 
   const onLogin = () => {
-    setGlobalState({ loginModal: true });
+    setRootState({ loginModal: true });
   };
 
   return (

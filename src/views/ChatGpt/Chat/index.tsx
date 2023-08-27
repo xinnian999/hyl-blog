@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { MessagesWrapper, InputWrapper, Main } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
-import { useMount } from "@/hooks";
+import { useBoolean, useMount, useScroll } from "@/hooks";
 import { sendApi } from "./api";
 import useStore from "../store";
 import { url } from "hyl-utils";
@@ -22,21 +22,16 @@ function ChatGpt() {
   const { value, disabled, controller, autoValue, updateDialog, createDialog } =
     useStore();
 
-  const wrapperRef = useRef(null);
+  const [visible, onVisible] = useBoolean(false);
+
+  const [end, onEnd, offEnd] = useBoolean(false);
+
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   const setMessages = (msg) => {
     updateDialog((item) => ({
       messages: item.current ? msg : item.messages,
     }));
-  };
-
-  const goEnd = () => {
-    const MessagesDom: any = wrapperRef.current!;
-
-    MessagesDom.scrollTo({
-      top: MessagesDom.scrollHeight - MessagesDom.clientHeight,
-      behavior: "smooth", // 平滑滚动
-    });
   };
 
   useMount(() => {
@@ -46,12 +41,19 @@ function ChatGpt() {
       createDialog();
     }
 
+    onVisible();
+
     return () => setState({ autoValue: "" });
   });
 
   useEffect(() => {
-    goEnd();
-  }, [messages]);
+    const element = wrapperRef.current!;
+    const { scrollHeight, clientHeight, scrollTop } = element;
+    element.scrollTo({
+      top: scrollHeight - clientHeight,
+      behavior: "smooth", // 平滑滚动
+    });
+  }, [messages, visible]);
 
   useEffect(() => {
     if (autoValue) {
@@ -136,13 +138,14 @@ function ChatGpt() {
     <Main>
       <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
-        {messages.map((message, index) => (
-          <Bubble
-            key={message.content + index}
-            isUser={index % 2 === 0}
-            content={message.content}
-          />
-        ))}
+        {visible &&
+          messages.map((message, index) => (
+            <Bubble
+              key={message.content + index}
+              isUser={index % 2 === 0}
+              content={message.content}
+            />
+          ))}
       </MessagesWrapper>
 
       <InputWrapper>

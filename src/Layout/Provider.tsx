@@ -44,7 +44,7 @@ document.addEventListener("copy", () => {
 
 function Provider({ children }) {
   const location = useLocation();
-  const { theme, primaryColor, setGlobalState } = useRootStore();
+  const { theme, primaryColor, setRootState } = useRootStore();
 
   const { width } = useWindowSize();
 
@@ -64,7 +64,7 @@ function Provider({ children }) {
     manual: !url.getParams().getUserInfo,
     progress: false,
     onSuccess(res: any) {
-      setGlobalState({ loginModal: true, userInfo: res, loginState: true });
+      setRootState({ loginModal: true, userInfo: res, loginState: true });
     },
   });
 

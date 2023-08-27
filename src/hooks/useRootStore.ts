@@ -1,11 +1,11 @@
-import useStore from "./rootStore";
+import useStore from "@/rootStore";
 
 const useRootStore = () => {
   const store = useStore();
 
   return {
     ...store,
-    setGlobalState: useStore.setState,
+    setRootState: useStore.setState,
   };
 };
 

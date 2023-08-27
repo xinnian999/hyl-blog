@@ -19,7 +19,7 @@ function LoginModal() {
     loading: false,
   });
 
-  const { setGlobalState } = useRootStore();
+  const { setRootState } = useRootStore();
 
   const randomAvatar = () => {
     const random = getRandom(0, 5);
@@ -39,7 +39,7 @@ function LoginModal() {
       }).then((res) => {
         if (res.status === 0) {
           message.success("注册成功");
-          setGlobalState({ loginType: "login" });
+          setRootState({ loginType: "login" });
         }
         if (res.status === 1) {
           message.warning("用户名已存在");

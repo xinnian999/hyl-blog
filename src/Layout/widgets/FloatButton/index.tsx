@@ -7,7 +7,7 @@ import { FloatButtonWrapper } from "./styled";
 function FloatButton() {
   const { top } = useScroll();
 
-  const { theme, setGlobalState } = useRootStore();
+  const { theme, setRootState } = useRootStore();
 
   const action = [
     {
@@ -16,7 +16,7 @@ function FloatButton() {
       ),
       message: theme === "dark" ? "开灯" : "关灯",
       onclick: () => {
-        setGlobalState({ theme: theme === "dark" ? "light" : "dark" });
+        setRootState({ theme: theme === "dark" ? "light" : "dark" });
       },
     },
     {

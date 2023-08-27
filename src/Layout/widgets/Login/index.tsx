@@ -5,12 +5,12 @@ import Register from "./Register";
 import WechatLogin from "./WechatLogin";
 
 const LoginModal: React.FC = () => {
-  const { loginModal, loginType, setGlobalState } = useRootStore();
+  const { loginModal, loginType, setRootState } = useRootStore();
 
   return (
     <Modal
       open={loginModal}
-      onCancel={() => setGlobalState({ loginModal: false })}
+      onCancel={() => setRootState({ loginModal: false })}
       footer={null}
       destroyOnClose
     >
@@ -20,7 +20,7 @@ const LoginModal: React.FC = () => {
         <Tabs
           centered
           activeKey={loginType}
-          onChange={(key: any) => setGlobalState({ loginType: key })}
+          onChange={(key: any) => setRootState({ loginType: key })}
         >
           <Tabs.TabPane tab="登陆" key="login">
             <Login />

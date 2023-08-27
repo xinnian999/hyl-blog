@@ -8,7 +8,7 @@ import { getLoginStatusApi, getWxQrCodeApi } from "./api";
 function WechatLogin() {
   const [QrCode, setQrCode] = useState("");
 
-  const { setGlobalState } = useRootStore();
+  const { setRootState } = useRootStore();
 
   useMount(() => {
     getWxQrCodeApi().then((res) => {
@@ -19,7 +19,7 @@ function WechatLogin() {
           if (res.username) {
             clearInterval(timer);
 
-            setGlobalState({
+            setRootState({
               loginState: true,
               userInfo: res,
               loginModal: false,
@@ -38,7 +38,7 @@ function WechatLogin() {
       <div className="wxHeader">
         <LeftOutlined
           className="wxHeader-back"
-          onClick={() => setGlobalState({ loginType: "login" })}
+          onClick={() => setRootState({ loginType: "login" })}
         />
 
         <h2>请使用微信扫码登陆</h2>

@@ -1,7 +1,13 @@
 import Provider from "./Provider";
 import { Header, Main, Footer } from "./root";
-import { Music, FloatButton, Background, FrameNum, Wave } from "./widgets";
-import FloatTier from "./floatTier";
+import {
+  Music,
+  FloatButton,
+  Background,
+  FrameNum,
+  Wave,
+  Login,
+} from "./widgets";
 import { FloatButton as AntdFloatButton } from "antd";
 
 function Layout() {
@@ -14,9 +20,9 @@ function Layout() {
       <Background />
       <Music />
       {/* <FloatButton /> */}
-      <FloatTier />
       <FrameNum />
       <AntdFloatButton.BackTop />
+      <Login />
     </Provider>
   );
 }
