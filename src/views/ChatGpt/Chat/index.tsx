@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import { MessagesWrapper, InputWrapper, Main } from "../styled";
+import { MessagesWrapper, InputWrapper, ChatWrapper } from "../styled";
 import { Button, Input } from "antd";
 import Bubble from "./Bubble";
-import { useBoolean, useMount, useScroll } from "@/hooks";
+import { useBoolean, useMount } from "@/hooks";
 import { sendApi } from "./api";
 import useStore from "../store";
 import { url } from "hyl-utils";
@@ -19,12 +19,17 @@ function ChatGpt() {
   const messages = useStore(
     (state) => state.dialogList.find((item) => item.current)!.messages
   );
-  const { value, disabled, controller, autoValue, updateDialog, createDialog } =
-    useStore();
+  const {
+    value,
+    disabled,
+    controller,
+    autoValue,
+    autoScroll,
+    updateDialog,
+    createDialog,
+  } = useStore();
 
   const [visible, onVisible] = useBoolean(false);
-
-  const [end, onEnd, offEnd] = useBoolean(false);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -46,13 +51,19 @@ function ChatGpt() {
     return () => setState({ autoValue: "" });
   });
 
-  useEffect(() => {
+  const goEnd = () => {
     const element = wrapperRef.current!;
-    const { scrollHeight, clientHeight, scrollTop } = element;
+    const { scrollHeight, clientHeight } = element;
     element.scrollTo({
       top: scrollHeight - clientHeight,
       behavior: "smooth", // 平滑滚动
     });
+  };
+
+  useEffect(() => {
+    if (autoScroll) {
+      goEnd();
+    }
   }, [messages, visible]);
 
   useEffect(() => {
@@ -135,7 +146,7 @@ function ChatGpt() {
   };
 
   return (
-    <Main>
+    <ChatWrapper>
       <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
         {visible &&
@@ -178,7 +189,7 @@ function ChatGpt() {
           发送
         </Button>
       </InputWrapper>
-    </Main>
+    </ChatWrapper>
   );
 }
 

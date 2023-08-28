@@ -3,6 +3,7 @@ import { useMount } from "@/hooks";
 import { ChatWindowWrapper } from "./styled";
 import Chat from "./Chat";
 import History from "./History";
+import ToolBar from "./ToolBar";
 
 function ChatGpt() {
   useMount(() => {
@@ -11,12 +12,11 @@ function ChatGpt() {
 
   return (
     <Plate title="chatgpt">
-      <Preview width="100vw" btnPosition={{ x: 3, y: 3 }}>
-        <ChatWindowWrapper>
-          <History />
-          <Chat />
-        </ChatWindowWrapper>
-      </Preview>
+      <ChatWindowWrapper>
+        <History />
+        <Chat />
+        <ToolBar />
+      </ChatWindowWrapper>
     </Plate>
   );
 }

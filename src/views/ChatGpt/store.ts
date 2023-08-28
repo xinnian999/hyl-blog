@@ -21,6 +21,7 @@ type StoreTypes = {
   disabled: boolean;
   controller: AbortController;
   autoValue: string;
+  autoScroll: boolean;
   createDialog: () => void;
   deleteDialog: (id: string) => void;
   updateDialog: (newItem: (item: DialogType) => any) => void;
@@ -46,6 +47,7 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
     controller: new AbortController(),
     //自动发送的消息
     autoValue: "",
+    autoScroll: true,
 
     createDialog() {
       const { dialogList, controller, disabled } = get();

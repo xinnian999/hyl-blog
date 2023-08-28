@@ -1,4 +1,4 @@
-import { HistoryList, HistoryWrapper } from "./styled";
+import { HistoryList, HistoryWrapper } from "../styled";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 import { memo } from "react";

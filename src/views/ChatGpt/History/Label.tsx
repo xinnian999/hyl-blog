@@ -1,5 +1,5 @@
 import { useBoolean } from "@/hooks";
-import { LabelWrapper } from "./styled";
+import { LabelWrapper } from "../styled";
 import { Icon } from "@/components";
 import { memo, useRef, useState } from "react";
 import { Input, InputRef } from "antd";
