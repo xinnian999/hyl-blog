@@ -17,19 +17,6 @@ function History() {
         新建会话
       </Button>
 
-      <Tooltip title="初始化">
-        <Button
-          size="small"
-          icon={<RedoOutlined />}
-          className="refresh"
-          onClick={() => {
-            localStorage.removeItem("chatgpt");
-
-            window.location.reload();
-          }}
-        />
-      </Tooltip>
-
       <HistoryList>
         {dialogList.map((item) => {
           return <Label key={item.id} {...item} />;

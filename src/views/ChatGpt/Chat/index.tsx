@@ -27,6 +27,7 @@ function ChatGpt() {
     autoScroll,
     updateDialog,
     createDialog,
+    fullScreen,
   } = useStore();
 
   const [visible, onVisible] = useBoolean(false);
@@ -147,7 +148,11 @@ function ChatGpt() {
 
   return (
     <ChatWrapper>
-      <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
+      <MessagesWrapper
+        fullScreen={fullScreen}
+        id="MessagesWrapper"
+        ref={wrapperRef}
+      >
         <Bubble isUser={false} content={tip} />
         {visible &&
           messages.map((message, index) => (
@@ -165,7 +170,7 @@ function ChatGpt() {
           disabled={disabled}
           onChange={(e) => setState({ value: e.target.value })}
           placeholder="你想对Ai说什么？（支持回车发送，ctrl+回车换行）"
-          autoSize={{ minRows: 4, maxRows: 999 }}
+          autoSize={{ minRows: 3, maxRows: 6 }}
           onKeyDown={handleKeyDown}
         />
         {disabled && (

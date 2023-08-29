@@ -1,12 +1,30 @@
 import { Space } from "antd";
 import styled from "styled-components";
 
-export const ChatWindowWrapper = styled.div`
+type ChatWindowWrapperProps = {
+  fullScreen: boolean;
+};
+
+export const ChatWindowWrapper = styled.div<ChatWindowWrapperProps>`
   display: flex;
+  ${(props) =>
+    props.fullScreen &&
+    `position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 999999;
+  padding: 20px;
+  overflow:hidden;
+  `}
 `;
 
 export const ChatWrapper = styled.div`
   width: calc(100% - 280px - 50px);
+  display: flex;
+  flex-direction: column;
 `;
 
 export const HistoryWrapper = styled.div`
@@ -88,17 +106,20 @@ export const LabelWrapper = styled.li<{ active: boolean }>`
 
 export const InputWrapper = styled.div`
   padding: 10px;
+  padding-bottom: 0;
+  padding-right: 0;
   text-align: right;
   .sendBtn {
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: 10px;
   }
 `;
 
-export const MessagesWrapper = styled.div`
+export const MessagesWrapper = styled.div<ChatWindowWrapperProps>`
   overflow-y: scroll;
   padding: 20px;
-  height: 60vh;
+
+  ${(props) => (props.fullScreen ? "flex: 1;" : "height: 60vh;")}
 `;
 
 export const MessageBubble = styled.div<{ isUserMessage: boolean }>`
