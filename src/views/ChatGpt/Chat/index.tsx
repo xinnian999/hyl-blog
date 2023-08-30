@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
-import { MessagesWrapper, InputWrapper, ChatWrapper } from "../styled";
-import { Button, Input } from "antd";
+import { MessagesWrapper, ChatWrapper } from "../styled";
 import Bubble from "./Bubble";
 import { useBoolean, useMount } from "@/hooks";
 import { sendApi } from "./api";
 import useStore from "../store";
 import { url } from "hyl-utils";
+import MsgInput from "./MsgInput";
 
 const { setState } = useStore;
 
@@ -15,30 +15,22 @@ const tip = `
   我的用途非常广泛，可以用于自然语言处理（NLP）任务，如对话生成、问答系统、文本生成、写代码等。
 `;
 
-function ChatGpt() {
+function Chat() {
   const messages = useStore(
     (state) => state.dialogList.find((item) => item.current)!.messages
   );
   const {
     value,
-    disabled,
-    controller,
     autoValue,
     autoScroll,
-    updateDialog,
     createDialog,
     fullScreen,
+    setMessages,
   } = useStore();
 
   const [visible, onVisible] = useBoolean(false);
 
   const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const setMessages = (msg) => {
-    updateDialog((item) => ({
-      messages: item.current ? msg : item.messages,
-    }));
-  };
 
   useMount(() => {
     const params = url.getParams();
@@ -52,18 +44,13 @@ function ChatGpt() {
     return () => setState({ autoValue: "" });
   });
 
-  const goEnd = () => {
-    const element = wrapperRef.current!;
-    const { scrollHeight, clientHeight } = element;
-    element.scrollTo({
-      top: scrollHeight - clientHeight,
-      behavior: "smooth", // 平滑滚动
-    });
-  };
-
   useEffect(() => {
     if (autoScroll) {
-      goEnd();
+      const element = wrapperRef.current!;
+      element.scrollTo({
+        top: element.scrollHeight - element.clientHeight,
+        behavior: "smooth", // 平滑滚动
+      });
     }
   }, [messages, visible]);
 
@@ -137,22 +124,9 @@ function ChatGpt() {
     }
   };
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13 && e.ctrlKey) {
-      setState({ value: value + "\n" });
-    }
-    if (e.keyCode === 13) {
-      return handleMessageSend();
-    }
-  };
-
   return (
     <ChatWrapper>
-      <MessagesWrapper
-        fullScreen={fullScreen}
-        id="MessagesWrapper"
-        ref={wrapperRef}
-      >
+      <MessagesWrapper fullScreen={fullScreen} ref={wrapperRef}>
         <Bubble isUser={false} content={tip} />
         {visible &&
           messages.map((message, index) => (
@@ -164,38 +138,9 @@ function ChatGpt() {
           ))}
       </MessagesWrapper>
 
-      <InputWrapper>
-        <Input.TextArea
-          value={value}
-          disabled={disabled}
-          onChange={(e) => setState({ value: e.target.value })}
-          placeholder="你想对Ai说什么？（支持回车发送，ctrl+回车换行）"
-          autoSize={{ minRows: 3, maxRows: 6 }}
-          onKeyDown={handleKeyDown}
-        />
-        {disabled && (
-          <Button
-            className="sendBtn"
-            type="primary"
-            onClick={() => {
-              controller.abort();
-              setState({ disabled: false });
-            }}
-          >
-            终止
-          </Button>
-        )}
-        <Button
-          className="sendBtn"
-          type="primary"
-          disabled={disabled}
-          onClick={() => handleMessageSend()}
-        >
-          发送
-        </Button>
-      </InputWrapper>
+      <MsgInput handleMessageSend={handleMessageSend} />
     </ChatWrapper>
   );
 }
 
-export default ChatGpt;
+export default Chat;

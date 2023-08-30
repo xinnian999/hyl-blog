@@ -26,6 +26,7 @@ type StoreTypes = {
   createDialog: () => void;
   deleteDialog: (id: string) => void;
   updateDialog: (newItem: (item: DialogType) => any) => void;
+  setMessages: (msgs: msgType[]) => void;
 };
 
 const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
@@ -50,6 +51,7 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
     autoValue: "",
     autoScroll: true,
     fullScreen: false,
+
     createDialog() {
       const { dialogList, controller, disabled } = get();
 
@@ -68,6 +70,7 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
         })),
       ];
       if (disabled) {
+        //如果正在接收流，切断
         controller.abort();
         return set({ dialogList: newDialogList, disabled: false });
       }
@@ -89,6 +92,12 @@ const store = persist<StoreTypes, [], [], Pick<StoreTypes, "dialogList">>(
         newDialogList[0].current = true;
       }
       set({ dialogList: newDialogList });
+    },
+
+    setMessages(msgs) {
+      get().updateDialog((item) => ({
+        messages: item.current ? msgs : item.messages,
+      }));
     },
   }),
   {

@@ -1,12 +1,12 @@
-import { Plate, Preview } from "@/components";
+import ReactDOM from "react-dom";
+import { useEffect } from "react";
+import { Plate } from "@/components";
 import { useMount } from "@/hooks";
-import { ChatWindowWrapper } from "./styled";
+import { ChatGptFullScreenWrapper, ChatGptWrapper } from "./styled";
 import Chat from "./Chat";
 import History from "./History";
 import ToolBar from "./ToolBar";
 import useStore from "./store";
-import ReactDOM from "react-dom";
-import { useEffect } from "react";
 
 function ChatGpt() {
   const { fullScreen } = useStore();
@@ -25,22 +25,22 @@ function ChatGpt() {
 
   if (fullScreen) {
     return ReactDOM.createPortal(
-      <ChatWindowWrapper fullScreen={fullScreen}>
+      <ChatGptFullScreenWrapper>
         <History />
         <Chat />
         <ToolBar />
-      </ChatWindowWrapper>,
+      </ChatGptFullScreenWrapper>,
       document.getElementById("root")!
     );
   }
 
   return (
     <Plate title="chatgpt">
-      <ChatWindowWrapper fullScreen={false}>
+      <ChatGptWrapper>
         <History />
         <Chat />
         <ToolBar />
-      </ChatWindowWrapper>
+      </ChatGptWrapper>
     </Plate>
   );
 }

@@ -20,6 +20,7 @@ import {
 } from "@/hooks";
 import prestrainImage from "@/prestrainImage";
 import { changeBlogTitle } from "@/utils";
+import { Error } from "@/components";
 
 notification.config({
   placement: "topRight",
@@ -124,4 +125,4 @@ function Provider({ children }) {
   );
 }
 
-export default Provider;
+export default Error(Provider);

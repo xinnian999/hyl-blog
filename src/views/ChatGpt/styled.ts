@@ -1,15 +1,12 @@
 import { Space } from "antd";
 import styled from "styled-components";
 
-type ChatWindowWrapperProps = {
-  fullScreen: boolean;
-};
-
-export const ChatWindowWrapper = styled.div<ChatWindowWrapperProps>`
+export const ChatGptWrapper = styled.div`
   display: flex;
-  ${(props) =>
-    props.fullScreen &&
-    `position: fixed;
+`;
+
+export const ChatGptFullScreenWrapper = styled(ChatGptWrapper)`
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -17,8 +14,7 @@ export const ChatWindowWrapper = styled.div<ChatWindowWrapperProps>`
   background-color: #fff;
   z-index: 999999;
   padding: 20px;
-  overflow:hidden;
-  `}
+  overflow: hidden;
 `;
 
 export const ChatWrapper = styled.div`
@@ -96,7 +92,6 @@ export const LabelWrapper = styled.li<{ active: boolean }>`
     color: #eee;
   }
   .ico {
-    /* vertical-align: middle; */
     font-size: 18px !important;
     &:hover {
       color: var(--ant-primary-4);
@@ -115,7 +110,7 @@ export const InputWrapper = styled.div`
   }
 `;
 
-export const MessagesWrapper = styled.div<ChatWindowWrapperProps>`
+export const MessagesWrapper = styled.div<{ fullScreen: boolean }>`
   overflow-y: scroll;
   padding: 20px;
 
