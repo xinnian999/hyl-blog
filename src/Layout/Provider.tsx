@@ -30,8 +30,8 @@ notification.config({
 });
 
 document.addEventListener("copy", () => {
-  var selecter = window.getSelection()?.toString();
-  if (selecter) {
+  const selected = window.getSelection()?.toString();
+  if (selected) {
     return notification.success({
       message: "阁下，复制成功了！转载要记得标明出处哦～～",
       style: { top: "80px" },
