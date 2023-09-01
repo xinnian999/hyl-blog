@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import { Swiper } from "swiper/react";
+import {Swiper} from "swiper/react";
 
 export const HomeMainWrapper = styled.div`
   width: 73%;
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 `;
 
 export const ArticleWrapper = styled.div`
@@ -10,8 +13,16 @@ export const ArticleWrapper = styled.div`
   position: relative;
   flex-wrap: wrap;
   justify-content: space-between;
+
   .item {
     width: 32%;
+    @media (max-width: 1200px) {
+      width: 48%;
+    }
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
     margin-bottom: 20px;
   }
 
@@ -27,6 +38,7 @@ export const ArticleWrapper = styled.div`
     align-items: center;
     background-image: linear-gradient(45deg, gold, deeppink);
     animation: hue 3s infinite linear;
+
     &::before,
     &::after {
       content: "";
@@ -40,9 +52,11 @@ export const ArticleWrapper = styled.div`
       clip-path: inset(0px round 10px);
       animation: clippath 3s infinite linear;
     }
+
     &::after {
       animation: clippath 3s infinite -1.5s linear;
     }
+
     span {
       color: white;
       font-size: 20px;
@@ -93,9 +107,11 @@ export const ArticleCardWrapper = styled.div`
   overflow: hidden;
   animation: zoomIn;
   animation-duration: 1s;
+
   &:hover .title {
     color: var(--ant-primary-color);
   }
+
   &:hover .image {
     transform: scale(1.2);
   }
@@ -132,6 +148,7 @@ export const ArticleCardImage = styled.div`
   display: grid;
   place-items: end start;
   background-color: #222;
+
   .image {
     width: 100%;
     height: 100%;
@@ -143,6 +160,7 @@ export const ArticleCardImage = styled.div`
 export const ArticleCardMain = styled.div`
   padding: 15px;
   /* font-size: 14px; */
+
   .title {
     height: 50px;
     transition: 0.5s all;
@@ -175,6 +193,7 @@ export const SwiperWrapper = styled(Swiper)`
     background-color: rgba(0, 0, 0, 0.3);
     padding: 15px;
   }
+
   .bullet {
     width: 15px;
     height: 15px;
@@ -186,11 +205,13 @@ export const SwiperWrapper = styled(Swiper)`
     vertical-align: middle;
     cursor: pointer;
   }
+
   .bullet-active {
     background-color: #fff;
     border: 5px solid rgba(0, 0, 0, 0.5);
     box-sizing: content-box;
   }
+
   .swiper-button-prev,
   .swiper-button-next {
     height: 80px;
@@ -199,6 +220,7 @@ export const SwiperWrapper = styled(Swiper)`
     transform: translateY(-50%);
     color: var(--ant-primary-color);
   }
+
   .swiper-button-prev {
     left: 0;
   }
@@ -210,6 +232,7 @@ export const SwiperWrapper = styled(Swiper)`
   .SwiperSlide {
     width: 100%;
     position: relative;
+
     .title {
       position: absolute;
       top: 0;
@@ -220,6 +243,7 @@ export const SwiperWrapper = styled(Swiper)`
       padding: 5px 10px;
     }
   }
+
   img {
     width: 100%;
     height: 100%;

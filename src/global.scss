@@ -80,6 +80,7 @@ body {
   max-width: var(--heart-width);
   margin: 0 auto;
   position: relative;
+  padding: 0 15px;
 }
 
 .box-shadow {
@@ -130,13 +131,13 @@ p {
   border-radius: 10px;
   background-color: var(--ant-primary-color);
   background-image: -webkit-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.2) 25%,
-    transparent 25%,
-    transparent 50%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.2) 75%,
-    transparent 75%,
-    transparent
+                  45deg,
+                  rgba(255, 255, 255, 0.2) 25%,
+                  transparent 25%,
+                  transparent 50%,
+                  rgba(255, 255, 255, 0.2) 50%,
+                  rgba(255, 255, 255, 0.2) 75%,
+                  transparent 75%,
+                  transparent
   );
 }
