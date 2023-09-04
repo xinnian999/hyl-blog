@@ -8,7 +8,6 @@ import {useGetData, useMount, useRootStore, useScroll, useWindowSize,} from "@/h
 import prestrainImage from "@/prestrainImage";
 import {changeBlogTitle} from "@/utils";
 import {Error} from "@/components";
-import GlobalStyle from "./GlobalStyle";
 
 
 notification.config({
@@ -109,7 +108,6 @@ function Provider({children}) {
                 transformers={[legacyLogicalPropertiesTransformer]}
             >
                 <StyledProvider theme={styledGlobalProps}>
-                    <GlobalStyle/>
                     {children}
                 </StyledProvider>
             </AntdStyleProvider>

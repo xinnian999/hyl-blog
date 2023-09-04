@@ -1,13 +1,12 @@
-import { useEffect, useRef } from "react";
-import { MessagesWrapper, ChatWrapper } from "../styled";
+import {useEffect, useRef} from "react";
+import {ChatWrapper, MessagesWrapper} from "../styled";
 import Bubble from "./Bubble";
-import { useBoolean, useMount } from "@/hooks";
-import { sendApi } from "./api";
+import {useBoolean, useMount} from "@/hooks";
 import useStore from "../store";
-import { url } from "hyl-utils";
+import {url} from "hyl-utils";
 import MsgInput from "./MsgInput";
 
-const { setState } = useStore;
+const {setState} = useStore;
 
 const tip = `
   您好，我是chatgpt。\n
@@ -16,131 +15,69 @@ const tip = `
 `;
 
 function Chat() {
-  const messages = useStore(
-    (state) => state.dialogList.find((item) => item.current)!.messages
-  );
-  const {
-    value,
-    autoValue,
-    autoScroll,
-    createDialog,
-    fullScreen,
-    setMessages,
-  } = useStore();
+    const messages = useStore(
+        (state) => state.dialogList.find((item) => item.current)!.messages
+    );
+    const {
+        value,
+        autoValue,
+        autoScroll,
+        createDialog,
+        fullScreen,
+        setMessages,
+        sendMessage
+    } = useStore();
 
-  const [visible, onVisible] = useBoolean(false);
+    const [visible, onVisible] = useBoolean(false);
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-  useMount(() => {
-    const params = url.getParams();
-    if (params.q) {
-      setState({ autoValue: params.q });
-      createDialog();
-    }
-
-    onVisible();
-
-    return () => setState({ autoValue: "" });
-  });
-
-  useEffect(() => {
-    if (autoScroll) {
-      const element = wrapperRef.current!;
-      element.scrollTo({
-        top: element.scrollHeight - element.clientHeight,
-        behavior: "smooth", // 平滑滚动
-      });
-    }
-  }, [messages, visible]);
-
-  useEffect(() => {
-    if (autoValue) {
-      handleMessageSend(autoValue);
-    }
-  }, [autoValue]);
-
-  const handleMessageSend = (msg = value): void => {
-    const newController = new AbortController();
-
-    if (msg.trim()) {
-      setState({ disabled: true, controller: newController, value: "" });
-      setMessages([...messages, { content: msg, role: "user" }]);
-
-      setTimeout(() => {
-        setMessages([
-          ...messages,
-          { content: msg, role: "user" },
-          { content: "ai思索中...", role: "assistant" },
-        ]);
-      }, 700);
-
-      sendApi(
-        {
-          messages: [...messages, { content: msg, role: "user" }],
-        },
-        newController
-      ).then(async (response) => {
-        //获取UTF8的解码
-        const encode = new TextDecoder("utf-8");
-        //获取body的reader
-        const reader = response.body!.getReader();
-
-        let contents = "";
-
-        while (true) {
-          const { done, value } = await reader.read();
-
-          if (done) {
-            setState({ disabled: false });
-            break;
-          }
-          // 解码内容
-          const text = encode.decode(value);
-
-          //切成消息数组，并过滤掉空数据
-          const datas = text.split("data: ").filter((item) => item);
-
-          // 遍历消息
-          datas.forEach((item) => {
-            try {
-              const c = JSON.parse(item);
-
-              if (c.choices[0].delta.content) {
-                contents += c.choices[0].delta.content;
-              }
-            } catch (e) {
-              // console.log([e, item, text, texts]);
-            }
-          });
-
-          setMessages([
-            ...messages,
-            { content: msg, role: "user" },
-            { content: contents, role: "assistant" },
-          ]);
+    useMount(() => {
+        const params = url.getParams();
+        if (params.q) {
+            setState({autoValue: params.q});
+            createDialog();
         }
-      });
-    }
-  };
 
-  return (
-    <ChatWrapper>
-      <MessagesWrapper fullScreen={fullScreen} ref={wrapperRef}>
-        <Bubble isUser={false} content={tip} />
-        {visible &&
-          messages.map((message, index) => (
-            <Bubble
-              key={message.content + index}
-              isUser={index % 2 === 0}
-              content={message.content}
-            />
-          ))}
-      </MessagesWrapper>
+        onVisible();
 
-      <MsgInput handleMessageSend={handleMessageSend} />
-    </ChatWrapper>
-  );
+        return () => setState({autoValue: ""});
+    });
+
+    useEffect(() => {
+        if (autoScroll) {
+            const element = wrapperRef.current!;
+            element.scrollTo({
+                top: element.scrollHeight - element.clientHeight,
+                behavior: "smooth", // 平滑滚动
+            });
+        }
+    }, [messages, visible]);
+
+    useEffect(() => {
+        if (autoValue) {
+            sendMessage(autoValue);
+        }
+    }, [autoValue]);
+
+
+    return (
+        <ChatWrapper>
+            <MessagesWrapper fullScreen={fullScreen} ref={wrapperRef}>
+                <Bubble isUser={false} content={tip}/>
+                {visible &&
+                    messages.map((message, index) => (
+                        <Bubble
+                            key={message.content + index}
+                            isUser={index % 2 === 0}
+                            content={message.content}
+                        />
+                    ))}
+            </MessagesWrapper>
+
+            <MsgInput/>
+        </ChatWrapper>
+    );
 }
 
 export default Chat;
