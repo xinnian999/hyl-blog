@@ -4,16 +4,17 @@ interface PlateProps {
   title?: string;
   bg?: string;
   children?: React.ReactNode;
+  hasBackgroundColor?:boolean
 }
 
-const Plate: React.FC<PlateProps> = ({ title, children }) => {
+const Plate: React.FC<PlateProps> = ({ title, children,hasBackgroundColor=true }) => {
   return (
     <>
       <PlateBanner>
         <div className="bg" />
         <h2>{title}</h2>
       </PlateBanner>
-      <PlateContent>{children}</PlateContent>
+      <PlateContent hasBackgroundColor={hasBackgroundColor}>{children}</PlateContent>
     </>
   );
 };

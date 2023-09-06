@@ -1,24 +1,25 @@
 import styled from "styled-components";
-import { r } from "@/utils";
-import { MenuOutlined } from "@ant-design/icons";
+import {r} from "@/utils";
+import {MenuOutlined} from "@ant-design/icons";
 import TweenOne from "rc-tween-one";
 
 interface PlateBannerProps {
-  bg?: string;
+    bg?: string;
 }
 
 export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
   height: 450px;
+
   .bg {
     height: 100%;
     background-size: cover;
     background-position: center;
     opacity: ${(props) => (props.theme.isDark ? "0.7" : "1")};
     background-image: ${(props) =>
-      `url(${require(`@/assets/img/bg/${
-        props.theme.dark ? "bg8.jpg" : "bg24.jpg"
-      }`)})`};
+            `url(${require(`@/assets/img/bg/${
+                    props.theme.dark ? "bg8.jpg" : "bg24.jpg"
+            }`)})`};
   }
 
   h2 {
@@ -34,17 +35,16 @@ export const PlateBanner = styled.div<PlateBannerProps>`
   }
 `;
 
-export const PlateContent = styled.div`
+export const PlateContent = styled.div<{ hasBackgroundColor: boolean }>`
   max-width: var(--heart-width);
   margin: 0 auto;
   position: relative;
   top: -60px;
-  background-color: var(--background-color);
+  background-color: ${props => props.hasBackgroundColor ? ' var(--background-color)' : 'transparent'};
   border-radius: 15px;
   padding: 15px;
-  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
-    0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  @media screen and (max-width: 800px) {
+  box-shadow: ${props => props.hasBackgroundColor ? '0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);' : 'none'};
+  @media screen and(max-width: 800px) {
     margin: 0 20px;
   }
 `;
@@ -88,9 +88,11 @@ export const DownIcon = styled(TweenOne)`
   color: #fff;
   left: 50%;
   margin-left: -27px;
+
   path {
     font-weight: bold;
   }
+
   &:hover {
     background-color: var(--ant-primary-color);
   }
