@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useEffect, useState} from "react";
 import styled from "styled-components";
 
 const FrameNumWrapper = styled.div`
@@ -10,39 +10,40 @@ const FrameNumWrapper = styled.div`
   text-shadow: 1px 1px #000;
 `;
 
+
 const FrameNum: React.FC = () => {
-  const [frameCount, setFrameCount] = useState(0);
-  const [startTime, setStartTime] = useState(0);
-  const [fps, setFPS] = useState(0);
+    const [frameCount, setFrameCount] = useState(0);
+    const [startTime, setStartTime] = useState(0);
+    const [fps, setFPS] = useState(0);
 
-  useEffect(() => {
-    let animationFrameId;
+    useEffect(() => {
+        let animationFrameId;
 
-    function calculateFPS(timestamp) {
-      if (!startTime) {
-        setStartTime(timestamp);
-      }
+        function calculateFPS(timestamp) {
+            if (!startTime) {
+                setStartTime(timestamp);
+            }
 
-      const elapsed = timestamp - startTime;
-      setFrameCount((prevFrameCount) => prevFrameCount + 1);
+            const elapsed = timestamp - startTime;
+            setFrameCount((prevFrameCount) => prevFrameCount + 1);
 
-      if (elapsed >= 1000) {
-        const calculatedFPS = frameCount / (elapsed / 1000);
-        setFPS(Math.round(calculatedFPS));
+            if (elapsed >= 1000) {
+                const calculatedFPS = frameCount / (elapsed / 1000);
+                setFPS(Math.round(calculatedFPS));
 
-        setFrameCount(0);
-        setStartTime(timestamp);
-      }
+                setFrameCount(0);
+                setStartTime(timestamp);
+            }
 
-      animationFrameId = requestAnimationFrame(calculateFPS);
-    }
+            animationFrameId = requestAnimationFrame(calculateFPS);
+        }
 
-    animationFrameId = requestAnimationFrame(calculateFPS);
+        animationFrameId = requestAnimationFrame(calculateFPS);
 
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [frameCount, startTime]);
+        return () => cancelAnimationFrame(animationFrameId);
+    }, [frameCount, startTime]);
 
-  return <FrameNumWrapper>FPS：{fps}</FrameNumWrapper>;
+    return <FrameNumWrapper>FPS：{fps}</FrameNumWrapper>;
 };
 
 export default FrameNum;

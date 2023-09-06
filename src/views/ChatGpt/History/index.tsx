@@ -1,4 +1,4 @@
-import { HistoryList, HistoryWrapper } from "./styled";
+import { HistoryList, HistoryWrapper } from "../styled";
 import { Button, Tooltip } from "antd";
 import { PlusOutlined, RedoOutlined } from "@ant-design/icons";
 import { memo } from "react";
@@ -16,19 +16,6 @@ function History() {
       <Button icon={<PlusOutlined />} onClick={createDialog}>
         新建会话
       </Button>
-
-      <Tooltip title="初始化">
-        <Button
-          size="small"
-          icon={<RedoOutlined />}
-          className="refresh"
-          onClick={() => {
-            localStorage.removeItem("chatgpt");
-
-            window.location.reload();
-          }}
-        />
-      </Tooltip>
 
       <HistoryList>
         {dialogList.map((item) => {

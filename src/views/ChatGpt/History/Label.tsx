@@ -1,10 +1,11 @@
 import { useBoolean } from "@/hooks";
-import { LabelWrapper } from "./styled";
+import { LabelWrapper } from "../styled";
 import { Icon } from "@/components";
 import { memo, useRef, useState } from "react";
 import { Input, InputRef } from "antd";
 import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
 import useStore from "../store";
+import { flushSync } from "react-dom";
 
 function HistoryLabel({ id, current, time }) {
   const { deleteDialog, updateDialog } = useStore();
@@ -69,13 +70,12 @@ function HistoryLabel({ id, current, time }) {
                   className="ico"
                   onClick={(e) => {
                     e.stopPropagation();
-                    on();
-
-                    setValue(time);
-                    setTimeout(() => {
-                      inputRef.current!.focus({
-                        cursor: "end",
-                      });
+                    flushSync(() => {
+                      on();
+                      setValue(time);
+                    });
+                    inputRef.current!.focus({
+                      cursor: "end",
                     });
                   }}
                   type="icon-zhongmingming1"

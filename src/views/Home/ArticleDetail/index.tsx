@@ -10,6 +10,7 @@ import { Comment, Markdown } from "@/components";
 import { addArticleVisits, queryAboutArticle } from "../api";
 import ToolItem from "./ToolItem";
 import { AboutArticle, ArticleDetailWrapper, Main, Toolbar } from "./styled";
+import { flushSync } from "react-dom";
 
 function ArticleDetail() {
   const [{ info, targetOffset, anchorList, aboutArticle }, setState] =
@@ -36,7 +37,15 @@ function ArticleDetail() {
     onSuccess: (res) => {
       const [data] = res.data;
 
-      setState({ info: data });
+      flushSync(() => {
+        setState({ info: data });
+      });
+
+      //生成锚点
+      setState({
+        anchorList: [...mdRef.current.children[0].querySelectorAll("h2,h3")],
+        targetOffset: window.innerHeight / 4,
+      });
 
       //查询相关文章
       queryAboutArticle(data.category).then((res) => {
@@ -57,14 +66,6 @@ function ArticleDetail() {
           updateTime: time.parse(data.updateTime),
         });
       }, 3000);
-
-      //生成锚点
-      setTimeout(() => {
-        setState({
-          anchorList: [...mdRef.current.children[0].querySelectorAll("h2,h3")],
-          targetOffset: window.innerHeight / 4,
-        });
-      });
     },
   });
 

@@ -2,7 +2,7 @@ import { notification } from "antd";
 import { cookie, ajax } from "hyl-utils";
 import Nprogress from "nprogress";
 import "nprogress/nprogress.css";
-import { store } from "@/store";
+import { setState } from "@/rootStore";
 
 const request = ajax.create({
   baseURL: "/api",
@@ -14,7 +14,7 @@ request.interceptors = {
   beforeRequest(config) {
     config.csrfHeaderName = "X-CSRF-TOKEN";
     config.csrfCookieName = "csrf_token";
-    // config.headers={}
+
     return config;
   },
   errorRequest(err) {
@@ -33,10 +33,7 @@ request.interceptors = {
 
     // 监听登陆是否失效：
     if (!cookie.get("blog_token")) {
-      store.dispatch({
-        type: "CHANGE_LOGIN_STATE",
-        payload: false,
-      });
+      setState({ loginState: false });
     }
 
     return res.response;

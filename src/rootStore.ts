@@ -33,4 +33,10 @@ const store = persist<StoreTypes, [], [], Omit<StoreTypes, "loginModal">>(
   }
 );
 
-export default create(store);
+const useStore = create(store);
+
+const { setState, getState } = useStore;
+
+export { setState, getState };
+
+export default useStore;

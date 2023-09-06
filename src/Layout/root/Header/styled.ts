@@ -10,15 +10,14 @@ export const HeaderWrapper = styled.header`
   z-index: 11;
   text-align: center;
   backdrop-filter: blur(7px);
-  transition: 0.5s all;
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%);
 
   display: flex;
   padding: 0 30px;
 
   .active {
-    background-color: var(--ant-primary-color);
-    color: #fff !important;
+    color: var(--ant-primary-color) !important;
+    /* color: #fff !important; */
   }
 `;
 

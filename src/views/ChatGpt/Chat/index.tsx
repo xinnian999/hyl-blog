@@ -1,13 +1,12 @@
-import { useEffect, useRef } from "react";
-import { MessagesWrapper, InputWrapper, Main } from "../styled";
-import { Button, Input } from "antd";
+import {useEffect, useRef} from "react";
+import {ChatWrapper, MessagesWrapper} from "../styled";
 import Bubble from "./Bubble";
-import { useBoolean, useMount, useScroll } from "@/hooks";
-import { sendApi } from "./api";
+import {useBoolean, useMount} from "@/hooks";
 import useStore from "../store";
-import { url } from "hyl-utils";
+import {url} from "hyl-utils";
+import MsgInput from "./MsgInput";
 
-const { setState } = useStore;
+const {setState} = useStore;
 
 const tip = `
   您好，我是chatgpt。\n
@@ -15,171 +14,70 @@ const tip = `
   我的用途非常广泛，可以用于自然语言处理（NLP）任务，如对话生成、问答系统、文本生成、写代码等。
 `;
 
-function ChatGpt() {
-  const messages = useStore(
-    (state) => state.dialogList.find((item) => item.current)!.messages
-  );
-  const { value, disabled, controller, autoValue, updateDialog, createDialog } =
-    useStore();
+function Chat() {
+    const messages = useStore(
+        (state) => state.dialogList.find((item) => item.current)!.messages
+    );
+    const {
+        value,
+        autoValue,
+        autoScroll,
+        createDialog,
+        fullScreen,
+        setMessages,
+        sendMessage
+    } = useStore();
 
-  const [visible, onVisible] = useBoolean(false);
+    const [visible, onVisible] = useBoolean(false);
 
-  const [end, onEnd, offEnd] = useBoolean(false);
+    const wrapperRef = useRef<HTMLDivElement>(null);
 
-  const wrapperRef = useRef<HTMLDivElement>(null);
-
-  const setMessages = (msg) => {
-    updateDialog((item) => ({
-      messages: item.current ? msg : item.messages,
-    }));
-  };
-
-  useMount(() => {
-    const params = url.getParams();
-    if (params.q) {
-      setState({ autoValue: params.q });
-      createDialog();
-    }
-
-    onVisible();
-
-    return () => setState({ autoValue: "" });
-  });
-
-  useEffect(() => {
-    const element = wrapperRef.current!;
-    const { scrollHeight, clientHeight, scrollTop } = element;
-    element.scrollTo({
-      top: scrollHeight - clientHeight,
-      behavior: "smooth", // 平滑滚动
-    });
-  }, [messages, visible]);
-
-  useEffect(() => {
-    if (autoValue) {
-      handleMessageSend(autoValue);
-    }
-  }, [autoValue]);
-
-  const handleMessageSend = (msg = value): void => {
-    const newController = new AbortController();
-
-    if (msg.trim()) {
-      setState({ disabled: true, controller: newController, value: "" });
-      setMessages([...messages, { content: msg, role: "user" }]);
-
-      setTimeout(() => {
-        setMessages([
-          ...messages,
-          { content: msg, role: "user" },
-          { content: "ai思索中...", role: "assistant" },
-        ]);
-      }, 700);
-
-      sendApi(
-        {
-          messages: [...messages, { content: msg, role: "user" }],
-        },
-        newController
-      ).then(async (response) => {
-        //获取UTF8的解码
-        const encode = new TextDecoder("utf-8");
-        //获取body的reader
-        const reader = response.body!.getReader();
-
-        let contents = "";
-
-        while (true) {
-          const { done, value } = await reader.read();
-
-          if (done) {
-            setState({ disabled: false });
-            break;
-          }
-          // 解码内容
-          const text = encode.decode(value);
-
-          //切成消息数组，并过滤掉空数据
-          const datas = text.split("data: ").filter((item) => item);
-
-          // 遍历消息
-          datas.forEach((item) => {
-            try {
-              const c = JSON.parse(item);
-
-              if (c.choices[0].delta.content) {
-                contents += c.choices[0].delta.content;
-              }
-            } catch (e) {
-              // console.log([e, item, text, texts]);
-            }
-          });
-
-          setMessages([
-            ...messages,
-            { content: msg, role: "user" },
-            { content: contents, role: "assistant" },
-          ]);
+    useMount(() => {
+        const params = url.getParams();
+        if (params.q) {
+            setState({autoValue: params.q});
+            createDialog();
         }
-      });
-    }
-  };
 
-  const handleKeyDown = (e) => {
-    if (e.keyCode === 13 && e.ctrlKey) {
-      setState({ value: value + "\n" });
-    }
-    if (e.keyCode === 13) {
-      return handleMessageSend();
-    }
-  };
+        onVisible();
 
-  return (
-    <Main>
-      <MessagesWrapper id="MessagesWrapper" ref={wrapperRef}>
-        <Bubble isUser={false} content={tip} />
-        {visible &&
-          messages.map((message, index) => (
-            <Bubble
-              key={message.content + index}
-              isUser={index % 2 === 0}
-              content={message.content}
-            />
-          ))}
-      </MessagesWrapper>
+        return () => setState({autoValue: ""});
+    });
 
-      <InputWrapper>
-        <Input.TextArea
-          value={value}
-          disabled={disabled}
-          onChange={(e) => setState({ value: e.target.value })}
-          placeholder="你想对Ai说什么？（支持回车发送，ctrl+回车换行）"
-          autoSize={{ minRows: 4, maxRows: 999 }}
-          onKeyDown={handleKeyDown}
-        />
-        {disabled && (
-          <Button
-            className="sendBtn"
-            type="primary"
-            onClick={() => {
-              controller.abort();
-              setState({ disabled: false });
-            }}
-          >
-            终止
-          </Button>
-        )}
-        <Button
-          className="sendBtn"
-          type="primary"
-          disabled={disabled}
-          onClick={() => handleMessageSend()}
-        >
-          发送
-        </Button>
-      </InputWrapper>
-    </Main>
-  );
+    useEffect(() => {
+        if (autoScroll) {
+            const element = wrapperRef.current!;
+            element.scrollTo({
+                top: element.scrollHeight - element.clientHeight,
+                behavior: "smooth", // 平滑滚动
+            });
+        }
+    }, [messages, visible]);
+
+    useEffect(() => {
+        if (autoValue) {
+            sendMessage(autoValue);
+        }
+    }, [autoValue]);
+
+
+    return (
+        <ChatWrapper>
+            <MessagesWrapper fullScreen={fullScreen} ref={wrapperRef}>
+                <Bubble isUser={false} content={tip}/>
+                {visible &&
+                    messages.map((message, index) => (
+                        <Bubble
+                            key={message.content + index}
+                            isUser={index % 2 === 0}
+                            content={message.content}
+                        />
+                    ))}
+            </MessagesWrapper>
+
+            <MsgInput/>
+        </ChatWrapper>
+    );
 }
 
-export default ChatGpt;
+export default Chat;

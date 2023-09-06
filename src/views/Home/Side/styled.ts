@@ -4,6 +4,10 @@ import styled from "styled-components";
 export const HomeSideWrapper = styled.div`
   width: 25%;
 
+  @media (max-width: 1000px) {
+    display: none;
+  }
+
   .avatar {
     padding: 20px 0;
     text-align: center;
@@ -20,6 +24,7 @@ export const HomeSideWrapper = styled.div`
     display: flex;
     justify-content: space-around;
     padding: 0 15px;
+
     li {
       border: 1px solid #999;
       width: 45px;
@@ -29,6 +34,7 @@ export const HomeSideWrapper = styled.div`
       text-align: center;
       line-height: 45px;
       cursor: pointer;
+
       &:hover {
         color: #fff;
         background-color: var(--ant-primary-color);
@@ -41,9 +47,11 @@ export const HomeSideWrapper = styled.div`
     justify-content: space-around;
     padding: 0 20px;
     text-align: center;
+
     p {
       margin-bottom: 0;
     }
+
     h3 {
       margin-top: 10px;
     }
@@ -51,15 +59,18 @@ export const HomeSideWrapper = styled.div`
 
   .tags {
     padding-top: 15px;
+
     .count {
       font-size: 12px;
       margin-right: 5px;
     }
+
     .tag {
       display: inline-block;
       margin-right: 15px;
       margin-bottom: 15px;
       font-size: 15px;
+
       &:hover {
         cursor: pointer;
         background-color: var(--ant-primary-color);
@@ -74,11 +85,13 @@ export const HomeSideWrapper = styled.div`
       margin-bottom: 5px;
     }
   }
+
   .gif {
     display: block;
     margin: 25px auto;
     height: 80px;
   }
+
   .lastWeek {
     text-align: center;
     font-weight: bold;

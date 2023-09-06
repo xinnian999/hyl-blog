@@ -13,12 +13,12 @@ const NavWrapper = styled.ul`
   .navItem {
     position: relative;
     margin-right: 10px;
+    ${({ theme }) => theme.scrollTop < 1 && "text-shadow: 0px 0px 10px black;"};
+
     a {
-      color: ${({ theme }) =>
-        theme.scrollTop > 1 ? "#555" : "#fff;text-shadow: 0px 0px 10px black;"};
+      color: ${({ theme }) => (theme.scrollTop > 1 ? "#555" : "#fff")};
       &:hover {
-        background-color: var(--ant-primary-color);
-        color: #fff;
+        color: var(--ant-primary-4);
       }
     }
     &-main {
