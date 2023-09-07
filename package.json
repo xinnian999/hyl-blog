@@ -70,6 +70,7 @@
     "postcss-normalize": "^10.0.1",
     "postcss-plugin-px2rem": "^0.8.1",
     "postcss-preset-env": "^7.0.1",
+    "prettier": "^3.0.3",
     "prompts": "^2.4.2",
     "rc-queue-anim": "^2.0.0",
     "rc-scroll-anim": "^2.7.6",
@@ -213,5 +214,12 @@
     "babel-plugin-styled-components": "^2.1.4",
     "ora": "^5.1.0",
     "scp2": "^0.5.0"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": true
   }
 }
