@@ -1,11 +1,11 @@
-import { Tag, Avatar, Skeleton, Tabs } from "antd";
-import type { TabsProps } from "antd";
-import { Prism } from "react-syntax-highlighter";
-import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { CheckOutlined, CloseOutlined } from "@ant-design/icons";
-import { Plate, Copy } from "@/components";
-import { useGetData } from "@/hooks";
-import { LinkWrapper, Title } from "./styled";
+import { Tag, Avatar, Skeleton, Tabs } from 'antd';
+import type { TabsProps } from 'antd';
+import { Prism } from 'react-syntax-highlighter';
+import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
+import { Plate, Copy } from '@/components';
+import { useGetData } from '@/hooks';
+import { LinkWrapper, Title } from './styled';
 
 type Data = {
   name: string;
@@ -18,12 +18,12 @@ type Data = {
 };
 
 const tags = [
-  { color: "green", icon: <CheckOutlined />, con: "原创优先" },
-  { color: "green", icon: <CheckOutlined />, con: "技术优先" },
-  { color: "red", icon: <CloseOutlined />, con: "经常宕机" },
-  { color: "red", icon: <CloseOutlined />, con: "不合法规" },
-  { color: "red", icon: <CloseOutlined />, con: "插边球站" },
-  { color: "red", icon: <CloseOutlined />, con: "红标报毒" },
+  { color: 'green', icon: <CheckOutlined />, con: '原创优先' },
+  { color: 'green', icon: <CheckOutlined />, con: '技术优先' },
+  { color: 'red', icon: <CloseOutlined />, con: '经常宕机' },
+  { color: 'red', icon: <CloseOutlined />, con: '不合法规' },
+  { color: 'red', icon: <CloseOutlined />, con: '插边球站' },
+  { color: 'red', icon: <CloseOutlined />, con: '红标报毒' },
 ];
 
 const info = `名称：${globalConfig.title}
@@ -37,13 +37,13 @@ const yaml = `- name: ${globalConfig.title}
   descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
-  const [data] = useGetData<Data>("/link/query", {
+  const [data] = useGetData<Data>('/link/query', {
     mockLoadingCount: 8,
   });
 
-  const items: TabsProps["items"] = [
+  const items: TabsProps['items'] = [
     {
-      key: "chinese",
+      key: 'chinese',
       label: `中文`,
       children: (
         <Copy content={info}>
@@ -52,14 +52,14 @@ export default function Link() {
       ),
     },
     {
-      key: "yaml",
+      key: 'yaml',
       label: `Yaml`,
       children: (
         <Copy content={yaml}>
           <Prism
             showLineNumbers
             style={tomorrow}
-            language={"xml"}
+            language={'xml'}
             PreTag="div"
             children={yaml}
           />

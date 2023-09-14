@@ -1,9 +1,9 @@
-import { Skeleton } from "antd";
-import { InsertRowAboveOutlined } from "@ant-design/icons";
-import { time } from "hyl-utils";
-import { useGetData } from "@/hooks";
-import { LazyImage, Plate } from "@/components";
-import { CollectionWrapper } from "./styled";
+import { Skeleton } from 'antd';
+import { InsertRowAboveOutlined } from '@ant-design/icons';
+import { time } from 'hyl-utils';
+import { useGetData } from '@/hooks';
+import { LazyImage, Plate } from '@/components';
+import { CollectionWrapper } from './styled';
 
 type Data = {
   title: string;
@@ -16,7 +16,7 @@ type Data = {
 };
 
 export default function Collection() {
-  const [data] = useGetData<Data>("/collection/query", { mockLoadingCount: 4 });
+  const [data] = useGetData<Data>('/collection/query', { mockLoadingCount: 4 });
 
   const renderItem = data.map(
     ({ picture, title, autograph, createTime, loading, link, id }) => {
@@ -37,7 +37,7 @@ export default function Collection() {
             <p className="autograph">{autograph}</p>
             <div className="time">
               <InsertRowAboveOutlined className="iconAbove" />
-              <span>{time.parse(createTime, "YYYY-MM")}</span>
+              <span>{time.parse(createTime, 'YYYY-MM')}</span>
             </div>
           </Skeleton>
         </div>
