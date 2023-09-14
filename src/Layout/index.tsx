@@ -1,5 +1,5 @@
-import Provider from "./Provider";
-import { Header, Main, Footer } from "./root";
+import Provider from './Provider';
+import { Header, Main, Footer } from './root';
 import {
   Music,
   FloatButton,
@@ -7,8 +7,8 @@ import {
   FrameNum,
   Wave,
   Login,
-} from "./widgets";
-import { FloatButton as AntdFloatButton } from "antd";
+} from './widgets';
+import { FloatButton as AntdFloatButton } from 'antd';
 
 function Layout() {
   return (
