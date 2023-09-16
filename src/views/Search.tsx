@@ -108,7 +108,7 @@ function Search() {
       const history = [...historyTag, val];
       localStorage.setItem("historyTag", JSON.stringify(history));
       setHistoryTag(history);
-      request.get(`/all/search`, { q: val }).then((res) => {
+      request<any>({url:`/all/search`,params: { q: val }}).then((res) => {
         on();
 
         setResult(res);

@@ -1,83 +1,108 @@
-import { notification } from "antd";
-import { cookie, ajax } from "hyl-utils";
-import Nprogress from "nprogress";
-import "nprogress/nprogress.css";
-import { setState } from "@/rootStore";
+import { setState } from '@/rootStore';
+import { notification } from 'antd';
+import axios, { AxiosRequestConfig } from 'axios';
+import { cookie } from 'hyl-utils';
+import Nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
 
-const request = ajax.create({
-  baseURL: "/api",
+type responseType<T = any> = {
+  data: T[];
+  status: number;
+  total: number;
+};
+
+const myAxios = axios.create({
+  baseURL: '/api',
   timeout: 15000,
   withCredentials: true,
+  paramsSerializer: params =>
+    Object.keys(params)
+      .map(key => {
+        if (typeof params[key] !== 'object') return `${key}=${params[key]}`;
+        const value = encodeURIComponent(JSON.stringify(params[key]));
+        return `${encodeURIComponent(key)}=${value}`;
+      })
+      .join('&'),
 });
 
-request.interceptors = {
-  beforeRequest(config) {
-    config.csrfHeaderName = "X-CSRF-TOKEN";
-    config.csrfCookieName = "csrf_token";
+myAxios.interceptors.request.use(config => {
+  config.xsrfHeaderName = 'X-CSRF-TOKEN';
+  config.xsrfCookieName = 'csrf_token';
+  Nprogress.start();
+  return config;
+});
 
-    return config;
-  },
-  errorRequest(err) {
-    return err;
-  },
-  beforeResponse(res) {
+myAxios.interceptors.response.use(
+  response => {
+    const { message } = response.data;
     // 关闭顶部加载进度条
     Nprogress.done();
 
-    if (res.response.message) {
+    if (message) {
       notification.error({
-        message: "接口错误",
-        description: res.response.message,
+        message: '接口报错',
+        description: message,
       });
     }
 
     // 监听登陆是否失效：
-    if (!cookie.get("blog_token")) {
+    if (!cookie.get('blog_token')) {
       setState({ loginState: false });
     }
 
-    return res.response;
+    return response;
   },
-
-  errorResponse(err) {
-    const { status } = err;
+  error => {
+    const { status } = error.response;
 
     switch (status) {
       case 504:
         notification.error({
           message: status,
-          description: "请求超时",
+          description: '请求超时',
         });
 
         break;
       case 502:
         notification.error({
           message: status,
-          description: "后端服务挂了",
+          description: '后端服务挂了',
         });
         break;
       case 500:
         notification.error({
           message: status,
-          description: "请求接口异常",
+          description: '请求接口异常',
         });
         break;
       case 404:
         notification.error({
           message: status,
-          description: "请求接口不存在",
+          description: '请求接口不存在',
         });
         break;
       default:
         notification.error({
           message: status,
-          description: "请求接口失败",
+          description: '请求接口失败',
         });
         break;
     }
 
-    return err;
-  },
-};
+    // 对响应错误做点什么
+    return Promise.reject(error);
+  }
+);
+
+const request = <T = responseType>(config: AxiosRequestConfig) =>
+  new Promise<T>((resolve, reject) => {
+    myAxios(config)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
 
 export default request;

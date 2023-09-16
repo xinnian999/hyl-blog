@@ -6,7 +6,7 @@ import { useBoolean, useRootStore, useSetState } from "@/hooks";
 import { insertText } from "./insertText";
 import emoji from "./emoji";
 import "./style.scss";
-import { addCommentApi } from "../api";
+import { request } from "@/utils";
 
 const { TextArea } = Input;
 
@@ -62,7 +62,7 @@ export default function Editor({
     }
 
     setState({ loading: true });
-    addCommentApi(data).then((res: any) => {
+    request({ url: '/comment/add', data }).then((res) => {
       if (res.status === 0) {
         setState({ loading: false, value: "" });
         refresh();

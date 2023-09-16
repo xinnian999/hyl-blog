@@ -14,7 +14,6 @@ function Main() {
   const [loading, on, off] = useBoolean(true);
 
   const [articleData, run] = useGetData<articleItem>("/article/query", {
-    progress: false,
     cache: true,
     data: {
       pageNum: state.pageNum,

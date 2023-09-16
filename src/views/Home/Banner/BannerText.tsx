@@ -67,7 +67,7 @@ const BannerTextWrapper = styled.div`
 function BannerText() {
   const [exp, setExp] = useState("");
   useMount(() => {
-    request.get("/experience/queryRandOne").then(({ data, status }) => {
+    request({url:"/experience/queryRandOne",method:'get'}).then(({ data, status }) => {
       if (status === 0) {
         setExp(data[0].content);
       }

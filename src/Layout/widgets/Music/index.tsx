@@ -8,7 +8,6 @@ function Music() {
   const { theme } = useRootStore();
 
   useGetData("/music/query", {
-    progress: false,
     onSuccess: (res) => {
       const data = res.data.map((item) => ({
         ...item,

@@ -45,13 +45,11 @@ function Provider({children}) {
     });
 
     useGetData("/all/getCsrfToken", {
-        progress: false,
         manual: !!cookie.get("csrf_token"),
     });
 
     useGetData("/qq/getLoginStatus", {
         manual: !url.getParams().getUserInfo,
-        progress: false,
         onSuccess(res: any) {
             setRootState({loginModal: true, userInfo: res, loginState: true});
         },

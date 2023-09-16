@@ -16,7 +16,6 @@ function Main() {
   const swiperRef: any = useRef(null);
 
   const [data] = useGetData<articleItem>("/article/query", {
-    progress: false,
     data: {
       pageNum: 1,
       pageSize: 5,

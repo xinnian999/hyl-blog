@@ -1,7 +1,6 @@
-import { useState } from "react";
-import Nprogress from "nprogress";
-import { request } from "@/utils";
-import useMount from "./useMount";
+import { useState } from 'react';
+import { request } from '@/utils';
+import useMount from './useMount';
 
 type responseType = {
   data: any[];
@@ -12,7 +11,6 @@ type responseType = {
 type toolConfig = {
   data?: object;
   manual?: boolean;
-  progress?: boolean;
   onSuccess?: (res: responseType) => void;
   onFail?: (err: Response) => void;
   mockLoadingCount?: number;
@@ -25,10 +23,9 @@ type runFn = (props?: toolConfig) => Promise<responseType>;
 //默认开启progress顶部加载进度条，可设置config的progress为 false
 //默认关闭缓存数据，可设置config的cacheData为 true开启
 const defaultConfig: Required<toolConfig> = {
-  progress: true,
   onSuccess: () => {},
   onFail: () => {},
-  data: { orderBys: "id desc" },
+  data: { orderBys: 'id desc' },
   manual: false,
   mockLoadingCount: 0,
   cache: false,
@@ -40,8 +37,8 @@ function useGetData<T = any>(
 ) {
   const config = { ...defaultConfig, ...newConfig };
 
-  const [result, setResult] = useState([]);
-  const [data, setData] = useState([]);
+  const [result, setResult] = useState<T[]>([]);
+  const [data, setData] = useState<T[]>([]);
 
   const run: runFn = async (runProps) => {
     //重复请求的新配置合并
@@ -49,40 +46,52 @@ function useGetData<T = any>(
       Object.assign(config, runProps);
     }
 
-    // 是否开启顶部加载进度条
-    if (config.progress) {
-      Nprogress.start();
-    }
-
     //mock骨架屏加载数据
-    if (config.mockLoadingCount) {
-      const mockData = [...new Array(config.mockLoadingCount)].map(
-        (item, index) => ({
-          loading: true,
-          id: `${index}-key`,
-        })
-      );
-      setResult(data.concat(mockData as any));
+    // if (config.mockLoadingCount) {
+    //   const mockData: any[] = [...new Array(config.mockLoadingCount)].map(
+    //     (item, index) => ({
+    //       loading: true,
+    //       id: `${index}-key`,
+    //     })
+    //   );
+    //   setResult(data.concat(mockData));
+    // }
+
+    // try {
+    //   const res = await request.get(url, config.data);
+    //   if (res.data) {
+    //     const newData = config.cache ? data.concat(res.data) : res.data;
+    //     setResult(newData);
+    //     setData(newData);
+    //   }
+
+    //   //调用成功的回调函数
+    //   config.onSuccess(res);
+
+    //   return res;
+    // } catch (e) {
+    //   //调用失败的回调函数
+    //   config.onFail(e as Response);
+
+    //   return e;
+    // }
+
+    const res = await request({
+      url,
+      method: 'GET',
+      params: config.data,
+    });
+
+    if (Array.isArray(res.data)) {
+      const newData = config.cache ? data.concat(res.data) : res.data;
+      setResult(newData);
+      setData(newData);
     }
 
-    try {
-      const res = await request.get(url, config.data);
-      if (res.data) {
-        const newData = config.cache ? data.concat(res.data) : res.data;
-        setResult(newData);
-        setData(newData);
-      }
+    //调用成功的回调函数
+    config.onSuccess(res);
 
-      //调用成功的回调函数
-      config.onSuccess(res);
-
-      return res;
-    } catch (e) {
-      //调用失败的回调函数
-      config.onFail(e as Response);
-
-      return e;
-    }
+    return res;
   };
 
   const set = (data) => {

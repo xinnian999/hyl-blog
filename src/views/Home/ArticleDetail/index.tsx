@@ -47,7 +47,7 @@ function ArticleDetail() {
       });
 
       //查询相关文章
-      queryAboutArticle(data.category).then((res) => {
+      queryAboutArticle(data.category).then((res:any) => {
         setState({
           aboutArticle: res.data.filter(
             (item) => item.id !== Number(params.id)

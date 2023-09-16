@@ -23,6 +23,7 @@
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
     "@types/react-redux": "^7.1.25",
+    "ahooks": "^3.7.8",
     "animate.css": "^4.1.1",
     "antd": "^5.6.3",
     "aplayer": "^1.10.1",
@@ -71,7 +72,9 @@
     "postcss-plugin-px2rem": "^0.8.1",
     "postcss-preset-env": "^7.0.1",
     "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.3",
     "prompts": "^2.4.2",
+    "qs": "^6.11.2",
     "rc-queue-anim": "^2.0.0",
     "rc-scroll-anim": "^2.7.6",
     "rc-tween-one": "^3.0.3",
@@ -110,22 +113,6 @@
     "webpack-manifest-plugin": "^4.0.2",
     "workbox-webpack-plugin": "^6.4.1",
     "zustand": "^4.4.0"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "react/jsx-no-undef": 0,
-      "react-hooks/exhaustive-deps": 0,
-      "jsx-a11y/alt-text": 0,
-      "no-loop-func": 0
-    },
-    "globals": {
-      "wx": true,
-      "$": true
-    }
   },
   "browserslist": {
     "production": [
@@ -220,6 +207,41 @@
     "tabWidth": 2,
     "singleQuote": true,
     "trailingComma": "es5",
-    "semi": true
+    "semi": true,
+    "jsxSingleQuote": true,
+    "arrowParens": "avoid",
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "react/jsx-no-undef": 0,
+      "react-hooks/exhaustive-deps": 0,
+      "jsx-a11y/alt-text": 0,
+      "no-loop-func": 0,
+      "no-var": 1,
+      "no-empty": 1,
+      "prefer-template": 1,
+      "object-shorthand": 1,
+      "prefer-const": 1,
+      "prefer-destructuring": 1,
+      "no-duplicate-imports": 1,
+      "no-useless-rename": 1,
+      "arrow-body-style": 1,
+      "max-params": [
+        2,
+        2
+      ],
+      "require-await": 1
+    },
+    "globals": {
+      "wx": true,
+      "$": true
+    }
   }
 }

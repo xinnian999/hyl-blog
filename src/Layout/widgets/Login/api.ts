@@ -1,9 +1,9 @@
-import { request } from "@/utils";
-import md5 from "js-md5";
+import { request } from '@/utils';
+import md5 from 'js-md5';
 
 export const loginApi = ({ username, password }) => {
   const data = { username, password: md5(password) };
-  return request.post("/user/login", data);
+  return request({ url: '/user/login', method: 'post', data });
 };
 
 export const registerApi = (params) => {
@@ -11,13 +11,13 @@ export const registerApi = (params) => {
     ...params,
     password: md5(params.password),
   };
-  return request.post("/user/register", data);
+  return request({ url: '/user/register', method: 'post', data });
 };
 
 export const getWxQrCodeApi = () => {
-  return request.get("/qq/getWxQrCode");
+  return request<any>({ url: '/qq/getWxQrCode', method: 'get' });
 };
 
 export const getLoginStatusApi = () => {
-  return request.get("/qq/getLoginStatus");
+  return request<any>({ url: '/qq/getLoginStatus', method: 'get' });
 };
