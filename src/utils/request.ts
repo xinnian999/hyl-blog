@@ -19,8 +19,7 @@ const myAxios = axios.create({
     Object.keys(params)
       .map(key => {
         if (typeof params[key] !== 'object') return `${key}=${params[key]}`;
-        const value = encodeURIComponent(JSON.stringify(params[key]));
-        return `${encodeURIComponent(key)}=${value}`;
+        return `${key}=${encodeURI(JSON.stringify(params[key]))}`;
       })
       .join('&'),
 });

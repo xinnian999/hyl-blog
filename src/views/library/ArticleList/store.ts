@@ -42,22 +42,28 @@ const store = create<StoreTypes>((set, get) => ({
   },
 
   async fetchData() {
-    console.log(get().params);
+    const api = {
+      url: '/article/query',
+      method: 'get',
+      params: get().params,
+    };
 
-    const api = { url: '/article/query', method: 'get', params: get().params };
     const { data: articleData, total } = await request(api);
 
     set({ articleData, total });
   },
+
   paramsChange(param) {
     set({ params: { ...get().params, ...param } });
   },
+
   pageChange(pageNum) {
     get().paramsChange({ pageNum });
   },
+
   categoryChange(category) {
     const { params, paramsChange } = get();
-    paramsChange({ filters: { ...params.filters, category } });
+    paramsChange({ filters: { ...params.filters, category }, pageNum: 1 });
   },
 }));
 

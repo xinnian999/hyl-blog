@@ -3,7 +3,7 @@ import {
   ArticleItem,
   ArticleListWrapper,
 } from '@/views/library/ArticleList/styled';
-import { Button, Pagination, Space } from 'antd';
+import { Affix, Button, Pagination, Space } from 'antd';
 import { time } from 'hyl-utils';
 import { useEffect } from 'react';
 
@@ -24,16 +24,18 @@ const ArticleList = () => {
 
   return (
     <Plate title='文章列表'>
-      <Space wrap>
-        {tagData.map(({ name }) => (
-          <Button
-            type={filters.category === name ? 'primary' : 'default'}
-            onClick={() => categoryChange(name)}
-          >
-            {name}
-          </Button>
-        ))}
-      </Space>
+      <Affix offsetTop={80}>
+        <Space wrap>
+          {tagData.map(({ name }) => (
+            <Button
+              type={filters.category === name ? 'primary' : 'default'}
+              onClick={() => categoryChange(name)}
+            >
+              {name}
+            </Button>
+          ))}
+        </Space>
+      </Affix>
       <ArticleListWrapper>
         {articleData.map(
           ({ title, picture, introduce, createTime, category }) => (
