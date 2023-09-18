@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
 export const ArticleListWrapper = styled.div`
-  padding: 0 150px;
+  padding: 25px 12vw;
+
+  .search-bar {
+    padding: 0 150px;
+  }
+  .category-bar {
+    margin: 30px 0;
+  }
 `;
 
 export const ArticleItem = styled.div`

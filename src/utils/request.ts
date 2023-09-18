@@ -2,7 +2,7 @@ import { setState } from '@/rootStore';
 import { notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
 import { cookie } from 'hyl-utils';
-import Nprogress from 'nprogress';
+import topProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 
 type responseType<T = any> = {
@@ -27,7 +27,7 @@ const myAxios = axios.create({
 myAxios.interceptors.request.use(config => {
   config.xsrfHeaderName = 'X-CSRF-TOKEN';
   config.xsrfCookieName = 'csrf_token';
-  Nprogress.start();
+  topProgress.start();
   return config;
 });
 
@@ -35,7 +35,7 @@ myAxios.interceptors.response.use(
   response => {
     const { message } = response.data;
     // 关闭顶部加载进度条
-    Nprogress.done();
+    topProgress.done();
 
     if (message) {
       notification.error({

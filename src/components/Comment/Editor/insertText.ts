@@ -1,5 +1,5 @@
-export function insertText(inputRef, str, setState) {
-  const element = inputRef.current.resizableTextArea.textArea;
+export function insertText({ inputEl, str, setState }) {
+  const element = inputEl.resizableTextArea.textArea;
 
   const tmpStr = element.value;
 
