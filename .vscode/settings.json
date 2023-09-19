@@ -6,7 +6,8 @@
     "nprogress",
     "partialize",
     "prestrain",
-    "shouye"
+    "shouye",
+    "zustand"
   ],
   "npm-scripts.showStartNotification": false
 }

@@ -8,6 +8,7 @@ import { Button, Pagination, Space, Spin } from 'antd';
 import Search from 'antd/es/input/Search';
 import { time } from 'hyl-utils';
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useStore from './store';
 
 const ArticleList = () => {
@@ -16,7 +17,7 @@ const ArticleList = () => {
     params,
     total,
     fetchData,
-    pageChange,
+    paramsChange,
     categoryChange,
     onSearch,
     loading,
@@ -24,30 +25,31 @@ const ArticleList = () => {
 
   const listRef = useRef<HTMLDivElement>(null);
 
+  const navigate = useNavigate();
+
   const [tagData] = useGetData('/category/query', { data: { orderBys: '' } });
-
-  const scroll = () => {
-    if (
-      document.documentElement.scrollTop >
-      document.documentElement.scrollHeight * 0.5
-    ) {
-      const { top } = listRef.current!.getBoundingClientRect();
-
-      window.scrollTo({
-        top: top + document.documentElement.scrollTop - 250,
-        behavior: 'smooth', // 平滑滚动
-      });
-    }
-  };
-
-  useEffect(() => {
-    fetchData(scroll);
-  }, [params]);
 
   const { pageNum, pageSize, filters } = params;
 
+  useEffect(() => {
+    fetchData();
+  }, [params]);
+
+  const pageChange = (pageNum: number) => {
+    paramsChange({ pageNum });
+
+    // 滚动回列表顶部
+    window.scrollTo({
+      top:
+        listRef.current!.getBoundingClientRect().top +
+        document.documentElement.scrollTop -
+        250,
+      behavior: 'smooth', // 平滑滚动
+    });
+  };
+
   return (
-    <Plate title='文章列表'>
+    <Plate title='文章列表' bg='bg23.jpg'>
       <ArticleListWrapper>
         <div className='search-bar'>
           <Search
@@ -73,7 +75,7 @@ const ArticleList = () => {
         <Spin spinning={loading}>
           <div className='articleList' ref={listRef}>
             {articleData.map(
-              ({ title, picture, introduce, createTime, category }) => (
+              ({ title, picture, introduce, createTime, category, id }) => (
                 <ArticleItem>
                   <img
                     className='image'
@@ -81,7 +83,7 @@ const ArticleList = () => {
                   />
 
                   <div className='info'>
-                    <h2>{title}</h2>
+                    <h2 onClick={() => navigate(`/article/${id}`)}>{title}</h2>
                     <div className='introduce'>{introduce}</div>
                     <div className='last'>
                       <div className='time'>
@@ -97,6 +99,7 @@ const ArticleList = () => {
             )}
           </div>
         </Spin>
+
         <Pagination
           current={pageNum}
           pageSize={pageSize}

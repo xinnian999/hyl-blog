@@ -1,5 +1,4 @@
 import { request } from '@/utils';
-import { flushSync } from 'react-dom';
 import { create } from 'zustand';
 
 interface articleItem extends Item {
@@ -27,9 +26,9 @@ type StoreTypes = {
   total: number;
   params: paramsType;
   loading: boolean;
-  fetchData: (scroll: () => void) => void;
+  fetchData: () => Promise<void>;
   paramsChange: (param: Partial<paramsType>) => void;
-  pageChange: (page: number) => void;
+  paramsFilterChange: (filter: paramsType['filters']) => void;
   categoryChange: (category: string) => void;
   onSearch: (q: string) => void;
 };
@@ -45,7 +44,7 @@ const store = create<StoreTypes>((set, get) => ({
   },
   loading: false,
 
-  async fetchData(scroll) {
+  async fetchData() {
     const api = {
       url: '/article/query',
       method: 'get',
@@ -56,32 +55,31 @@ const store = create<StoreTypes>((set, get) => ({
 
     const { data: articleData, total } = await request(api);
 
-    flushSync(() => {
-      set({ articleData, total, loading: false });
-    });
-
-    scroll();
+    set({ articleData, total, loading: false });
   },
 
   paramsChange(param) {
     set({ params: { ...get().params, ...param } });
   },
 
-  pageChange(pageNum) {
-    get().paramsChange({ pageNum });
+  paramsFilterChange(filter) {
+    const { params, paramsChange } = get();
+    paramsChange({
+      filters: { ...params.filters, ...filter },
+      pageNum: 1,
+    });
   },
 
   categoryChange(category) {
-    const { params, paramsChange } = get();
-    paramsChange({ filters: { ...params.filters, category }, pageNum: 1 });
+    const { params, paramsFilterChange } = get();
+    // 如果点击的是当前分类，就取消分类查询所有
+    paramsFilterChange({
+      category: category === params.filters.category ? '' : category,
+    });
   },
 
   onSearch(q) {
-    const { params, paramsChange } = get();
-    paramsChange({
-      filters: { ...params.filters, category: '', title: q },
-      pageNum: 1,
-    });
+    get().paramsFilterChange({ category: '', title: q });
   },
 }));
 

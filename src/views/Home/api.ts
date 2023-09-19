@@ -1,10 +1,9 @@
 import { request } from '@/utils';
 
-export const addArticleVisits = (data) => {
-  return request({ url: '/article/visit', method: 'post', data });
-};
+export const addArticleVisits = data =>
+  request({ url: '/article/visit', method: 'put', data });
 
-export const queryAboutArticle = (category) => {
+export const queryAboutArticle = category => {
   const params = {
     pageNum: 1,
     pageSize: 6,

@@ -32,6 +32,16 @@ export const ArticleItem = styled.div`
     margin-left: 20px;
     padding: 15px 0;
 
+    h2 {
+      transition: 0.7s all;
+
+      cursor: pointer;
+      color: #3c4858;
+      &:hover {
+        color: var(--ant-primary-color);
+      }
+    }
+
     .introduce {
       margin-top: 10px;
     }

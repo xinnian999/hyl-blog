@@ -1,25 +1,23 @@
-import styled from "styled-components";
-import {r} from "@/utils";
-import {MenuOutlined} from "@ant-design/icons";
-import TweenOne from "rc-tween-one";
+import { r } from '@/utils';
+import { MenuOutlined } from '@ant-design/icons';
+import TweenOne from 'rc-tween-one';
+import styled from 'styled-components';
 
 interface PlateBannerProps {
-    bg?: string;
+  bg?: string;
 }
 
 export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
-  height: 450px;
+  height: 500px;
 
   .bg {
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: ${(props) => (props.theme.isDark ? "0.7" : "1")};
-    background-image: ${(props) =>
-            `url(${require(`@/assets/img/bg/${
-                    props.theme.dark ? "bg8.jpg" : "bg24.jpg"
-            }`)})`};
+    opacity: ${props => (props.theme.isDark ? '0.7' : '1')};
+    background-image: ${props =>
+      `url(${require(`@/assets/img/bg/${props.bg || 'bg24.jpg'}`)})`};
   }
 
   h2 {
@@ -28,7 +26,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     top: 50%;
     transform: translate(-50%, -50%);
     font-weight: 500;
-    font-size: 45px;
+    font-size: 50px;
     letter-spacing: 5px;
     color: #eee;
     text-shadow: 3px 3px 0 var(--ant-primary-8);
@@ -40,10 +38,14 @@ export const PlateContent = styled.div<{ hasBackgroundColor: boolean }>`
   margin: 0 auto;
   position: relative;
   top: -60px;
-  background-color: ${props => props.hasBackgroundColor ? ' var(--background-color)' : 'transparent'};
+  background-color: ${props =>
+    props.hasBackgroundColor ? ' var(--background-color)' : 'transparent'};
   border-radius: 15px;
   padding: 15px;
-  box-shadow: ${props => props.hasBackgroundColor ? '0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);' : 'none'};
+  box-shadow: ${props =>
+    props.hasBackgroundColor
+      ? '0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);'
+      : 'none'};
   @media screen and(max-width: 800px) {
     margin: 0 20px;
   }

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BackgroundWrapper = styled.div`
   height: 100%;
@@ -6,12 +6,12 @@ export const BackgroundWrapper = styled.div`
   position: fixed;
   top: 0;
   z-index: -1;
-  background-color: #eaeaea;
-  background-image: url(${require("@/assets/img/bg/bg0.webp")});
+  background-color: #eee;
+  background-image: url(${require('@/assets/img/bg/bg0.webp')});
 `;
 
-function Lantern() {
-  return <BackgroundWrapper id="background"></BackgroundWrapper>;
+function Background() {
+  return <BackgroundWrapper id='background'></BackgroundWrapper>;
 }
 
-export default Lantern;
+export default Background;

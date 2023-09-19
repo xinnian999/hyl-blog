@@ -1,10 +1,10 @@
-import { Icon, Popover } from "@/components";
-import { CaretDownOutlined } from "@ant-design/icons";
-import { memo } from "react";
-import { NavLink, useLocation } from "react-router-dom";
-import router from "@/router";
-import { classnames } from "hyl-utils";
-import styled from "styled-components";
+import { Icon, Popover } from '@/components';
+import router from '@/router';
+import { CaretDownOutlined } from '@ant-design/icons';
+import { classnames } from 'hyl-utils';
+import { memo } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import styled from 'styled-components';
 
 const NavWrapper = styled.ul`
   display: inline-flex;
@@ -13,10 +13,11 @@ const NavWrapper = styled.ul`
   .navItem {
     position: relative;
     margin-right: 10px;
-    ${({ theme }) => theme.scrollTop < 1 && "text-shadow: 0px 0px 10px black;"};
+    /* ${({ theme }) =>
+      theme.scrollTop < 1 && 'text-shadow: 0px 0px 10px black;'}; */
 
     a {
-      color: ${({ theme }) => (theme.scrollTop > 1 ? "#555" : "#fff")};
+      color: ${({ theme }) => (theme.scrollTop > 1 ? '#555' : '#fff')};
       &:hover {
         color: var(--ant-primary-4);
       }
@@ -78,10 +79,10 @@ function NavItem(props: routeItem) {
         children && (
           <>
             <header>{title}</header>
-            <ul className="towNav">
-              {children.map((item) => {
+            <ul className='towNav'>
+              {children.map(item => {
                 return (
-                  <li key={item.title} className="twoNavItem">
+                  <li key={item.title} className='twoNavItem'>
                     <NavLink to={`${path}/${item.path}`}>
                       {item.icon && <Icon type={item.icon} />} {item.title}
                     </NavLink>
@@ -93,20 +94,20 @@ function NavItem(props: routeItem) {
         )
       }
     >
-      <li className="navItem">
+      <li className='navItem'>
         <NavLink
           to={
             children
-              ? `${path}/${children.find((item) => item.index)!.path}`
+              ? `${path}/${children.find(item => item.index)!.path}`
               : path
           }
-          className={classnames("navItem-main", {
-            active: path === "/" ? false : location.pathname.includes(path),
+          className={classnames('navItem-main', {
+            active: path === '/' ? false : location.pathname.includes(path),
           })}
         >
           {icon && <Icon type={icon} />}
-          <span className="nav-title">{title}</span>
-          {children && <CaretDownOutlined className="down" />}
+          <span className='nav-title'>{title}</span>
+          {children && <CaretDownOutlined className='down' />}
         </NavLink>
       </li>
     </Popover>
@@ -116,8 +117,8 @@ function NavItem(props: routeItem) {
 const Nav = () => (
   <NavWrapper>
     {router
-      .filter((item) => item.title)
-      .map((item) => (
+      .filter(item => item.title)
+      .map(item => (
         <NavItem key={item.title} {...item} />
       ))}
   </NavWrapper>

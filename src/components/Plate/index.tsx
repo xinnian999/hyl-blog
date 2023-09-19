@@ -1,20 +1,27 @@
-import { PlateContent, PlateBanner } from "./styled";
+import { PlateBanner, PlateContent } from './styled';
 
 interface PlateProps {
   title?: string;
   bg?: string;
   children?: React.ReactNode;
-  hasBackgroundColor?:boolean
+  hasBackgroundColor?: boolean;
 }
 
-const Plate: React.FC<PlateProps> = ({ title, children,hasBackgroundColor=true }) => {
+const Plate: React.FC<PlateProps> = ({
+  title,
+  children,
+  hasBackgroundColor = true,
+  bg,
+}) => {
   return (
     <>
-      <PlateBanner>
-        <div className="bg" />
+      <PlateBanner bg={bg}>
+        <div className='bg' />
         <h2>{title}</h2>
       </PlateBanner>
-      <PlateContent hasBackgroundColor={hasBackgroundColor}>{children}</PlateContent>
+      <PlateContent hasBackgroundColor={hasBackgroundColor}>
+        {children}
+      </PlateContent>
     </>
   );
 };
