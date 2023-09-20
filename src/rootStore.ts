@@ -1,9 +1,9 @@
-import { omit } from "hyl-utils";
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { omit } from 'hyl-utils';
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 type StoreTypes = {
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
   primaryColor: string;
   userInfo: {
     id: number;
@@ -13,23 +13,23 @@ type StoreTypes = {
   };
   loginModal: boolean;
   loginState: boolean;
-  loginType: "login" | "register" | "wx";
+  loginType: 'login' | 'register' | 'wx';
   chatGptData: any[];
 };
 
-const store = persist<StoreTypes, [], [], Omit<StoreTypes, "loginModal">>(
-  (set) => ({
-    theme: "light",
-    primaryColor: "#d6324d",
-    userInfo: { id: 0, username: "昵称", headPicture: "", email: "" },
+const store = persist<StoreTypes, [], [], Omit<StoreTypes, 'loginModal'>>(
+  set => ({
+    theme: 'light',
+    primaryColor: '#d6324d',
+    userInfo: { id: 0, username: '昵称', headPicture: '', email: '' },
     loginModal: false,
     loginState: false,
-    loginType: "login",
+    loginType: 'login',
     chatGptData: [],
   }),
   {
-    name: "root",
-    partialize: (state) => omit(state, ["loginModal"]) as StoreTypes,
+    name: 'root',
+    partialize: state => omit(state, ['loginModal']) as StoreTypes,
   }
 );
 
@@ -37,6 +37,6 @@ const useStore = create(store);
 
 const { setState, getState } = useStore;
 
-export { setState, getState };
+export { getState, setState };
 
 export default useStore;

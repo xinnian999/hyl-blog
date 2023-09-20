@@ -37,7 +37,7 @@ const ArticleList = () => {
 
   const pageChange = (pageNum: number) => {
     paramsChange({ pageNum });
-
+    //TODO:未实现异步滚动（等接口加载完且渲染完dom，尝试监听pageNum但页面挂载完成时必定执行一次滚动）
     // 滚动回列表顶部
     window.scrollTo({
       top:

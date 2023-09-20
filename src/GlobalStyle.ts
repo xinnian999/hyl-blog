@@ -1,15 +1,15 @@
-import {createGlobalStyle} from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   @font-face {
     font-family: "汉仪霹雳体简";
-    src: url(${require("@/assets/font/汉仪霹雳体简.woff")});
+    src: url(${require('@/assets/font/汉仪霹雳体简.woff')});
     font-display: swap;
   }
 
   @font-face {
     font-family: "font";
-    src: url(${require("@/assets/font/HarmonyOS_Sans_SC_Medium.subset.woff2")});
+    src: url(${require('@/assets/font/HarmonyOS_Sans_SC_Medium.subset.woff2')});
     font-display: swap;
   }
 
@@ -143,5 +143,5 @@ const GlobalStyle = createGlobalStyle`
     transparent);
   }
 
-`
+`;
 export default GlobalStyle;

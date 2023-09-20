@@ -26,7 +26,7 @@ type StoreTypes = {
   total: number;
   params: paramsType;
   loading: boolean;
-  fetchData: () => Promise<void>;
+  fetchData: () => void;
   paramsChange: (param: Partial<paramsType>) => void;
   paramsFilterChange: (filter: paramsType['filters']) => void;
   categoryChange: (category: string) => void;
