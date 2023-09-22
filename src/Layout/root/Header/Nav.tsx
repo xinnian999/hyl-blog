@@ -18,9 +18,6 @@ const NavWrapper = styled.ul`
 
     a {
       color: ${({ theme }) => (theme.scrollTop > 1 ? '#555' : '#fff')};
-      &:hover {
-        color: var(--ant-primary-4);
-      }
     }
     &-main {
       padding: 5px;
@@ -42,6 +39,9 @@ const NavWrapper = styled.ul`
 
     &:hover .down {
       transform: rotate(180deg);
+    }
+    &:hover a {
+      color: var(--ant-primary-4);
     }
   }
   .towNav {
