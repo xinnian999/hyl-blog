@@ -1,7 +1,7 @@
 import { request } from '@/utils';
 import { create } from 'zustand';
 
-interface articleItem extends Item {
+export interface articleItem extends Item {
   title: string;
   category: string;
   introduce: string;
@@ -26,6 +26,7 @@ type StoreTypes = {
   total: number;
   params: paramsType;
   loading: boolean;
+  value: string;
   fetchData: () => void;
   paramsChange: (param: Partial<paramsType>) => void;
   paramsFilterChange: (filter: paramsType['filters']) => void;
@@ -43,6 +44,7 @@ const store = create<StoreTypes>((set, get) => ({
     orderBys: 'topping desc,id desc',
   },
   loading: false,
+  value: '',
 
   async fetchData() {
     const api = {
@@ -75,7 +77,9 @@ const store = create<StoreTypes>((set, get) => ({
     // 如果点击的是当前分类，就取消分类查询所有
     paramsFilterChange({
       category: category === params.filters.category ? '' : category,
+      title: '',
     });
+    set({ value: '' });
   },
 
   onSearch(q) {

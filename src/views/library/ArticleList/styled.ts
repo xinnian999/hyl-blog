@@ -9,6 +9,11 @@ export const ArticleListWrapper = styled.div`
   .category-bar {
     margin: 30px 0;
   }
+  .filter {
+    margin: 30px 0;
+    font-weight: bold;
+    font-size: 20px;
+  }
 `;
 
 export const ArticleItem = styled.div`
@@ -52,7 +57,7 @@ export const ArticleItem = styled.div`
       }
 
       display: flex;
-      margin-top: 40px;
+      margin-top: 50px;
     }
   }
 `;

@@ -5,10 +5,8 @@ import GlobalStyle from './GlobalStyle';
 import Layout from './Layout';
 
 createRoot(document.getElementById('root')!).render(
-  <>
+  <BrowserRouter>
     <GlobalStyle />
-    <BrowserRouter>
-      <Layout />
-    </BrowserRouter>
-  </>
+    <Layout />
+  </BrowserRouter>
 );

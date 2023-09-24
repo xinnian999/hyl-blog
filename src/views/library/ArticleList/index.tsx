@@ -1,15 +1,13 @@
-import { Plate } from '@/components';
+import { Icon, Plate } from '@/components';
 import { useGetData } from '@/hooks';
-import {
-  ArticleItem,
-  ArticleListWrapper,
-} from '@/views/library/ArticleList/styled';
+import { ArticleListWrapper } from '@/views/library/ArticleList/styled';
 import { Button, Pagination, Space, Spin } from 'antd';
 import Search from 'antd/es/input/Search';
-import { time } from 'hyl-utils';
 import { useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import ArticleCard from './ArticleCard';
 import useStore from './store';
+
+const { setState } = useStore;
 
 const ArticleList = () => {
   const {
@@ -21,11 +19,10 @@ const ArticleList = () => {
     categoryChange,
     onSearch,
     loading,
+    value,
   } = useStore();
 
   const listRef = useRef<HTMLDivElement>(null);
-
-  const navigate = useNavigate();
 
   const [tagData] = useGetData('/category/query', { data: { orderBys: '' } });
 
@@ -48,6 +45,13 @@ const ArticleList = () => {
     });
   };
 
+  const reload = () => {
+    paramsChange({ filters: {} });
+    setState({ value: '' });
+  };
+
+  const currentFilter = filters.title || filters.category;
+
   return (
     <Plate title='文章列表' bg='bg23.jpg'>
       <ArticleListWrapper>
@@ -56,6 +60,8 @@ const ArticleList = () => {
             placeholder='输入关键词搜索文章'
             onSearch={onSearch}
             enterButton
+            value={value}
+            onChange={e => setState({ value: e.target.value })}
           />
         </div>
 
@@ -65,6 +71,7 @@ const ArticleList = () => {
               <Button
                 type={filters.category === name ? 'primary' : 'default'}
                 onClick={() => categoryChange(name)}
+                key={name}
               >
                 {name}
               </Button>
@@ -72,31 +79,22 @@ const ArticleList = () => {
           </Space>
         </div>
 
+        {currentFilter && (
+          <div className='filter'>
+            {currentFilter}：{' '}
+            <Button
+              icon={<Icon type='icon-zhongzhi' />}
+              size='small'
+              onClick={reload}
+            />
+          </div>
+        )}
+
         <Spin spinning={loading}>
           <div className='articleList' ref={listRef}>
-            {articleData.map(
-              ({ title, picture, introduce, createTime, category, id }) => (
-                <ArticleItem>
-                  <img
-                    className='image'
-                    src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
-                  />
-
-                  <div className='info'>
-                    <h2 onClick={() => navigate(`/article/${id}`)}>{title}</h2>
-                    <div className='introduce'>{introduce}</div>
-                    <div className='last'>
-                      <div className='time'>
-                        {time.parse(createTime, 'YYYY-MM-DD')}
-                      </div>
-                      <div className='tags'>
-                        <Space>{category.split(',').map(item => item)}</Space>
-                      </div>
-                    </div>
-                  </div>
-                </ArticleItem>
-              )
-            )}
+            {articleData.map(item => (
+              <ArticleCard {...item} key={item.id} />
+            ))}
           </div>
         </Spin>
 
