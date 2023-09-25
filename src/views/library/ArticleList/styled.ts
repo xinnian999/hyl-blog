@@ -13,6 +13,8 @@ export const ArticleListWrapper = styled.div`
     margin: 30px 0;
     font-weight: bold;
     font-size: 20px;
+    display: flex;
+    justify-content: space-between;
   }
 `;
 

@@ -14,7 +14,7 @@ const Tag = () => {
 
   useEffect(() => {
     const myChart = echarts.init(echartsRef.current!);
-    const data = tagData.sort((a, b) => b.count - a.count);
+    const data = tagData.sort((a, b) => b.count - a.count).slice(0, 10);
     // 绘制图表
     myChart.setOption({
       title: {

@@ -52,7 +52,7 @@ const ArticleList = () => {
     setState({ value: '' });
   };
 
-  const currentFilter = filters.title || filters.category;
+  const currentFilter = filters.title || filters.category || pageSize > 1;
 
   return (
     <Plate title='文章列表' bg='bg23.jpg'>
@@ -83,11 +83,20 @@ const ArticleList = () => {
 
         {currentFilter && (
           <div className='filter'>
-            {currentFilter}：{' '}
-            <Button
-              icon={<Icon type='icon-zhongzhi' />}
-              size='small'
-              onClick={reload}
+            <div>
+              {currentFilter}：{' '}
+              <Button
+                icon={<Icon type='icon-zhongzhi' />}
+                size='small'
+                onClick={reload}
+              />
+            </div>
+            <Pagination
+              simple
+              current={pageNum}
+              pageSize={pageSize}
+              total={total}
+              onChange={pageChange}
             />
           </div>
         )}
