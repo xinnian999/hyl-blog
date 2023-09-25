@@ -1,43 +1,47 @@
 import { Plate } from '@/components';
 import { useGetData } from '@/hooks';
+import * as echarts from 'echarts';
+import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-
-const TagWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-const TagItem = styled.div`
-  padding: 10px 15px;
-  margin-right: 20px;
-  margin-bottom: 20px;
-  background-color: #ededed;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s all;
-  &:hover {
-    background-color: var(--ant-primary-color);
-    color: #fff;
-    transform: scale(1.2);
-  }
-  .count {
-    color: #363636;
-    opacity: 0.4;
-    font-size: 13px;
-    padding-left: 5px;
-    position: relative;
-    top: -5px;
-  }
-`;
+import { TagEcharts, TagItem, TagWrapper } from './styled';
 
 const Tag = () => {
   const [tagData] = useGetData('/category/query');
 
   const navigate = useNavigate();
 
+  const echartsRef = useRef(null);
+
+  useEffect(() => {
+    const myChart = echarts.init(echartsRef.current!);
+    const data = tagData.sort((a, b) => b.count - a.count);
+    // 绘制图表
+    myChart.setOption({
+      title: {
+        text: '标签统计',
+        left: 'center',
+      },
+      tooltip: {},
+      xAxis: {
+        data: data.map(item => item.name),
+      },
+      yAxis: {},
+      series: [
+        {
+          name: '数量',
+          type: 'bar',
+          data: data.map(item => item.count),
+        },
+      ],
+    });
+  }, [tagData]);
+
   return (
     <Plate title='标签'>
+      <TagEcharts ref={echartsRef}>
+        <div className='tag-echarts'></div>
+      </TagEcharts>
+
       <TagWrapper>
         {tagData.map(({ name, count }) => (
           <TagItem key={name} onClick={() => navigate(`/article`)}>

@@ -32,17 +32,19 @@ const ArticleList = () => {
     fetchData();
   }, [params]);
 
-  const pageChange = (pageNum: number) => {
-    paramsChange({ pageNum });
+  const pageChange = (page: number, size: number) => {
+    paramsChange({ pageNum: page, pageSize: size });
     //TODO:未实现异步滚动（等接口加载完且渲染完dom，尝试监听pageNum但页面挂载完成时必定执行一次滚动）
-    // 滚动回列表顶部
-    window.scrollTo({
-      top:
-        listRef.current!.getBoundingClientRect().top +
-        document.documentElement.scrollTop -
-        250,
-      behavior: 'smooth', // 平滑滚动
-    });
+    if (page !== pageNum) {
+      // 滚动回列表顶部
+      window.scrollTo({
+        top:
+          listRef.current!.getBoundingClientRect().top +
+          document.documentElement.scrollTop -
+          250,
+        behavior: 'smooth', // 平滑滚动
+      });
+    }
   };
 
   const reload = () => {
@@ -103,6 +105,7 @@ const ArticleList = () => {
           pageSize={pageSize}
           total={total}
           onChange={pageChange}
+          pageSizeOptions={[5, 10, 20, 30]}
         />
       </ArticleListWrapper>
     </Plate>
