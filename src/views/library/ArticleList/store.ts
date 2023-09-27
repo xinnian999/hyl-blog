@@ -1,4 +1,3 @@
-import { request } from '@/utils';
 import { create } from 'zustand';
 
 export interface articleItem extends Item {
@@ -27,14 +26,11 @@ type StoreTypes = {
   params: paramsType;
   loading: boolean;
   value: string;
-  fetchData: () => void;
   paramsChange: (param: Partial<paramsType>) => void;
   paramsFilterChange: (filter: paramsType['filters']) => void;
-  categoryChange: (category: string) => void;
-  onSearch: (q: string) => void;
 };
 
-const store = create<StoreTypes>((set, get) => ({
+const initialValues = {
   articleData: [],
   total: 0,
   params: {
@@ -45,20 +41,10 @@ const store = create<StoreTypes>((set, get) => ({
   },
   loading: false,
   value: '',
+};
 
-  async fetchData() {
-    const api = {
-      url: '/article/query',
-      method: 'get',
-      params: get().params,
-    };
-
-    set({ loading: true });
-
-    const { data: articleData, total } = await request(api);
-
-    set({ articleData, total, loading: false });
-  },
+const store = create<StoreTypes>((set, get) => ({
+  ...initialValues,
 
   paramsChange(param) {
     set({ params: { ...get().params, ...param } });
@@ -72,18 +58,8 @@ const store = create<StoreTypes>((set, get) => ({
     });
   },
 
-  categoryChange(category) {
-    const { params, paramsFilterChange } = get();
-    // 如果点击的是当前分类，就取消分类查询所有
-    paramsFilterChange({
-      category: category === params.filters.category ? '' : category,
-      title: '',
-    });
-    set({ value: '' });
-  },
-
-  onSearch(q) {
-    get().paramsFilterChange({ category: '', title: q });
+  reset() {
+    set(initialValues);
   },
 }));
 

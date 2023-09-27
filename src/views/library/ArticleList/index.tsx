@@ -5,22 +5,14 @@ import { Button, Pagination, Space, Spin } from 'antd';
 import Search from 'antd/es/input/Search';
 import { useEffect, useRef } from 'react';
 import ArticleCard from './ArticleCard';
+import { fetchData, onClickCategory, onSearch } from './actions';
 import useStore from './store';
 
 const { setState } = useStore;
 
 const ArticleList = () => {
-  const {
-    articleData,
-    params,
-    total,
-    fetchData,
-    paramsChange,
-    categoryChange,
-    onSearch,
-    loading,
-    value,
-  } = useStore();
+  const { articleData, params, total, paramsChange, loading, value } =
+    useStore();
 
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -72,7 +64,7 @@ const ArticleList = () => {
             {tagData.map(({ name }) => (
               <Button
                 type={filters.category === name ? 'primary' : 'default'}
-                onClick={() => categoryChange(name)}
+                onClick={() => onClickCategory(name)}
                 key={name}
               >
                 {name}

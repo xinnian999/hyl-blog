@@ -1,12 +1,12 @@
-import {useEffect, useRef} from "react";
-import {ChatWrapper, MessagesWrapper} from "../styled";
-import Bubble from "./Bubble";
-import {useBoolean, useMount} from "@/hooks";
-import useStore from "../store";
-import {url} from "hyl-utils";
-import MsgInput from "./MsgInput";
+import { useBoolean, useMount } from '@/hooks';
+import { url } from 'hyl-utils';
+import { useEffect, useRef } from 'react';
+import useStore from '../store';
+import { ChatWrapper, MessagesWrapper } from '../styled';
+import Bubble from './Bubble';
+import MsgInput from './MsgInput';
 
-const {setState} = useStore;
+const { setState } = useStore;
 
 const tip = `
   您好，我是chatgpt。\n
@@ -15,69 +15,61 @@ const tip = `
 `;
 
 function Chat() {
-    const messages = useStore(
-        (state) => state.dialogList.find((item) => item.current)!.messages
-    );
-    const {
-        value,
-        autoValue,
-        autoScroll,
-        createDialog,
-        fullScreen,
-        setMessages,
-        sendMessage
-    } = useStore();
+  const messages = useStore(
+    state => state.dialogList.find(item => item.current)!.messages
+  );
+  const { autoValue, autoScroll, createDialog, fullScreen, sendMessage } =
+    useStore();
 
-    const [visible, onVisible] = useBoolean(false);
+  const [visible, onVisible] = useBoolean(false);
 
-    const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
-    useMount(() => {
-        const params = url.getParams();
-        if (params.q) {
-            setState({autoValue: params.q});
-            createDialog();
-        }
+  useMount(() => {
+    const params = url.getParams();
+    if (params.q) {
+      setState({ autoValue: params.q });
+      createDialog();
+    }
 
-        onVisible();
+    onVisible();
 
-        return () => setState({autoValue: ""});
-    });
+    return () => setState({ autoValue: '' });
+  });
 
-    useEffect(() => {
-        if (autoScroll) {
-            const element = wrapperRef.current!;
-            element.scrollTo({
-                top: element.scrollHeight - element.clientHeight,
-                behavior: "smooth", // 平滑滚动
-            });
-        }
-    }, [messages, visible]);
+  useEffect(() => {
+    if (autoScroll) {
+      const element = wrapperRef.current!;
+      element.scrollTo({
+        top: element.scrollHeight - element.clientHeight,
+        behavior: 'smooth', // 平滑滚动
+      });
+    }
+  }, [messages, visible]);
 
-    useEffect(() => {
-        if (autoValue) {
-            sendMessage(autoValue);
-        }
-    }, [autoValue]);
+  useEffect(() => {
+    if (autoValue) {
+      sendMessage(autoValue);
+    }
+  }, [autoValue]);
 
+  return (
+    <ChatWrapper>
+      <MessagesWrapper fullScreen={fullScreen} ref={wrapperRef}>
+        <Bubble isUser={false} content={tip} />
+        {visible &&
+          messages.map((message, index) => (
+            <Bubble
+              key={message.content + index}
+              isUser={index % 2 === 0}
+              content={message.content}
+            />
+          ))}
+      </MessagesWrapper>
 
-    return (
-        <ChatWrapper>
-            <MessagesWrapper fullScreen={fullScreen} ref={wrapperRef}>
-                <Bubble isUser={false} content={tip}/>
-                {visible &&
-                    messages.map((message, index) => (
-                        <Bubble
-                            key={message.content + index}
-                            isUser={index % 2 === 0}
-                            content={message.content}
-                        />
-                    ))}
-            </MessagesWrapper>
-
-            <MsgInput/>
-        </ChatWrapper>
-    );
+      <MsgInput />
+    </ChatWrapper>
+  );
 }
 
 export default Chat;
