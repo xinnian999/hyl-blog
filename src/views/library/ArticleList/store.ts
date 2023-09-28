@@ -18,6 +18,7 @@ type paramsType = {
   pageSize: number;
   filters: { publish?: number; category?: string; title?: string };
   orderBys: string;
+  sort: string;
 };
 
 type StoreTypes = {
@@ -28,6 +29,7 @@ type StoreTypes = {
   value: string;
   paramsChange: (param: Partial<paramsType>) => void;
   paramsFilterChange: (filter: paramsType['filters']) => void;
+  reset: () => void;
 };
 
 const initialValues = {
@@ -38,6 +40,7 @@ const initialValues = {
     pageSize: 10,
     filters: { publish: 1 },
     orderBys: 'topping desc,id desc',
+    sort: '日期',
   },
   loading: false,
   value: '',

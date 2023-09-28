@@ -5,16 +5,26 @@ export const ArticleListWrapper = styled.div`
 
   .search-bar {
     padding: 0 150px;
+    margin-bottom: 35px;
   }
-  .category-bar {
-    margin: 30px 0;
+
+  .filter-bar {
+    width: 100%;
+    margin-bottom: 20px;
+    .filter-type {
+      font-size: 14px;
+      width: 40px;
+      border-right: 1px solid #999;
+    }
   }
-  .filter {
-    margin: 30px 0;
-    font-weight: bold;
-    font-size: 20px;
-    display: flex;
-    justify-content: space-between;
+`;
+
+export const FilterText = styled.div<{ active: boolean }>`
+  color: ${({ active }) => (active ? 'var(--ant-primary-color)' : '#999')};
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: var(--ant-primary-4);
   }
 `;
 
