@@ -34,42 +34,51 @@ export const ArticleItem = styled.div`
   margin: 0 auto;
   height: 200px;
   margin-bottom: 20px;
+  padding: 10px 0;
 
   .image {
-    height: 180px;
+    height: 100%;
     width: 30%;
     border-radius: 15px;
     display: block;
   }
 
   .info {
-    //flex: 1;
     width: 70%;
     height: 100%;
     margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     padding: 15px 0;
+    .top {
+      h2 {
+        transition: 0.7s all;
 
-    h2 {
-      transition: 0.7s all;
-
-      cursor: pointer;
-      color: #3c4858;
-      &:hover {
-        color: var(--ant-primary-color);
+        cursor: pointer;
+        color: #3c4858;
+        &:hover {
+          color: var(--ant-primary-color);
+        }
       }
-    }
 
-    .introduce {
-      margin-top: 10px;
+      .introduce {
+        margin-top: 10px;
+      }
+
+      .tags {
+        font-size: 13px;
+      }
     }
 
     .last {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 13px;
       .time {
         margin-right: 20px;
       }
-
-      display: flex;
-      margin-top: 50px;
     }
   }
 `;

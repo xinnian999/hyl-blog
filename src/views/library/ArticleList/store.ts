@@ -17,8 +17,7 @@ type paramsType = {
   pageNum: number;
   pageSize: number;
   filters: { publish?: number; category?: string; title?: string };
-  orderBys: string;
-  sort: string;
+  orderBys: { [key: string]: string };
 };
 
 type StoreTypes = {
@@ -27,42 +26,37 @@ type StoreTypes = {
   params: paramsType;
   loading: boolean;
   value: string;
-  paramsChange: (param: Partial<paramsType>) => void;
-  paramsFilterChange: (filter: paramsType['filters']) => void;
+  setParams: (param: Partial<paramsType>) => void;
+  setParamsFilter: (filter: paramsType['filters']) => void;
   reset: () => void;
 };
 
-const initialValues = {
+const store = create<StoreTypes>((set, get) => ({
   articleData: [],
   total: 0,
   params: {
+    table: 'article',
     pageNum: 1,
     pageSize: 10,
     filters: { publish: 1 },
-    orderBys: 'topping desc,id desc',
-    sort: '日期',
+    orderBys: { topping: 'desc', createTime: 'desc' },
   },
   loading: false,
   value: '',
-};
 
-const store = create<StoreTypes>((set, get) => ({
-  ...initialValues,
-
-  paramsChange(param) {
-    set({ params: { ...get().params, ...param } });
+  setParams(param) {
+    set({ params: { ...get().params, pageNum: 1, ...param } });
   },
 
-  paramsFilterChange(filter) {
-    const { params, paramsChange } = get();
-    paramsChange({
+  setParamsFilter(filter) {
+    const { setParams, params } = get();
+    setParams({
       filters: { ...params.filters, ...filter },
-      pageNum: 1,
     });
   },
 
   reset() {
-    set(initialValues);
+    set(get());
   },
 }));
 

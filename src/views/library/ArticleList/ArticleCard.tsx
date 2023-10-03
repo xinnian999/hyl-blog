@@ -11,6 +11,8 @@ const ArticleCard: React.FC<articleItem> = ({
   introduce,
   createTime,
   category,
+  visits,
+  comments,
   id,
 }) => {
   const navigate = useNavigate();
@@ -23,14 +25,12 @@ const ArticleCard: React.FC<articleItem> = ({
       />
 
       <div className='info'>
-        <h2 onClick={() => navigate(`/article/${id}`)}>{title}</h2>
-        <div className='introduce'>{introduce}</div>
-        <div className='last'>
-          <div className='time'>
-            <IconText icon='icon-shijian1' size={18}>
-              {time.parse(createTime, 'YYYY-MM-DD')}
-            </IconText>{' '}
-          </div>
+        <div className='top'>
+          <h2 onClick={() => navigate(`/article/${id}`)}>{title}</h2>
+          <div className='introduce'>{introduce}</div>
+        </div>
+
+        <div className='down'>
           <div className='tags'>
             <Space>
               {category.split(',').map(item => (
@@ -38,6 +38,22 @@ const ArticleCard: React.FC<articleItem> = ({
                   {item}
                 </IconText>
               ))}
+            </Space>
+          </div>
+
+          <div className='last'>
+            <span className='time'>
+              <IconText icon='icon-shijian1' size={16}>
+                {time.parse(createTime, 'YYYY-MM-DD')}
+              </IconText>
+            </span>
+            <Space className='count'>
+              <IconText icon='icon-chakan' size={16}>
+                {visits}
+              </IconText>
+              <IconText icon='icon-huifu' size={16}>
+                {comments}
+              </IconText>
             </Space>
           </div>
         </div>

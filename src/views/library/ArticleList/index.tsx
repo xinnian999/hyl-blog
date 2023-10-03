@@ -4,7 +4,13 @@ import { Pagination, Space, Spin } from 'antd';
 import Search from 'antd/es/input/Search';
 import { useEffect, useRef } from 'react';
 import ArticleCard from './ArticleCard';
-import { fetchData, onChangePage, onClickCategory, onSearch } from './actions';
+import {
+  fetchData,
+  onChangePage,
+  onClickCategory,
+  onClickOrderBy,
+  onSearch,
+} from './actions';
 import useStore from './store';
 import { ArticleListWrapper, FilterText } from './styled';
 
@@ -13,20 +19,24 @@ const { setState } = useStore;
 const sortData = [
   {
     name: '日期',
+    key: 'createTime',
   },
   {
     name: '浏览',
+    key: 'visits',
   },
   {
     name: '点赞',
+    key: 'like',
   },
   {
     name: '评论',
+    key: 'comments',
   },
 ];
 
 const ArticleList = () => {
-  const { articleData, params, total, loading, value, reset } = useStore();
+  const { articleData, params, total, loading, value } = useStore();
 
   const listRef = useRef<HTMLDivElement>(null);
 
@@ -72,10 +82,10 @@ const ArticleList = () => {
 
         <Space wrap size={16} className='filter-bar'>
           <div className='filter-type'>排序</div>
-          {sortData.map(({ name }) => (
+          {sortData.map(({ name, key }) => (
             <FilterText
-              active={params.sort === name}
-              // onClick={() => onClickCategory(name)}
+              active={!!params.orderBys[key]}
+              onClick={() => onClickOrderBy(key)}
               key={name}
             >
               {name}
