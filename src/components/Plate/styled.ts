@@ -29,7 +29,8 @@ export const PlateBanner = styled.div<PlateBannerProps>`
     font-size: 50px;
     letter-spacing: 5px;
     color: #eee;
-    text-shadow: 3px 3px 0 var(--ant-primary-8);
+    /* text-shadow: 3px 3px 0 var(--ant-primary-8); */
+    text-shadow: 0px 0px 10px black;
   }
 `;
 

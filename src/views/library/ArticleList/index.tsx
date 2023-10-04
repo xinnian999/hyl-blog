@@ -1,9 +1,9 @@
-import { Plate } from '@/components';
+import { ArticleCard, Plate } from '@/components';
 import { useGetData } from '@/hooks';
 import { Pagination, Space, Spin } from 'antd';
 import Search from 'antd/es/input/Search';
 import { useEffect, useRef } from 'react';
-import ArticleCard from './ArticleCard';
+
 import {
   fetchData,
   onChangePage,
@@ -49,7 +49,7 @@ const ArticleList = () => {
   }, [params]);
 
   return (
-    <Plate title='文章列表' bg='bg23.jpg'>
+    <Plate title='文章列表' bg='bg23.jpg' hasBackgroundColor={false}>
       <ArticleListWrapper>
         <div className='search-bar'>
           <Search
@@ -98,7 +98,7 @@ const ArticleList = () => {
         <Spin spinning={loading}>
           <div className='articleList' ref={listRef}>
             {articleData.map(item => (
-              <ArticleCard {...item} key={item.id} />
+              <ArticleCard {...item} key={item.id} className='articleItem' />
             ))}
           </div>
         </Spin>

@@ -18,7 +18,7 @@ interface categoryItem extends Item {
 interface ArticleDetailState {
   info: Pick<
     articleItem,
-    "content" | "title" | "createTime" | "updateTime" | "visits" | "category"
+    'content' | 'title' | 'createTime' | 'updateTime' | 'visits' | 'category'
   >;
   anchorList: any;
   targetOffset: number;

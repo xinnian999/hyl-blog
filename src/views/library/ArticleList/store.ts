@@ -37,7 +37,7 @@ const store = create<StoreTypes>((set, get) => ({
   params: {
     table: 'article',
     pageNum: 1,
-    pageSize: 10,
+    pageSize: 12,
     filters: { publish: 1 },
     orderBys: { topping: 'desc', createTime: 'desc' },
   },

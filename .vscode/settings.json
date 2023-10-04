@@ -8,6 +8,7 @@
     "partialize",
     "prestrain",
     "shouye",
+    "Swiper",
     "zustand"
   ],
   "npm-scripts.showStartNotification": false

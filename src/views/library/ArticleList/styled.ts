@@ -1,7 +1,22 @@
 import styled from 'styled-components';
 
 export const ArticleListWrapper = styled.div`
-  padding: 25px 12vw;
+  .articleList {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    .articleItem {
+      width: calc(25% - 12px);
+      margin-bottom: 15px;
+      margin-right: 15px;
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
+      &:last-child {
+        margin-right: auto;
+      }
+    }
+  }
 
   .search-bar {
     padding: 0 150px;
@@ -20,7 +35,7 @@ export const ArticleListWrapper = styled.div`
 `;
 
 export const FilterText = styled.div<{ active: boolean }>`
-  color: ${({ active }) => (active ? 'var(--ant-primary-color)' : '#999')};
+  color: ${({ active }) => (active ? 'var(--ant-primary-color)' : '#666')};
   font-size: 14px;
   cursor: pointer;
   &:hover {
