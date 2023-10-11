@@ -33,7 +33,7 @@ const ArticleCard: React.FC<articleItem> = ({
         <div className='down'>
           <div className='tags'>
             <Space>
-              {category.split(',').map(item => (
+              {category.map(item => (
                 <IconText size={14} icon='icon-biaoqian2' key={item}>
                   {item}
                 </IconText>

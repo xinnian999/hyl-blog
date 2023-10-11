@@ -12,7 +12,7 @@ import {
 
 interface ArticleCardProps extends Item {
   title: string;
-  category: string;
+  category: string[];
   introduce: string;
   content: string;
   picture: string;
@@ -73,7 +73,7 @@ function ArticleCard(props: ArticleCardProps) {
       </ArticleCardMain>
 
       <ArticleCardFooter>
-        {category.split(',').map((item: string) => (
+        {category.map((item: string) => (
           <Tag icon={<Icon type='icon-biaoqian2' />} color='pink' key={item}>
             {item}
           </Tag>

@@ -13,7 +13,7 @@ const { setParams, setParamsFilter } = get();
 
 export const fetchData = async () => {
   const api = {
-    url: '/current/query',
+    url: '/current/query/article',
     method: 'get',
     params: get().params,
   };

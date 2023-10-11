@@ -2,7 +2,7 @@ import { create } from 'zustand';
 
 export interface articleItem extends Item {
   title: string;
-  category: string;
+  category: string[];
   introduce: string;
   content: string;
   picture: string;
@@ -35,7 +35,6 @@ const store = create<StoreTypes>((set, get) => ({
   articleData: [],
   total: 0,
   params: {
-    table: 'article',
     pageNum: 1,
     pageSize: 12,
     filters: { publish: 1 },

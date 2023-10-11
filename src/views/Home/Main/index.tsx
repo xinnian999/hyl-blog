@@ -13,13 +13,13 @@ function Main() {
 
   const [loading, on, off] = useBoolean(true);
 
-  const [articleData, run] = useGetData<articleItem>('/article/query', {
+  const [articleData, run] = useGetData<articleItem>('/current/query/article', {
     cache: true,
     data: {
       pageNum: state.pageNum,
       pageSize: 18,
       filters: { publish: 1 },
-      orderBys: 'topping desc,id desc',
+      orderBys: { topping: 'desc', createTime: 'desc' },
     },
     onSuccess(res) {
       setState({

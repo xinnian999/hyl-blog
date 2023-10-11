@@ -1,6 +1,6 @@
 interface articleItem extends Item {
   title: string;
-  category: string;
+  category: string[];
   introduce: string;
   content: string;
   picture: string;
