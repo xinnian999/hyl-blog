@@ -12,7 +12,7 @@ import {
 
 interface ArticleCardProps extends Item {
   title: string;
-  category: string[];
+  category: any[];
   introduce: string;
   content: string;
   picture: string;
@@ -38,6 +38,7 @@ function ArticleCard(props: ArticleCardProps) {
   } = props;
 
   const history = useNavigate();
+  console.log(category);
 
   return (
     <ArticleCardWrapper
@@ -73,9 +74,14 @@ function ArticleCard(props: ArticleCardProps) {
       </ArticleCardMain>
 
       <ArticleCardFooter>
-        {category.map((item: string) => (
-          <Tag icon={<Icon type='icon-biaoqian2' />} color='pink' key={item}>
-            {item}
+        {category.map(item => (
+          <Tag
+            icon={<Icon type='icon-wenjianjia' />}
+            color={item.bg}
+            key={item.id}
+            bordered={false}
+          >
+            {item.name}
           </Tag>
         ))}
       </ArticleCardFooter>
