@@ -6,8 +6,8 @@ export const BackgroundWrapper = styled.div`
   position: fixed;
   top: 0;
   z-index: -1;
-  background-color: #eee;
-  background-image: url(${require('@/assets/img/bg/bg0.webp')});
+  background-color: #dbdbdb;
+  /* background-image: url(${require('@/assets/img/bg/bg0.webp')}); */
 `;
 
 function Background() {

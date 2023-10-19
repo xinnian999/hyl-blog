@@ -1,6 +1,15 @@
 import styled from 'styled-components';
 
 export const ArticleListWrapper = styled.div`
+  .bar {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+  }
+  .page-bar {
+    padding: 10px;
+  }
   .articleList {
     display: flex;
     flex-wrap: wrap;

@@ -53,49 +53,50 @@ const ArticleList = () => {
   return (
     <Plate title='文章列表' bg='bg23.jpg' hasBackgroundColor={false}>
       <ArticleListWrapper>
-        <div className='search-bar'>
-          <Search
-            placeholder='输入关键词搜索文章'
-            onSearch={onSearch}
-            enterButton
-            value={value}
-            onChange={e => setState({ value: e.target.value })}
-          />
+        <div className='bar'>
+          <div className='search-bar'>
+            <Search
+              placeholder='输入关键词搜索文章'
+              onSearch={onSearch}
+              enterButton
+              value={value}
+              onChange={e => setState({ value: e.target.value })}
+            />
+          </div>
+          <Space wrap size={16} className='filter-bar'>
+            <div className='filter-type'>分类</div>
+            <FilterText
+              active={!filters.category}
+              onClick={() => onClickCategory('')}
+            >
+              全部
+            </FilterText>
+            {categoryData.map(({ name }) => (
+              <FilterText
+                active={filters.category === name}
+                onClick={() => onClickCategory(name)}
+                key={name}
+              >
+                {name}
+              </FilterText>
+            ))}
+          </Space>
+
+          <Space wrap size={16} className='filter-bar'>
+            <div className='filter-type'>排序</div>
+            {sortData.map(({ name, key }) => (
+              <FilterText
+                active={!!params.orderBys[key]}
+                onClick={() => onClickOrderBy(key)}
+                key={name}
+              >
+                {name}
+              </FilterText>
+            ))}
+          </Space>
         </div>
 
-        <Space wrap size={16} className='filter-bar'>
-          <div className='filter-type'>分类</div>
-          <FilterText
-            active={!filters.category}
-            onClick={() => onClickCategory('')}
-          >
-            全部
-          </FilterText>
-          {categoryData.map(({ name }) => (
-            <FilterText
-              active={filters.category === name}
-              onClick={() => onClickCategory(name)}
-              key={name}
-            >
-              {name}
-            </FilterText>
-          ))}
-        </Space>
-
-        <Space wrap size={16} className='filter-bar'>
-          <div className='filter-type'>排序</div>
-          {sortData.map(({ name, key }) => (
-            <FilterText
-              active={!!params.orderBys[key]}
-              onClick={() => onClickOrderBy(key)}
-              key={name}
-            >
-              {name}
-            </FilterText>
-          ))}
-        </Space>
-
-        <div className='filter-bar'>第{pageNum}页</div>
+        <div className='page-bar'>第{pageNum}页</div>
 
         <Spin spinning={loading}>
           <div className='articleList' ref={listRef}>
