@@ -29,7 +29,7 @@ export const ArticleListWrapper = styled.div`
 
   .search-bar {
     padding: 0 150px;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
   }
 
   .filter-bar {

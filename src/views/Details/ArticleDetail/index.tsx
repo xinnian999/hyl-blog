@@ -1,13 +1,13 @@
-import { Anchor, Comment, Icon, Markdown, Plate } from '@/components';
+import { Anchor, Comment, Markdown, Plate } from '@/components';
 import { useGetData, useSetState, useWindowSize } from '@/hooks';
 import { changeBlogTitle } from '@/utils';
 import { CheckSquareOutlined, UnorderedListOutlined } from '@ant-design/icons';
-import { Affix, Space, Tag } from 'antd';
+import { Affix } from 'antd';
 import { time } from 'hyl-utils';
-import { useMemo, useRef } from 'react';
+import { useRef } from 'react';
 import { flushSync } from 'react-dom';
 import { useParams } from 'react-router-dom';
-import { addArticleVisits, queryAboutArticle } from '../api';
+import { addArticleVisits, queryAboutArticle } from '../../Home/api';
 import ToolItem from './ToolItem';
 import { AboutArticle, ArticleDetailWrapper, Main, Toolbar } from './styled';
 
@@ -68,34 +68,34 @@ function ArticleDetail() {
 
   const { title, category, createTime, updateTime, content } = info;
 
-  const articleInfo = useMemo(
-    () => (
-      <Space size={20} direction={size.width > 800 ? 'horizontal' : 'vertical'}>
-        <span>
-          {category.map((item: string) => (
-            <Tag icon={<Icon type='icon-biaoqian2' />} color='pink' key={item}>
-              {item}
-            </Tag>
-          ))}
-        </span>
-        <span>
-          <Icon type='icon-fabu' /> 发布日期：
-          {time.parse(createTime, 'YYYY-MM-DD')}
-        </span>
-        <span>
-          <Icon type='icon-banbengengxin' /> 更新日期：
-          {time.parse(updateTime, 'YYYY-MM-DD')}
-        </span>
-        <span>
-          <Icon type='icon-word' /> 文章字数：
-          {content.length > 1000
-            ? `${~~(content.length / 100) / 10}k`
-            : content.length}
-        </span>
-      </Space>
-    ),
-    [info, size]
-  );
+  // const articleInfo = useMemo(
+  //   () => (
+  //     <Space size={20} direction={size.width > 800 ? 'horizontal' : 'vertical'}>
+  //       <span>
+  //         {category.map((item: string) => (
+  //           <Tag icon={<Icon type='icon-biaoqian2' />} color='pink' key={item}>
+  //             {item}
+  //           </Tag>
+  //         ))}
+  //       </span>
+  //       <span>
+  //         <Icon type='icon-fabu' /> 发布日期：
+  //         {time.parse(createTime, 'YYYY-MM-DD')}
+  //       </span>
+  //       <span>
+  //         <Icon type='icon-banbengengxin' /> 更新日期：
+  //         {time.parse(updateTime, 'YYYY-MM-DD')}
+  //       </span>
+  //       <span>
+  //         <Icon type='icon-word' /> 文章字数：
+  //         {content.length > 1000
+  //           ? `${~~(content.length / 100) / 10}k`
+  //           : content.length}
+  //       </span>
+  //     </Space>
+  //   ),
+  //   [info, size]
+  // );
 
   return (
     <Plate title={title} hasBackgroundColor={false}>

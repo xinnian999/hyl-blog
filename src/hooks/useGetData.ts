@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import { request } from '@/utils';
+import { useState } from 'react';
 import useMount from './useMount';
 
 type responseType = {
@@ -15,6 +15,7 @@ type toolConfig = {
   onFail?: (err: Response) => void;
   mockLoadingCount?: number;
   cache?: boolean;
+  parseResult?: (result: any[]) => any[];
 };
 
 type runFn = (props?: toolConfig) => Promise<responseType>;
@@ -29,6 +30,7 @@ const defaultConfig: Required<toolConfig> = {
   manual: false,
   mockLoadingCount: 0,
   cache: false,
+  parseResult: result => result,
 };
 
 function useGetData<T = any>(
@@ -40,7 +42,7 @@ function useGetData<T = any>(
   const [result, setResult] = useState<T[]>([]);
   const [data, setData] = useState<T[]>([]);
 
-  const run: runFn = async (runProps) => {
+  const run: runFn = async runProps => {
     //重复请求的新配置合并
     if (runProps) {
       Object.assign(config, runProps);
@@ -84,8 +86,10 @@ function useGetData<T = any>(
 
     if (Array.isArray(res.data)) {
       const newData = config.cache ? data.concat(res.data) : res.data;
-      setResult(newData);
-      setData(newData);
+
+      const parseResult = config.parseResult(newData);
+      setResult(parseResult);
+      setData(parseResult);
     }
 
     //调用成功的回调函数
@@ -94,7 +98,7 @@ function useGetData<T = any>(
     return res;
   };
 
-  const set = (data) => {
+  const set = data => {
     setResult(data);
     setData(data);
   };

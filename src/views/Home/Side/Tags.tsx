@@ -1,37 +1,35 @@
-import { useGetData, useMount } from "@/hooks";
-import { Affix, Tag } from "antd";
-import { SideItem } from "./styled";
-import { getRandom } from "hyl-utils";
-import { useRef, useState } from "react";
+import { useGetData, useMount } from '@/hooks';
+import { Affix, Tag } from 'antd';
+import { getRandom } from 'hyl-utils';
+import { useState } from 'react';
+import { SideItem } from './styled';
 
 const color = [
-  "magenta",
-  "volcano",
-  "orange",
-  "gold",
-  "lime",
-  "green",
-  "cyan",
-  "geekblue",
-  "purple",
-  "processing",
-  "success",
-  "error",
-  "warning",
+  'magenta',
+  'volcano',
+  'orange',
+  'gold',
+  'lime',
+  'green',
+  'cyan',
+  'geekblue',
+  'purple',
+  'processing',
+  'success',
+  'error',
+  'warning',
 ];
 
 const Tags = () => {
-  const [tag] = useGetData("/category/query", {
-    data: { orderBys: "count desc" },
-  });
+  const [tag] = useGetData('/category/query', {});
 
   const [offsetTop, setOffsetTop] = useState(80);
 
   useMount(() => {
-    const el = document.getElementById("Footer");
+    const el = document.getElementById('Footer');
     const options = {
       root: null,
-      rootMargin: "0px",
+      rootMargin: '0px',
       threshold: 0.2,
     };
 
@@ -56,20 +54,18 @@ const Tags = () => {
   return (
     <Affix offsetTop={offsetTop}>
       <SideItem>
-        <div className="tags">
-          {tag.map((item) => {
-            return (
-              <Tag
-                icon={item.count && <span className="count">{item.count}</span>}
-                key={item.name}
-                className="tag"
-                bordered={false}
-                color={color[getRandom(0, color.length)]}
-              >
-                {item.name}
-              </Tag>
-            );
-          })}
+        <div className='tags'>
+          {tag.map(item => (
+            <Tag
+              icon={item.count && <span className='count'>{item.count}</span>}
+              key={item.name}
+              className='tag'
+              bordered={false}
+              color={color[getRandom(0, color.length)]}
+            >
+              {item.name}
+            </Tag>
+          ))}
         </div>
       </SideItem>
     </Affix>

@@ -13,6 +13,10 @@ function Main() {
 
   const [loading, on, off] = useBoolean(true);
 
+  const [categoryData] = useGetData('/category/query', {
+    data: { orderBys: '' },
+  });
+
   const [articleData, run] = useGetData<articleItem>('/current/query/article', {
     cache: true,
     data: {
@@ -27,6 +31,16 @@ function Main() {
         pageNum: state.pageNum + 1,
       });
       off();
+    },
+    parseResult: result => {
+      console.log(result);
+
+      return result.map(item => ({
+        ...item,
+        category: categoryData.filter(category =>
+          item.category.includes(category.name)
+        ),
+      }));
     },
   });
 

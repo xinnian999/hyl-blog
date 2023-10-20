@@ -10,13 +10,17 @@ export const ArticleCardWrapper = styled.div`
   overflow: hidden;
   animation: zoomIn;
   animation-duration: 1s;
+  .content {
+    &:hover {
+      cursor: pointer;
+    }
+    &:hover .title {
+      color: var(--ant-primary-color);
+    }
 
-  &:hover .title {
-    color: var(--ant-primary-color);
-  }
-
-  &:hover .image {
-    transform: scale(1.2);
+    &:hover .image {
+      transform: scale(1.2);
+    }
   }
 
   .topping {
@@ -31,10 +35,6 @@ export const ArticleCardWrapper = styled.div`
     left: -18px;
     top: 9px;
     z-index: 5;
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 `;
 

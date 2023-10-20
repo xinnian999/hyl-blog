@@ -1,21 +1,21 @@
-import { useGetData } from "@/hooks";
-import { SwiperWrapper } from "./styled";
-import { SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Scrollbar, A11y, Autoplay } from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/autoplay";
+import { useGetData } from '@/hooks';
+import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import { SwiperSlide } from 'swiper/react';
+import { SwiperWrapper } from './styled';
 
-import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
   const navigate = useNavigate();
 
   const swiperRef: any = useRef(null);
 
-  const [data] = useGetData<articleItem>("/article/query", {
+  const [data] = useGetData<articleItem>('/article/query', {
     data: {
       pageNum: 1,
       pageSize: 5,
@@ -27,10 +27,10 @@ function Main() {
     <SwiperWrapper
       pagination={{
         clickable: true,
-        type: "bullets",
-        bulletClass: "bullet",
-        bulletActiveClass: "bullet-active",
-        bulletElement: "div",
+        type: 'bullets',
+        bulletClass: 'bullet',
+        bulletActiveClass: 'bullet-active',
+        bulletElement: 'div',
       }}
       navigation
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
@@ -40,14 +40,14 @@ function Main() {
       ref={swiperRef}
       loop
     >
-      {data.map((item) => {
+      {data.map(item => {
         return (
           <SwiperSlide
-            className="SwiperSlide"
+            className='SwiperSlide'
             onClick={() => navigate(`/article/${item.id}`)}
             key={item.id}
           >
-            <div className="title">{item.title}</div>
+            <div className='title'>{item.title}</div>
             <img
               src={`${globalConfig.remoteStaticUrl}/image/${item.picture}`}
             />
