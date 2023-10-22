@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { TagEcharts, TagItem, TagWrapper } from './styled';
 
 const Tag = () => {
-  const [tagData] = useGetData('/category/query');
+  const [tagData] = useGetData('/current/query/tag');
 
   const navigate = useNavigate();
 
