@@ -1,6 +1,5 @@
 import { useGetData, useMount } from '@/hooks';
 import { Affix, Tag } from 'antd';
-import { getRandom } from 'hyl-utils';
 import { useState } from 'react';
 import { SideItem } from './styled';
 
@@ -21,7 +20,7 @@ const color = [
 ];
 
 const Tags = () => {
-  const [tag] = useGetData('/category/query', {});
+  const [tag] = useGetData('/current/query/tag');
 
   const [offsetTop, setOffsetTop] = useState(80);
 
@@ -61,7 +60,7 @@ const Tags = () => {
               key={item.name}
               className='tag'
               bordered={false}
-              color={color[getRandom(0, color.length)]}
+              color={item.bg}
             >
               {item.name}
             </Tag>

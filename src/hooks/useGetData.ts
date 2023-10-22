@@ -1,6 +1,5 @@
 import { request } from '@/utils';
-import { useState } from 'react';
-import useMount from './useMount';
+import { useEffect, useState } from 'react';
 
 type responseType = {
   data: any[];
@@ -16,6 +15,7 @@ type toolConfig = {
   mockLoadingCount?: number;
   cache?: boolean;
   parseResult?: (result: any[]) => any[];
+  deps?: any[];
 };
 
 type runFn = (props?: toolConfig) => Promise<responseType>;
@@ -26,11 +26,12 @@ type runFn = (props?: toolConfig) => Promise<responseType>;
 const defaultConfig: Required<toolConfig> = {
   onSuccess: () => {},
   onFail: () => {},
-  data: { orderBys: 'id desc' },
+  data: {},
   manual: false,
   mockLoadingCount: 0,
   cache: false,
   parseResult: result => result,
+  deps: [],
 };
 
 function useGetData<T = any>(
@@ -47,36 +48,6 @@ function useGetData<T = any>(
     if (runProps) {
       Object.assign(config, runProps);
     }
-
-    //mock骨架屏加载数据
-    // if (config.mockLoadingCount) {
-    //   const mockData: any[] = [...new Array(config.mockLoadingCount)].map(
-    //     (item, index) => ({
-    //       loading: true,
-    //       id: `${index}-key`,
-    //     })
-    //   );
-    //   setResult(data.concat(mockData));
-    // }
-
-    // try {
-    //   const res = await request.get(url, config.data);
-    //   if (res.data) {
-    //     const newData = config.cache ? data.concat(res.data) : res.data;
-    //     setResult(newData);
-    //     setData(newData);
-    //   }
-
-    //   //调用成功的回调函数
-    //   config.onSuccess(res);
-
-    //   return res;
-    // } catch (e) {
-    //   //调用失败的回调函数
-    //   config.onFail(e as Response);
-
-    //   return e;
-    // }
 
     const res = await request({
       url,
@@ -95,7 +66,7 @@ function useGetData<T = any>(
     //调用成功的回调函数
     config.onSuccess(res);
 
-    return res;
+    return Promise.resolve(res);
   };
 
   const set = data => {
@@ -103,11 +74,11 @@ function useGetData<T = any>(
     setData(data);
   };
 
-  useMount(() => {
+  useEffect(() => {
     if (!config.manual) {
       run();
     }
-  });
+  }, config.deps);
 
   return [result, run, set] as [T[], runFn, (data: T[]) => void];
 }

@@ -4,6 +4,19 @@ import { Divider, Spin } from 'antd';
 import Swiper from './Swiper';
 import { ArticleWrapper, HomeMainWrapper } from './styled';
 
+interface articleItem extends Item {
+  title: string;
+  tag: string;
+  introduce: string;
+  content: string;
+  picture: string;
+  type: number;
+  visits: number;
+  comments: number;
+  publish: number;
+  topping: number;
+}
+
 function Main() {
   const [state, setState] = useSetState({
     pageNum: 1,
@@ -12,10 +25,6 @@ function Main() {
   });
 
   const [loading, on, off] = useBoolean(true);
-
-  const [categoryData] = useGetData('/category/query', {
-    data: { orderBys: '' },
-  });
 
   const [articleData, run] = useGetData<articleItem>('/current/query/article', {
     cache: true,
@@ -31,16 +40,6 @@ function Main() {
         pageNum: state.pageNum + 1,
       });
       off();
-    },
-    parseResult: result => {
-      console.log(result);
-
-      return result.map(item => ({
-        ...item,
-        category: categoryData.filter(category =>
-          item.category.includes(category.name)
-        ),
-      }));
     },
   });
 

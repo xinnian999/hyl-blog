@@ -12,7 +12,7 @@ import {
 
 interface ArticleCardProps extends Item {
   title: string;
-  category: any[];
+  tag: string;
   introduce: string;
   content: string;
   picture: string;
@@ -30,7 +30,7 @@ function ArticleCard(props: ArticleCardProps) {
     id,
     comments,
     visits,
-    category,
+    tag,
     createTime,
     picture,
     topping,
@@ -70,14 +70,14 @@ function ArticleCard(props: ArticleCardProps) {
       </div>
 
       <ArticleCardFooter>
-        {category.map(item => (
+        {tag.split(',').map(t => (
           <Tag
             icon={<Icon type='icon-wenjianjia' />}
-            color={item.bg}
-            key={item.id}
+            color='pink'
+            key={t}
             bordered={false}
           >
-            {item.name}
+            {t}
           </Tag>
         ))}
       </ArticleCardFooter>

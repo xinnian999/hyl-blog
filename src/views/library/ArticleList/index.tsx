@@ -40,8 +40,8 @@ const ArticleList = () => {
 
   const listRef = useRef<HTMLDivElement>(null);
 
-  const [categoryData] = useGetData('/category/query', {
-    data: { orderBys: '' },
+  const [tagData] = useGetData('/current/query/tag', {
+    data: { filters: { belong: 'article' } },
   });
 
   const { pageNum, pageSize, filters } = params;
@@ -71,7 +71,7 @@ const ArticleList = () => {
             >
               全部
             </FilterText>
-            {categoryData.map(({ name }) => (
+            {tagData.map(({ name }) => (
               <FilterText
                 active={filters.category === name}
                 onClick={() => onClickCategory(name)}
@@ -101,14 +101,7 @@ const ArticleList = () => {
         <Spin spinning={loading}>
           <div className='articleList' ref={listRef}>
             {articleData.map(item => (
-              <ArticleCard
-                {...item}
-                category={categoryData.filter(v =>
-                  item.category.includes(v.name)
-                )}
-                key={item.id}
-                className='articleItem'
-              />
+              <ArticleCard {...item} key={item.id} className='articleItem' />
             ))}
           </div>
         </Spin>
