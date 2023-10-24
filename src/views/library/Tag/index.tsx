@@ -44,7 +44,7 @@ const Tag = () => {
 
       <TagWrapper>
         {tagData.map(({ name, count }) => (
-          <TagItem key={name} onClick={() => navigate(`/article`)}>
+          <TagItem key={name} onClick={() => navigate(`/tag/${name}`)}>
             <span>{name}</span>
             <span className='count'>{count}</span>
           </TagItem>
