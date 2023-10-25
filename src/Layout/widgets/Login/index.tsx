@@ -1,20 +1,23 @@
-import { Modal, Tabs } from "antd";
-import { useRootStore } from "@/hooks";
-import Login from "./Login";
-import Register from "./Register";
-import WechatLogin from "./WechatLogin";
+import { useRootStore } from '@/hooks';
+import { Modal, Tabs } from 'antd';
+import Login from './Login';
+import Register from './Register';
+import WechatLogin from './WechatLogin';
 
 const LoginModal: React.FC = () => {
-  const { loginModal, loginType, setRootState } = useRootStore();
+  const { loginModal, loginType, setRootState, poll } = useRootStore();
 
   return (
     <Modal
       open={loginModal}
-      onCancel={() => setRootState({ loginModal: false })}
+      onCancel={() => {
+        setRootState({ loginModal: false });
+        clearInterval(poll);
+      }}
       footer={null}
       destroyOnClose
     >
-      {loginType === "wx" ? (
+      {loginType === 'wx' ? (
         <WechatLogin />
       ) : (
         <Tabs
@@ -22,10 +25,10 @@ const LoginModal: React.FC = () => {
           activeKey={loginType}
           onChange={(key: any) => setRootState({ loginType: key })}
         >
-          <Tabs.TabPane tab="登陆" key="login">
+          <Tabs.TabPane tab='登陆' key='login'>
             <Login />
           </Tabs.TabPane>
-          <Tabs.TabPane tab="注册" key="register">
+          <Tabs.TabPane tab='注册' key='register'>
             <Register />
           </Tabs.TabPane>
         </Tabs>

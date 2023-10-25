@@ -37,12 +37,12 @@ function ArticleCard(props: ArticleCardProps) {
     className,
   } = props;
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <ArticleCardWrapper className={className} key={id}>
       {topping === 1 && <div className='topping'>置顶</div>}
-      <div className='content' onClick={() => history(`/article/${id}`)}>
+      <div className='content' onClick={() => navigate(`/article/${id}`)}>
         <ArticleCardImage>
           <img
             className='image'
@@ -72,10 +72,11 @@ function ArticleCard(props: ArticleCardProps) {
       <ArticleCardFooter>
         {tag.split(',').map(t => (
           <Tag
-            icon={<Icon type='icon-wenjianjia' />}
+            icon={<Icon type='icon-biaoqian2' />}
             color='pink'
             key={t}
             bordered={false}
+            onClick={() => navigate(`/tag/${t}/article`)}
           >
             {t}
           </Tag>

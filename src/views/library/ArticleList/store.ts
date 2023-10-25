@@ -16,7 +16,7 @@ export interface articleItem extends Item {
 type paramsType = {
   pageNum: number;
   pageSize: number;
-  filters: { publish?: number; category?: string; title?: string };
+  filters: { publish?: number; tag?: string; title?: string };
   orderBys: { [key: string]: string };
 };
 

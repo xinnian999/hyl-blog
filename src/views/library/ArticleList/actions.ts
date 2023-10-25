@@ -26,13 +26,13 @@ export const fetchData = async () => {
 };
 
 export const onSearch = (q: string) => {
-  setParamsFilter({ category: '', title: q });
+  setParamsFilter({ tag: '', title: q });
 };
 
 export const onClickCategory = (category: string) => {
   // 如果点击的是当前分类，就取消分类查询所有
   setParamsFilter({
-    category: category === get().params.filters.category ? '' : category,
+    tag: category === get().params.filters.tag ? '' : category,
     title: '',
   });
   // 重置搜索

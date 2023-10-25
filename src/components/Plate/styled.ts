@@ -20,7 +20,7 @@ export const PlateBanner = styled.div<PlateBannerProps>`
       `url(${require(`@/assets/img/bg/${props.bg || 'bg24.jpg'}`)})`};
   }
 
-  h2 {
+  .title {
     position: absolute;
     left: 50%;
     top: 50%;

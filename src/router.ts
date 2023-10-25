@@ -16,7 +16,7 @@ const route: routeItem[] = [
     component: lazy(() => import('@/views/Details/ArticleDetail')),
   },
   {
-    path: '/tag/:tag',
+    path: '/tag/:tagName/:type',
     component: lazy(() => import('@/views/Details/TagDetail')),
   },
   {

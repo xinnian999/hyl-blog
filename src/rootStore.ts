@@ -15,6 +15,7 @@ type StoreTypes = {
   loginState: boolean;
   loginType: 'login' | 'register' | 'wx';
   chatGptData: any[];
+  poll: undefined | NodeJS.Timer;
 };
 
 const store = persist<StoreTypes, [], [], Omit<StoreTypes, 'loginModal'>>(
@@ -26,6 +27,7 @@ const store = persist<StoreTypes, [], [], Omit<StoreTypes, 'loginModal'>>(
     loginState: false,
     loginType: 'login',
     chatGptData: [],
+    poll: undefined,
   }),
   {
     name: 'root',

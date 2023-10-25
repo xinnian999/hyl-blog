@@ -1,7 +1,8 @@
+import { ReactNode } from 'react';
 import { PlateBanner, PlateContent } from './styled';
 
 interface PlateProps {
-  title?: string;
+  title?: ReactNode;
   bg?: string;
   children?: React.ReactNode;
   hasBackgroundColor?: boolean;
@@ -17,7 +18,7 @@ const Plate: React.FC<PlateProps> = ({
     <>
       <PlateBanner bg={bg}>
         <div className='bg' />
-        <h2>{title}</h2>
+        <div className='title'>{title}</div>
       </PlateBanner>
       <PlateContent hasBackgroundColor={hasBackgroundColor}>
         {children}

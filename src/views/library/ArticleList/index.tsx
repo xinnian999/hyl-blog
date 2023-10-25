@@ -66,14 +66,14 @@ const ArticleList = () => {
           <Space wrap size={16} className='filter-bar'>
             <div className='filter-type'>分类</div>
             <FilterText
-              active={!filters.category}
+              active={!filters.tag}
               onClick={() => onClickCategory('')}
             >
               全部
             </FilterText>
             {tagData.map(({ name }) => (
               <FilterText
-                active={filters.category === name}
+                active={filters.tag === name}
                 onClick={() => onClickCategory(name)}
                 key={name}
               >
