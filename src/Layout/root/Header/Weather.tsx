@@ -1,5 +1,5 @@
-import { useGetData } from "@/hooks";
-import styled from "styled-components";
+import { useQuery } from '@/hooks';
+import styled from 'styled-components';
 
 const WeatherWrapper = styled.div`
   color: #fff;
@@ -8,10 +8,10 @@ const WeatherWrapper = styled.div`
 `;
 
 function Weather() {
-  const [data] = useGetData("/all/getWeather");
+  const { data } = useQuery({ url: '/all/getWeather' });
 
   if (data?.length) {
-    const { province, temperature, weather } = data[0];
+    const [{ province, temperature, weather }] = data;
     return (
       <WeatherWrapper>
         {province} {temperature}°C {weather}

@@ -1,4 +1,4 @@
-import { useGetData } from '@/hooks';
+import { useQuery } from '@/hooks';
 import {
   GithubOutlined,
   QqOutlined,
@@ -61,14 +61,15 @@ const switchTime = () => {
 };
 
 function Side() {
-  const [weather] = useGetData('/all/getWeather');
+  const { data: weather } = useQuery({ url: '/all/getWeather' });
 
-  const [counts] = useGetData('/all/counts');
+  const { data: counts } = useQuery({ url: '/all/counts' });
 
-  const [commentData] = useGetData<CommentData>('/comment/query', {
-    data: {
+  const { data: commentData } = useQuery<CommentData>({
+    url: '/current/query/comment',
+    params: {
       filters: { article_id: 99999 },
-      orderBys: 'id desc',
+      orderBys: { id: 'desc' },
     },
   });
 

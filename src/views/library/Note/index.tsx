@@ -1,5 +1,5 @@
 import { Plate, Preview } from '@/components';
-import { useGetData } from '@/hooks';
+import { useQuery } from '@/hooks';
 import { Prism } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { NoteWrapper } from './styled';
@@ -13,7 +13,7 @@ type Data = {
 };
 
 export default function Index() {
-  const [data] = useGetData<Data>('/note/query');
+  const { data } = useQuery<Data>({ url: '/note/query' });
 
   return (
     <Plate title='笔记' bg='bg16.jpg'>

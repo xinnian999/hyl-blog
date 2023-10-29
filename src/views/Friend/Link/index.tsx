@@ -1,10 +1,10 @@
-import { Tag, Avatar, Skeleton, Tabs } from 'antd';
+import { Copy, Plate } from '@/components';
+import { useQuery } from '@/hooks';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import type { TabsProps } from 'antd';
+import { Avatar, Tabs, Tag } from 'antd';
 import { Prism } from 'react-syntax-highlighter';
 import { tomorrow } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { Plate, Copy } from '@/components';
-import { useGetData } from '@/hooks';
 import { LinkWrapper, Title } from './styled';
 
 type Data = {
@@ -37,8 +37,13 @@ const yaml = `- name: ${globalConfig.title}
   descr: 犹一心一意 , 念念不忘`;
 
 export default function Link() {
-  const [data] = useGetData<Data>('/link/query', {
-    mockLoadingCount: 8,
+  const { data } = useQuery<Data>({
+    url: '/current/query/link',
+    params: {
+      orderBys: {
+        id: 'desc',
+      },
+    },
   });
 
   const items: TabsProps['items'] = [
@@ -47,7 +52,7 @@ export default function Link() {
       label: `中文`,
       children: (
         <Copy content={info}>
-          <pre className="mylink-info">{info}</pre>
+          <pre className='mylink-info'>{info}</pre>
         </Copy>
       ),
     },
@@ -60,7 +65,7 @@ export default function Link() {
             showLineNumbers
             style={tomorrow}
             language={'xml'}
-            PreTag="div"
+            PreTag='div'
             children={yaml}
           />
         </Copy>
@@ -70,44 +75,40 @@ export default function Link() {
 
   return (
     <>
-      <Plate title="友情链接" bg="bg12.png">
+      <Plate title='友情链接' bg='bg12.png'>
         <LinkWrapper>
-          <div className="explain">
+          <div className='explain'>
             <Title>链接申请说明</Title>
-            <div className="explain-main">
-              <p className="tags">
-                {tags.map((item) => (
+            <div className='explain-main'>
+              <p className='tags'>
+                {tags.map(item => (
                   <Tag color={item.color} icon={item.icon} key={item.con}>
                     {item.con}
                   </Tag>
                 ))}
               </p>
-              <div className="content">
+              <div className='content'>
                 <p>
                   交换友链可在 <b>留言板</b>
                   ，本站友链倒序排列，且不定期清理失效友链
                 </p>
-                <Tabs type="card" items={items} />
+                <Tabs type='card' items={items} />
               </div>
             </div>
           </div>
 
-          <div className="link-main">
-            {data.map(({ avator, name, descr, link, id, loading }) => {
-              return (
-                <div
-                  className="linkItem"
-                  onClick={() => window.open(link)}
-                  key={id}
-                >
-                  <Skeleton loading={loading} active>
-                    <Avatar src={avator} className="avatar" />
-                    <span>{name}</span>
-                    <div>{descr}</div>
-                  </Skeleton>
-                </div>
-              );
-            })}
+          <div className='link-main'>
+            {data.map(({ avator, name, descr, link, id }) => (
+              <div
+                className='linkItem'
+                onClick={() => window.open(link)}
+                key={id}
+              >
+                <Avatar src={avator} className='avatar' />
+                <span>{name}</span>
+                <div>{descr}</div>
+              </div>
+            ))}
           </div>
         </LinkWrapper>
       </Plate>

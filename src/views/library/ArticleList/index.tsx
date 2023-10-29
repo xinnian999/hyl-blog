@@ -1,16 +1,8 @@
 import { ArticleCard, Plate } from '@/components';
-import { useGetData } from '@/hooks';
+import { useQuery } from '@/hooks';
 import { Pagination, Space, Spin } from 'antd';
 import Search from 'antd/es/input/Search';
 import { useEffect, useRef } from 'react';
-
-import {
-  fetchData,
-  onChangePage,
-  onClickCategory,
-  onClickOrderBy,
-  onSearch,
-} from './actions';
 import useStore from './store';
 import { ArticleListWrapper, FilterText } from './styled';
 
@@ -36,12 +28,24 @@ const sortData = [
 ];
 
 const ArticleList = () => {
-  const { articleData, params, total, loading, value } = useStore();
+  const {
+    articleData,
+    params,
+    total,
+    loading,
+    value,
+    fetchData,
+    onChangePage,
+    onClickCategory,
+    onClickOrderBy,
+    onSearch,
+  } = useStore();
 
   const listRef = useRef<HTMLDivElement>(null);
 
-  const [tagData] = useGetData('/current/query/tag', {
-    data: { filters: { belong: 'article' } },
+  const { data: category } = useQuery({
+    url: '/current/query/category',
+    params: { filters: { belong: 'article' } },
   });
 
   const { pageNum, pageSize, filters } = params;
@@ -66,14 +70,14 @@ const ArticleList = () => {
           <Space wrap size={16} className='filter-bar'>
             <div className='filter-type'>分类</div>
             <FilterText
-              active={!filters.tag}
+              active={!filters.category}
               onClick={() => onClickCategory('')}
             >
               全部
             </FilterText>
-            {tagData.map(({ name }) => (
+            {category.map(({ name }) => (
               <FilterText
-                active={filters.tag === name}
+                active={filters.category === name}
                 onClick={() => onClickCategory(name)}
                 key={name}
               >

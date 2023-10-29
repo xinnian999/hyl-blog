@@ -1,8 +1,7 @@
-import { Skeleton } from 'antd';
+import { LazyImage, Plate } from '@/components';
+import { useQuery } from '@/hooks';
 import { InsertRowAboveOutlined } from '@ant-design/icons';
 import { time } from 'hyl-utils';
-import { useGetData } from '@/hooks';
-import { LazyImage, Plate } from '@/components';
 import { CollectionWrapper } from './styled';
 
 type Data = {
@@ -16,38 +15,36 @@ type Data = {
 };
 
 export default function Collection() {
-  const [data] = useGetData<Data>('/collection/query', { mockLoadingCount: 4 });
-
-  const renderItem = data.map(
-    ({ picture, title, autograph, createTime, loading, link, id }) => {
-      return (
-        <div
-          className="cardContainer"
-          onClick={() => window.open(link)}
-          key={id}
-        >
-          <Skeleton loading={loading}>
-            <div className="image">
-              <LazyImage
-                src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
-              />
-            </div>
-
-            <div className="title">{title}</div>
-            <p className="autograph">{autograph}</p>
-            <div className="time">
-              <InsertRowAboveOutlined className="iconAbove" />
-              <span>{time.parse(createTime, 'YYYY-MM')}</span>
-            </div>
-          </Skeleton>
-        </div>
-      );
-    }
-  );
+  const { data } = useQuery<Data>({
+    url: '/current/query/collection',
+  });
 
   return (
-    <Plate title="珍藏">
-      <CollectionWrapper>{renderItem}</CollectionWrapper>
+    <Plate title='珍藏'>
+      <CollectionWrapper>
+        {data.map(
+          ({ picture, title, autograph, createTime, loading, link, id }) => (
+            <div
+              className='cardContainer'
+              onClick={() => window.open(link)}
+              key={id}
+            >
+              <div className='image'>
+                <LazyImage
+                  src={`${globalConfig.remoteStaticUrl}/image/${picture}`}
+                />
+              </div>
+
+              <div className='title'>{title}</div>
+              <p className='autograph'>{autograph}</p>
+              <div className='time'>
+                <InsertRowAboveOutlined className='iconAbove' />
+                <span>{time.parse(createTime, 'YYYY-MM')}</span>
+              </div>
+            </div>
+          )
+        )}
+      </CollectionWrapper>
     </Plate>
   );
 }

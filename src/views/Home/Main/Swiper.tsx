@@ -1,4 +1,4 @@
-import { useGetData } from '@/hooks';
+import { useQuery } from '@/hooks';
 import { A11y, Autoplay, Navigation, Pagination, Scrollbar } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/autoplay';
@@ -10,13 +10,14 @@ import { SwiperWrapper } from './styled';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Main() {
+function Swiper() {
   const navigate = useNavigate();
 
   const swiperRef: any = useRef(null);
 
-  const [data] = useGetData<articleItem>('/article/query', {
-    data: {
+  const { data } = useQuery<articleItem>({
+    url: '/current/query/article',
+    params: {
       pageNum: 1,
       pageSize: 5,
       filters: { publishBanner: 1 },
@@ -40,22 +41,18 @@ function Main() {
       ref={swiperRef}
       loop
     >
-      {data.map(item => {
-        return (
-          <SwiperSlide
-            className='SwiperSlide'
-            onClick={() => navigate(`/article/${item.id}`)}
-            key={item.id}
-          >
-            <div className='title'>{item.title}</div>
-            <img
-              src={`${globalConfig.remoteStaticUrl}/image/${item.picture}`}
-            />
-          </SwiperSlide>
-        );
-      })}
+      {data.map(item => (
+        <SwiperSlide
+          className='SwiperSlide'
+          onClick={() => navigate(`/article/${item.id}`)}
+          key={item.id}
+        >
+          <div className='title'>{item.title}</div>
+          <img src={`${globalConfig.remoteStaticUrl}/image/${item.picture}`} />
+        </SwiperSlide>
+      ))}
     </SwiperWrapper>
   ) : null;
 }
 
-export default Main;
+export default Swiper;

@@ -1,7 +1,7 @@
 import { Error } from '@/components';
 import {
-  useGetData,
   useMount,
+  useQuery,
   useRootStore,
   useScroll,
   useWindowSize,
@@ -56,11 +56,13 @@ function Provider({ children }) {
     removeDom('#loading-box');
   });
 
-  useGetData('/all/getCsrfToken', {
+  useQuery({
+    url: '/all/getCsrfToken',
     manual: !!cookie.get('csrf_token'),
   });
 
-  useGetData('/qq/getLoginStatus', {
+  useQuery({
+    url: '/qq/getLoginStatus',
     manual: !url.getParams().getUserInfo,
     onSuccess(res: any) {
       setRootState({ loginModal: true, userInfo: res, loginState: true });

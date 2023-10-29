@@ -1,25 +1,37 @@
 import { Icon, Plate } from '@/components';
-import { useMount } from '@/hooks';
-import { Tabs } from 'antd';
-import { useState } from 'react';
+import { useQuery } from '@/hooks';
+import { List, Tag } from 'antd';
+import { time } from 'hyl-utils';
 import { useNavigate, useParams } from 'react-router-dom';
-import Article from './Article';
+import styled from 'styled-components';
+
+const Item = styled(List.Item)`
+  padding: 15px 20px !important;
+  border-radius: 10px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--ant-primary-4);
+    color: #fff;
+  }
+  .title {
+    font-size: 16px;
+  }
+`;
 
 const TagDetail = () => {
-  const { tagName = '', type = 'article' } = useParams();
-
-  const [tab, setTab] = useState('article');
+  const { tagName = '' } = useParams();
 
   const navigate = useNavigate();
 
-  useMount(() => {
-    setTab(type);
+  const { data, loading } = useQuery<articleItem>({
+    url: '/current/query/article',
+    params: {
+      filters: { tag: tagName },
+      orderBys: {
+        createTime: 'desc',
+      },
+    },
   });
-
-  const onChangeTab = key => {
-    setTab(key);
-    navigate(`/tag/${tagName}/${key}`);
-  };
 
   return (
     <Plate
@@ -29,14 +41,38 @@ const TagDetail = () => {
         </div>
       }
       bg='bg15.jpg'
+      description={`${data.length}篇`}
     >
-      <Tabs activeKey={tab} onChange={onChangeTab}>
-        <Tabs.TabPane tab='文章' key='article'>
-          <Article tag={tagName} />
-        </Tabs.TabPane>
-        <Tabs.TabPane tab='作品' key='work'></Tabs.TabPane>
-        <Tabs.TabPane tab='笔记' key='note'></Tabs.TabPane>
-      </Tabs>
+      <List
+        dataSource={data}
+        itemLayout='vertical'
+        loading={loading}
+        renderItem={item => (
+          <Item
+            onClick={() => navigate(`/article/${item.id}`)}
+            extra={
+              <>
+                <span>
+                  {item.tag.split(',').map(t => (
+                    <Tag
+                      icon={<Icon type='icon-biaoqian2' />}
+                      color='pink'
+                      key={t}
+                      bordered={false}
+                      onClick={() => navigate(`/tag/${t}/article`)}
+                    >
+                      {t}
+                    </Tag>
+                  ))}
+                </span>
+                <span>{time.parse(item.createTime, 'YYYY-MM-DD')}</span>
+              </>
+            }
+          >
+            <span className='title'>{item.title}</span>
+          </Item>
+        )}
+      />
     </Plate>
   );
 };

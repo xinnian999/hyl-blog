@@ -3,6 +3,7 @@ import { PlateBanner, PlateContent } from './styled';
 
 interface PlateProps {
   title?: ReactNode;
+  description?: ReactNode;
   bg?: string;
   children?: React.ReactNode;
   hasBackgroundColor?: boolean;
@@ -13,18 +14,20 @@ const Plate: React.FC<PlateProps> = ({
   children,
   hasBackgroundColor = true,
   bg,
-}) => {
-  return (
-    <>
-      <PlateBanner bg={bg}>
-        <div className='bg' />
+  description,
+}) => (
+  <>
+    <PlateBanner bg={bg}>
+      <div className='bg' />
+      <div className='info'>
         <div className='title'>{title}</div>
-      </PlateBanner>
-      <PlateContent hasBackgroundColor={hasBackgroundColor}>
-        {children}
-      </PlateContent>
-    </>
-  );
-};
+        <div className='description'>{description}</div>
+      </div>
+    </PlateBanner>
+    <PlateContent hasBackgroundColor={hasBackgroundColor}>
+      {children}
+    </PlateContent>
+  </>
+);
 
 export default Plate;

@@ -20,6 +20,10 @@ type optionsType = {
 type runFn = (props?: optionsType) => Promise<responseType>;
 
 function useQuery<T = any>(options: optionsType) {
+  const [data, setData] = useState<T[]>([]);
+
+  const [loading, onLoading, offLoading] = useBoolean(false);
+
   const {
     url = '',
     params = {},
@@ -28,17 +32,13 @@ function useQuery<T = any>(options: optionsType) {
     manual = false,
   } = options;
 
-  const [data, setData] = useState<T[]>([]);
-
-  const [loading, on, off] = useBoolean(false);
-
   const run: runFn = async runProps => {
     //重复请求的新配置合并
     if (runProps) {
       Object.assign(options, runProps);
     }
 
-    on();
+    onLoading();
     const res = await request({
       url,
       method: 'GET',
@@ -46,7 +46,7 @@ function useQuery<T = any>(options: optionsType) {
     });
 
     setData(res.data);
-    off();
+    offLoading();
     //调用成功的回调函数
     if (onSuccess) {
       onSuccess(res);

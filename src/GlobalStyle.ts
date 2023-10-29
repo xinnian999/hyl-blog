@@ -114,6 +114,13 @@ const GlobalStyle = createGlobalStyle`
     margin-bottom: 1em;
   }
 
+  .hover{
+    &:hover{
+      cursor: pointer; 
+      opacity: 0.8;
+    }
+  }
+
   ::-webkit-scrollbar {
     /*滚动条整体样式*/
     width: 5px;

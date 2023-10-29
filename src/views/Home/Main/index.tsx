@@ -7,6 +7,7 @@ import { ArticleWrapper, HomeMainWrapper } from './styled';
 interface articleItem extends Item {
   title: string;
   tag: string;
+  category: string;
   introduce: string;
   content: string;
   picture: string;

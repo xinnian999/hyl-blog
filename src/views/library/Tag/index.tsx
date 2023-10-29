@@ -1,12 +1,12 @@
 import { Plate } from '@/components';
-import { useGetData } from '@/hooks';
+import { useQuery } from '@/hooks';
 import * as echarts from 'echarts';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { TagEcharts, TagItem, TagWrapper } from './styled';
 
 const Tag = () => {
-  const [tagData] = useGetData('/current/query/tag');
+  const { data: tagData } = useQuery({ url: '/current/query/tag' });
 
   const navigate = useNavigate();
 

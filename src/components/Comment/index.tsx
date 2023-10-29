@@ -1,4 +1,4 @@
-import { useGetData, useRootStore } from '@/hooks';
+import { useQuery, useRootStore } from '@/hooks';
 import { Alert, Divider, List } from 'antd';
 import Editor from './Editor';
 import Reply from './Reply';
@@ -14,11 +14,12 @@ interface CommentProps {
 function Comment(props: CommentProps) {
   const { articleId, title, btnName, className } = props;
 
-  const [commentData, run] = useGetData<CommentData>('/comment/query', {
-    data: {
+  const { data: commentData, run } = useQuery<CommentData>({
+    url: '/current/query/comment',
+    params: {
       articleId,
       filters: { article_id: articleId },
-      orderBys: 'id desc',
+      orderBys: { id: 'desc' },
     },
   });
 
@@ -28,11 +29,8 @@ function Comment(props: CommentProps) {
 
   const commentItem = (props: CommentData) => {
     const replyData = commentData
-      .filter(item => {
-        return item.reply_id === props.id;
-      })
+      .filter(item => item.reply_id === props.id)
       .reverse();
-    console.log(commentData, replyData);
 
     return <Reply commentItem={props} refresh={run} replyData={replyData} />;
   };

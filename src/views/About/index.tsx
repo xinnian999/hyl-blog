@@ -1,9 +1,9 @@
-import { Timeline, Card, Tag } from "antd";
-import { time } from "hyl-utils";
-import { QqOutlined, WechatOutlined, MailOutlined } from "@ant-design/icons";
-import { Icon, Plate } from "@/components";
-import { useMount, useSetState, useGetData } from "@/hooks";
-import { AboutWrapper, Title, Info, Section } from "./styled";
+import { Icon, Plate } from '@/components';
+import { useMount, useQuery, useSetState } from '@/hooks';
+import { MailOutlined, QqOutlined, WechatOutlined } from '@ant-design/icons';
+import { Card, Tag, Timeline } from 'antd';
+import { time } from 'hyl-utils';
+import { AboutWrapper, Info, Section, Title } from './styled';
 
 type updateLogData = {
   content: string;
@@ -21,11 +21,13 @@ const About = () => {
     year: 0,
   });
 
-  const [updateLog] = useGetData<updateLogData>("/updateLog/query");
+  const { data: updateLog } = useQuery<updateLogData>({
+    url: '/current/query/updatelog',
+  });
 
   useMount(() => {
     const t = setInterval(
-      () => setState(time.duration("2022/6/1 10:00", new Date().toUTCString())),
+      () => setState(time.duration('2022/6/1 10:00', new Date().toUTCString())),
       1000
     );
 
@@ -33,7 +35,7 @@ const About = () => {
   });
 
   return (
-    <Plate title="关于">
+    <Plate title='关于'>
       <AboutWrapper>
         <Title>关于我</Title>
         <Info>
@@ -49,25 +51,25 @@ const About = () => {
           <br />
           <b>可以通过以下方式联系到我：</b>
           <br />
-          <QqOutlined className="myContact" /> 33075783337 <br />
-          <WechatOutlined className="myContact" /> 17803000829 <br />
-          <MailOutlined className="myContact" /> 17803000829@163.com <br />
-          <Icon type="icon-gitee2" className="myContact gitee" />{" "}
+          <QqOutlined className='myContact' /> 33075783337 <br />
+          <WechatOutlined className='myContact' /> 17803000829 <br />
+          <MailOutlined className='myContact' /> 17803000829@163.com <br />
+          <Icon type='icon-gitee2' className='myContact gitee' />{' '}
           <a
-            target="_blank"
-            rel="noreferrer"
-            href="https://gitee.com/mind251314/dashboard/projects"
+            target='_blank'
+            rel='noreferrer'
+            href='https://gitee.com/mind251314/dashboard/projects'
           >
             gitee
           </a>
           <img
-            src="https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/apple-touch-icon.png"
-            className="myContact juejin"
-          />{" "}
+            src='https://lf3-cdn-tos.bytescm.com/obj/static/xitu_juejin_web//static/favicons/apple-touch-icon.png'
+            className='myContact juejin'
+          />{' '}
           <a
-            href="https://juejin.cn/user/1900422792751454"
-            target="_blank"
-            rel="noreferrer"
+            href='https://juejin.cn/user/1900422792751454'
+            target='_blank'
+            rel='noreferrer'
           >
             junjin
           </a>
@@ -105,14 +107,14 @@ const About = () => {
         </Info>
 
         <Title>更新日志</Title>
-        <Info className="updateLog">
+        <Info className='updateLog'>
           <Timeline>
             {updateLog.map(({ content, createTime }) => (
               <Timeline.Item key={createTime}>
-                <Tag className="time">
-                  {time.parse(createTime, "YYYY-MM-DD")}
+                <Tag className='time'>
+                  {time.parse(createTime, 'YYYY-MM-DD')}
                 </Tag>
-                <div className="content">{content}</div>
+                <div className='content'>{content}</div>
               </Timeline.Item>
             ))}
           </Timeline>
@@ -122,7 +124,7 @@ const About = () => {
           本站文章仅代表个人观点，和任何组织或个人无关。
           <br />
           本站采用「
-          <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh">
+          <a href='https://creativecommons.org/licenses/by-nc/4.0/deed.zh'>
             署名-非商业性使用4.0 国际 (CC BY-NC 4.0)
           </a>
           」创作共享协议。只要在使用时注明出处，那么您可以可以对本站所有原创内容进行转载、节选、二次创作，但是您不得对其用于商业目的。
@@ -134,15 +136,15 @@ const About = () => {
         </Info>
 
         <Title>其他</Title>
-        <Info className="other">
-          <Card title="我的微信">
-            <img src={require("@/assets/img/about/weixin.jpg")} />
+        <Info className='other'>
+          <Card title='我的微信'>
+            <img src={require('@/assets/img/about/weixin.jpg')} />
           </Card>
-          <Card title="我的小程序">
-            <img src={require("@/assets/img/about/xiaochengxu.jpg")} />
+          <Card title='我的小程序'>
+            <img src={require('@/assets/img/about/xiaochengxu.jpg')} />
           </Card>
-          <Card title="我的公众号">
-            <img src={require("@/assets/img/about/gongzhonghao.jpg")} />
+          <Card title='我的公众号'>
+            <img src={require('@/assets/img/about/gongzhonghao.jpg')} />
           </Card>
         </Info>
       </AboutWrapper>

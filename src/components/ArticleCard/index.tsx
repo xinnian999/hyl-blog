@@ -1,6 +1,6 @@
 import { IconText } from '@/components';
 import Icon from '@/components/Basic/Icon';
-import { Space, Tag } from 'antd';
+import { Space, Tag, Tooltip } from 'antd';
 import { time } from 'hyl-utils';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -13,6 +13,7 @@ import {
 interface ArticleCardProps extends Item {
   title: string;
   tag: string;
+  category: string;
   introduce: string;
   content: string;
   picture: string;
@@ -35,6 +36,7 @@ function ArticleCard(props: ArticleCardProps) {
     picture,
     topping,
     className,
+    category,
   } = props;
 
   const navigate = useNavigate();
@@ -70,16 +72,21 @@ function ArticleCard(props: ArticleCardProps) {
       </div>
 
       <ArticleCardFooter>
+        <Tag icon={<Icon type='icon-wenjianjia' />} color='orange'>
+          {category}
+        </Tag>
         {tag.split(',').map(t => (
-          <Tag
-            icon={<Icon type='icon-biaoqian2' />}
-            color='pink'
-            key={t}
-            bordered={false}
-            onClick={() => navigate(`/tag/${t}/article`)}
-          >
-            {t}
-          </Tag>
+          <Tooltip key={t} title='点击查看此标签更多文章'>
+            <Tag
+              className='hover'
+              icon={<Icon type='icon-biaoqian2' />}
+              color='pink'
+              bordered={false}
+              onClick={() => navigate(`/tag/${t}`)}
+            >
+              {t}
+            </Tag>
+          </Tooltip>
         ))}
       </ArticleCardFooter>
     </ArticleCardWrapper>

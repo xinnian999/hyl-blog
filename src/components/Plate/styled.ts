@@ -20,17 +20,27 @@ export const PlateBanner = styled.div<PlateBannerProps>`
       `url(${require(`@/assets/img/bg/${props.bg || 'bg24.jpg'}`)})`};
   }
 
-  .title {
+  .info {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    font-weight: 500;
-    font-size: 50px;
-    letter-spacing: 5px;
-    color: #eee;
-    /* text-shadow: 3px 3px 0 var(--ant-primary-8); */
-    text-shadow: 0px 0px 10px black;
+    text-align: center;
+    .title {
+      font-weight: 500;
+      font-size: 50px;
+      letter-spacing: 5px;
+      color: #eee;
+      text-shadow: 0px 0px 10px black;
+    }
+    .description {
+      margin-top: 10px;
+      font-weight: 500;
+      font-size: 35px;
+      letter-spacing: 5px;
+      color: #eee;
+      text-shadow: 0px 0px 10px black;
+    }
   }
 `;
 

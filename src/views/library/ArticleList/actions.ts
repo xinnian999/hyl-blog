@@ -32,7 +32,7 @@ export const onSearch = (q: string) => {
 export const onClickCategory = (category: string) => {
   // 如果点击的是当前分类，就取消分类查询所有
   setParamsFilter({
-    tag: category === get().params.filters.tag ? '' : category,
+    category: category === get().params.filters.category ? '' : category,
     title: '',
   });
   // 重置搜索

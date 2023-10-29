@@ -1,4 +1,4 @@
-import { useGetData, useMount } from '@/hooks';
+import { useMount, useQuery } from '@/hooks';
 import { Affix, Tag } from 'antd';
 import { useState } from 'react';
 import { SideItem } from './styled';
@@ -20,7 +20,7 @@ const color = [
 ];
 
 const Tags = () => {
-  const [tag] = useGetData('/current/query/tag');
+  const { data: tag } = useQuery({ url: '/current/query/tag' });
 
   const [offsetTop, setOffsetTop] = useState(80);
 
