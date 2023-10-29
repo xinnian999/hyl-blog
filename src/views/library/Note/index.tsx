@@ -13,7 +13,7 @@ type Data = {
 };
 
 export default function Index() {
-  const { data } = useQuery<Data>({ url: '/note/query' });
+  const { data } = useQuery<Data>({ url: '/current/query/note' });
 
   return (
     <Plate title='笔记' bg='bg16.jpg'>
