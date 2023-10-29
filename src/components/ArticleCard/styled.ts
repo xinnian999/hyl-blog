@@ -84,4 +84,13 @@ export const ArticleCardMain = styled.div`
 export const ArticleCardFooter = styled.div`
   padding: 10px 15px;
   border-top: 1px solid #eaeaea;
+  white-space: nowrap;
+  transition: all 1s;
+  &:hover {
+    white-space: normal;
+  }
+  .tags {
+    overflow: hidden;
+    line-height: 30px;
+  }
 `;

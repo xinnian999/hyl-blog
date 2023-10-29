@@ -72,22 +72,24 @@ function ArticleCard(props: ArticleCardProps) {
       </div>
 
       <ArticleCardFooter>
-        <Tag icon={<Icon type='icon-wenjianjia' />} color='orange'>
-          {category}
-        </Tag>
-        {tag.split(',').map(t => (
-          <Tooltip key={t} title='点击查看此标签更多文章'>
-            <Tag
-              className='hover'
-              icon={<Icon type='icon-biaoqian2' />}
-              color='pink'
-              bordered={false}
-              onClick={() => navigate(`/tag/${t}`)}
-            >
-              {t}
-            </Tag>
-          </Tooltip>
-        ))}
+        <div className='tags'>
+          <Tag icon={<Icon type='icon-wenjianjia' />} color='orange'>
+            {category}
+          </Tag>
+          {tag.split(',').map(t => (
+            <Tooltip key={t} title='点击查看此标签更多文章'>
+              <Tag
+                className='hover'
+                icon={<Icon type='icon-biaoqian2' />}
+                color='pink'
+                bordered={false}
+                onClick={() => navigate(`/tag/${t}`)}
+              >
+                {t}
+              </Tag>
+            </Tooltip>
+          ))}
+        </div>
       </ArticleCardFooter>
     </ArticleCardWrapper>
   );
