@@ -1,8 +1,8 @@
-import { Divider, List, Alert } from "antd";
-import { useGetData, useRedux } from "@/hooks";
-import Reply from "./Reply";
-import Editor from "./Editor";
-import "./style.scss";
+import { useQuery, useRootStore } from '@/hooks';
+import { Alert, Divider, List } from 'antd';
+import Editor from './Editor';
+import Reply from './Reply';
+import './style.scss';
 
 interface CommentProps {
   articleId: string;
@@ -14,64 +14,61 @@ interface CommentProps {
 function Comment(props: CommentProps) {
   const { articleId, title, btnName, className } = props;
 
-  const [commentData, run] = useGetData<CommentData>("/comment/query", {
-    data: {
+  const { data: commentData, run } = useQuery<CommentData>({
+    url: '/current/query/comment',
+    params: {
       articleId,
       filters: { article_id: articleId },
-      orderBys: "id desc",
+      orderBys: { id: 'desc' },
     },
   });
 
-  const { store, dispatch } = useRedux();
+  const { loginState, setRootState } = useRootStore();
 
-  const currentCommentData = commentData.filter((item) => !item.reply_id);
+  const currentCommentData = commentData.filter(item => !item.reply_id);
 
   const commentItem = (props: CommentData) => {
     const replyData = commentData
-      .filter((item) => {
-        return item.reply_id === props.id;
-      })
+      .filter(item => item.reply_id === props.id)
       .reverse();
 
     return <Reply commentItem={props} refresh={run} replyData={replyData} />;
   };
 
   return (
-    <div id="comment" className={className}>
+    <div id='comment' className={className}>
       {title && <Divider>{title}</Divider>}
-      {store.loginState ? (
+      {loginState ? (
         <Editor btnName={btnName} articleId={articleId} refresh={run} />
       ) : (
         <Alert
           message={
             <>
               <span
-                className="commentLoginBtn"
-                onClick={() =>
-                  dispatch({ type: "CHANGE_LOGIN_MODAL", payload: true })
-                }
+                className='commentLoginBtn'
+                onClick={() => setRootState({ loginModal: true })}
               >
                 登录
-              </span>{" "}
+              </span>{' '}
               后可发表评论
             </>
           }
-          type="info"
+          type='info'
           showIcon
         />
       )}
       <List
         dataSource={currentCommentData}
         header={
-          <span className="total">{`${currentCommentData.length}条${
-            articleId === "99999" ? "留言" : "评论"
+          <span className='total'>{`${currentCommentData.length}条${
+            articleId === '99999' ? '留言' : '评论'
           }`}</span>
         }
-        itemLayout="horizontal"
-        className="commentCon"
+        itemLayout='horizontal'
+        className='commentCon'
         renderItem={commentItem}
-        locale={{ emptyText: "暂无评论，快发表第一个热评！" }}
-        loading={!commentData.length && articleId === "99999"}
+        locale={{ emptyText: '暂无评论，快发表第一个热评！' }}
+        loading={!commentData.length && articleId === '99999'}
       />
     </div>
   );

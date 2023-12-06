@@ -5,6 +5,7 @@ const readline = require("readline").createInterface({
   output: process.stdout,
 });
 
+
 const deploy = () =>
   readline.question(`请输入服务器密码：`, (name) => {
     const server = {
@@ -21,6 +22,7 @@ const deploy = () =>
       loading.stop();
 
       if (err) {
+        console.log(err);
         console.log("密码错误,请重新输入");
         deploy();
       } else {

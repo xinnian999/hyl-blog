@@ -1,18 +1,25 @@
+import Main from "./Main";
+import Side from "./Side";
+import styled from "styled-components";
 import Banner from "./Banner";
-import HotArticle from "./HotArticle";
-import SentenceContent from "./SentenceContent";
-import HomeFooter from "./HomeFooter";
-import Progress from "./Progress";
-import "./style.scss";
 
-export default function Home() {
+const HomeMain = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+`;
+
+function Home() {
   return (
     <div id="home">
       <Banner />
-      <HotArticle />
-      <SentenceContent />
-      <Progress />
-      <HomeFooter />
+
+      <HomeMain id="homeMain" className="center">
+        <Main />
+        <Side />
+      </HomeMain>
     </div>
   );
 }
+
+export default Home;

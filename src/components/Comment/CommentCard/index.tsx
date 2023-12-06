@@ -1,15 +1,33 @@
 import { Icon } from "@/components";
-import { useRedux } from "@/hooks";
+import { useRootStore } from "@/hooks";
 import { Avatar } from "antd";
 import { time, httpTohttps } from "hyl-utils";
 import { memo } from "react";
 import "./style.scss";
 
-function CommentCard({ avatar, author, datetime, content, children, reply }) {
-  const { store } = useRedux();
+interface CommentCardProps {
+  avatar: string;
+  author: React.ReactNode;
+  datetime: string;
+  content: string;
+  children?: React.ReactNode;
+  className?: string;
+  reply?: () => void;
+}
+
+const CommentCard: React.FC<CommentCardProps> = ({
+  avatar,
+  author,
+  datetime,
+  content,
+  children,
+  reply,
+  className,
+}) => {
+  const { loginState } = useRootStore();
 
   return (
-    <div id="commentCard">
+    <div id="commentCard" className={className}>
       <Avatar
         className="commentCard-avatar"
         src={httpTohttps(avatar)}
@@ -22,7 +40,7 @@ function CommentCard({ avatar, author, datetime, content, children, reply }) {
             {time.parseFrom(datetime)}
           </div>
 
-          {store.loginState && (
+          {loginState && (
             <span className="commentCard-head-replyBtn" onClick={reply}>
               <Icon type="icon-shuoshuo" /> 回复
             </span>
@@ -34,6 +52,6 @@ function CommentCard({ avatar, author, datetime, content, children, reply }) {
       </div>
     </div>
   );
-}
+};
 
 export default memo(CommentCard);

@@ -1,7 +1,7 @@
 import { Plate } from "@/components";
 import styled from "styled-components";
 
-export const CollectionWrapper = styled(Plate.Main)`
+export const CollectionWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding: 20px 0;

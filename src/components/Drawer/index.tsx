@@ -3,17 +3,17 @@ import { useBoolean } from "@/hooks";
 import { memo } from "react";
 
 interface DrawerProps extends AntdDrawerProps {
-  Flag: any;
+  flag: React.ReactNode;
 }
 
 function Drawer(props: DrawerProps) {
-  const { Flag, ...antdDrawerProps } = props;
+  const { flag, ...antdDrawerProps } = props;
 
   const [open, on, off] = useBoolean(false);
 
   return (
     <>
-      <Flag onClick={on} />
+      <span onClick={on}>{flag}</span>
       <AntdDrawer
         onClose={off}
         width="60%"

@@ -1,76 +1,53 @@
-import { useMount, useBoolean } from "@/hooks";
-import { useNavigate } from "react-router-dom";
-import TweenOne from "rc-tween-one";
+import styled from "styled-components";
+import { useMount } from "@/hooks";
+import bubbles from "./bubbles";
 import { useRef } from "react";
-import Canvas from "@/views/Home/Banner/Canvas";
-import { DownOutlined, MenuOutlined, CloseOutlined } from "@ant-design/icons";
-import textCustom from "./textCustom";
-import "./style.scss";
-import { classnames } from "hyl-utils";
+import BannerText from "./BannerText";
 
-export default function Banner() {
-  const navigate = useNavigate();
+const Wrapper = styled.div`
+  position: relative;
+  height: 100vh;
+  .bg {
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-image: url(${require(`@/assets/img/bg/bg24.jpg`)});
+    background-attachment: fixed;
+    canvas {
+      backface-visibility: hidden;
+    }
+  }
+  .info {
+    color: var(--plate-text-color);
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9;
+  }
+`;
 
-  const [visible, , , toggle] = useBoolean(false);
-
-  const drawerRef = useRef(null);
+function Banner() {
+  const canvasRef = useRef(null);
 
   useMount(() => {
-    textCustom();
+    const timer = bubbles(canvasRef.current);
+    return () => {
+      clearInterval(timer);
+    };
   });
 
-  const goNext = () => {
-    const goElement = document.querySelector(".homeArticle");
-    goElement?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
   return (
-    <div className="homeBanner" ref={drawerRef}>
-      <Canvas />
-      <div className="bannerContent">
-        <p className="bannerContent-title text1 animate__animated animate__zoomIn">
-          {globalConfig.title}
-        </p>
-        <p className="bannerContent-autograph text2  animate__animated animate__zoomIn">
-          {globalConfig.description}
-        </p>
-        <button
-          className="bannerContent-Button  animate__animated animate__zoomIn"
-          onClick={() => navigate("/article")}
-        >
-          Enter Blog
-        </button>
-
-        <TweenOne
-          animation={{
-            y: "-=20",
-            yoyo: true,
-            repeat: -1,
-            duration: 1000,
-          }}
-          className="bannerContent-icon"
-          key="icon"
-          onClick={goNext}
-        >
-          <DownOutlined />
-        </TweenOne>
+    <Wrapper>
+      <div className="bg">
+        <canvas id="demo-canvas" ref={canvasRef} />
       </div>
-
-      <div className="fast-nav-btn" onClick={toggle}>
-        {visible ? <CloseOutlined /> : <MenuOutlined />}
+      <div className="info">
+        <BannerText />
       </div>
-
-      <div
-        className={classnames("fast-nav", { "fast-nav-hide": visible })}
-      ></div>
-      {visible && <div className="fast-nav-mask" onClick={toggle}></div>}
-      {visible && (
-        <ul className="fast-nav-menus animate__animated animate__fadeInRight">
-          <li onClick={() => navigate("/link")}>友链</li>
-          <li onClick={() => navigate("/journal/note")}>笔记</li>
-          <li onClick={() => navigate("/about")}>关于</li>
-        </ul>
-      )}
-    </div>
+    </Wrapper>
   );
 }
+
+export default Banner;

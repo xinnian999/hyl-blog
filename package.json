@@ -22,8 +22,9 @@
     "@types/node": "^16.11.41",
     "@types/react": "^18.0.14",
     "@types/react-dom": "^18.0.5",
+    "@types/react-redux": "^7.1.25",
     "animate.css": "^4.1.1",
-    "antd": "^5.2.1",
+    "antd": "^5.6.3",
     "aplayer": "^1.10.1",
     "axios": "^1.3.5",
     "babel-jest": "^27.4.2",
@@ -46,16 +47,18 @@
     "eslint": "^8.3.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
+    "fancy-components": "^0.0.23",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.0.0",
     "html-webpack-plugin": "^5.5.0",
     "http-proxy-middleware": "^2.0.4",
-    "hyl-utils": "^1.3.61",
+    "hyl-utils": "^1.3.62",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.4.3",
     "jest-resolve": "^27.4.2",
     "jest-watch-typeahead": "^1.0.0",
     "js-md5": "^0.7.3",
+    "js-yaml": "^4.1.0",
     "jsonwebtoken": "^8.5.1",
     "lib-flexible": "^0.3.2",
     "mini-css-extract-plugin": "^2.4.5",
@@ -67,6 +70,8 @@
     "postcss-normalize": "^10.0.1",
     "postcss-plugin-px2rem": "^0.8.1",
     "postcss-preset-env": "^7.0.1",
+    "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.3",
     "prompts": "^2.4.2",
     "rc-queue-anim": "^2.0.0",
     "rc-scroll-anim": "^2.7.6",
@@ -76,6 +81,7 @@
     "react-dev-utils": "^12.0.1",
     "react-dom": "^18.2.0",
     "react-emotor": "^1.1.0",
+    "react-fast-marquee": "^1.6.0",
     "react-highlight-words": "^0.20.0",
     "react-infinite-scroll-component": "^6.1.0",
     "react-markdown": "^8.0.3",
@@ -95,30 +101,16 @@
     "source-map-loader": "^3.0.0",
     "style-loader": "^3.3.1",
     "styled-components": "^5.3.6",
+    "swiper": "^9.3.2",
     "tailwindcss": "^3.0.2",
     "terser-webpack-plugin": "^5.2.5",
-    "typescript": "^4.7.4",
+    "typescript": "^5.1.6",
     "web-vitals": "^2.1.4",
     "webpack": "^5.64.4",
     "webpack-dev-server": "^4.6.0",
     "webpack-manifest-plugin": "^4.0.2",
-    "workbox-webpack-plugin": "^6.4.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "rules": {
-      "react/jsx-no-undef": 0,
-      "react-hooks/exhaustive-deps": 0,
-      "jsx-a11y/alt-text": 0,
-      "no-loop-func": 0
-    },
-    "globals": {
-      "wx": true,
-      "$": true
-    }
+    "workbox-webpack-plugin": "^6.4.1",
+    "zustand": "^4.4.0"
   },
   "browserslist": {
     "production": [
@@ -188,6 +180,15 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "babel-plugin-styled-components",
+        {
+          "displayName": true,
+          "fileName": false
+        }
+      ]
     ]
   },
   "devDependencies": {
@@ -195,7 +196,51 @@
     "@types/lodash": "^4.14.182",
     "@types/nprogress": "^0.2.0",
     "@types/styled-components": "^5.1.24",
+    "babel-plugin-styled-components": "^2.1.4",
     "ora": "^5.1.0",
     "scp2": "^0.5.0"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": true,
+    "jsxSingleQuote": true,
+    "arrowParens": "avoid",
+    "plugins": [
+      "prettier-plugin-organize-imports"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "react/jsx-no-undef": 0,
+      "react-hooks/exhaustive-deps": 0,
+      "react/jsx-key": 1,
+      "jsx-a11y/alt-text": 0,
+      "no-loop-func": 0,
+      "no-var": 1,
+      "no-empty": 1,
+      "prefer-template": 1,
+      "object-shorthand": 1,
+      "prefer-const": 1,
+      "prefer-destructuring": 1,
+      "no-duplicate-imports": 1,
+      "no-useless-rename": 1,
+      "arrow-body-style": 1,
+      "max-params": [
+        2,
+        2
+      ],
+      "require-await": 1
+    },
+    "globals": {
+      "wx": true,
+      "$": true
+    }
   }
 }

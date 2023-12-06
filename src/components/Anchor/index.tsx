@@ -33,7 +33,7 @@ function Anchor(props: AnchorProps) {
     return () => window.removeEventListener("scroll", scrollAnchor);
   });
   return (
-    <AnchorWrpper>
+    <AnchorWrpper className="anchor">
       <AntdAnchor targetOffset={targetOffset} affix={false} style={style}>
         {anchorData.map((item: { id: string; localName: string }) => {
           const { id, localName } = item;

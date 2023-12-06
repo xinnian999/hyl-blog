@@ -4,3 +4,4 @@ export { default as changeBlogTitle } from "./changeBlogTitle";
 export { default as getDecode } from "./getDecode";
 export { default as batchCopyDom } from "./batchCopyDom";
 export { default as r } from "./r";
+export { default as getRandomColor } from "./getRandomColor";

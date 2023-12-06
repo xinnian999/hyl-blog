@@ -1,22 +1,20 @@
-import Header from "./Header";
-import Provider from "./Provider";
-import Footer from "./Footer";
-import Main from "./Main";
-import { Music, FloatButton, Background } from "./widgets";
-import { useLocation } from "react-router-dom";
+import { FloatButton as AntdFloatButton } from 'antd';
+import Provider from './Provider';
+import { Footer, Header, Main } from './root';
+import { Background, FrameNum, Login, Music, Wave } from './widgets';
 
-function Layout() {
-  const { pathname } = useLocation();
-  return (
-    <Provider>
-      {pathname !== "/home" && <Header />}
-      <Main />
-      <Footer />
-      <Background />
-      <Music />
-      {pathname !== "/home" && <FloatButton />}
-    </Provider>
-  );
-}
+const Layout = () => (
+  <Provider>
+    <Header />
+    <Main />
+    <Footer />
+    <Wave />
+    <Background />
+    <Music />
+    <FrameNum />
+    <AntdFloatButton.BackTop />
+    <Login />
+  </Provider>
+);
 
 export default Layout;

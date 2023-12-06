@@ -1,6 +1,12 @@
-import { createRoot } from "react-dom/client";
-import "animate.css";
-import "@/style/global.scss";
-import App from "./App";
+import 'animate.css';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import GlobalStyle from './GlobalStyle';
+import Layout from './Layout';
 
-createRoot(document.getElementById("root")!).render(<App />);
+createRoot(document.getElementById('root')!).render(
+  <BrowserRouter>
+    <GlobalStyle />
+    <Layout />
+  </BrowserRouter>
+);

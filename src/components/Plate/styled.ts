@@ -1,78 +1,65 @@
-import styled from "styled-components";
-import { r } from "@/utils";
-import { MenuOutlined } from "@ant-design/icons";
+import { r } from '@/utils';
+import { MenuOutlined } from '@ant-design/icons';
+import TweenOne from 'rc-tween-one';
+import styled from 'styled-components';
 
 interface PlateBannerProps {
-  bg: string;
-  dark: boolean;
+  bg?: string;
 }
 
 export const PlateBanner = styled.div<PlateBannerProps>`
   position: relative;
-  height: ${r`600px`};
+  height: 500px;
+
   .bg {
     height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: ${(props) => (props.dark ? "0.7" : "1")};
-    background-image: ${(props) =>
-      `url(${require(`@/assets/img/bg/${
-        props.dark ? "bg8.jpg" : props.bg
-      }`)})`};
+    opacity: ${props => (props.theme.isDark ? '0.7' : '1')};
+    background-image: ${props =>
+      `url(${require(`@/assets/img/bg/${props.bg || 'bg24.jpg'}`)})`};
   }
+
   .info {
-    color: var(--plate-text-color);
-    text-align: center;
-    width: 100%;
     position: absolute;
+    left: 50%;
     top: 50%;
-    transform: translateY(-70%);
-    z-index: 9;
-    h2 {
+    transform: translate(-50%, -50%);
+    text-align: center;
+    .title {
       font-weight: 500;
-      font-size: ${r`40px`};
-      margin-bottom: 20px;
+      font-size: 50px;
       letter-spacing: 5px;
+      color: #eee;
       text-shadow: 0px 0px 10px black;
     }
-    .autograph {
-      font-size: ${r`20px`};
+    .description {
+      margin-top: 10px;
+      font-weight: 500;
+      font-size: 35px;
+      letter-spacing: 5px;
+      color: #eee;
       text-shadow: 0px 0px 10px black;
-      &-cursor {
-        animation: shanxian 2000ms infinite;
-      }
-      @keyframes shanxian {
-        from {
-          opacity: 1;
-        }
-        50% {
-          opacity: 0;
-        }
-        to {
-          opacity: 1;
-        }
-      }
     }
   }
 `;
 
-export const PlateContent = styled.div`
+export const PlateContent = styled.div<{ hasBackgroundColor: boolean }>`
   max-width: var(--heart-width);
   margin: 0 auto;
   position: relative;
-  top: -50px;
-  display: flex;
-  @media screen and (max-width: 800px) {
+  top: -60px;
+  background-color: ${props =>
+    props.hasBackgroundColor ? ' var(--background-color)' : 'transparent'};
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: ${props =>
+    props.hasBackgroundColor
+      ? '0 12px 15px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);'
+      : 'none'};
+  @media screen and(max-width: 800px) {
     margin: 0 20px;
   }
-`;
-
-export const Main = styled.div`
-  background-color: var(--background-color);
-  border-radius: 15px;
-  box-shadow: var(--box-shadow);
-  border: 1px solid var(--border-color);
-  flex: 1;
 `;
 
 export const ToolbarWrapper = styled.div`
@@ -102,4 +89,24 @@ export const ToolbarFlag = styled(MenuOutlined)`
   padding: 5px 10px;
   cursor: pointer;
   z-index: 999;
+`;
+
+export const DownIcon = styled(TweenOne)`
+  bottom: 20px;
+  font-size: 24px;
+  position: absolute;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #fff;
+  left: 50%;
+  margin-left: -27px;
+
+  path {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background-color: var(--ant-primary-color);
+  }
 `;

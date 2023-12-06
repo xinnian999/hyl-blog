@@ -1,5 +1,5 @@
 import CommentCard from "../CommentCard";
-import { useSetState, useRedux } from "@/hooks";
+import { useSetState, useRootStore } from "@/hooks";
 import Editor from "../Editor";
 
 interface ReplyProps {
@@ -11,7 +11,7 @@ interface ReplyProps {
 const Reply = (props: ReplyProps) => {
   const { commentItem, refresh, replyData } = props;
 
-  const { store } = useRedux();
+  const { loginState } = useRootStore();
 
   const [{ visible, replyName, replyEmail, content }, setState] = useSetState({
     visible: false,
@@ -41,7 +41,7 @@ const Reply = (props: ReplyProps) => {
   );
 
   return (
-    <div className="replyItem animate__animated animate__zoomIn">
+    <div className="replyItem">
       <CommentCard
         {...commentItem}
         author={author(commentItem)}
@@ -64,7 +64,7 @@ const Reply = (props: ReplyProps) => {
               />
             </div>
           ))}
-        {visible && store.loginState && (
+        {visible && loginState && (
           <div className="replyEditor">
             <Editor
               btnName={`回复 ${replyName}`}

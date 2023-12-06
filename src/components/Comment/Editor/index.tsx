@@ -1,12 +1,12 @@
-import { Button, Input, message, Modal, Popover, Space, Tooltip } from "antd";
-import { useRef } from "react";
-import { SmileOutlined, UndoOutlined } from "@ant-design/icons";
-import { time } from "hyl-utils";
-import { useBoolean, useRedux, useSetState } from "@/hooks";
-import { insertText } from "./insertText";
-import emoji from "./emoji";
-import "./style.scss";
-import { addCommentApi } from "../api";
+import { useBoolean, useRootStore, useSetState } from '@/hooks';
+import { request } from '@/utils';
+import { SmileOutlined, UndoOutlined } from '@ant-design/icons';
+import { Button, Input, Modal, Popover, Space, Tooltip, message } from 'antd';
+import { time } from 'hyl-utils';
+import { useRef } from 'react';
+import emoji from './emoji';
+import { insertText } from './insertText';
+import './style.scss';
 
 const { TextArea } = Input;
 
@@ -28,13 +28,11 @@ export default function Editor({
   onClose,
 }: editor) {
   const [{ value, loading }, setState] = useSetState({
-    value: "",
+    value: '',
     loading: false,
   });
 
-  const { store, dispatch } = useRedux();
-
-  const { userInfo } = store;
+  const { userInfo, setRootState } = useRootStore();
 
   const inputRef = useRef(null);
   const emailInputRef: any = useRef(null);
@@ -48,7 +46,7 @@ export default function Editor({
   const onSubmit = () => {
     const { headPicture, username, email, id: author_id } = userInfo;
 
-    if (!value) return message.warning("评论内容不能为空");
+    if (!value) return message.warning('评论内容不能为空');
 
     const data = {
       content: value,
@@ -64,11 +62,11 @@ export default function Editor({
     }
 
     setState({ loading: true });
-    addCommentApi(data).then((res: any) => {
+    request({ url: '/comment/add', data }).then(res => {
       if (res.status === 0) {
-        setState({ loading: false, value: "" });
+        setState({ loading: false, value: '' });
         refresh();
-        message.success("发表评论成功");
+        message.success('发表评论成功');
       }
     });
   };
@@ -77,21 +75,20 @@ export default function Editor({
     const emailValue = emailInputRef.current.input.value;
     const emailExp =
       /[a-zA-Z0-9]+([-_.][A-Za-zd]+)*@([a-zA-Z0-9]+[-.])+[A-Za-zd]{2,5}$/;
-    if (!emailExp.test(emailValue)) return message.error("邮箱格式不合法");
+    if (!emailExp.test(emailValue)) return message.error('邮箱格式不合法');
 
-    dispatch({
-      type: "CHANGE_USER_INFO",
-      payload: { email: emailValue },
-    });
+    setRootState({ userInfo: { ...userInfo, email: emailValue } });
     off();
-    message.success("绑定邮箱成功");
+    message.success('绑定邮箱成功');
   };
 
   const content = (
-    <ul className="emojiAll">
+    <ul className='emojiAll'>
       {emoji.map((item, index) => (
         <li
-          onClick={() => insertText(inputRef, item, setState)}
+          onClick={() =>
+            insertText({ inputEl: inputRef.current, str: item, setState })
+          }
           key={item + index}
         >
           {item}
@@ -101,17 +98,17 @@ export default function Editor({
   );
 
   return (
-    <div className="comment-editor animate__animated animate__fadeInDown">
-      <div className="toolbar">
-        <Popover content={content} trigger="click">
-          <Tooltip title="表情">
-            <SmileOutlined className="emoji-icon" />
+    <div className='comment-editor'>
+      <div className='toolbar'>
+        <Popover content={content} trigger='click'>
+          <Tooltip title='表情'>
+            <SmileOutlined className='emoji-icon' />
           </Tooltip>
         </Popover>
-        <Tooltip title="重写">
+        <Tooltip title='重写'>
           <UndoOutlined
-            onClick={() => setState({ value: "" })}
-            className="emoji-icon"
+            onClick={() => setState({ value: '' })}
+            className='emoji-icon'
           />
         </Tooltip>
       </div>
@@ -121,11 +118,11 @@ export default function Editor({
         onChange={onChangeValue}
         value={value}
         ref={inputRef}
-        className="editor"
+        className='editor'
       />
       <Space>
         <Button
-          htmlType="submit"
+          htmlType='submit'
           loading={loading}
           onClick={() => {
             if (!userInfo.email) {
@@ -134,32 +131,32 @@ export default function Editor({
 
             onSubmit();
           }}
-          type="primary"
+          type='primary'
         >
           {btnName}
         </Button>
         {onClose && (
-          <Button htmlType="submit" onClick={onClose}>
+          <Button htmlType='submit' onClick={onClose}>
             收起
           </Button>
         )}
       </Space>
 
       <Modal
-        title="绑定邮箱"
+        title='绑定邮箱'
         open={open}
         onCancel={off}
-        okText="绑定"
+        okText='绑定'
         keyboard={false}
         closable={false}
         footer={[
-          <Button key="submit" type="primary" onClick={onOkEmail}>
+          <Button key='submit' type='primary' onClick={onOkEmail}>
             绑定
           </Button>,
         ]}
       >
-        <div className="emailTip">请绑定邮箱，将用于接收回复通知的邮件</div>
-        <Input ref={emailInputRef} placeholder="请输入你的邮箱..." />
+        <div className='emailTip'>请绑定邮箱，将用于接收回复通知的邮件</div>
+        <Input ref={emailInputRef} placeholder='请输入你的邮箱...' />
       </Modal>
     </div>
   );

@@ -1,7 +1,6 @@
-import { Skeleton } from "antd";
-import { useGetData } from "@/hooks";
-import { Plate } from "@/components";
-import { WorkWrapper } from "./styled";
+import { Plate } from '@/components';
+import { useQuery } from '@/hooks';
+import { WorkWrapper } from './styled';
 
 type Data = {
   name: string;
@@ -13,37 +12,29 @@ type Data = {
 };
 
 export default function Works() {
-  const [data] = useGetData<Data>("/works/query", { mockLoadingCount: 4 });
-
-  const renderItem = data.map(
-    ({ name, picture, link, autograph, loading, id }) => {
-      return (
-        <div
-          className="item"
-          style={{
-            backgroundImage: `url(${`${globalConfig.remoteStaticUrl}/image/${picture}`})`,
-            backgroundSize: "cover",
-          }}
-          onClick={() => window.open(link)}
-          key={id}
-        >
-          <Skeleton loading={loading} active>
-            <div className="title">{name}</div>
-            <hr />
-            <div className="autograph">{autograph}</div>
-          </Skeleton>
-        </div>
-      );
-    }
-  );
+  const { data } = useQuery<Data>({
+    url: '/current/query/works',
+  });
 
   return (
-    <Plate
-      title="个人作品"
-      autograph="你知道太阳为什么是太阳吗？因为它从不在乎别人的目光"
-      bg="bg15.jpg"
-    >
-      <WorkWrapper>{renderItem}</WorkWrapper>
+    <Plate title='个人作品' bg='bg15.jpg'>
+      <WorkWrapper>
+        {data.map(({ name, picture, link, autograph, loading, id }) => (
+          <div
+            className='item'
+            style={{
+              backgroundImage: `url(${`${globalConfig.remoteStaticUrl}/image/${picture}`})`,
+              backgroundSize: 'cover',
+            }}
+            onClick={() => window.open(link)}
+            key={id}
+          >
+            <div className='title'>{name}</div>
+            <hr />
+            <div className='autograph'>{autograph}</div>
+          </div>
+        ))}
+      </WorkWrapper>
     </Plate>
   );
 }

@@ -28,6 +28,8 @@
 
   .replyItem {
     border-bottom: 1px solid #eee;
+    animation: zoomIn;
+    animation-duration: 1s;
     &:last-child {
       border: none;
     }

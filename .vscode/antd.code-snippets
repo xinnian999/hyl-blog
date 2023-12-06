@@ -1,0 +1,7 @@
+{
+  "antd-snippets": {
+    "prefix": "antd",
+    "body": ["import { $1 } from 'antd';"],
+    "description": "antd"
+  }
+}

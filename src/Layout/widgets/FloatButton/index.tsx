@@ -1,47 +1,22 @@
-import { App, Tooltip } from "antd";
-import { SettingOutlined, VerticalAlignTopOutlined } from "@ant-design/icons";
-import { useRedux, useScroll } from "@/hooks";
-import setModalConfig from "./setModal";
+import { Tooltip } from "antd";
+import { VerticalAlignTopOutlined } from "@ant-design/icons";
+import { useRootStore, useScroll } from "@/hooks";
 import { Icon } from "@/components";
 import { FloatButtonWrapper } from "./styled";
-import { useNavigate } from "react-router-dom";
 
 function FloatButton() {
   const { top } = useScroll();
 
-  const navigate = useNavigate();
-
-  const { modal } = App.useApp();
-
-  const { store, dispatch } = useRedux();
+  const { theme, setRootState } = useRootStore();
 
   const action = [
     {
-      icon: <Icon type="icon-shouye1" />,
-      message: "首页",
+      icon: (
+        <Icon type={theme === "dark" ? "icon-moon-fill" : "icon-sun_fill"} />
+      ),
+      message: theme === "dark" ? "开灯" : "关灯",
       onclick: () => {
-        navigate("/home");
-      },
-    },
-    // {
-    //   icon: <Icon type="icon-jiqiren" />,
-    //   message: "ChatGpt",
-    //   onclick: () => {
-    //     navigate("/chatgpt");
-    //   },
-    // },
-    {
-      icon: <SettingOutlined />,
-      message: "网站设置",
-      onclick: () => {
-        modal.confirm(setModalConfig);
-      },
-    },
-    {
-      icon: <Icon type={store.dark ? "icon-moon-fill" : "icon-sun_fill"} />,
-      message: store.dark ? "开灯" : "关灯",
-      onclick: () => {
-        dispatch({ type: "CHANGE_DARK", payload: !store.dark });
+        setRootState({ theme: theme === "dark" ? "light" : "dark" });
       },
     },
     {

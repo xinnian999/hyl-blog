@@ -2,7 +2,7 @@ import { Plate } from "@/components";
 import { r } from "@/utils";
 import styled from "styled-components";
 
-export const LinkWrapper = styled(Plate.Main)`
+export const LinkWrapper = styled.div`
   position: relative;
 
   .explain {

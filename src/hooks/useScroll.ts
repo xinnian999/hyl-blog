@@ -1,20 +1,27 @@
 import { throttle } from "hyl-utils";
 import { useState, useEffect } from "react";
 
-// 监听页面是否滚动到指定位置
-const useScroll = () => {
+const useScroll = (el: HTMLElement | null | Window = window) => {
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
-  const onScroll: any = throttle((e: any) => {
-    setTop(e.srcElement.documentElement.scrollTop);
-    setLeft(e.srcElement.documentElement.scrollLeft);
-  }, 50);
+
+  const onScroll = throttle(() => {
+    if (el === window) {
+      setTop(el.scrollY);
+      setLeft(el.scrollX);
+    } else {
+      setTop((el as HTMLElement).scrollTop);
+      setLeft((el as HTMLElement).scrollLeft);
+    }
+  }, 100);
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll);
+    if (el) {
+      el.addEventListener("scroll", onScroll);
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+      return () => el.removeEventListener("scroll", onScroll);
+    }
+  }, [el]);
 
   return { top, left };
 };

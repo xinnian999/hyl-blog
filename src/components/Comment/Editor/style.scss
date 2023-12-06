@@ -4,6 +4,8 @@
   padding: 15px;
   border-radius: 10px;
   margin-top: 10px;
+  animation: fadeInDown;
+  animation-duration: 1s;
   .editor {
     margin-bottom: 10px;
     border-radius: 0;
@@ -52,7 +54,9 @@
   flex-wrap: wrap;
   z-index: 9999;
 
-  width: 273px;
+  width: 280px;
+  height: 300px;
+  overflow: auto;
   li {
     padding: 5px;
     border: 1px solid #eee;

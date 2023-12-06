@@ -1,8 +1,4 @@
-import { useRedux } from "@/hooks";
-import { useEffect } from "react";
-import PmRibbon from "pm-ribbon";
-import starBg from "./starBg";
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BackgroundWrapper = styled.div`
   height: 100%;
@@ -10,41 +6,12 @@ export const BackgroundWrapper = styled.div`
   position: fixed;
   top: 0;
   z-index: -1;
-  background-color: #eaeaea;
-  background-size: cover;
-
-  canvas {
-    width: 100%;
-    height: 100%;
-    display: inline-block;
-    vertical-align: baseline;
-    position: absolute;
-    z-index: -1;
-  }
+  background-color: #dbdbdb;
+  /* background-image: url(${require('@/assets/img/bg/bg0.webp')}); */
 `;
 
-function Lantern() {
-  const { store } = useRedux();
-
-  useEffect(() => {
-    const body = document.querySelector("body")!;
-    if (store.dark) {
-      body.id = "dark";
-      starBg(store.theme.bg);
-    } else {
-      body.id = "light";
-
-      const bg: any = document.querySelector("#canvasBg")!;
-      bg.style.display = "none";
-    }
-  }, [store.dark]);
-
-  return (
-    <BackgroundWrapper id="background">
-      <canvas id="canvasBg"></canvas>
-      {!store.dark && <PmRibbon clickChangeDom={document} />}
-    </BackgroundWrapper>
-  );
+function Background() {
+  return <BackgroundWrapper id='background'></BackgroundWrapper>;
 }
 
-export default Lantern;
+export default Background;
